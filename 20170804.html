@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,8 @@
 <script type="text/javascript">
 
 	var map;
-
+	var watchID;
+	
 	// T-map 초기화
 	function initTmap(lon3857, lat3857) {
 		
@@ -31,8 +33,8 @@
 		map.setCenter(cLonLat, 16);
 		map.removeZoomControl();						// Zoom Control 제거
 		
-		var privateMarker = "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/128/Map-Marker-Flag--Pink.png";				// 고객
-		var engMarker = "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/128/Map-Marker-Chequered-Flag-Right-Pink.png";	// 엔지니어
+		var privateMarker = "https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png";
+		var engMarker = "https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png"; // 엔지니어
 		createMarker(lon3857, lat3857, privateMarker);
 		createMarker(lon3857, lat3857, engMarker);
 	}
@@ -101,20 +103,23 @@
 
 		location.innerHTML = "<p>Locating…</p>";
 
-		navigator.geolocation.getCurrentPosition(success, error);
+		//navigator.geolocation.getCurrentPosition(success, error);
+		navigator.geolocation.watchPosition(success, error);
 	}
-	
+			
 	// 위치 자동 불러오기
 	window.onload = function() {
 		geoFindMe();
 	};
+	
+	
 	
 </script>
 </head>
 <body>
 
 	<p>
-		<button onclick="geoFindMe()">현 위치</button>
+		<button onclick="reLoding()">현 위치</button>
 	</p>
 	<div id="location"></div>
 
