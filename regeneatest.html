@@ -11,14 +11,19 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
-.row div:nth-child(2) {
-	height: 222px;
-	overflow: auto;
-	margin-bottom: 20px;
+@media only screen and (min-width: 992px) {
+	.row>div:nth-child(2)>div:nth-child(2) {
+		height: 222px;
+		overflow: auto;
+		margin-bottom: 20px;
+	}
+	.row>div:nth-child(2)>div:nth-child(2)>table {
+		margin-bottom: 0px;
+	}
 }
 
-.row div:nth-child(2)>table {
-	margin-bottom: 0px;
+textarea {
+	resize: none;
 }
 </style>
 <script type="text/javascript">
@@ -37,8 +42,10 @@
 			<div class="row">
 				<div class="col-md-7">
 					<div class="text-right">
-						<button type="button" class="btn btn-default" data-toggle="modal"
-							data-target="#myModal">회원등록</button>
+						<button type="button" class="btn btn-info" data-toggle="modal"
+							data-target="#memberRegisterModal">회원등록</button>
+						<button type="button" class="btn btn-warning" data-toggle="modal"
+							data-target="#memberModifyModal">회원수정</button>
 					</div>
 					<table class="table table-striped">
 						<colgroup>
@@ -83,48 +90,51 @@
 				</div>
 				<div class="col-md-5">
 					<div class="text-right">
-						<button type="button" class="btn btn-default">메모추가</button>
+						<button type="button" class="btn btn-info" data-toggle="modal"
+							data-target="#memoRegisterModal">메모추가</button>
 					</div>
-					<table class="table table-striped">
-						<colgroup>
-							<col style="width: 50px; text-align: center;" />
-							<col style="" />
-						</colgroup>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>특이사항1</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>특이사항2</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>특이사항3</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>특이사항3</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>특이사항3</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>특이사항3</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>특이사항3</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>특이사항3</td>
-							</tr>
-						</tbody>
-					</table>
+					<div>
+						<table class="table table-striped">
+							<colgroup>
+								<col style="width: 50px; text-align: center;" />
+								<col style="" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>특이사항1</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>특이사항2</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>특이사항3</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>특이사항3</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>특이사항3</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>특이사항3</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>특이사항3</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>특이사항3</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -178,8 +188,8 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
+	<!-- 회원등록 -->
+	<div class="modal fade" id="memberRegisterModal" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
@@ -190,8 +200,12 @@
 				<div class="modal-body">
 					<form action="" method="post">
 						<div class="form-group">
-							<label for="name">이름</label> <input type="text"
-								class="form-control" id="name" placeholder="이름을 입력하세요">
+							<label for="buyer">구매자</label> <input type="text"
+								class="form-control" id="buyer" placeholder="이름을 입력하세요">
+						</div>
+						<div class="form-group">
+							<label for="payee">수취인</label> <input type="text"
+								class="form-control" id="payee" placeholder="이름을 입력하세요">
 						</div>
 						<div class="form-group">
 							<label for="tel1">휴대폰 번호</label> <input type="text"
@@ -214,18 +228,118 @@
 								class="form-control" id="report" placeholder="특이사항을 등록하세요.">
 						</div>
 						<div class="form-group">
-							<label for="report">등급</label>
-							<select class="form-control">
+							<label for="report">등급</label> <select class="form-control">
 								<option value="1">일반</option>
 								<option value="2">블랙</option>
 								<option value="3">화이트</option>
 							</select>
 						</div>
-						
+
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success">등록</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 회원수정 -->
+	<div class="modal fade" id="memberModifyModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">회원수정</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="post">
+						<div class="form-group">
+							<label for="buyer">구매자</label> <input type="text"
+								class="form-control" id="buyer" placeholder="이름을 입력하세요">
+						</div>
+						<div class="form-group">
+							<label for="payee">수취인</label> <input type="text"
+								class="form-control" id="payee" placeholder="이름을 입력하세요">
+						</div>
+						<div class="form-group">
+							<label for="tel1">휴대폰 번호</label> <input type="text"
+								class="form-control" id="tel1" placeholder="휴대폰 번호를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="tel2">전화번호</label> <input type="text"
+								class="form-control" id="tel2" placeholder="전화번호를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="addr1">지번주소</label> <input type="text"
+								class="form-control" id="addr1" placeholder="지번 주소를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="addr2">도로명주소</label> <input type="text"
+								class="form-control" id="addr2" placeholder="도로명 주소를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="report">특이사항</label> <input type="text"
+								class="form-control" id="report" placeholder="특이사항을 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="report">등급</label> <select class="form-control">
+								<option value="1">일반</option>
+								<option value="2">블랙</option>
+								<option value="3">화이트</option>
+							</select>
+						</div>
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning">수정</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 메모추가 -->
+	<div class="modal fade" id="memoRegisterModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">메모추가</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="post">
+						<textarea class="form-control" rows="20"></textarea>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success">등록</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 메모추가 -->
+	<div class="modal fade" id="memoModifyModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">메모수정</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="post">
+						<textarea class="form-control" rows="20"></textarea>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning">수정</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 				</div>
 			</div>
