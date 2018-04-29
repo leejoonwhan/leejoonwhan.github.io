@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+.row div:nth-child(2) {
+	height: 222px;
+	overflow: auto;
+	margin-bottom: 20px;
+}
+
+.row div:nth-child(2)>table {
+	margin-bottom: 0px;
+}
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+	<div class="wrap container">
+		<div class="top">
+			<div>
+				<h2>REGENEA</h2>
+				<p>회원관리</p>
+			</div>
+		</div>
+		<div class="middel">
+			<div class="row">
+				<div class="col-md-7">
+					<div class="text-right">
+						<button type="button" class="btn btn-default" data-toggle="modal"
+							data-target="#myModal">회원등록</button>
+					</div>
+					<table class="table table-striped">
+						<colgroup>
+							<col style="width: 100px; text-align: center;" />
+							<col style="" />
+							<col style="width: 100px; text-align: center;" />
+							<col style="" />
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>등급</th>
+								<td colspan="3">블랙, 일반, 화이트</td>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td>홍길동</td>
+								<th>연락처</th>
+								<td>010-1111-1111</td>
+							</tr>
+							<tr>
+								<th>보조이름</th>
+								<td>가명</td>
+								<th>연락처2</th>
+								<td>010-2222-2222</td>
+							</tr>
+							<tr>
+								<th>총구매액</th>
+								<td>90,000</td>
+								<th>구매횟수</th>
+								<td>3</td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td colspan="3">서울시 (제주도는빨강)</td>
+							</tr>
+							<tr>
+								<th>특이사항</th>
+								<td colspan="3">이건 먼데</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-5">
+					<div class="text-right">
+						<button type="button" class="btn btn-default">메모추가</button>
+					</div>
+					<table class="table table-striped">
+						<colgroup>
+							<col style="width: 50px; text-align: center;" />
+							<col style="" />
+						</colgroup>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>특이사항1</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>특이사항2</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>특이사항3</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>특이사항3</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>특이사항3</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>특이사항3</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>특이사항3</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>특이사항3</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>주문날짜</th>
+						<th>물품명</th>
+						<th>옵션</th>
+						<th>구매금액</th>
+						<th>구매사이트</th>
+						<th>비고</th>
+						<th>사은품증정</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>2018-04-05</td>
+						<td>jpdr8001</td>
+						<td>colr: 베이지 / size: XL</td>
+						<td>30,000</td>
+						<td>리제네아 파티샵</td>
+						<td>반품</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>2018-04-05</td>
+						<td>jpdr8001</td>
+						<td>colr: 베이지 / size: XL</td>
+						<td>30,000</td>
+						<td>리제네아 파티샵</td>
+						<td>반품</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>2018-04-05</td>
+						<td>jpdr8001</td>
+						<td>colr: 베이지 / size: XL</td>
+						<td>30,000</td>
+						<td>리제네아 파티샵</td>
+						<td>반품</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">회원등록</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" method="post">
+						<div class="form-group">
+							<label for="name">이름</label> <input type="text"
+								class="form-control" id="name" placeholder="이름을 입력하세요">
+						</div>
+						<div class="form-group">
+							<label for="tel1">휴대폰 번호</label> <input type="text"
+								class="form-control" id="tel1" placeholder="휴대폰 번호를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="tel2">전화번호</label> <input type="text"
+								class="form-control" id="tel2" placeholder="전화번호를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="addr1">지번주소</label> <input type="text"
+								class="form-control" id="addr1" placeholder="지번 주소를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="addr2">도로명주소</label> <input type="text"
+								class="form-control" id="addr2" placeholder="도로명 주소를 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="report">특이사항</label> <input type="text"
+								class="form-control" id="report" placeholder="특이사항을 등록하세요.">
+						</div>
+						<div class="form-group">
+							<label for="report">등급</label>
+							<select class="form-control">
+								<option value="1">일반</option>
+								<option value="2">블랙</option>
+								<option value="3">화이트</option>
+							</select>
+						</div>
+						
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success">등록</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>
