@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 	.row>div:nth-child(2)>div:nth-child(2) {
 		height: 222px;
 		overflow: auto;
-		margin-bottom: 20px;
+		margin-bottom: 15px;
 	}
 	.row>div:nth-child(2)>div:nth-child(2)>table {
 		margin-bottom: 0px;
@@ -24,6 +25,7 @@
 
 textarea {
 	resize: none;
+    margin-bottom: 15px;
 }
 
 .btns {
@@ -33,11 +35,15 @@ textarea {
 .register-memo-tbody > tr {
 	cursor: pointer;
 }
+
+.alert {
+	margin-bottom: 0px;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
 	$(".alert").hide();
-
+	
 	$(".btn-register-member").on("click", function() {
     	checkMemberInfo("register");
     });
@@ -50,7 +56,7 @@ $(document).ready(function() {
     	checkMemoText("register");
     });
     
-    $(".register-memo-tbody > tr").on("dblclick", function() {
+    $(".register-memo-tbody > tr").on("click", function() {
     	$('#modifyMemoModal').modal('show')
     });
     
@@ -64,11 +70,11 @@ function checkMemberInfo(division) {
     
 	if ($(`#${division}-buyer`).val().trim() == "") {
     	text = "구매자(을)를 확인해주세요.";
-    } else if ($(`#${division}-payee`).val().trim() == "") {
+    } /*else if ($(`#${division}-payee`).val().trim() == "") {
     	text = "수취인(을)를 확인해주세요.";
-    } else if ($(`#${division}-tel1`).val().trim() == "") {
+    }*/ else if ($(`#${division}-tel1`).val().trim() == "") {
     	text = "휴대폰 번호(을)를 확인해주세요.";
-    } else if ($(`#${division}-tel2`).val().trim() == "") {
+    } /*else if ($(`#${division}-tel2`).val().trim() == "") {
     	text = "전화번호(을)를 확인해주세요.";
     } else if ($(`#${division}-addr1`).val().trim() == "") {
     	text = "지번주소(을)를 확인해주세요.";
@@ -76,10 +82,19 @@ function checkMemberInfo(division) {
     	text = "도로명주소(을)를 확인해주세요.";
     } else if ($(`#${division}-report`).val().trim() == "") {
     	text = "특이사항(을)를 확인해주세요.";
-    }
+    }*/
     
     if (text != null) {
+    	$(`.alert-${division}Member > h4`).html("<strong>양식 오류</strong>");
     	$(`.alert-${division}Member > p`).text(text);
+        $(`.alert-${division}Member`).removeClass("alert-success");
+        $(`.alert-${division}Member`).addClass("alert-danger");
+        $(`.alert-${division}Member`).show();
+    } else {
+    	$(`.alert-${division}Member > h4`).html("<strong>입력 성공</strong>");
+    	$(`.alert-${division}Member > p`).text("정상적으로 등록되었습니다.");
+    	$(`.alert-${division}Member`).removeClass("alert-danger");
+        $(`.alert-${division}Member`).addClass("alert-success");
         $(`.alert-${division}Member`).show();
     }
 }
@@ -89,8 +104,17 @@ function checkMemoText(division) {
     $(`.alert-${division}Memo`).hide();
        
     if ($(`#${division}-memo`).val().trim() == "") {
+    	$(`.alert-${division}Memo > h4`).html("<strong>양식 오류</strong>");
     	$(`.alert-${division}Memo > p`).text("메모(을)를 확인해주세요.");
+        $(`.alert-${division}Memo`).removeClass("alert-success");
+        $(`.alert-${division}Memo`).addClass("alert-danger");
         $(`.alert-${division}Memo`).show();
+    } else {
+    	$(`.alert-${division}Memo > h4`).html("<strong>입력 성공</strong>");
+    	$(`.alert-${division}Memo > p`).text("정상적으로 등록되었습니다.");
+    	$(`.alert-${division}Memo`).removeClass("alert-danger");
+        $(`.alert-${division}Memo`).addClass("alert-success");
+        $(`.alert-${division}Member`).show();
     }
 }
 </script>
@@ -265,7 +289,7 @@ function checkMemoText(division) {
 				<div class="modal-body">
 					<form action="" method="post">
 						<div class="form-group">
-							<label for="register-buyer">구매자</label> <input type="text"
+							<label for="register-buyer">구매자(*)</label> <input type="text"
 								class="form-control" id="register-buyer" name="register-buyer" placeholder="이름을 입력하세요">
 						</div>
 						<div class="form-group">
@@ -273,7 +297,7 @@ function checkMemoText(division) {
 								class="form-control" id="register-payee" name="register-payee" placeholder="이름을 입력하세요">
 						</div>
 						<div class="form-group">
-							<label for="register-tel1">휴대폰 번호</label> <input type="text"
+							<label for="register-tel1">휴대폰 번호(*)</label> <input type="text"
 								class="form-control" id="register-tel1" name="register-tel1" placeholder="휴대폰 번호를 등록하세요.">
 						</div>
 						<div class="form-group">
@@ -300,8 +324,8 @@ function checkMemoText(division) {
 							</select>
 						</div>
 						<div class="alert alert-danger alert-dismissible fade in alert-registerMember" role="alert">
-                            <h4>양식 오류<span class="anchorjs-icon"></span></h4>
-                            <p>일케일케 해주세염</p>
+                            <h4></h4>
+                            <p></p>
                       </div>
 					</form>
 				</div>
@@ -325,7 +349,7 @@ function checkMemoText(division) {
 				<div class="modal-body">
 					<form action="" method="post">
 						<div class="form-group">
-							<label for="modify-buyer">구매자</label> <input type="text"
+							<label for="modify-buyer">구매자(*)</label> <input type="text"
 								class="form-control" id="modify-buyer" name="modify-buyer" placeholder="이름을 입력하세요">
 						</div>
 						<div class="form-group">
@@ -333,7 +357,7 @@ function checkMemoText(division) {
 								class="form-control" id="modify-payee" name="modify-payee" placeholder="이름을 입력하세요">
 						</div>
 						<div class="form-group">
-							<label for="modify-tel1">휴대폰 번호</label> <input type="text"
+							<label for="modify-tel1">휴대폰 번호(*)</label> <input type="text"
 								class="form-control" id="modify-tel1" name="modify-tel1" placeholder="휴대폰 번호를 등록하세요.">
 						</div>
 						<div class="form-group">
@@ -360,8 +384,8 @@ function checkMemoText(division) {
 							</select>
 						</div>
 						<div class="alert alert-danger alert-dismissible fade in alert-modifyMember" role="alert">
-                            <h4>양식 오류<span class="anchorjs-icon"></span></h4>
-                            <p>일케일케 해주세염</p>
+                            <h4></h4>
+                            <p></p>
                       	</div>
 					</form>
 				</div>
@@ -387,8 +411,8 @@ function checkMemoText(division) {
 						<textarea class="form-control" rows="20" id="register-memo" name="register-memo"></textarea>
 					</form>
                     <div class="alert alert-danger alert-dismissible fade in alert-registerMemo" role="alert">
-                        <h4>양식 오류<span class="anchorjs-icon"></span></h4>
-                        <p>일케일케 해주세염</p>
+                        <h4><strong></strong></h4>
+                            <p></p>
                     </div>
 				</div>
 				<div class="modal-footer">
@@ -413,8 +437,8 @@ function checkMemoText(division) {
 						<textarea class="form-control" rows="20" id="modify-memo" name="modify-memo"></textarea>
 					</form>
                     <div class="alert alert-danger alert-dismissible fade in alert-modifyMemo" role="alert">
-                        <h4>양식 오류<span class="anchorjs-icon"></span></h4>
-                        <p>일케일케 해주세염</p>
+                        <h4></h4>
+                            <p></p>
                     </div>
 				</div>
 				<div class="modal-footer">
