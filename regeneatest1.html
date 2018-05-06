@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 function checkMemberInfo(division) {
 	
-    $(`.alert-${division}Member`).hide();
+    //$(`.alert-${division}Member`).hide();
     
     var text = null;
     
@@ -91,17 +91,19 @@ function checkMemberInfo(division) {
         $(`.alert-${division}Member`).addClass("alert-danger");
         $(`.alert-${division}Member`).show();
     } else {
-    	$(`.alert-${division}Member > h4`).html("<strong>입력 성공</strong>");
-    	$(`.alert-${division}Member > p`).text("정상적으로 등록되었습니다.");
-    	$(`.alert-${division}Member`).removeClass("alert-danger");
-        $(`.alert-${division}Member`).addClass("alert-success");
-        $(`.alert-${division}Member`).show();
+    	if (checkRegexp(division)) {
+            $(`.alert-${division}Member > h4`).html("<strong>입력 성공</strong>");
+            $(`.alert-${division}Member > p`).text("정상적으로 등록되었습니다.");
+            $(`.alert-${division}Member`).removeClass("alert-danger");
+            $(`.alert-${division}Member`).addClass("alert-success");
+            $(`.alert-${division}Member`).show();
+        }
     }
 }
 
 function checkMemoText(division) {
 	
-    $(`.alert-${division}Memo`).hide();
+    //$(`.alert-${division}Memo`).hide();
        
     if ($(`#${division}-memo`).val().trim() == "") {
     	$(`.alert-${division}Memo > h4`).html("<strong>양식 오류</strong>");
@@ -114,9 +116,48 @@ function checkMemoText(division) {
     	$(`.alert-${division}Memo > p`).text("정상적으로 등록되었습니다.");
     	$(`.alert-${division}Memo`).removeClass("alert-danger");
         $(`.alert-${division}Memo`).addClass("alert-success");
-        $(`.alert-${division}Member`).show();
+        $(`.alert-${division}Memo`).show();
     }
 }
+
+function checkRegexp(division) {
+
+	var regexpTel1 = /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))-(\d{3,4})-(\d{4})$/;
+    var regexpTel2 = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
+    
+    var check1 = true;
+    var check2 = true;
+    
+    console.log($(`#${division}-tel1`).val().trim() != "");
+    console.log(regexpTel1.test($(`#${division}-tel1`).val().trim()) || regexpTel2.test($(`#${division}-tel1`).val().trim()));
+    console.log($(`#${division}-tel2`).val().trim() != "");
+    console.log(regexpTel1.test($(`#${division}-tel2`).val().trim()) || regexpTel2.test($(`#${division}-tel2`).val().trim()));
+    
+	if ($(`#${division}-tel1`).val().trim() != "") {
+    	
+        if (regexpTel1.test($(`#${division}-tel1`).val().trim()) || regexpTel2.test($(`#${division}-tel1`).val().trim())) {
+        	
+        } else {
+        	$(`.alert-${division}Member > h4`).html("<strong>양식 오류</strong>");
+    		$(`.alert-${division}Member > p`).text("휴대폰 번호(을)를 확인해주세요.");
+            check1 = false;
+        }
+    }
+    
+    if ($(`#${division}-tel2`).val().trim() != "") {
+    	
+        if (regexpTel1.test($(`#${division}-tel2`).val().trim()) || regexpTel2.test($(`#${division}-tel2`).val().trim())) {
+        	
+        } else {
+        	$(`.alert-${division}Member > h4`).html("<strong>양식 오류</strong>");
+    		$(`.alert-${division}Member > p`).text("휴대폰 번호(을)를 확인해주세요.");
+            check2 = false;
+        }
+    }
+    
+    return (check1 && check2);
+}
+
 </script>
 </head>
 <body>
