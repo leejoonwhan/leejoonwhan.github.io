@@ -675,14 +675,14 @@
 
 		function search() {
 			var input = $("#inputSearch").val();
+			$tbody.empty();
+			
 			if (input == "") {
-				alert("펫 이름을(를) 입력해주세요.");
+				init();
 				return;
 			}
 
-			$tbody.empty();
 			var filter = $(pets).filter(function (i,n){return n.name===input});
-			
 			for (var i = 0; i < filter.length; i++) {
 				$tbody.append(
 					'<tr>'
@@ -711,11 +711,7 @@
 			
 			$tbody = $('tbody');
 			init();
-
-			$("#reset").on("click", function() {
-				init();
-			});
-
+			
 			$("#btnSearch").on("click", function() {
 				search();				
 			});
@@ -746,8 +742,6 @@
 			</button>
 			</span>        
 		</div>
-
-		<button class="btn btn-default" type="button" id="reset">초기화</button>
 	</div>
 
 	<table class="table table-striped">
