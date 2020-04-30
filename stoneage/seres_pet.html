@@ -645,56 +645,10 @@
 			//renderResults();
 		}
 		sortResults('no', true);
-		console.log(pets);
-
-		// jQuery
-		$(document).ready(function() {
-			
-			$tbody = $('tbody');
-			init();
-
-			$("#reset").on("click", function() {
-				init();
-			});
-
-			$("#btnSearch").on("click", function() {
-				
-				var input = $("#inputSearch").val();
-				if (input == "") {
-					alert("펫 이름을(를) 입력해주세요.");
-					return;
-				}
-
-				$tbody.empty();
-				var filter = $(pets).filter(function (i,n){return n.name===input});
-				
-				for (var i = 0; i < filter.length; i++) {
-					$tbody.append(
-						'<tr>'
-						+ '<td><img src="' + filter[i].img + '"></td>'
-						+ '<td>' + filter[i].name + '</td>'
-						+ '<td>' + Number(filter[i].hp) + '</td>'
-						+ '<td>' + Number(filter[i].atk) + '</td>'
-						+ '<td>' + Number(filter[i].def) + '</td>'
-						+ '<td>' + Number(filter[i].agi) + '</td>'
-						+ '<td>' + filter[i].avgHp + '</td>'
-						+ '<td>' + filter[i].avgTotal + '</td>'
-						+ '<td>' + filter[i].avgAtk + '</td>'
-						+ '<td>' + filter[i].avgDef + '</td>'
-						+ '<td>' + filter[i].avgAgi + '</td>'
-						+ '<td>' + filter[i].earth + '</td>'
-						+ '<td>' + filter[i].water + '</td>'
-						+ '<td>' + filter[i].fire + '</td>'
-						+ '<td>' + filter[i].wind + '</td>'
-						+ '<td>' + filter[i].slot + '</td>'
-						+ '</tr>'
-					);
-				}
-			});
-		});
-
+		
 		function init() {
 			$tbody.empty();
+			$("#inputSearch").val("");
 			for (var i = 0; i < pets.length; i++) {
 				$tbody.append(
 					'<tr>'
@@ -718,6 +672,61 @@
 				);
 			}
 		}
+
+		function search() {
+			var input = $("#inputSearch").val();
+			if (input == "") {
+				alert("펫 이름을(를) 입력해주세요.");
+				return;
+			}
+
+			$tbody.empty();
+			var filter = $(pets).filter(function (i,n){return n.name===input});
+			
+			for (var i = 0; i < filter.length; i++) {
+				$tbody.append(
+					'<tr>'
+					+ '<td><img src="' + filter[i].img + '"></td>'
+					+ '<td>' + filter[i].name + '</td>'
+					+ '<td>' + Number(filter[i].hp) + '</td>'
+					+ '<td>' + Number(filter[i].atk) + '</td>'
+					+ '<td>' + Number(filter[i].def) + '</td>'
+					+ '<td>' + Number(filter[i].agi) + '</td>'
+					+ '<td>' + filter[i].avgHp + '</td>'
+					+ '<td>' + filter[i].avgTotal + '</td>'
+					+ '<td>' + filter[i].avgAtk + '</td>'
+					+ '<td>' + filter[i].avgDef + '</td>'
+					+ '<td>' + filter[i].avgAgi + '</td>'
+					+ '<td>' + filter[i].earth + '</td>'
+					+ '<td>' + filter[i].water + '</td>'
+					+ '<td>' + filter[i].fire + '</td>'
+					+ '<td>' + filter[i].wind + '</td>'
+					+ '<td>' + filter[i].slot + '</td>'
+					+ '</tr>'
+				);
+			}
+		}
+		// jQuery
+		$(document).ready(function() {
+			
+			$tbody = $('tbody');
+			init();
+
+			$("#reset").on("click", function() {
+				init();
+			});
+
+			$("#btnSearch").on("click", function() {
+				search();				
+			});
+
+			$("#inputSearch").keypress(function(e) {
+				if (e.keyCode == 13) {
+					search();
+				}
+			});
+		});
+	
 	</script>
 </head>
 <body>
@@ -728,7 +737,7 @@
 		아직 미완성입니다. 수정 또는 추가가 필요한 경우 IRC <strong>[신병교육대]칸쵸</strong>를 호출해주세요.
 	</p>
 
-	<form class="navbar-form navbar-right" role="search">
+	<div class="navbar-form navbar-right" role="search">
 		<div class="form-group input-group">
 			<input type="text" class="form-control" id="inputSearch" placeholder="Search..">
 			<span class="input-group-btn">
@@ -739,7 +748,7 @@
 		</div>
 
 		<button class="btn btn-default" type="button" id="reset">초기화</button>
-	</form>
+	</div>
 
 	<table class="table table-striped">
 		<thead>
