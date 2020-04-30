@@ -8,6 +8,25 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style>
+		#btnTop {
+		  display: none;
+		  position: fixed;
+		  bottom: 20px;
+		  right: 30px;
+		  z-index: 99;
+		  font-size: 18px;
+		  border: none;
+		  outline: none;
+		  background-color: red;
+		  color: white;
+		  cursor: pointer;
+		  padding: 15px;
+		  border-radius: 4px;
+		}
+
+		#btnTop:hover {
+		  background-color: #555;
+		}
 	</style>
 	<script>
 		var pets = [
@@ -93,13 +112,13 @@
 			,{"no":"080","img":"http://ongam.com/files/attach/images/2660457/122/661/002/080.gif","name":"쟈그","hp":48,"atk":8,"def":5,"agi":5,"avgHp":11.05,"avgTotal":4.45,"avgAtk":2.02,"avgDef":1.34,"avgAgi":1.09,"earth":0,"water":10,"fire":0,"wind":0,"slot":5,"etc":"수10","get":"쿠오해저터널 쟈루섬 방향 1층 (11,31)"}
 			,{"no":"081","img":"http://ongam.com/files/attach/images/2660457/125/661/002/081.gif","name":"판지","hp":32,"atk":6,"def":4,"agi":3,"avgHp":10.95,"avgTotal":4.5,"avgAtk":2.01,"avgDef":1.47,"avgAgi":1.02,"earth":2,"water":8,"fire":0,"wind":0,"slot":6,"etc":"지2수8","get":"벽청의 동굴 근처 해변(157,704), 아름산 동굴(한의 도끼이벤트중)"}
 			,{"no":"082","img":"http://ongam.com/files/attach/images/2660457/128/661/002/082.gif","name":"기가로스","hp":61,"atk":11,"def":11,"agi":6,"avgHp":10.45,"avgTotal":5,"avgAtk":1.95,"avgDef":2,"avgAgi":1.05,"earth":3,"water":0,"fire":0,"wind":7,"slot":4,"etc":"지3풍7","get":"폐허 입구주변, 잊혀진 영웅의 동굴 19~20층"}
-			,{"no":"083","img":"http://ongam.com/files/attach/images/2660457/131/661/002/083.gif","name":"메가로스","hp":58,"atk":10,"def":11,"agi":4,"avghp":10.99,"avgTotal":4.62,"avgAtk":1.9,"avgDef":2.02,"avgAgi":0.7,"earth":4,"water":6,"fire":0,"wind":0,"slot":4,"etc":"지4수6","get":"환생이벤트"}
+			,{"no":"083","img":"http://ongam.com/files/attach/images/2660457/131/661/002/083.gif","name":"메가로스","hp":58,"atk":10,"def":11,"agi":4,"avgHp":10.99,"avgTotal":4.62,"avgAtk":1.9,"avgDef":2.02,"avgAgi":0.7,"earth":4,"water":6,"fire":0,"wind":0,"slot":4,"etc":"지4수6","get":"환생이벤트"}
 			,{"no":"084","img":"http://ongam.com/files/attach/images/2660457/134/661/002/084.gif","name":"비트로스","hp":54,"atk":11,"def":9,"agi":4,"avgHp":10.34,"avgTotal":4.92,"avgAtk":2.15,"avgDef":1.92,"avgAgi":0.85,"earth":0,"water":0,"fire":3,"wind":7,"slot":4,"etc":"화3풍7","get":"아스마르광산 6층 (6,6)"}
 			,{"no":"085","img":"http://ongam.com/files/attach/images/2660457/137/661/002/085.gif","name":"가가로스","hp":58,"atk":11,"def":11,"agi":5,"avgHp":10.78,"avgTotal":4.94,"avgAtk":2.13,"avgDef":2,"avgAgi":0.81,"earth":0,"water":2,"fire":8,"wind":0,"slot":4,"etc":"수2화8","get":"폐허 입구 주변, 잊혀진 영웅의 동굴 19~20층"}
 			,{"no":"086","img":"http://ongam.com/files/attach/images/2660457/140/661/002/086.gif","name":"루이","hp":48,"atk":7,"def":7,"agi":3,"avgHp":11.82,"avgTotal":4.32,"avgAtk":1.68,"avgDef":1.9,"avgAgi":0.75,"earth":0,"water":8,"fire":2,"wind":0,"slot":5,"etc":"수8화2","get":"POT F코스. 벽청동굴B 8층 (19,13)"}
 			,{"no":"087","img":"http://ongam.com/files/attach/images/2660457/143/661/002/087.gif","name":"무이","hp":45,"atk":6,"def":6,"agi":2,"avgHp":12.08,"avgTotal":4.18,"avgAtk":1.64,"avgDef":1.78,"avgAgi":0.76,"earth":0,"water":10,"fire":0,"wind":0,"slot":5,"etc":"수10","get":"리온 이벤트, 카탄의 상인(무한) 퀘스트, 무이굴(사이너스-세르노스섬 해저동굴) (46,27)"}
 			,{"no":"088","img":"http://ongam.com/files/attach/images/2660457/146/661/002/088.gif","name":"씨보스","hp":46,"atk":6,"def":7,"agi":2,"avgHp":11.78,"avgTotal":4.32,"avgAtk":1.63,"avgDef":1.98,"avgAgi":0.71,"earth":2,"water":8,"fire":0,"wind":0,"slot":5,"etc":"지2수8","get":"벽청가는 해변 (141,797)"}
-			,{"no":"089","img":"http://ongam.com/files/attach/images/2660457/149/661/002/089.gif","name":"투이", "hp":53, "atk":8, "def":7, "agi":3, "avghp":11.3, "avgTotal":4.32, "avgAtk":1.81, "avgDef":1.81, "avgAgi":0.7, "earth":0, "water":5, "fire":5, "wind":0, "slot":6, "etc":"수5화5", "get":"환생이벤트"}
+			,{"no":"089","img":"http://ongam.com/files/attach/images/2660457/149/661/002/089.gif","name":"투이", "hp":53, "atk":8, "def":7, "agi":3, "avgHp":11.3, "avgTotal":4.32, "avgAtk":1.81, "avgDef":1.81, "avgAgi":0.7, "earth":0, "water":5, "fire":5, "wind":0, "slot":6, "etc":"수5화5", "get":"환생이벤트"}
 			,{"no":"090","img":"http://ongam.com/files/attach/images/2660457/152/661/002/090.gif","name":"다이노","hp":62,"atk":9,"def":11,"agi":2,"avgHp":11.66,"avgTotal":4.49,"avgAtk":1.88,"avgDef":2.12,"avgAgi":0.49,"earth":9,"water":1,"fire":0,"wind":0,"slot":4,"etc":"지9수1","get":"석상오남매이벤트"}
 			,{"no":"091","img":"http://ongam.com/files/attach/images/2660457/155/661/002/091.gif","name":"다이노스","hp":65,"atk":10,"def":11,"agi":3,"avgHp":11.9,"avgTotal":4.39,"avgAtk":1.78,"avgDef":2.11,"avgAgi":0.5,"earth":3,"water":7,"fire":0,"wind":0,"slot":4,"etc":"지3수7","get":"칠흑의 동굴 18층"}
 			,{"no":"092","img":"http://ongam.com/files/attach/images/2660457/158/661/002/092.gif","name":"프라키토스","hp":58,"atk":11,"def":9,"agi":2,"avgHp":11.41,"avgTotal":4.67,"avgAtk":2.23,"avgDef":1.94,"avgAgi":0.5,"earth":0,"water":2,"fire":8,"wind":0,"slot":4,"etc":"수2화8","get":"쿠르마을~ 몽환동굴사이 지역"}
@@ -157,8 +176,8 @@
 //			,{"no":"159","img":"http://ongam.com/files/attach/images/2660457/684/662/002/159.gif","name":"델타르돈","hp":52,"atk":9,"def":8,"agi":6,"avgHp":10.07,"avgTotal":5.04,"avgAtk":1.98,"avgDef":1.76,"avgAgi":1.3,"earth":9,"water":0,"fire":0,"wind":1,"slot":5,"etc":"지9풍1","get":"인어마을에서 흑운모 60개로 구입"}
 //			,{"no":"160","img":"http://ongam.com/files/attach/images/2660457/687/662/002/160.gif","name":"카르카로돈","hp":54,"atk":10,"def":6,"agi":8,"avgHp":10.1,"avgTotal":5.07,"avgAtk":2.05,"avgDef":1.45,"avgAgi":1.57,"earth":1,"water":0,"fire":0,"wind":9,"slot":5,"etc":"지1풍9","get":"인어마을에서 흑운모 60개로 구입"}
 //			,{"no":"163","img":"http://ongam.com/files/attach/images/2660457/690/662/002/163.gif","name":"크루거","hp":54,"atk":9,"def":8,"agi":7,"avgHp":11.1,"avgTotal":5,"avgAtk":1.72,"avgDef":1.9,"avgAgi":1.38,"earth":5,"water":5,"fire":0,"wind":0,"slot":5,"etc":"지5수5","get":"스라인 복권페트"}
-//			,{"no":"164","img":"http://ongam.com/files/attach/images/2660457/693/662/002/164.gif","name":"카우거","hp":56,"atk":11,"def":6,"agi":8,"avgHp":11.11,"avgTotal":5.34,"avgAtk":2.39,"avgDef":1.33,"avgAgi":1.63,"earth":7,"water":0,"fire":0,"wind":3,"slot":5,"etc":"지7풍3","get":"캐시페트 (6,900원)"}
-//			,{"no":"165","img":"http://ongam.com/files/attach/images/2660457/698/662/002/165.gif","name":"갈푸스","hp":53,"atk":12,"def":5,"agi":8,"avgHp":10.33,"avgTotal":5.32,"avgAtk":2.6,"avgDef":1.13,"avgAgi":1.59,"earth":0,"water":0,"fire":9,"wind":1,"slot":5,"etc":"화9풍1","get":"캐시페트 (6,900원)"}
+			,{"no":"164","img":"http://ongam.com/files/attach/images/2660457/693/662/002/164.gif","name":"카우거","hp":47,"atk":9,"def":6,"agi":7,"avgHp":9.86,"avgTotal":4.98,"avgAtk":2.0,"avgDef":1.4,"avgAgi":1.58,"earth":7,"water":0,"fire":0,"wind":3,"slot":5,"get":"수목원, 신전마을"}
+			,{"no":"165","img":"http://ongam.com/files/attach/images/2660457/698/662/002/165.gif","name":"갈푸스","hp":46,"atk":10,"def":5,"agi":7,"avgHp":9.54,"avgTotal":5,"avgAtk":2.19,"avgDef":1.21,"avgAgi":1.6,"earth":0,"water":0,"fire":5,"wind":5,"slot":5,"get":"수목원, 신전"}
 //			,{"no":"166","img":"http://ongam.com/files/attach/images/2660457/705/662/002/166.gif","name":"링코","hp":55,"atk":7,"def":5,"agi":6,"avgHp":14.55,"avgTotal":4.9,"avgAtk":1.81,"avgDef":1.44,"avgAgi":1.65,"earth":2,"water":8,"fire":0,"wind":0,"slot":6,"etc":"지2수8","get":"스톤에이지 2주년 기념페트"}
 //			,{"no":"167","img":"http://ongam.com/files/attach/images/2660457/709/662/002/167.gif","name":"백호","hp":69,"atk":11,"def":10,"agi":8,"avgHp":12.07,"avgTotal":5.38,"avgAtk":2.04,"avgDef":1.96,"avgAgi":1.38,"earth":7,"water":3,"fire":0,"wind":0,"slot":6,"etc":"지7수3","get":"영웅이벤트"}
 //			,{"no":"168","img":"http://ongam.com/files/attach/images/2660457/712/662/002/168.gif","name":"황호","hp":55,"atk":11,"def":8,"agi":7,"avgHp":10.55,"avgTotal":5.3,"avgAtk":2.16,"avgDef":1.64,"avgAgi":1.5,"earth":6,"water":0,"fire":0,"wind":4,"slot":6,"etc":"지6풍4","get":"오랑이 이벤트"}
@@ -440,9 +459,9 @@
 //			,{"no":"576","img":"http://ongam.com/files/attach/images/2660457/868/369/004/576.gif","name":"하트문","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":0,"water":0,"fire":6,"wind":4,"slot":5,"etc":"화6풍4","get":"페트합성 - 글루밍 + 하트링"}
 //			,{"no":"577","img":"http://ongam.com/files/attach/images/2660457/454/913/004/577.gif","name":"잔비노","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":10,"water":0,"fire":0,"wind":0,"slot":5,"etc":"지10","get":"페트합성 - G리비노 + 기비노"}
 //			,{"no":"578","img":"http://ongam.com/files/attach/images/2660457/079/478/005/578.gif","name":"디어룬","hp":55,"atk":9,"def":7,"agi":9,"avgHp":11.37,"avgTotal":5.65,"avgAtk":2.01,"avgDef":1.65,"avgAgi":1.99,"earth":3,"water":0,"fire":0,"wind":7,"slot":7,"etc":"지3풍7","get":"레어캐시페트 (7,200원), 용용이 스페셜 세트, 여름한정 판도라의 상자(2012)"}
-//			,{"no":"579","img":"http://ongam.com/files/attach/images/2660457/461/913/004/579.gif","name":"비노","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":8,"water":2,"fire":0,"wind":0,"slot":5,"etc":"지8수2","get":"페트합성 - 잔비노 + (진)리비노"}
-//			,{"no":"580","img":"http://ongam.com/files/attach/images/2660457/464/913/004/580.gif","name":"기로","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":0,"water":2,"fire":8,"wind":0,"slot":5,"etc":"수2화8","get":"페트합성 - 청기로 + (진)얀기로"}
-//			,{"no":"581","img":"http://ongam.com/files/attach/images/2660457/473/913/004/581.gif","name":"기노","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":0,"water":0,"fire":8,"wind":2,"slot":5,"etc":"화8풍2","get":"페트합성 - 혈기노 + (진)반기노"}
+			,{"no":"579","img":"http://ongam.com/files/attach/images/2660457/461/913/004/579.gif","name":"리논","hp":47,"atk":10,"def":6,"agi":4,"avgHp":10.03,"avgTotal":4.8,"avgAtk":2.27,"avgDef":1.51,"avgAgi":1.02,"earth":10,"water":0,"fire":0,"wind":0,"slot":4,"get":"수련관 레이드 랜덤 획득"}
+			,{"no":"580","img":"http://ongam.com/files/attach/images/2660457/464/913/004/580.gif","name":"기로스","hp":62,"atk":13,"def":8,"agi":7,"avgHp":10.45,"avgTotal":1.22,"avgAtk":2.32,"avgDef":1.41,"avgAgi":1.22,"earth":0,"water":3,"fire":7,"wind":0,"slot":4,"get":"수련관 레이드 랜덤 획득"}
+			,{"no":"581","img":"http://ongam.com/files/attach/images/2660457/473/913/004/581.gif","name":"기노","hp":52,"atk":12,"def":7,"agi":6,"avgHp":9.95,"avgTotal":5,"avgAtk":2.4,"avgDef":1.4,"avgAgi":1.2,"earth":0,"water":0,"fire":10,"wind":0,"slot":4,"get":"진홍 여신방"}
 //			,{"no":"582","img":"http://ongam.com/files/attach/images/2660457/481/913/004/582.gif","name":"보로","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":0,"water":0,"fire":6,"wind":4,"slot":5,"etc":"화6풍4","get":"페트합성 - 기보로 + (진)반보로"}
 //			,{"no":"583","img":"http://ongam.com/files/attach/images/2660457/488/913/004/583.gif","name":"르돈","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":2,"water":0,"fire":0,"wind":8,"slot":5,"etc":"지2풍8","get":"페트합성 - 만보돈 + (진)부르돈"}
 //			,{"no":"584","img":"http://ongam.com/files/attach/images/2660457/951/243/005/584.gif","name":"마그노","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":9,"water":0,"fire":0,"wind":1,"slot":5,"etc":"지9풍1","get":"카루타나 마을 부근 해변"}
@@ -683,7 +702,6 @@
 		
 		// 검색기능
 		function search() {
-			
 			$("th > span").removeAttr("aria-hidden");
 			$("th > span").removeAttr("class");
 
@@ -692,14 +710,26 @@
 				init();
 				return;
 			}
-
-			filter = $(pets).filter(function (i,n){return n.name===input});
+			
+			filter = $(pets).filter(function(i, n){return n.name===input});
 			print(filter);
+		}
+		
+		// 스크롤
+		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+		window.onscroll = function() {scrollFunction()};
+		function scrollFunction() {
+			if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+				btnTop.style.display = "block";
+			} else {
+				btnTop.style.display = "none";
+			}
 		}
 
 		// jQuery
 		$(document).ready(function() {
-			
+
+			var btnTop = document.getElementById("btnTop");
 			$tbody = $('tbody');
 			init();
 			
@@ -745,50 +775,58 @@
 					print(pets);
 				}
 			});
+
+			// 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
+			$("#btnTop").on("click", function() {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			});
 		});
 	
 	</script>
 </head>
 <body>
-	
-	<h2>SERES Server Pet Info</h2>
-	<hr>
-	<p class="lead">
-		아직 미완성입니다. 수정 또는 추가가 필요한 경우 IRC <strong>[신병교육대]칸쵸</strong>를 호출해주세요.
-	</p>
+	<div class="container">
+		<h2>SERES Server Pet Info</h2>
+		<hr>
+		<p class="lead">
+			아직 미완성입니다. 수정 또는 추가가 필요한 경우 IRC <strong>[신병교육대]칸쵸</strong>를 호출해주세요.
+		</p>
 
-	<div class="navbar-form navbar-right" role="search">
-		<div class="form-group input-group">
-			<input type="text" class="form-control" id="inputSearch" placeholder="Search..">
-			<span class="input-group-btn">
-			<button class="btn btn-default" type="button" id="btnSearch">
-			<span class="glyphicon glyphicon-search"></span>
-			</button>
-			</span>        
+		<div class="navbar-form navbar-right" role="search">
+			<div class="form-group input-group">
+				<input type="text" class="form-control" id="inputSearch" placeholder="Search..">
+				<span class="input-group-btn">
+				<button class="btn btn-default" type="button" id="btnSearch">
+				<span class="glyphicon glyphicon-search"></span>
+				</button>
+				</span>        
+			</div>
 		</div>
-	</div>
 
-	<table class="table table-striped">
-		<thead>
-			<th id="img">이미지</th>
-			<th id="name">이름<span></span></th>
-			<th id="hp">내구력<span></span></th>
-			<th id="atk">공격력<span></span></th>
-			<th id="def">방어력<span></span></th>
-			<th id="agi">순발력<span></span></th>
-			<th id="avgHp">내구 성장률<span></span></th>
-			<th id="avgTotal">스텟 성장률<span></span></th>
-			<th id="avgAtk">공격 성장률<span></span></th>
-			<th id="avgDef">방어 성장률<span></span></th>
-			<th id="avgAgi">순발 성장률<span></span></th>
-			<th id="earth">지<span></span></th>
-			<th id="water">수<span></span></th>
-			<th id="fire">화<span></span></th>
-			<th id="wind">풍<span></span></th>
-			<th id="slot">슬롯<span></span></th>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
+		<table class="table table-striped">
+			<thead>
+				<th id="img">이미지</th>
+				<th id="name">이름<span></span></th>
+				<th id="hp">내구력<span></span></th>
+				<th id="atk">공격력<span></span></th>
+				<th id="def">방어력<span></span></th>
+				<th id="agi">순발력<span></span></th>
+				<th id="avgHp">내구 성장률<span></span></th>
+				<th id="avgTotal">스텟 성장률<span></span></th>
+				<th id="avgAtk">공격 성장률<span></span></th>
+				<th id="avgDef">방어 성장률<span></span></th>
+				<th id="avgAgi">순발 성장률<span></span></th>
+				<th id="earth">지<span></span></th>
+				<th id="water">수<span></span></th>
+				<th id="fire">화<span></span></th>
+				<th id="wind">풍<span></span></th>
+				<th id="slot">슬롯<span></span></th>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<button id="btnTop" title="Go to top">Top</button>
 </body>
 </html>
