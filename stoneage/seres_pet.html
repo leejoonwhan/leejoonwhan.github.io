@@ -763,7 +763,7 @@
 			$("th").on("click", function() {
 				
 				var id = $(this).attr("id");
-				if (id == "img" || id == "name" || id == "get") {
+				if (id == "img" || id == "get") {
 					return;
 				}
 				
@@ -771,7 +771,6 @@
 				if ($(this).find("span").attr("class") == "glyphicon glyphicon-sort-by-attributes-alt") {
 					$(this).find("span").attr("class", "glyphicon glyphicon-sort-by-attributes");
 					$(this).find("span").attr("aria-hidden", "true");
-					var id = $(this).attr("id");
 					sortResults(id, true);
 					print(pets);
 
@@ -780,7 +779,6 @@
 				else if ($(this).find("span").attr("class") == "glyphicon glyphicon-sort-by-attributes") {
 					$(this).find("span").attr("class", "glyphicon glyphicon-sort-by-attributes-alt");
 					$(this).find("span").attr("aria-hidden", "true");
-					var id = $(this).attr("id");
 					sortResults(id, false);
 					print(pets);
 				}
@@ -790,7 +788,6 @@
 					$("th > span").removeAttr("class");
 					$(this).find("span").addClass("glyphicon glyphicon-sort-by-attributes-alt");
 					$(this).find("span").attr("aria-hidden", "true");
-					
 					sortResults(id, false);
 					print(pets);
 				}
