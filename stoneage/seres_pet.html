@@ -632,7 +632,8 @@
 //			,{"no":"797","img":"http://ongam.com/files/attach/images/2660457/816/231/037/584eb94cee65616cf1cc36256022e972.gif","name":"코무시","hp":"0","atk":"0","def":"0","agi":"0","avgHp":"0","avgTotal":"0","avgAtk":"0","avgDef":"0","avgAgi":"0","earth":"0","water":"0","fire":"6","wind":"4","slot":"5","etc":"화6풍4","get":"2013 추석 이벤트"}
 //			,{"no":"798","img":"http://ongam.com/files/attach/images/2660457/882/231/037/d0e507835531a65647e86a17939cffec.gif","name":"코르코","hp":"0","atk":"0","def":"0","agi":"0","avgHp":"0","avgTotal":"0","avgAtk":"0","avgDef":"0","avgAgi":"0","earth":"3","water":"7","fire":"0","wind":"0","slot":"5","etc":"지3수7","get":"2013 추석 이벤트"}
 		];
-	
+		var filter;
+
 		// JSON 정렬
 		function sortResults(prop, asc) {
 			pets.sort(function(a, b) {
@@ -642,83 +643,106 @@
 					return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
 				}
 			});
-			//renderResults();
 		}
-		sortResults('no', true);
 		
+		// 초기화
 		function init() {
-			$tbody.empty();
+			sortResults('no', true);
 			$("#inputSearch").val("");
-			for (var i = 0; i < pets.length; i++) {
+			$("th > span").removeAttr("aria-hidden");
+			$("th > span").removeAttr("class");
+			print(pets);
+		}
+		
+		// 리스트를 화면에 출력함
+		function print(list) {
+			$tbody.empty();
+			for (var i = 0; i < list.length; i++) {
 				$tbody.append(
 					'<tr>'
-					+ '<td><img src="' + pets[i].img + '"></td>'
-					+ '<td>' + pets[i].name + '</td>'
-					+ '<td>' + Number(pets[i].hp) + '</td>'
-					+ '<td>' + Number(pets[i].atk) + '</td>'
-					+ '<td>' + Number(pets[i].def) + '</td>'
-					+ '<td>' + Number(pets[i].agi) + '</td>'
-					+ '<td>' + pets[i].avgHp + '</td>'
-					+ '<td>' + pets[i].avgTotal + '</td>'
-					+ '<td>' + pets[i].avgAtk + '</td>'
-					+ '<td>' + pets[i].avgDef + '</td>'
-					+ '<td>' + pets[i].avgAgi + '</td>'
-					+ '<td>' + pets[i].earth + '</td>'
-					+ '<td>' + pets[i].water + '</td>'
-					+ '<td>' + pets[i].fire + '</td>'
-					+ '<td>' + pets[i].wind + '</td>'
-					+ '<td>' + pets[i].slot + '</td>'
+					+ '<td><img src="' + list[i].img + '"></td>'
+					+ '<td>' + list[i].name + '</td>'
+					+ '<td>' + Number(list[i].hp) + '</td>'
+					+ '<td>' + Number(list[i].atk) + '</td>'
+					+ '<td>' + Number(list[i].def) + '</td>'
+					+ '<td>' + Number(list[i].agi) + '</td>'
+					+ '<td>' + list[i].avgHp + '</td>'
+					+ '<td>' + list[i].avgTotal + '</td>'
+					+ '<td>' + list[i].avgAtk + '</td>'
+					+ '<td>' + list[i].avgDef + '</td>'
+					+ '<td>' + list[i].avgAgi + '</td>'
+					+ '<td>' + list[i].earth + '</td>'
+					+ '<td>' + list[i].water + '</td>'
+					+ '<td>' + list[i].fire + '</td>'
+					+ '<td>' + list[i].wind + '</td>'
+					+ '<td>' + list[i].slot + '</td>'
 					+ '</tr>'
 				);
 			}
 		}
-
+		
+		// 검색기능
 		function search() {
-			var input = $("#inputSearch").val();
-			$tbody.empty();
 			
+			$("th > span").removeAttr("aria-hidden");
+			$("th > span").removeAttr("class");
+
+			var input = $("#inputSearch").val();
 			if (input == "") {
 				init();
 				return;
 			}
 
-			var filter = $(pets).filter(function (i,n){return n.name===input});
-			for (var i = 0; i < filter.length; i++) {
-				$tbody.append(
-					'<tr>'
-					+ '<td><img src="' + filter[i].img + '"></td>'
-					+ '<td>' + filter[i].name + '</td>'
-					+ '<td>' + Number(filter[i].hp) + '</td>'
-					+ '<td>' + Number(filter[i].atk) + '</td>'
-					+ '<td>' + Number(filter[i].def) + '</td>'
-					+ '<td>' + Number(filter[i].agi) + '</td>'
-					+ '<td>' + filter[i].avgHp + '</td>'
-					+ '<td>' + filter[i].avgTotal + '</td>'
-					+ '<td>' + filter[i].avgAtk + '</td>'
-					+ '<td>' + filter[i].avgDef + '</td>'
-					+ '<td>' + filter[i].avgAgi + '</td>'
-					+ '<td>' + filter[i].earth + '</td>'
-					+ '<td>' + filter[i].water + '</td>'
-					+ '<td>' + filter[i].fire + '</td>'
-					+ '<td>' + filter[i].wind + '</td>'
-					+ '<td>' + filter[i].slot + '</td>'
-					+ '</tr>'
-				);
-			}
+			filter = $(pets).filter(function (i,n){return n.name===input});
+			print(filter);
 		}
+
 		// jQuery
 		$(document).ready(function() {
 			
 			$tbody = $('tbody');
 			init();
 			
+			// 검색 버튼
 			$("#btnSearch").on("click", function() {
 				search();				
 			});
-
+			
+			// 검색 입력창
 			$("#inputSearch").keypress(function(e) {
 				if (e.keyCode == 13) {
 					search();
+				}
+			});
+			
+			// 정렬
+			$("th").on("click", function() {
+				// 내림차순을 오름차순으로 변경
+				if ($(this).find("span").attr("class") == "glyphicon glyphicon-sort-by-attributes-alt") {
+					$(this).find("span").attr("class", "glyphicon glyphicon-sort-by-attributes");
+					$(this).find("span").attr("aria-hidden", "true");
+					var id = $(this).attr("id");
+					sortResults(id, true);
+					print(pets);
+
+				}
+				// 오름차순을 내림차순으로 변경
+				else if ($(this).find("span").attr("class") == "glyphicon glyphicon-sort-by-attributes") {
+					$(this).find("span").attr("class", "glyphicon glyphicon-sort-by-attributes-alt");
+					$(this).find("span").attr("aria-hidden", "true");
+					var id = $(this).attr("id");
+					sortResults(id, false);
+					print(pets);
+				}
+				// 다른 타이틀 내림차순으로 정렬
+				else {
+					$("th > span").removeAttr("aria-hidden");
+					$("th > span").removeAttr("class");
+					$(this).find("span").addClass("glyphicon glyphicon-sort-by-attributes-alt");
+					$(this).find("span").attr("aria-hidden", "true");
+					var id = $(this).attr("id");
+					sortResults(id, false);
+					print(pets);
 				}
 			});
 		});
@@ -746,22 +770,22 @@
 
 	<table class="table table-striped">
 		<thead>
-			<th>이미지</th>
-			<th>이름</th>
-			<th>내구력</th>
-			<th>공격력</th>
-			<th>방어력</th>
-			<th>순발력</th>
-			<th>내구 성장률</th>
-			<th>스텟 성장률</th>
-			<th>공격 성장률</th>
-			<th>방어 성장률</th>
-			<th>순발 성장률</th>
-			<th>지</th>
-			<th>수</th>
-			<th>화</th>
-			<th>풍</th>
-			<th>슬롯</th>
+			<th id="img">이미지</th>
+			<th id="name">이름<span></span></th>
+			<th id="hp">내구력<span></span></th>
+			<th id="atk">공격력<span></span></th>
+			<th id="def">방어력<span></span></th>
+			<th id="agi">순발력<span></span></th>
+			<th id="avgHp">내구 성장률<span></span></th>
+			<th id="avgTotal">스텟 성장률<span></span></th>
+			<th id="avgAtk">공격 성장률<span></span></th>
+			<th id="avgDef">방어 성장률<span></span></th>
+			<th id="avgAgi">순발 성장률<span></span></th>
+			<th id="earth">지<span></span></th>
+			<th id="water">수<span></span></th>
+			<th id="fire">화<span></span></th>
+			<th id="wind">풍<span></span></th>
+			<th id="slot">슬롯<span></span></th>
 		</thead>
 		<tbody>
 		</tbody>
