@@ -30,7 +30,7 @@
 		}
 
 		#imgBox {
-			width: 160px;
+			width: 128px;
 		}
 
 		img {
@@ -79,7 +79,7 @@
 			,{"no":"037","img":"http://ongam.com/files/attach/images/2660457/798/660/002/037.gif","name":"쿠카스","hp":43,"atk":7,"def":10,"agi":1,"avgHp":10.08,"avgTotal":4.75,"avgAtk":1.72,"avgDef":2.51,"avgAgi":0.52,"earth":8,"water":2,"fire":0,"wind":0,"slot":5,"etc":"지8수2","get":"동쿠링광산2층 (5,7)"}
 			,{"no":"038","img":"http://ongam.com/files/attach/images/2660457/805/660/002/038.gif","name":"코로카스","hp":34,"atk":6,"def":8,"agi":2,"avgHp":10.42,"avgTotal":4.87,"avgAtk":1.85,"avgDef":2.46,"avgAgi":0.56,"earth":0,"water":4,"fire":6,"wind":0,"slot":5,"etc":"수4화6","get":"도둑의 동굴 지하4층 (15,4)"}
 			,{"no":"039","img":"http://ongam.com/files/attach/images/2660457/811/660/002/039.gif","name":"로기안","hp":44,"atk":8,"def":11,"agi":2,"avgHp":10.1,"avgTotal":4.68,"avgAtk":1.73,"avgDef":2.48,"avgAgi":0.5,"earth":8,"water":0,"fire":0,"wind":2,"slot":5,"etc":"지8풍2","get":"유리 동굴 13층"}
-			,{"no":"040","img":"http://ongam.com/files/attach/images/2660457/818/660/002/040.gif","name":"램가스","hp":38,"atk":8,"def":10,"agi":3,"avgHp":09.23,"avgTotal":5.24,"avgAtk":1.92,"avgDef":2.62,"avgAgi":0.7,"earth":5,"water":0,"fire":0,"wind":5,"slot":5,"etc":"지5풍5","get":"미선의 편지 A이벤트"}
+			,{"no":"040","img":"http://ongam.com/files/attach/images/2660457/818/660/002/040.gif","name":"램가스","hp":38,"atk":8,"def":10,"agi":3,"avgHp":09.23,"avgTotal":5.24,"avgAtk":1.92,"avgDef":2.62,"avgAgi":0.7,"earth":5,"water":0,"fire":0,"wind":5,"slot":5,"etc":"지5풍5","get":"카타르카스 연구가퀘스트(동쿠링광산3층 32,38)"}
 			,{"no":"041","img":"http://ongam.com/files/attach/images/2660457/830/660/002/041.gif","name":"아이카스","hp":44,"atk":6,"def":10,"agi":1,"avgHp":10.78,"avgTotal":4.7,"avgAtk":1.63,"avgDef":2.52,"avgAgi":0.55,"earth":5,"water":5,"fire":0,"wind":0,"slot":5,"etc":"지5수5","get":"칠흑의 동굴 9층 (40,42), D코스"}
 			,{"no":"042","img":"http://ongam.com/files/attach/images/2660457/837/660/002/042.gif","name":"쿠타스","hp":44,"atk":7,"def":8,"agi":2,"avgHp":10.77,"avgTotal":4.8,"avgAtk":1.88,"avgDef":2.24,"avgAgi":0.5,"earth":0,"water":6,"fire":4,"wind":0,"slot":5,"etc":"수6화4","get":"칠흑의 동굴 11층 출구근처"}
 			,{"no":"043","img":"http://ongam.com/files/attach/images/2660457/841/660/002/043.gif","name":"카르기안","hp":39,"atk":6,"def":9,"agi":3,"avgHp":10.25,"avgTotal":4.86,"avgAtk":1.63,"avgDef":2.39,"avgAgi":0.83,"earth":2,"water":0,"fire":0,"wind":8,"slot":5,"etc":"지2풍8","get":"칠흑의 동굴 5층(13,56), A코스"}
@@ -760,7 +760,7 @@
 					+ '<td>' + list[i].def + '</td>'
 					+ '<td>' + list[i].agi + '</td>'
 					+ '<td>' + list[i].avgHp + '</td>'
-					+ '<td>' + list[i].avgTotal + '</td>'
+					+ '<td class="text-right">' + list[i].avgTotal + '</td>'
 					+ '<td>' + list[i].avgAtk + '</td>'
 					+ '<td>' + list[i].avgDef + '</td>'
 					+ '<td>' + list[i].avgAgi + '</td>'
@@ -893,6 +893,24 @@
 		</div>
 
 		<table class="table table-striped">
+			<colgroup>
+				<col width="">	<!-- 이미지 -->
+				<col width="100px">	<!-- 이름 -->
+				<col width="30px">	<!-- 내구력 -->
+				<col width="30px">	<!-- 공격력 -->
+				<col width="30px">	<!-- 방어력 -->
+				<col width="30px">	<!-- 순발력 -->
+				<col width="60px">	<!-- 내구 성장률 -->
+				<col width="60px">	<!-- 스텟 성장률 -->
+				<col width="60px">	<!-- 공격 성장률 -->
+				<col width="60px">	<!-- 방어 성장률 -->
+				<col width="60px">	<!-- 순발 성장률 -->
+				<col width="30px">	<!-- 지 -->
+				<col width="30px">	<!-- 수 -->
+				<col width="30px">	<!-- 화 -->
+				<col width="30px">	<!-- 풍 -->
+				<col width="">	<!-- 획득방법 -->
+			</colgroup>
 			<thead>
 				<th id="img">이미지</th>
 				<th id="name">이름<span></span></th>
