@@ -65,7 +65,8 @@
 			, {"name":"환생 이벤트", "url":"http://pooyas.com/sa_quest/8167", "area":"가우린", "map":"", "reward":"캐릭터 환생 혜택,<br>정령왕의 활(공 +25, 방 -15 (5-6) 부의 정령 Lv3) [보너스 이벤트 선택사항.]<br>출신 마을에 따른 페트 한마리(환생 얼룩우리, 카르곤, 투이, 메가로스), 5환생시 골로스", "memo":"페트 인벤토리 1칸(5환생시 4칸)"}
 		];
 		var printList;
-		
+		valueInit();
+
 		// JSON 정렬
 		function sortResults(prop, asc) {
 			printList.sort(function(a, b) {
@@ -114,8 +115,8 @@
 				$tbody.append(
 					'<tr>'
 					+ '<td>' + (i + 1) + '</td>'
-					+ '<td><a href="' + printList[i].url + '">' + printList[i].name + '</a></td>'
-					+ '<td><a href="' + printList[i].map + '">' + printList[i].area + '</a></td>'
+					+ '<td><a href="' + printList[i].url + '" target="_blank">' + printList[i].name + '</a></td>'
+					+ '<td><a href="' + printList[i].map + '" target="_blank">' + printList[i].area + '</a></td>'
 					+ '<td>' + printList[i].reward + '</td>'
 					+ '<td>' + printList[i].memo + '</td>'
 					+ '</tr>'
