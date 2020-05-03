@@ -37,6 +37,12 @@
 			max-width: 100%;
 			max-height: 128px;
 		}
+
+		.searchValue {
+			display: inline;
+			width: 70px;
+		}
+
 	</style>
 	<script>
 		var pets = [
@@ -714,9 +720,7 @@
 //			,{"no":"999","img":"","name":"","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":0,"water":0,"fire":0,"wind":0,"slot":0,"get":""}
 //			,{"no":"999","img":"","name":"","hp":0,"atk":0,"def":0,"agi":0,"avgHp":0,"avgTotal":0,"avgAtk":0,"avgDef":0,"avgAgi":0,"earth":0,"water":0,"fire":0,"wind":0,"slot":0,"get":""}
 		];
-		var printList = pets;
-	
-
+		var printList;
 		valueInit();
 		
 		// JSON 정렬
@@ -742,11 +746,11 @@
 
 		// 초기화
 		function init() {
-			sortResults('no', true);
 			$("#inputSearch").val("");
 			$("th > span").removeAttr("aria-hidden");
 			$("th > span").removeAttr("class");
 			printList = pets;
+			sortResults('no', true);
 			print();
 		}
 		
@@ -789,7 +793,7 @@
 				init();
 				return;
 			}
-			
+
 			printList = [];
 			var arrInput = input.split(",");
 			for (var i = 0; i < arrInput.length; i++) {
@@ -909,6 +913,65 @@
 			<p>다중 검색은 구분자 <strong>,</strong> 를 붙여주세요.</p>
 			<footer>현무,백호,주작,청룡</footer>
 		</blockquote>
+		
+		<!--
+		<div class="row">
+			<div class="col-xs-3">
+				<label for="label">내구 성장률</label>
+				<input type="text" class="form-control searchValue" id="minHp">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxHp">
+			</div>
+			<div class="col-xs-9">
+				<label for="label">스텟 성장률</label>
+				<input type="text" class="form-control searchValue" id="minTotal">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxTotal">
+			</div>
+			<div class="col-xs-3">
+				<label for="label">공격 성장률</label>
+				<input type="text" class="form-control searchValue" id="minAtk">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxAtk">
+			</div>
+			<div class="col-xs-3">
+				<label for="label">방어 성장률</label>
+				<input type="text" class="form-control searchValue" id="minDef">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxDef">
+			</div>
+			<div class="col-xs-6">
+				<label for="label">순발 성장률</label>
+				<input type="text" class="form-control searchValue" id="minAgi">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxAgi">
+			</div>
+			<div class="col-xs-3">
+				<label for="label">지　속　성&nbsp;</label>
+				<input type="text" class="form-control searchValue" id="minEarth">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxEarth">
+			</div>
+			<div class="col-xs-3">
+				<label for="label">수　속　성&nbsp;</label>
+				<input type="text" class="form-control searchValue" id="minWater">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxWater">
+			</div>
+			<div class="col-xs-3">
+				<label for="label">화　속　성&nbsp;</label>
+				<input type="text" class="form-control searchValue" id="minFire">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxFire">
+			</div>
+			<div class="col-xs-3">
+				<label for="label">풍　속　성&nbsp;</label>
+				<input type="text" class="form-control searchValue" id="minWind">
+				<strong>~</strong>
+				<input type="text" class="form-control searchValue" id="maxWind">
+			</div>
+		</div>
+		-->
 		<div class="navbar-form navbar-right" role="search">
 			<button class="btn btn-success" type="button" id="qpfmrk">베르가류</button>
 			<button class="btn btn-primary" type="button" id="disrlfh">얀기로류</button>
