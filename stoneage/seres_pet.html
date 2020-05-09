@@ -832,9 +832,8 @@
 			*/
 			
 			var cnt = 0;
-			printList = [];
 			if (input != "") {
-				cnt++;
+				printList = [];
 				var arrInput = input.split(",");
 				for (var i = 0; i < arrInput.length; i++) {
 					var name = arrInput[i].trim();
@@ -843,6 +842,7 @@
 						printList.push(filter[0]);
 					}
 				}
+				cnt++;
 			}
 			if (minHp != "") {
 				var filter;
@@ -853,8 +853,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgHp >= minHp});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -870,8 +870,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgHp <= maxHp});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -887,8 +887,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgTotal >= minTotal});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -904,8 +904,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgTotal <= maxTotal});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -921,8 +921,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgAtk >= minAtk});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -938,8 +938,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgAtk <= maxAtk});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -955,8 +955,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgDef >= minDef});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -972,8 +972,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgDef <= maxDef});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -989,8 +989,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgAgi >= minAgi});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1006,8 +1006,8 @@
 					filter = $(pets).filter(function(i, n){return n.avgAgi <= maxAgi});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1023,8 +1023,8 @@
 					filter = $(pets).filter(function(i, n){return n.earth >= minEarth});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1040,8 +1040,8 @@
 					filter = $(pets).filter(function(i, n){return n.earth <= maxEarth});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1057,8 +1057,8 @@
 					filter = $(pets).filter(function(i, n){return n.water >= minWater});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1074,8 +1074,8 @@
 					filter = $(pets).filter(function(i, n){return n.water <= maxWater});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1091,8 +1091,8 @@
 					filter = $(pets).filter(function(i, n){return n.fire >= minFire});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1108,8 +1108,8 @@
 					filter = $(pets).filter(function(i, n){return n.fire <= maxFire});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1125,8 +1125,8 @@
 					filter = $(pets).filter(function(i, n){return n.wind >= minWind});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
@@ -1142,13 +1142,12 @@
 					filter = $(pets).filter(function(i, n){return n.wind <= maxWind});
 				}
 				
+				printList = [];
 				if (filter.length > 0) {
-					printList = [];
 					for (var i = 0; i < filter.length; i++) {
 						printList.push(filter[i]);
 					}
 				}
-				cnt++;
 			}
 
 			print();
@@ -1282,64 +1281,6 @@
 			<footer>현무,백호,주작,청룡</footer>
 		</blockquote>
 		
-		<!--
-		<div class="row">
-			<div class="col-xs-3">
-				<label for="label">내구 성장률</label>
-				<input type="text" class="form-control searchValue" id="minHp">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxHp">
-			</div>
-			<div class="col-xs-9">
-				<label for="label">스텟 성장률</label>
-				<input type="text" class="form-control searchValue" id="minTotal">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxTotal">
-			</div>
-			<div class="col-xs-3">
-				<label for="label">공격 성장률</label>
-				<input type="text" class="form-control searchValue" id="minAtk">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxAtk">
-			</div>
-			<div class="col-xs-3">
-				<label for="label">방어 성장률</label>
-				<input type="text" class="form-control searchValue" id="minDef">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxDef">
-			</div>
-			<div class="col-xs-6">
-				<label for="label">순발 성장률</label>
-				<input type="text" class="form-control searchValue" id="minAgi">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxAgi">
-			</div>
-			<div class="col-xs-3">
-				<label for="label">지　속　성&nbsp;</label>
-				<input type="text" class="form-control searchValue" id="minEarth">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxEarth">
-			</div>
-			<div class="col-xs-3">
-				<label for="label">수　속　성&nbsp;</label>
-				<input type="text" class="form-control searchValue" id="minWater">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxWater">
-			</div>
-			<div class="col-xs-3">
-				<label for="label">화　속　성&nbsp;</label>
-				<input type="text" class="form-control searchValue" id="minFire">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxFire">
-			</div>
-			<div class="col-xs-3">
-				<label for="label">풍　속　성&nbsp;</label>
-				<input type="text" class="form-control searchValue" id="minWind">
-				<strong>~</strong>
-				<input type="text" class="form-control searchValue" id="maxWind">
-			</div>
-		</div>
-		-->
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<colgroup>
