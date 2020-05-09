@@ -33,36 +33,36 @@
 	</style>
 	<script>
 		var quest = [
-			{"name":"성인식", "url":"http://pooyas.com/sa_quest/7713", "area":"해저통로", "map":"", "reward":"의식의 투구(방 +15 민 -3 모든 이상상태 방어 +3)", "memo":"아이템 인벤토리 여유 공간 1칸"}
-			, {"name":"친구의 우정", "url":"http://pooyas.com/sa_quest/7882", "area":"사이너스", "map":"", "reward":"이상한 조개", "memo":"아이템 인벤토리 여유 공간 1칸"}
-			, {"name":"하로산의 약초", "url":"http://pooyas.com/sa_quest/7944", "area":"쟈루", "map":"", "reward":"할아버지의 부적(매력-1 모든이상상태 방어+2)", "memo":"아이템 인벤토리 여유 공간 1칸"}
-			, {"name":"도끼 전달(야무야무)", "url":"http://pooyas.com/sa_quest/7886", "area":"사이너스", "map":"", "reward":"야무야무 도끼 (공+35, 방-10, 민-10)", "memo":"아이템 인벤토리 여유 공간 1칸"}
-			, {"name":"마비 특효약 도주 후바바를 잡아라! (무한)", "url":"http://pooyas.com/sa_quest/9580", "area":"쟈루", "map":"", "reward":"아사 Lv3의 시그널(매력+3, 대지의 정령Lv3)", "memo":""}
-			, {"name":"리온의 숨바꼭질(무한)", "url":"http://pooyas.com/sa_quest/8053", "area":"사이너스", "map":"", "reward":"", "memo":""}
-			, {"name":"잃어 버린 호랑이 카토리누(무한)", "url":"http://pooyas.com/sa_quest/9557", "area":"쟈루", "map":"", "reward":"마론의 포도(지, 수, 화, 풍 중 한가지)<br>효과 - 전투시 포도의 색깔로 전체 속성증폭-1회사용", "memo":"고르고르(카토리누)의 피는 130정도입니다.<br>죽지 않도록 잘 때려서 포획하는게 중요합니다."}
-			, {"name":"딸을 찾아 주세요", "url":"http://pooyas.com/sa_quest/8075", "area":"쟈루", "map":"", "reward":"산적의 스몰클럽(공+7 매력+5 윤택의 정령 Lv3),<br>산적의 네일(공+17(x3) 방-5 매력+5 맹독의정령 Lv3),<br>산적의 깃털장식(회피율+3 잠의 정령 Lv4) 중 한가지<br>카난의 피리(매력+2, 독+5, 돌-5, 잠+5 부활의 정령lv2)</td>", "memo":""}
-			, {"name":"루니 포획", "url":"http://pooyas.com/sa_quest/7775", "area":"사이너스", "map":"", "reward":"", "memo":"루니 Lv15이상<br>본 퀘스트는 베르가 포획 퀘스트로 이어집니다."}
-			, {"name":"베르가 포획", "url":"http://pooyas.com/sa_quest/7798", "area":"사이너스", "map":"", "reward":"Lv1 쿠보", "memo":"베르가 Lv30이상"}
-			, {"name":"채석장의 비밀 [모나시프 획득]", "url":"http://pooyas.com/sa_quest/7872", "area":"가우린", "map":"", "reward":"Lv1 모나시프", "memo":"저순존 후바바 던전 워프"}
-			, {"name":"오형제의 시험", "url":"http://pooyas.com/sa_quest/7874", "area":"가우린", "map":"", "reward":"기로스의 반지(공-3 매력+4 거울의 정령 (기력20소모) - 얀기로 선택<br>리논의 목걸이(민-3 매력+4 윤택의 정령 Lv2 (기력12소모) - 리비노 선택<br>보로스의 피리(매력+4 부활의 정령 Lv2( 기력35소모) - 반보로 선택<br>기노의 팔찌(방-3 매력+4 빛의 정령 (기력20소모) - 반기노 선택<br>후르도의 하프(매력+4 수호의 정령 (기력15소모) - 부르돈 선택<br>", "memo":"위치 저장시 답안지 소멸함."}
-			, {"name":"마쥬의 우편배달", "url":"http://pooyas.com/sa_quest/7878", "area":"사이너스", "map":"", "reward":"마쥬의 곤봉 (공+35 은혜의정령 Lv3),<br>마쥬의 창 (공+45 민-10 매+4 치유의정령 Lv3),<br>마쥬의 도끼 (공+50 방-20 민-20 윤택의정령 Lv3) 중 랜덤으로 한가지</td>", "memo":"아이템 인벤토리 여유 공간 1칸"}
-			, {"name":"자연의 균형", "url":"http://pooyas.com/sa_quest/8077", "area":"쟈루", "map":"", "reward":"용감한 용: 용의 창(공+36 방-14 민-14 치유의 정령 Lv2)<br>강철의 용: 용의 갑옷(방+23 민-10 매력+2 맹독의 정령Lv2)<br>신속한 용: 용의 옷(방+13 민+4 매력+2 부활의 정령 Lv1) 중 하나", "memo":"퀘스트 중 출현하는 용은 이 곳에서 나오는 몹들과 이름만 다르고 모습이 같습니다.<br>그러므로 F11을 누르고 이름을 확인하시면서 다니는게 좋습니다."}
-			, {"name":"채굴권 다툼", "url":"http://pooyas.com/sa_quest/8012", "area":"가우린", "map":"", "reward":"", "memo":"비트로스, 오가로스 포획"}
-			, {"name":"선견의 빛 1,2,3번째 (몽환 이벤트, 무한)", "url":"http://pooyas.com/sa_quest/8050", "area":"세르노스", "map":"", "reward":"1번째: 꿈의 하프(공+2 민+1 매력+5 잠의 정령 Lv1)<br>2번째: 꿈의 모자(방+4 민+2 윤택의 정령 Lv2)<br>3번째: 꿈의 옷(공-2 방+12 민+7 치유의 정령 Lv2), 환생 보너스 포인트", "memo":"3회 클리어 필요."}
-			, {"name":"방향의 사당", "url":"http://pooyas.com/sa_quest/9738", "area":"가우린", "map":"", "reward":"", "memo":"아이템 인벤토리 여유 공간 4칸"}
-			, {"name":"모가로스 획득", "url":"https://chqhwk1515.wixsite.com/newbeeguide/post/%EC%B4%88%EB%B0%98-%EC%9C%A1%EC%84%B1-%EB%A0%88%EC%9D%B4%EB%93%9C-%ED%8C%81-%ED%80%98%EC%8A%A4%ED%8A%B8", "area":"가우린", "map":"", "reward":"Lv1 모가로스", "memo":"Lv77 골드부비, 진홍 이벤트 같이 진행"}
-			, {"name":"4개의 보물", "url":"http://pooyas.com/sa_quest/9736", "area":"사이너스", "map":"", "reward":"월광의 팔찌(공+3 방+3 민-3 매력+1 부활수호정령lv1)", "memo":""}
-			, {"name":"배고픈 샴기르 (오르곤 퀘스트)", "url":"http://pooyas.com/sa_quest/13266", "area":"원주민의 섬", "map":"", "reward":"샴기르의 머리장식(매력+5 부활빛의정령 Lv1),<br>영웅의 축복 5개(사용하면 스텟 포인트가 올라감),<br>용왕의 수호 2개", "memo":"이상한 조개 소지"}
-			, {"name":"우리스케의 사랑고백", "url":"http://pooyas.com/sa_quest/7930", "area":"쟈루", "map":"", "reward":"", "memo":"이상한 조개 소지"}
-			, {"name":"한의 도끼(무한)", "url":"http://pooyas.com/sa_quest/8016", "area":"쟈루", "map":"", "reward":"한의 도끼(공+35 방-15 민-15), 벌목아르바이트 소개장", "memo":"Lv25 판지 포획,<br>바르의 초대장 버리면 안됨 파구퀘할때 필요<br>배고픈 샴기르 한 후에 하는걸 추천"}
-			, {"name":"황금색 페트 [휴보, 도라비스 획득]", "url":"http://pooyas.com/sa_quest/8073", "area":"사이너스", "map":"", "reward":"Lv1 휴보", "memo":"Lv25 판지, Lv25 쟈그, Lv25 쟈그라, Lv25 고반케스<br>※ 카난에게 가져다 주는 페트 레벨은 꼭 Lv25여야 합니다. Lv24나 Lv26이면 받아주지 않습니다.<br>※ 휴보를 받는 것까지 진행해도 환생 보너스 포인트를 받을 수 있습니다."}
-			, {"name":"마리너스 여신을 도와 성스러운 돌을 구하자 [스텐토스, 라이혼]", "url":"http://pooyas.com/sa_quest/13913", "area":"원주민의 섬", "map":"", "reward":"Lv1 스텐토스, Lv1 라이혼", "memo":"낚시대 이벤트는 초록색 슈퍼 씨보스 + 만모로드로 제작"}
-			, {"name":"엄마의 흔적(유리동굴이벤트)", "url":"http://pooyas.com/sa_quest/7876", "area":"쟈루", "map":"", "reward":"대지의 인연 [땅] (공-4, 방+5, 매력+3 [땅] 대지를 정복하는 자의 증거)", "memo":""}
-			, {"name":"도난 당한 수호석", "url":"http://pooyas.com/sa_quest/7884", "area":"사이너스", "map":"", "reward":"", "memo":"천지의 동굴 이벤트와 같이 진행"}
-			, {"name":"바람의 하프(천지동굴이벤트)", "url":"http://pooyas.com/sa_quest/8169", "area":"사이너스", "map":"", "reward":"바람의 쇠사슬 [바람](매력 +3[바람] 바람을 정복하는 자의 증거)", "memo":""}
-			, {"name":"정령의 의식을 받아라(진홍이벤트)", "url":"http://pooyas.com/sa_quest/8171", "area":"가우린", "map":"", "reward":"불의 깃털장식[불](공+2 방-7 민+5 매력+3[불] 불을 정복하는 자의 증거)", "memo":"진홍의 동굴 A 입구 입장시 Lv120 모가로스 5마리가 중보스로 출현."}
-			, {"name":"물의 여신을 도와주세요(벽청이벤트)", "url":"http://pooyas.com/sa_quest/8173", "area":"쟈루", "map":"", "reward":"물의 반지[물](매력+3[물] 물을 정복한자의 증표)", "memo":"유리 퀘스트 하면서 이브를 찾을려면 쿠키마을 근처에 오게 되는데<br>그때 벽청 퀘스트 시작인 쿠키마을에서 물의 사자와 미리 대화를 해두면 좋습니다.<br>알수없는 동굴은 채석장 방향 입구에서만 입장이 가능합니다."}
-			, {"name":"환생 이벤트", "url":"http://pooyas.com/sa_quest/8167", "area":"가우린", "map":"", "reward":"캐릭터 환생 혜택,<br>정령왕의 활(공 +25, 방 -15 (5-6) 부의 정령 Lv3) [보너스 이벤트 선택사항.]<br>출신 마을에 따른 페트 한마리(환생 얼룩우리, 카르곤, 투이, 메가로스), 5환생시 골로스", "memo":"페트 인벤토리 1칸(5환생시 4칸)"}
+			{"name":"성인식", "cafe":"https://cafe.naver.com/saorignal/30" , "pooya":"http://pooyas.com/sa_quest/7713", "area":"해저통로", "map":"", "reward":"의식의 투구(방 +15 민 -3 모든 이상상태 방어 +3)", "memo":"아이템 인벤토리 여유 공간 1칸"}
+			, {"name":"친구의 우정", "cafe":"https://cafe.naver.com/saorignal/20" , "pooya":"http://pooyas.com/sa_quest/7882", "area":"사이너스", "map":"", "reward":"이상한 조개", "memo":"아이템 인벤토리 여유 공간 1칸"}
+			, {"name":"하로산의 약초", "cafe":"https://cafe.naver.com/saorignal/22" , "pooya":"http://pooyas.com/sa_quest/7944", "area":"쟈루", "map":"", "reward":"할아버지의 부적(매력-1 모든이상상태 방어+2)", "memo":"아이템 인벤토리 여유 공간 1칸"}
+			, {"name":"도끼 전달(야무야무)", "cafe":"https://cafe.naver.com/saorignal/27" , "pooya":"http://pooyas.com/sa_quest/7886", "area":"사이너스", "map":"", "reward":"야무야무 도끼 (공+35, 방-10, 민-10)", "memo":"아이템 인벤토리 여유 공간 1칸"}
+			, {"name":"마비 특효약 도주 후바바를 잡아라! (무한)", "cafe":"https://cafe.naver.com/saorignal/31" , "pooya":"http://pooyas.com/sa_quest/9580", "area":"쟈루", "map":"", "reward":"아사 Lv3의 시그널(매력+3, 대지의 정령Lv3)", "memo":"아들러님 제보 : 키사라기하프를 받기 위해서는 <strong>벎茄샷棺아</strong> 라고 입력해야 합니다."}
+			, {"name":"리온의 숨바꼭질(무한)", "cafe":"https://cafe.naver.com/saorignal/26" , "pooya":"http://pooyas.com/sa_quest/8053", "area":"사이너스", "map":"", "reward":"", "memo":""}
+			, {"name":"잃어 버린 호랑이 카토리누(무한)", "cafe":"https://cafe.naver.com/saorignal/38" , "pooya":"http://pooyas.com/sa_quest/9557", "area":"쟈루", "map":"", "reward":"마론의 포도(지, 수, 화, 풍 중 한가지)<br>효과 - 전투시 포도의 색깔로 전체 속성증폭-1회사용", "memo":"고르고르(카토리누)의 피는 130정도입니다.<br>죽지 않도록 잘 때려서 포획하는게 중요합니다."}
+			, {"name":"딸을 찾아 주세요", "cafe":"https://cafe.naver.com/saorignal/39" , "pooya":"http://pooyas.com/sa_quest/8075", "area":"쟈루", "map":"", "reward":"산적의 스몰클럽(공+7 매력+5 윤택의 정령 Lv3),<br>산적의 네일(공+17(x3) 방-5 매력+5 맹독의정령 Lv3),<br>산적의 깃털장식(회피율+3 잠의 정령 Lv4) 중 한가지<br>카난의 피리(매력+2, 독+5, 돌-5, 잠+5 부활의 정령lv2)</td>", "memo":""}
+			, {"name":"루니 포획", "cafe":"https://cafe.naver.com/saorignal/40" , "pooya":"http://pooyas.com/sa_quest/7775", "area":"사이너스", "map":"", "reward":"", "memo":"루니 Lv15이상<br>본 퀘스트는 베르가 포획 퀘스트로 이어집니다."}
+			, {"name":"베르가 포획", "cafe":"https://cafe.naver.com/saorignal/41" , "pooya":"http://pooyas.com/sa_quest/7798", "area":"사이너스", "map":"", "reward":"Lv1 쿠보", "memo":"베르가 Lv30이상"}
+			, {"name":"채석장의 비밀 [모나시프 획득]", "cafe":"https://cafe.naver.com/saorignal/73" , "pooya":"http://pooyas.com/sa_quest/7872", "area":"가우린", "map":"", "reward":"Lv1 모나시프", "memo":"저순존 후바바 던전 워프"}
+			, {"name":"오형제의 시험", "cafe":"https://cafe.naver.com/saorignal/75" , "pooya":"http://pooyas.com/sa_quest/7874", "area":"가우린", "map":"", "reward":"기로스의 반지(공-3 매력+4 거울의 정령 (기력20소모) - 얀기로 선택<br>리논의 목걸이(민-3 매력+4 윤택의 정령 Lv2 (기력12소모) - 리비노 선택<br>보로스의 피리(매력+4 부활의 정령 Lv2( 기력35소모) - 반보로 선택<br>기노의 팔찌(방-3 매력+4 빛의 정령 (기력20소모) - 반기노 선택<br>후르도의 하프(매력+4 수호의 정령 (기력15소모) - 부르돈 선택<br>", "memo":"위치 저장시 답안지 소멸함."}
+			, {"name":"마쥬의 우편배달", "cafe":"https://cafe.naver.com/saorignal/81" , "pooya":"http://pooyas.com/sa_quest/7878", "area":"사이너스", "map":"", "reward":"마쥬의 곤봉 (공+35 은혜의정령 Lv3),<br>마쥬의 창 (공+45 민-10 매+4 치유의정령 Lv3),<br>마쥬의 도끼 (공+50 방-20 민-20 윤택의정령 Lv3) 중 랜덤으로 한가지</td>", "memo":"아이템 인벤토리 여유 공간 1칸"}
+			, {"name":"자연의 균형", "cafe":"https://cafe.naver.com/saorignal/84" , "pooya":"http://pooyas.com/sa_quest/8077", "area":"쟈루", "map":"", "reward":"용감한 용: 용의 창(공+36 방-14 민-14 치유의 정령 Lv2)<br>강철의 용: 용의 갑옷(방+23 민-10 매력+2 맹독의 정령Lv2)<br>신속한 용: 용의 옷(방+13 민+4 매력+2 부활의 정령 Lv1) 중 하나", "memo":"퀘스트 중 출현하는 용은 이 곳에서 나오는 몹들과 이름만 다르고 모습이 같습니다.<br>그러므로 F11을 누르고 이름을 확인하시면서 다니는게 좋습니다."}
+			, {"name":"채굴권 다툼", "cafe":"https://cafe.naver.com/saorignal/89" , "pooya":"http://pooyas.com/sa_quest/8012", "area":"가우린", "map":"", "reward":"", "memo":"비트로스, 오가로스 포획"}
+			, {"name":"선견의 빛 1,2,3번째 (몽환 이벤트, 무한)", "cafe":"https://cafe.naver.com/saorignal/95" , "pooya":"http://pooyas.com/sa_quest/8050", "area":"세르노스", "map":"", "reward":"1번째: 꿈의 하프(공+2 민+1 매력+5 잠의 정령 Lv1)<br>2번째: 꿈의 모자(방+4 민+2 윤택의 정령 Lv2)<br>3번째: 꿈의 옷(공-2 방+12 민+7 치유의 정령 Lv2), 환생 보너스 포인트", "memo":"3회 클리어 필요."}
+			, {"name":"방향의 사당", "cafe":"https://cafe.naver.com/saorignal/98" , "pooya":"http://pooyas.com/sa_quest/9738", "area":"가우린", "map":"", "reward":"", "memo":"아이템 인벤토리 여유 공간 4칸"}
+			, {"name":"모가로스 획득", "cafe":"" , "pooya":"https://chqhwk1515.wixsite.com/newbeeguide/post/%EC%B4%88%EB%B0%98-%EC%9C%A1%EC%84%B1-%EB%A0%88%EC%9D%B4%EB%93%9C-%ED%8C%81-%ED%80%98%EC%8A%A4%ED%8A%B8", "area":"가우린", "map":"", "reward":"Lv1 모가로스", "memo":"Lv77 골드부비, 진홍 이벤트 같이 진행"}
+			, {"name":"4개의 보물", "cafe":"https://cafe.naver.com/saorignal/109" , "pooya":"http://pooyas.com/sa_quest/9736", "area":"사이너스", "map":"", "reward":"월광의 팔찌(공+3 방+3 민-3 매력+1 부활수호정령lv1)", "memo":""}
+			, {"name":"배고픈 샴기르 (오르곤 퀘스트)", "cafe":"https://cafe.naver.com/saorignal/124" , "pooya":"http://pooyas.com/sa_quest/13266", "area":"원주민의 섬", "map":"", "reward":"샴기르의 머리장식(매력+5 부활빛의정령 Lv1),<br>영웅의 축복 5개(사용하면 스텟 포인트가 올라감),<br>용왕의 수호 2개", "memo":"이상한 조개 소지"}
+			, {"name":"우리스케의 사랑고백", "cafe":"https://cafe.naver.com/saorignal/29" , "pooya":"http://pooyas.com/sa_quest/7930", "area":"쟈루", "map":"", "reward":"", "memo":"이상한 조개 소지"}
+			, {"name":"한의 도끼(무한)", "cafe":"https://cafe.naver.com/saorignal/32" , "pooya":"http://pooyas.com/sa_quest/8016", "area":"쟈루", "map":"", "reward":"한의 도끼(공+35 방-15 민-15), 벌목아르바이트 소개장", "memo":"Lv25 판지 포획,<br>바르의 초대장 버리면 안됨 파구퀘할때 필요<br>배고픈 샴기르 한 후에 하는걸 추천"}
+			, {"name":"황금색 페트 [휴보, 도라비스 획득]", "cafe":"https://cafe.naver.com/saorignal/60" , "pooya":"http://pooyas.com/sa_quest/8073", "area":"사이너스", "map":"", "reward":"Lv1 휴보", "memo":"Lv25 판지, Lv25 쟈그, Lv25 쟈그라, Lv25 고반케스<br>※ 카난에게 가져다 주는 페트 레벨은 꼭 Lv25여야 합니다. Lv24나 Lv26이면 받아주지 않습니다.<br>※ 휴보를 받는 것까지 진행해도 환생 보너스 포인트를 받을 수 있습니다."}
+			, {"name":"마리너스 여신을 도와 성스러운 돌을 구하자 [스텐토스, 라이혼]", "cafe":"https://cafe.naver.com/saorignal/125" , "pooya":"http://pooyas.com/sa_quest/13913", "area":"원주민의 섬", "map":"", "reward":"Lv1 스텐토스, Lv1 라이혼", "memo":"낚시대 이벤트는 초록색 슈퍼 씨보스 + 만모로드로 제작"}
+			, {"name":"엄마의 흔적(유리동굴이벤트)", "cafe":"https://cafe.naver.com/saorignal/183" , "pooya":"http://pooyas.com/sa_quest/7876", "area":"쟈루", "map":"", "reward":"대지의 인연 [땅] (공-4, 방+5, 매력+3 [땅] 대지를 정복하는 자의 증거)", "memo":""}
+			, {"name":"도난 당한 수호석", "cafe":"https://cafe.naver.com/saorignal/85" , "pooya":"http://pooyas.com/sa_quest/7884", "area":"사이너스", "map":"", "reward":"", "memo":"천지의 동굴 이벤트와 같이 진행"}
+			, {"name":"바람의 하프(천지동굴이벤트)", "cafe":"https://cafe.naver.com/saorignal/186" , "pooya":"http://pooyas.com/sa_quest/8169", "area":"사이너스", "map":"", "reward":"바람의 쇠사슬 [바람](매력 +3[바람] 바람을 정복하는 자의 증거)", "memo":""}
+			, {"name":"정령의 의식을 받아라(진홍이벤트)", "cafe":"https://cafe.naver.com/saorignal/180" , "pooya":"http://pooyas.com/sa_quest/8171", "area":"가우린", "map":"", "reward":"불의 깃털장식[불](공+2 방-7 민+5 매력+3[불] 불을 정복하는 자의 증거)", "memo":"진홍의 동굴 A 입구 입장시 Lv120 모가로스 5마리가 중보스로 출현."}
+			, {"name":"물의 여신을 도와주세요(벽청이벤트)", "cafe":"https://cafe.naver.com/saorignal/189" , "pooya":"http://pooyas.com/sa_quest/8173", "area":"쟈루", "map":"", "reward":"물의 반지[물](매력+3[물] 물을 정복한자의 증표)", "memo":"유리 퀘스트 하면서 이브를 찾을려면 쿠키마을 근처에 오게 되는데<br>그때 벽청 퀘스트 시작인 쿠키마을에서 물의 사자와 미리 대화를 해두면 좋습니다.<br>알수없는 동굴은 채석장 방향 입구에서만 입장이 가능합니다."}
+			, {"name":"환생 이벤트", "cafe":"https://cafe.naver.com/saorignal/203" , "pooya":"http://pooyas.com/sa_quest/8167", "area":"가우린", "map":"", "reward":"캐릭터 환생 혜택,<br>정령왕의 활(공 +25, 방 -15 (5-6) 부의 정령 Lv3) [보너스 이벤트 선택사항.]<br>출신 마을에 따른 페트 한마리(환생 얼룩우리, 카르곤, 투이, 메가로스), 5환생시 골로스", "memo":"페트 인벤토리 1칸(5환생시 4칸)"}
 		];
 		var printList;
 		valueInit();
@@ -112,15 +112,24 @@
 		function print() {
 			$tbody.empty();
 			for (var i = 0; i < printList.length; i++) {
-				$tbody.append(
-					'<tr>'
-					+ '<td>' + (i + 1) + '</td>'
-					+ '<td><a href="' + printList[i].url + '" target="_blank">' + printList[i].name + '</a></td>'
-					+ '<td><a href="' + printList[i].map + '" target="_blank">' + printList[i].area + '</a></td>'
-					+ '<td>' + printList[i].reward + '</td>'
-					+ '<td>' + printList[i].memo + '</td>'
-					+ '</tr>'
-				);
+				var html = '<tr>'
+							+ '<td>' + (i + 1) + '</td>'
+							+ '<td>' + printList[i].name + '</td>'
+							+ '<td>';
+
+							if (printList[i].cafe != null) {
+								html = html + '<a href="' + printList[i].cafe + '" target="_blank">카페</a>'
+							}
+							if (printList[i].pooya != null)  {
+								html = html + '<br><a href="' + printList[i].pooya + '" target="_blank">뿌야</a>';
+							}
+							
+					html = html + '</td>'
+							+ '<td><a href="' + printList[i].map + '" target="_blank">' + printList[i].area + '</a></td>'
+							+ '<td>' + printList[i].reward + '</td>'
+							+ '<td>' + printList[i].memo + '</td>'
+							+ '</tr>'
+				$tbody.append(html);
 			}
 		}
 		
@@ -264,12 +273,14 @@
 				<col width="50px">
 				<col width="20%">
 				<col width="10%">
+				<col width="10%">
 				<col width="30%">
 				<col width="">
 			</colgroup>
 			<thead>
 				<th>순번</th>
 				<th>퀘스트</th>
+				<th>링크</th>
 				<th>지역</th>
 				<th>보상</th>
 				<th>비고</th>
