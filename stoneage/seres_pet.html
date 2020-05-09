@@ -43,6 +43,10 @@
 			width: 70px;
 		}
 
+		.green { color: #fff; background-color: #5cb85c;}
+		.blue { color: #fff; background-color: #337ab7;}
+		.red { color: #fff; background-color: #d9534f;}
+		.yellow { color: #fff; background-color: #f0ad4e;}
 	</style>
 	<script>
 		var pets = [
@@ -784,10 +788,10 @@
 					+ '<td class="text-right">' + (printList[i].avgAtk).toFixed(2) + '</td>'
 					+ '<td class="text-right">' + (printList[i].avgDef).toFixed(2) + '</td>'
 					+ '<td class="text-right">' + (printList[i].avgAgi).toFixed(2) + '</td>'
-					+ '<td>' + printList[i].earth + '</td>'
-					+ '<td>' + printList[i].water + '</td>'
-					+ '<td>' + printList[i].fire + '</td>'
-					+ '<td>' + printList[i].wind + '</td>'
+					+ '<td class="green">' + printList[i].earth + '</td>'
+					+ '<td class="blue">' + printList[i].water + '</td>'
+					+ '<td class="red">' + printList[i].fire + '</td>'
+					+ '<td class="yellow">' + printList[i].wind + '</td>'
 					+ '<td>' + printList[i].slot + '</td>'
 					+ '<td>' + printList[i].get + '</td>'
 					+ '</tr>'
