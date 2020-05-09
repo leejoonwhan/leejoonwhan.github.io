@@ -50,7 +50,7 @@
 			, {"name":"채굴권 다툼", "cafe":"https://cafe.naver.com/saorignal/89" , "pooya":"http://pooyas.com/sa_quest/8012", "area":"가우린", "map":"", "reward":"", "memo":"비트로스, 오가로스 포획"}
 			, {"name":"선견의 빛 1,2,3번째 (몽환 이벤트, 무한)", "cafe":"https://cafe.naver.com/saorignal/95" , "pooya":"http://pooyas.com/sa_quest/8050", "area":"세르노스", "map":"", "reward":"1번째: 꿈의 하프(공+2 민+1 매력+5 잠의 정령 Lv1)<br>2번째: 꿈의 모자(방+4 민+2 윤택의 정령 Lv2)<br>3번째: 꿈의 옷(공-2 방+12 민+7 치유의 정령 Lv2), 환생 보너스 포인트", "memo":"3회 클리어 필요."}
 			, {"name":"방향의 사당", "cafe":"https://cafe.naver.com/saorignal/98" , "pooya":"http://pooyas.com/sa_quest/9738", "area":"가우린", "map":"", "reward":"", "memo":"아이템 인벤토리 여유 공간 4칸"}
-			, {"name":"모가로스 획득", "cafe":"" , "pooya":"https://chqhwk1515.wixsite.com/newbeeguide/post/%EC%B4%88%EB%B0%98-%EC%9C%A1%EC%84%B1-%EB%A0%88%EC%9D%B4%EB%93%9C-%ED%8C%81-%ED%80%98%EC%8A%A4%ED%8A%B8", "area":"가우린", "map":"", "reward":"Lv1 모가로스", "memo":"Lv77 골드부비, 진홍 이벤트 같이 진행"}
+			, {"name":"모가로스 획득", "cafe":"https://static.wixstatic.com/media/3f1ea2_a2bc36656b6f4fb3ad616e4db4d821e9~mv2.png/v1/fill/w_350,h_2100,al_c,q_90,usm_0.66_1.00_0.01/3f1ea2_a2bc36656b6f4fb3ad616e4db4d821e9~mv2.webp", "pooya":"", "area":"가우린", "map":"", "reward":"Lv1 모가로스", "memo":"Lv77 골드부비, 진홍 이벤트 같이 진행"}
 			, {"name":"4개의 보물", "cafe":"https://cafe.naver.com/saorignal/109" , "pooya":"http://pooyas.com/sa_quest/9736", "area":"사이너스", "map":"", "reward":"월광의 팔찌(공+3 방+3 민-3 매력+1 부활수호정령lv1)", "memo":""}
 			, {"name":"배고픈 샴기르 (오르곤 퀘스트)", "cafe":"https://cafe.naver.com/saorignal/124" , "pooya":"http://pooyas.com/sa_quest/13266", "area":"원주민의 섬", "map":"", "reward":"샴기르의 머리장식(매력+5 부활빛의정령 Lv1),<br>영웅의 축복 5개(사용하면 스텟 포인트가 올라감),<br>용왕의 수호 2개", "memo":"이상한 조개 소지"}
 			, {"name":"우리스케의 사랑고백", "cafe":"https://cafe.naver.com/saorignal/29" , "pooya":"http://pooyas.com/sa_quest/7930", "area":"쟈루", "map":"", "reward":"", "memo":"이상한 조개 소지"}
@@ -117,10 +117,10 @@
 							+ '<td>' + printList[i].name + '</td>'
 							+ '<td>';
 
-							if (printList[i].cafe != null) {
-								html = html + '<a href="' + printList[i].cafe + '" target="_blank">카페</a>'
+							if (printList[i].cafe != "") {
+								html = html + '<a href="' + printList[i].cafe + '" target="_blank">카페</a>';
 							}
-							if (printList[i].pooya != null)  {
+							if (printList[i].pooya != "")  {
 								html = html + '<br><a href="' + printList[i].pooya + '" target="_blank">뿌야</a>';
 							}
 							
