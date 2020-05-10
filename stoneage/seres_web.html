@@ -61,6 +61,25 @@
 				document.documentElement.scrollTop = 0;
 			});
 
+			$("a").on("dblclick", function() {
+				var title = $(this).attr("aria-controls");
+				if (title == "start") {
+					window.open("http://seres.dothome.co.kr/skin/page/dining.html", "_blank");
+				}
+				if (title == "blog") {
+					window.open("https://ehsvnwy12.wixsite.com/seres", "_blank");
+				}
+				if (title == "vip") {
+					window.open("https://board-3.blueweb.co.kr/board.cgi?id=dhflrskf&bname=vmflqhem", "_blank");
+				}
+				if (title == "pet") {
+					window.open("https://leejoonwhan.github.io/stoneage/seres_pet.html", "_blank");
+				}
+				if (title == "reincarnation") {
+					window.open("https://leejoonwhan.github.io/stoneage/seres_reincarnation.html", "_blank");
+				}
+			});
+
 		});
 	
 	</script>
@@ -84,7 +103,8 @@
 		  <!-- Tab panes -->
 		  <div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="start">
-				<iframe src="http://www.google.ie/gwt/x?u=http://seres.dothome.co.kr/skin/page/dining.html"></iframe>
+				시작 페이지는 보안상의 문제로 화면을 띄울 수 없습니다.<br>
+				위의 제목 버튼을 <strong>더블클릭</strong>하여 접속을 해주시기 바랍니다.<br>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="blog">
 				<iframe src="https://ehsvnwy12.wixsite.com/seres"></iframe>
