@@ -104,21 +104,28 @@
 			// 초기치 뿌리기
 			var petBaseBody = $("#petBase tbody");
 			for (var i = 0; i < pets.length; i++) {
-				//var pet = pets[i];
-				//var name = pet[0];
-				//var base = pet[7];
-				//var hp = pet[9];
-				//var atk = pet[10];
-				//var def = pet[11];
-				//var agi = pet[12];
-
-				
-				for (var j = 4; j >= 0; j--) {
+				for (var j = 0; j < 5; j++) {
+					
 					var base = Number(pets[i][7]);
-					var hp = Number(pets[i][9]) + j - 2 + 3;
-					var atk = Number(pets[i][10]) + j - 2 + 3;
-					var def = Number(pets[i][11]) + j - 2 + 2;
-					var agi = Number(pets[i][12]) + j - 2 + 2;
+					var hp = Number(pets[i][9]) + 2;
+					var atk = Number(pets[i][10]) + 2;
+					var def = Number(pets[i][11]) + 2;
+					var agi = Number(pets[i][12]) + 2;
+					
+					if (j == 0) {
+						hp = hp + 3;
+						atk = atk + 3;
+						def = def + 2;
+						agi = agi + 2;
+					} else if (j == 1) {
+						hp = hp + 10;
+					} else if (j == 2) {
+						atk = atk + 10;
+					} else if (j == 3) {
+						def = def + 10;
+					} else if (j == 4) {
+						agi = agi + 10;
+					}
 
 					hp = base * hp / 100;
 					atk = base * atk / 100;
@@ -131,14 +138,13 @@
 					var sumAgi = agi;
 					
 					petBaseBody.append("<tr>");
-					petBaseBody.append("<td>" + pets[i][0] + "(" + Math.abs((j - 4) * 4) + "급)</td>");
+					petBaseBody.append("<td>" + pets[i][0] + "</td>");
 					petBaseBody.append("<td>" + sumHp.toFixed(2) + "</td>");
 					petBaseBody.append("<td>" + sumAtk.toFixed(2) + "</td>");
 					petBaseBody.append("<td>" + sumDef.toFixed(2) + "</td>");
 					petBaseBody.append("<td>" + sumAgi.toFixed(2) + "</td>");
 					petBaseBody.append("</tr>");
 				}
-
 			}
 			
 		});
