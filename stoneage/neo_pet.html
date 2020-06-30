@@ -871,7 +871,7 @@
 				,{"name":"[환]베르가", "img":"http://saneo14.com/index.php?mid=pet2&document_srl=469234", "avgHp":10.22, "avgTotal":5.08, "avgAtk":2.06, "avgDef":1.45, "avgAgi":1.57, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
 				,{"name":"[환]반기노", "img":"http://saneo14.com/index.php?mid=pet2&document_srl=469230", "avgHp":10.02, "avgTotal":5.10, "avgAtk":2.45, "avgDef":1.38, "avgAgi":1.26, "earth":0, "water":0, "fire":10, "wind":0, "get":"일반 포획;퀘스트"}
 				,{"name":"[환]얀기로", "img":"http://saneo14.com/index.php?mid=pet2&document_srl=469229", "avgHp":10.57, "avgTotal":5.08, "avgAtk":2.37, "avgDef":1.44, "avgAgi":1.26, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획;퀘스트"}
-,{"name":"[환]리비노", "img":"http://saneo14.com/index.php?mid=pet2&document_srl=469228", "avgHp":10.19, "avgTotal":4.92, "avgAtk":2.33, "avgDef":1.52, "avgAgi":1.07, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획;퀘스트"}
+				,{"name":"[환]리비노", "img":"http://saneo14.com/index.php?mid=pet2&document_srl=469228", "avgHp":10.19, "avgTotal":4.92, "avgAtk":2.33, "avgDef":1.52, "avgAgi":1.07, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획;퀘스트"}
 			];
 		var printList;
 		valueInit();
@@ -917,10 +917,10 @@
 					+ '<td class="text-right">' + (printList[i].avgAtk).toFixed(2) + '</td>'
 					+ '<td class="text-right">' + (printList[i].avgDef).toFixed(2) + '</td>'
 					+ '<td class="text-right">' + (printList[i].avgAgi).toFixed(2) + '</td>'
-					+ '<td class="green">' + printList[i].earth + '</td>'
-					+ '<td class="blue">' + printList[i].water + '</td>'
-					+ '<td class="red">' + printList[i].fire + '</td>'
-					+ '<td class="yellow">' + printList[i].wind + '</td>'
+					+ '<td class="text-right green">' + printList[i].earth + '</td>'
+					+ '<td class="text-right blue">' + printList[i].water + '</td>'
+					+ '<td class="text-right red">' + printList[i].fire + '</td>'
+					+ '<td class="text-right yellow">' + printList[i].wind + '</td>'
 					+ '<td>' + printList[i].get + '</td>'
 					+ '</tr>'
 				);
@@ -965,9 +965,9 @@
 				var arrInput = input.split(",");
 				for (var i = 0; i < arrInput.length; i++) {
 					var name = arrInput[i].trim();
-					var filter = $(pets).filter(function(i, n){return n.name===name});
-					if (filter.length > 0) {
-						printList.push(filter[0]);
+					var filter = $(pets).filter(function(i, n){return n.name.indexOf(name) > -1});
+					for (var j = 0; j < filter.length; j++) {
+						printList.push(filter[j]);
 					}
 				}
 				cnt++;
@@ -1277,6 +1277,24 @@
 					}
 				}
 			}
+			
+			// 일반 포획 체크
+			if ($("#dlfqksvhghlr").prop("checked")) {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.get.indexOf("일반 포획") > -1});
+				}
+				else {
+					filter = $(pets).filter(function(i, n){return n.get.indexOf("일반 포획") > -1});
+				}
+
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+			}
 
 			print();
 		}
@@ -1510,6 +1528,11 @@
 				</span>        
 			</div>
 			<button class="btn btn-default" type="button" id="reset">초기화</button>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="dlfqksvhghlr"> 일반 포획
+				</label>
+			</div>
 		</div>
 		
 		<br>
