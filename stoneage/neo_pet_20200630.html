@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Neo Server Pet Info</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		body { cursor: default; }
+		#btnTop {
+		  display: none;
+		  position: fixed;
+		  bottom: 20px;
+		  right: 30px;
+		  z-index: 99;
+		  font-size: 18px;
+		  border: none;
+		  outline: none;
+		  background-color: red;
+		  color: white;
+		  cursor: pointer;
+		  padding: 15px;
+		  border-radius: 4px;
+		}
+
+		#btnTop:hover {
+		  background-color: #555;
+		}
+
+		#imgBox {
+			width: 128px;
+		}
+
+		img {
+			max-width: 100%;
+			max-height: 128px;
+		}
+
+		.searchValue {
+			display: inline;
+			width: 100px;
+		}
+
+		.green { color: #fff; background-color: #5cb85c;}
+		.blue { color: #fff; background-color: #337ab7;}
+		.red { color: #fff; background-color: #d9534f;}
+		.yellow { color: #fff; background-color: #f0ad4e;}
+	</style>
+	<script>
+		var pets = [
+				{"name":"베라냐", "img":"http://saneo14.com/index.php?mid=Information&document_srl=645685", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.24, "avgDef":1.43, "avgAgi":1.40, "earth":0, "water":0, "fire":3, "wind":7, "get":"이벤트"}
+				,{"name":"문타", "img":"http://saneo14.com/index.php?mid=Information&document_srl=645684", "avgHp":9.81, "avgTotal":5.06, "avgAtk":2.09, "avgDef":1.30, "avgAgi":1.67, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"몬타", "img":"http://saneo14.com/index.php?mid=Information&document_srl=645683", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.09, "avgDef":1.28, "avgAgi":1.64, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"흑풍", "img":"http://saneo14.com/index.php?mid=Information&document_srl=645682", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.14, "avgDef":1.24, "avgAgi":1.64, "earth":8, "water":0, "fire":0, "wind":2, "get":"VIP 상점"}
+				,{"name":"언딘", "img":"http://saneo14.com/index.php?mid=Information&document_srl=645681", "avgHp":10.81, "avgTotal":5.00, "avgAtk":2.34, "avgDef":1.40, "avgAgi":1.26, "earth":0, "water":8, "fire":2, "wind":0, "get":"기타 획득"}
+				,{"name":"카오닉스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=645680", "avgHp":10.05, "avgTotal":5.17, "avgAtk":2.29, "avgDef":1.43, "avgAgi":1.45, "earth":0, "water":0, "fire":8, "wind":2, "get":"기타 획득"}
+				,{"name":"바로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624588", "avgHp":9.86, "avgTotal":5.16, "avgAtk":2.28, "avgDef":1.43, "avgAgi":1.45, "earth":3, "water":0, "fire":0, "wind":7, "get":"VIP 상점"}
+				,{"name":"밤미", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624587", "avgHp":9.44, "avgTotal":5.11, "avgAtk":1.89, "avgDef":1.21, "avgAgi":2.01, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획"}
+				,{"name":"만보돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624586", "avgHp":10.17, "avgTotal":5.02, "avgAtk":2.30, "avgDef":1.46, "avgAgi":1.26, "earth":0, "water":0, "fire":0, "wind":10, "get":"퀘스트"}
+				,{"name":"헐기노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624585", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.41, "avgDef":1.48, "avgAgi":1.16, "earth":0, "water":0, "fire":10, "wind":0, "get":"퀘스트"}
+				,{"name":"청기로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624584", "avgHp":10.62, "avgTotal":4.92, "avgAtk":2.28, "avgDef":1.48, "avgAgi":1.16, "earth":0, "water":10, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"잔비노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624583", "avgHp":10.07, "avgTotal":4.91, "avgAtk":2.30, "avgDef":1.51, "avgAgi":1.11, "earth":10, "water":0, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"아스타로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614937", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.14, "avgDef":1.29, "avgAgi":1.64, "earth":0, "water":8, "fire":2, "wind":0, "get":"레이드"}
+				,{"name":"모야미", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614936", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.28, "avgDef":1.47, "avgAgi":1.26, "earth":0, "water":0, "fire":0, "wind":10, "get":"일반 포획"}
+				,{"name":"마메르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614935", "avgHp":10.02, "avgTotal":5.07, "avgAtk":2.39, "avgDef":1.42, "avgAgi":1.26, "earth":0, "water":0, "fire":10, "wind":0, "get":"일반 포획"}
+				,{"name":"브로리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614934", "avgHp":10.72, "avgTotal":4.82, "avgAtk":2.23, "avgDef":1.34, "avgAgi":1.26, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"바레메", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614933", "avgHp":10.17, "avgTotal":4.85, "avgAtk":2.26, "avgDef":1.37, "avgAgi":1.21, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"카르굴", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614932", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.28, "avgDef":1.34, "avgAgi":1.45, "earth":0, "water":0, "fire":2, "wind":8, "get":"레이드"}
+				,{"name":"바르굴", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614931", "avgHp":10.19, "avgTotal":5.12, "avgAtk":2.29, "avgDef":1.43, "avgAgi":1.40, "earth":0, "water":0, "fire":8, "wind":2, "get":"레이드"}
+				,{"name":"사르굴", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614930", "avgHp":10.66, "avgTotal":5.05, "avgAtk":2.21, "avgDef":1.39, "avgAgi":1.45, "earth":2, "water":8, "fire":0, "wind":0, "get":"레이드"}
+				,{"name":"아르굴", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614929", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.27, "avgDef":1.38, "avgAgi":1.41, "earth":9, "water":1, "fire":0, "wind":0, "get":"레이드"}
+				,{"name":"카르노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614928", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.24, "avgDef":1.43, "avgAgi":1.40, "earth":8, "water":0, "fire":0, "wind":2, "get":"퀘스트"}
+				,{"name":"램가스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=591891", "avgHp":9.28, "avgTotal":5.32, "avgAtk":1.95, "avgDef":2.66, "avgAgi":0.72, "earth":5, "water":0, "fire":0, "wind":5, "get":"퀘스트"}
+				,{"name":"사이록스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590671", "avgHp":9.81, "avgTotal":5.06, "avgAtk":2.14, "avgDef":1.30, "avgAgi":1.62, "earth":0, "water":0, "fire":3, "wind":7, "get":"퀘스트"}
+				,{"name":"다크론", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590670", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.25, "avgDef":1.48, "avgAgi":1.26, "earth":0, "water":6, "fire":4, "wind":0, "get":"일반 포획"}
+				,{"name":"헤라쿠스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590669", "avgHp":12.47, "avgTotal":4.64, "avgAtk":2.22, "avgDef":1.97, "avgAgi":0.45, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"구루마루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590668", "avgHp":9.83, "avgTotal":5.09, "avgAtk":1.97, "avgDef":1.12, "avgAgi":2.00, "earth":7, "water":0, "fire":0, "wind":3, "get":"VIP 상점"}
+				,{"name":"카가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590667", "avgHp":10.02, "avgTotal":5.10, "avgAtk":2.27, "avgDef":1.42, "avgAgi":1.41, "earth":0, "water":0, "fire":8, "wind":2, "get":"VIP 상점"}
+				,{"name":"어스드래곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590666", "avgHp":12.28, "avgTotal":4.83, "avgAtk":2.15, "avgDef":2.23, "avgAgi":0.45, "earth":8, "water":0, "fire":0, "wind":2, "get":"맘모스 쿠폰"}
+				,{"name":"골드드래곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590665", "avgHp":10.00, "avgTotal":5.11, "avgAtk":2.14, "avgDef":1.33, "avgAgi":1.64, "earth":0, "water":0, "fire":1, "wind":9, "get":"맘모스 쿠폰"}
+				,{"name":"블랙드래곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590664", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.46, "avgDef":1.35, "avgAgi":1.26, "earth":0, "water":2, "fire":8, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"다람쥐", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557590", "avgHp":9.97, "avgTotal":5.01, "avgAtk":2.14, "avgDef":1.26, "avgAgi":1.62, "earth":0, "water":3, "fire":7, "wind":0, "get":"골드볼라 포획;이벤트"}
+				,{"name":"티티오", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557589", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.09, "avgDef":1.24, "avgAgi":1.69, "earth":0, "water":0, "fire":8, "wind":2, "get":"골드볼라 포획;이벤트"}
+				,{"name":"티티아", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557585", "avgHp":10.17, "avgTotal":5.02, "avgAtk":2.24, "avgDef":1.31, "avgAgi":1.47, "earth":2, "water":0, "fire":0, "wind":8, "get":"이벤트"}
+				,{"name":"키파", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557580", "avgHp":10.17, "avgTotal":5.02, "avgAtk":2.19, "avgDef":1.31, "avgAgi":1.52, "earth":8, "water":0, "fire":0, "wind":2, "get":"퀘스트"}
+				,{"name":"고루바", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557575", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.22, "avgDef":1.42, "avgAgi":1.36, "earth":6, "water":0, "fire":0, "wind":4, "get":"코스"}
+				,{"name":"라그노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557574", "avgHp":12.14, "avgTotal":4.67, "avgAtk":2.09, "avgDef":2.18, "avgAgi":0.40, "earth":8, "water":2, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"기로아치", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557568", "avgHp":10.62, "avgTotal":4.99, "avgAtk":2.26, "avgDef":1.53, "avgAgi":1.21, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"디키로돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557563", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.24, "avgDef":1.51, "avgAgi":1.26, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"머그노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557562", "avgHp":9.92, "avgTotal":4.99, "avgAtk":2.21, "avgDef":1.37, "avgAgi":1.41, "earth":0, "water":0, "fire":0, "wind":10, "get":"일반 포획"}
+				,{"name":"스노밍코", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557557", "avgHp":10.76, "avgTotal":4.95, "avgAtk":2.02, "avgDef":1.25, "avgAgi":1.69, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"킹크랩", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557552", "avgHp":11.99, "avgTotal":4.71, "avgAtk":2.13, "avgDef":2.18, "avgAgi":0.40, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"크랩", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557546", "avgHp":11.28, "avgTotal":4.93, "avgAtk":2.02, "avgDef":1.89, "avgAgi":1.02, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"흑룡", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557541", "avgHp":10.02, "avgTotal":5.07, "avgAtk":2.14, "avgDef":1.26, "avgAgi":1.67, "earth":9, "water":0, "fire":0, "wind":1, "get":"레이드"}
+				,{"name":"프로스비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557535", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.32, "avgDef":1.42, "avgAgi":1.26, "earth":0, "water":0, "fire":2, "wind":8, "get":"이벤트"}
+				,{"name":"푸로비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557528", "avgHp":10.32, "avgTotal":5.01, "avgAtk":2.28, "avgDef":1.47, "avgAgi":1.26, "earth":8, "water":2, "fire":0, "wind":0, "get":"이벤트"}
+				,{"name":"루돌프", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557525", "avgHp":9.97, "avgTotal":5.01, "avgAtk":2.09, "avgDef":1.25, "avgAgi":1.67, "earth":8, "water":0, "fire":0, "wind":2, "get":"이벤트"}
+				,{"name":"프로링", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557517", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.23, "avgDef":1.38, "avgAgi":1.40, "earth":5, "water":5, "fire":0, "wind":0, "get":"이벤트"}
+				,{"name":"링코링", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557508", "avgHp":9.97, "avgTotal":5.01, "avgAtk":2.09, "avgDef":1.30, "avgAgi":1.62, "earth":5, "water":5, "fire":0, "wind":0, "get":"이벤트"}
+				,{"name":"산타링코", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557503", "avgHp":10.76, "avgTotal":4.95, "avgAtk":2.07, "avgDef":1.30, "avgAgi":1.59, "earth":0, "water":7, "fire":3, "wind":0, "get":"이벤트"}
+				,{"name":"산타로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557497", "avgHp":11.85, "avgTotal":4.76, "avgAtk":2.26, "avgDef":2.05, "avgAgi":0.45, "earth":0, "water":4, "fire":6, "wind":0, "get":"이벤트"}
+				,{"name":"만모링", "img":"http://saneo14.com/index.php?mid=Information&document_srl=557488", "avgHp":10.62, "avgTotal":4.99, "avgAtk":2.26, "avgDef":1.53, "avgAgi":1.21, "earth":0, "water":6, "fire":4, "wind":0, "get":"이벤트"}
+				,{"name":"그린고르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=509497", "avgHp":12.18, "avgTotal":4.72, "avgAtk":2.10, "avgDef":2.22, "avgAgi":0.40, "earth":10, "water":0, "fire":0, "wind":0, "get":"골드볼라 포획"}
+				,{"name":"바라쿠스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478552", "avgHp":13.13, "avgTotal":4.57, "avgAtk":2.02, "avgDef":2.06, "avgAgi":0.50, "earth":2, "water":8, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"도에디크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478551", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.00, "avgDef":1.96, "avgAgi":1.02, "earth":8, "water":2, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"크로톤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478550", "avgHp":10.81, "avgTotal":5.00, "avgAtk":2.22, "avgDef":1.58, "avgAgi":1.21, "earth":0, "water":7, "fire":3, "wind":0, "get":"코스"}
+				,{"name":"흑호", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478549", "avgHp":10.28, "avgTotal":5.03, "avgAtk":2.24, "avgDef":1.43, "avgAgi":1.35, "earth":8, "water":0, "fire":0, "wind":2, "get":"퀘스트"}
+				,{"name":"황호", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478548", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.17, "avgDef":1.32, "avgAgi":1.56, "earth":2, "water":0, "fire":0, "wind":8, "get":"퀘스트"}
+				,{"name":"청호", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478547", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.24, "avgDef":1.39, "avgAgi":1.35, "earth":2, "water":8, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"이블티거", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478546", "avgHp":9.83, "avgTotal":5.09, "avgAtk":2.26, "avgDef":1.37, "avgAgi":1.46, "earth":0, "water":0, "fire":10, "wind":0, "get":"퀘스트"}
+				,{"name":"가우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478545", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.12, "avgDef":1.32, "avgAgi":1.61, "earth":0, "water":7, "fire":3, "wind":0, "get":"골드볼라 포획"}
+				,{"name":"타이판", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478543", "avgHp":10.57, "avgTotal":4.94, "avgAtk":2.25, "avgDef":1.44, "avgAgi":1.26, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"레이론", "img":"http://saneo14.com/index.php?mid=Information&document_srl=478541", "avgHp":10.27, "avgTotal":4.96, "avgAtk":2.23, "avgDef":1.52, "avgAgi":1.21, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"칼베로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469270", "avgHp":9.76, "avgTotal":5.00, "avgAtk":2.23, "avgDef":1.35, "avgAgi":1.42, "earth":0, "water":0, "fire":10, "wind":0, "get":"일반 포획"}
+				,{"name":"파이어크랩", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469268", "avgHp":11.66, "avgTotal":4.75, "avgAtk":2.13, "avgDef":2.17, "avgAgi":0.45, "earth":0, "water":0, "fire":9, "wind":1, "get":"일반 포획"}
+				,{"name":"파이와블", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469267", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.32, "avgDef":1.38, "avgAgi":1.31, "earth":0, "water":2, "fire":8, "wind":0, "get":"일반 포획"}
+				,{"name":"바이론", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469266", "avgHp":10.62, "avgTotal":4.99, "avgAtk":2.30, "avgDef":1.58, "avgAgi":1.12, "earth":0, "water":4, "fire":6, "wind":0, "get":"일반 포획"}
+				,{"name":"타우루스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469265", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.30, "avgDef":1.66, "avgAgi":1.02, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"롤프", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469264", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.07, "avgDef":1.31, "avgAgi":1.66, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"파이토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469262", "avgHp":11.95, "avgTotal":4.86, "avgAtk":2.35, "avgDef":2.01, "avgAgi":0.50, "earth":0, "water":1, "fire":9, "wind":0, "get":"레이드"}
+				,{"name":"가론고르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469259", "avgHp":10.66, "avgTotal":5.05, "avgAtk":2.40, "avgDef":1.58, "avgAgi":1.07, "earth":0, "water":2, "fire":8, "wind":0, "get":"레이드"}
+				,{"name":"파이마루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469257", "avgHp":9.81, "avgTotal":5.10, "avgAtk":2.18, "avgDef":1.28, "avgAgi":1.64, "earth":0, "water":2, "fire":8, "wind":0, "get":"레이드"}
+				,{"name":"레드드래곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469256", "avgHp":10.05, "avgTotal":5.17, "avgAtk":2.24, "avgDef":1.47, "avgAgi":1.45, "earth":0, "water":0, "fire":9, "wind":1, "get":"레이드"}
+				,{"name":"데빌바로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469253", "avgHp":10.66, "avgTotal":5.05, "avgAtk":2.34, "avgDef":1.45, "avgAgi":1.26, "earth":0, "water":3, "fire":7, "wind":0, "get":"레이드"}
+				,{"name":"아이스드래곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469252", "avgHp":10.62, "avgTotal":4.92, "avgAtk":2.32, "avgDef":1.34, "avgAgi":1.26, "earth":0, "water":8, "fire":2, "wind":0, "get":"VIP 상점"}
+				,{"name":"금주작", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456092", "avgHp":9.95, "avgTotal":5.06, "avgAtk":2.14, "avgDef":1.24, "avgAgi":1.69, "earth":0, "water":0, "fire":1, "wind":9, "get":"이벤트"}
+				,{"name":"한복밍코", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456089", "avgHp":10.90, "avgTotal":4.91, "avgAtk":2.02, "avgDef":1.25, "avgAgi":1.64, "earth":0, "water":5, "fire":5, "wind":0, "get":"이벤트"}
+				,{"name":"팽팽", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456087", "avgHp":11.99, "avgTotal":4.71, "avgAtk":2.05, "avgDef":2.22, "avgAgi":0.45, "earth":0, "water":0, "fire":6, "wind":4, "get":"이벤트"}
+				,{"name":"한복메이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456084", "avgHp":9.86, "avgTotal":5.16, "avgAtk":2.01, "avgDef":1.41, "avgAgi":1.73, "earth":4, "water":0, "fire":0, "wind":6, "get":"이벤트"}
+				,{"name":"토로카", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456080", "avgHp":9.97, "avgTotal":5.01, "avgAtk":2.19, "avgDef":1.31, "avgAgi":1.52, "earth":0, "water":0, "fire":9, "wind":1, "get":"이벤트"}
+				,{"name":"토르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456077", "avgHp":10.95, "avgTotal":4.96, "avgAtk":2.21, "avgDef":1.49, "avgAgi":1.26, "earth":0, "water":9, "fire":1, "wind":0, "get":"이벤트"}
+				,{"name":"메이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456073", "avgHp":9.48, "avgTotal":5.13, "avgAtk":1.86, "avgDef":1.11, "avgAgi":2.15, "earth":3, "water":0, "fire":0, "wind":7, "get":"이벤트"}
+				,{"name":"파아란", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456069", "avgHp":10.17, "avgTotal":5.02, "avgAtk":1.89, "avgDef":1.15, "avgAgi":1.98, "earth":0, "water":8, "fire":2, "wind":0, "get":"이벤트"}
+				,{"name":"왕토끼", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456067", "avgHp":9.52, "avgTotal":4.76, "avgAtk":1.70, "avgDef":1.70, "avgAgi":1.36, "earth":5, "water":0, "fire":0, "wind":5, "get":"이벤트"}
+				,{"name":"백설토끼", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456065", "avgHp":12.33, "avgTotal":4.68, "avgAtk":2.05, "avgDef":2.18, "avgAgi":0.45, "earth":0, "water":10, "fire":0, "wind":0, "get":"이벤트"}
+				,{"name":"흑토끼", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456058", "avgHp":10.62, "avgTotal":4.99, "avgAtk":2.30, "avgDef":1.49, "avgAgi":1.21, "earth":0, "water":3, "fire":7, "wind":0, "get":"이벤트"}
+				,{"name":"타이혼", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456056", "avgHp":9.76, "avgTotal":5.25, "avgAtk":2.06, "avgDef":1.55, "avgAgi":1.64, "earth":0, "water":0, "fire":5, "wind":5, "get":"복권"}
+				,{"name":"부루마루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456055", "avgHp":10.62, "avgTotal":4.99, "avgAtk":2.20, "avgDef":1.39, "avgAgi":1.40, "earth":2, "water":8, "fire":0, "wind":0, "get":"VIP 상점"}
+				,{"name":"샤우트", "img":"http://saneo14.com/index.php?mid=Information&document_srl=456054", "avgHp":12.09, "avgTotal":4.82, "avgAtk":2.14, "avgDef":2.23, "avgAgi":0.45, "earth":5, "water":0, "fire":0, "wind":5, "get":"VIP 상점"}
+				,{"name":"모사크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441666", "avgHp":10.71, "avgTotal":4.90, "avgAtk":2.30, "avgDef":1.44, "avgAgi":1.16, "earth":0, "water":10, "fire":0, "wind":0, "get":"이벤트"}
+				,{"name":"스노블", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441662", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.22, "avgDef":1.42, "avgAgi":1.36, "earth":0, "water":5, "fire":5, "wind":0, "get":"일반 포획"}
+				,{"name":"코우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441659", "avgHp":11.99, "avgTotal":4.71, "avgAtk":2.13, "avgDef":2.13, "avgAgi":0.45, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"노바티", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441657", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.17, "avgDef":1.42, "avgAgi":1.41, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"프라미우스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441655", "avgHp":10.33, "avgTotal":5.08, "avgAtk":2.35, "avgDef":1.62, "avgAgi":1.12, "earth":0, "water":2, "fire":8, "wind":0, "get":"이벤트"}
+				,{"name":"플라티우스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441653", "avgHp":11.19, "avgTotal":5.02, "avgAtk":2.07, "avgDef":1.94, "avgAgi":1.02, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"쿠아", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441650", "avgHp":9.76, "avgTotal":5.00, "avgAtk":2.08, "avgDef":1.30, "avgAgi":1.62, "earth":0, "water":5, "fire":5, "wind":0, "get":"일반 포획"}
+				,{"name":"쿠팡", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441648", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.11, "avgDef":1.31, "avgAgi":1.61, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"레오딘", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441635", "avgHp":10.28, "avgTotal":5.03, "avgAtk":2.20, "avgDef":1.38, "avgAgi":1.45, "earth":8, "water":2, "fire":0, "wind":0, "get":"VIP 상점"}
+				,{"name":"페가수스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441634", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.28, "avgDef":1.30, "avgAgi":1.50, "earth":0, "water":0, "fire":8, "wind":2, "get":"기타 획득"}
+				,{"name":"스피노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433653", "avgHp":10.05, "avgTotal":4.97, "avgAtk":2.37, "avgDef":1.34, "avgAgi":1.26, "earth":0, "water":0, "fire":10, "wind":0, "get":"일반 포획"}
+				,{"name":"주작", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433561", "avgHp":10.02, "avgTotal":5.10, "avgAtk":2.17, "avgDef":1.32, "avgAgi":1.61, "earth":0, "water":0, "fire":9, "wind":1, "get":"복권"}
+				,{"name":"풍백", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433560", "avgHp":9.81, "avgTotal":5.06, "avgAtk":2.03, "avgDef":1.10, "avgAgi":1.93, "earth":2, "water":0, "fire":0, "wind":8, "get":"VIP 상점"}
+				,{"name":"볼케", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433559", "avgHp":9.76, "avgTotal":5.05, "avgAtk":2.23, "avgDef":1.33, "avgAgi":1.50, "earth":0, "water":0, "fire":10, "wind":0, "get":"퀘스트"}
+				,{"name":"라피노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433558", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.28, "avgDef":1.43, "avgAgi":1.31, "earth":2, "water":0, "fire":0, "wind":8, "get":"일반 포획"}
+				,{"name":"하피노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433556", "avgHp":10.62, "avgTotal":4.92, "avgAtk":2.23, "avgDef":1.38, "avgAgi":1.31, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"야크노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433555", "avgHp":10.12, "avgTotal":4.97, "avgAtk":2.20, "avgDef":1.46, "avgAgi":1.31, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"메피노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433552", "avgHp":10.33, "avgTotal":5.08, "avgAtk":2.29, "avgDef":1.48, "avgAgi":1.31, "earth":0, "water":6, "fire":4, "wind":0, "get":"일레포인트 상점"}
+				,{"name":"야무리선수", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363875", "avgHp":9.95, "avgTotal":5.06, "avgAtk":2.41, "avgDef":1.39, "avgAgi":1.26, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획"}
+				,{"name":"깜아리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363874", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.09, "avgDef":1.32, "avgAgi":1.59, "earth":0, "water":5, "fire":5, "wind":0, "get":"일반 포획"}
+				,{"name":"코리프스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363873", "avgHp":10.28, "avgTotal":5.03, "avgAtk":2.30, "avgDef":1.61, "avgAgi":1.12, "earth":0, "water":2, "fire":8, "wind":0, "get":"코스"}
+				,{"name":"쿠오코마", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363869", "avgHp":11.95, "avgTotal":4.66, "avgAtk":2.17, "avgDef":2.04, "avgAgi":0.45, "earth":10, "water":0, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"베르푸스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363864", "avgHp":9.71, "avgTotal":5.00, "avgAtk":2.08, "avgDef":1.23, "avgAgi":1.69, "earth":0, "water":0, "fire":0, "wind":10, "get":"코스"}
+				,{"name":"테이노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363856", "avgHp":10.28, "avgTotal":5.03, "avgAtk":2.24, "avgDef":1.39, "avgAgi":1.40, "earth":0, "water":7, "fire":3, "wind":0, "get":"일레포인트 상점"}
+				,{"name":"크루거", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363854", "avgHp":10.14, "avgTotal":5.07, "avgAtk":2.24, "avgDef":1.43, "avgAgi":1.40, "earth":5, "water":5, "fire":0, "wind":0, "get":"VIP 상점"}
+				,{"name":"설표", "img":"http://saneo14.com/index.php?mid=Information&document_srl=363850", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.10, "avgDef":1.28, "avgAgi":1.64, "earth":8, "water":0, "fire":0, "wind":2, "get":"VIP 상점"}
+				,{"name":"흑기린", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339577", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.42, "avgDef":1.53, "avgAgi":1.11, "earth":0, "water":1, "fire":9, "wind":0, "get":"얼음성포인트상점"}
+				,{"name":"현무", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339438", "avgHp":10.47, "avgTotal":5.04, "avgAtk":2.22, "avgDef":1.75, "avgAgi":1.07, "earth":9, "water":1, "fire":0, "wind":0, "get":"얼음성포인트상점"}
+				,{"name":"청룡", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339436", "avgHp":10.95, "avgTotal":4.96, "avgAtk":2.30, "avgDef":1.45, "avgAgi":1.21, "earth":0, "water":9, "fire":1, "wind":0, "get":"레이드"}
+				,{"name":"레피온", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339433", "avgHp":9.81, "avgTotal":5.06, "avgAtk":2.08, "avgDef":1.25, "avgAgi":1.73, "earth":0, "water":2, "fire":8, "wind":0, "get":"얼음성포인트상점"}
+				,{"name":"라이쿠스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339431", "avgHp":12.99, "avgTotal":4.61, "avgAtk":2.02, "avgDef":2.15, "avgAgi":0.45, "earth":8, "water":2, "fire":0, "wind":0, "get":"얼음성포인트상점"}
+				,{"name":"익시노돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339429", "avgHp":9.63, "avgTotal":5.08, "avgAtk":1.96, "avgDef":1.11, "avgAgi":2.00, "earth":0, "water":0, "fire":0, "wind":10, "get":"얼음성포인트상점"}
+				,{"name":"테로노돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339424", "avgHp":9.76, "avgTotal":5.01, "avgAtk":1.84, "avgDef":1.22, "avgAgi":1.95, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"크로아치", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339422", "avgHp":10.27, "avgTotal":4.96, "avgAtk":2.23, "avgDef":1.56, "avgAgi":1.16, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"히파", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339419", "avgHp":9.60, "avgTotal":5.05, "avgAtk":1.97, "avgDef":1.04, "avgAgi":2.03, "earth":0, "water":0, "fire":5, "wind":5, "get":"얼음성포인트상점"}
+				,{"name":"얼룩부이비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=333583", "avgHp":11.00, "avgTotal":4.63, "avgAtk":2.01, "avgDef":1.36, "avgAgi":1.26, "earth":10, "water":0, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"아이스만모", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317078", "avgHp":13.18, "avgTotal":4.62, "avgAtk":2.06, "avgDef":2.02, "avgAgi":0.55, "earth":3, "water":7, "fire":0, "wind":0, "get":"운동회포인트 상점"}
+				,{"name":"복우리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317076", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.22, "avgDef":1.42, "avgAgi":1.41, "earth":0, "water":0, "fire":0, "wind":10, "get":"이벤트"}
+				,{"name":"카르푸스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317073", "avgHp":9.98, "avgTotal":5.02, "avgAtk":2.06, "avgDef":1.33, "avgAgi":1.63, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"케라노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317066", "avgHp":9.92, "avgTotal":4.99, "avgAtk":2.11, "avgDef":1.27, "avgAgi":1.61, "earth":0, "water":8, "fire":2, "wind":0, "get":"운동회포인트 상점"}
+				,{"name":"헬노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317061", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.12, "avgDef":1.27, "avgAgi":1.66, "earth":0, "water":0, "fire":10, "wind":0, "get":"VIP 상점"}
+				,{"name":"몽몽", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317058", "avgHp":11.80, "avgTotal":4.70, "avgAtk":2.26, "avgDef":2.00, "avgAgi":0.45, "earth":3, "water":7, "fire":0, "wind":0, "get":"이벤트"}
+				,{"name":"진돌", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317055", "avgHp":10.52, "avgTotal":5.09, "avgAtk":2.23, "avgDef":1.84, "avgAgi":1.02, "earth":0, "water":4, "fire":6, "wind":0, "get":"이벤트"}
+				,{"name":"몽돌", "img":"http://saneo14.com/index.php?mid=Information&document_srl=317051", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.28, "avgDef":1.52, "avgAgi":1.26, "earth":0, "water":0, "fire":3, "wind":7, "get":"이벤트"}
+				,{"name":"봉봉", "img":"http://saneo14.com/index.php?mid=Information&document_srl=301061", "avgHp":10.28, "avgTotal":5.03, "avgAtk":2.34, "avgDef":1.48, "avgAgi":1.21, "earth":2, "water":0, "fire":0, "wind":8, "get":"VIP 상점"}
+				,{"name":"프리토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=300909", "avgHp":11.85, "avgTotal":4.76, "avgAtk":2.04, "avgDef":2.08, "avgAgi":0.64, "earth":0, "water":0, "fire":2, "wind":8, "get":"코스"}
+				,{"name":"보르비스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=300907", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.17, "avgDef":1.32, "avgAgi":1.56, "earth":3, "water":7, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"토리토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=300902", "avgHp":11.99, "avgTotal":4.71, "avgAtk":2.09, "avgDef":2.13, "avgAgi":0.50, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"마르마루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=300900", "avgHp":9.95, "avgTotal":5.06, "avgAtk":2.19, "avgDef":1.33, "avgAgi":1.54, "earth":1, "water":0, "fire":0, "wind":9, "get":"VIP 상점"}
+				,{"name":"네오란스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207074", "avgHp":10.22, "avgTotal":4.90, "avgAtk":2.32, "avgDef":1.47, "avgAgi":1.11, "earth":10, "water":0, "fire":0, "wind":0, "get":"전장포인트 상점"}
+				,{"name":"마크론", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207072", "avgHp":9.81, "avgTotal":5.06, "avgAtk":2.13, "avgDef":1.25, "avgAgi":1.67, "earth":0, "water":0, "fire":8, "wind":2, "get":"전장포인트 상점"}
+				,{"name":"백호", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207069", "avgHp":10.19, "avgTotal":5.12, "avgAtk":2.11, "avgDef":1.42, "avgAgi":1.59, "earth":7, "water":0, "fire":0, "wind":3, "get":"퀘스트"}
+				,{"name":"로데오", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207066", "avgHp":10.00, "avgTotal":5.11, "avgAtk":2.15, "avgDef":1.38, "avgAgi":1.59, "earth":0, "water":0, "fire":8, "wind":2, "get":"퀘스트"}
+				,{"name":"펠타리오", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207064", "avgHp":11.80, "avgTotal":4.70, "avgAtk":2.05, "avgDef":2.30, "avgAgi":0.36, "earth":8, "water":0, "fire":0, "wind":2, "get":"전장포인트 상점"}
+				,{"name":"메가로돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207058", "avgHp":10.47, "avgTotal":5.04, "avgAtk":2.34, "avgDef":1.53, "avgAgi":1.16, "earth":0, "water":7, "fire":3, "wind":0, "get":"레이드"}
+				,{"name":"메가죠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207055", "avgHp":10.17, "avgTotal":5.02, "avgAtk":2.44, "avgDef":1.37, "avgAgi":1.21, "earth":0, "water":2, "fire":8, "wind":0, "get":"레이드"}
+				,{"name":"옥토", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207053", "avgHp":12.04, "avgTotal":4.77, "avgAtk":2.22, "avgDef":2.00, "avgAgi":0.55, "earth":0, "water":7, "fire":3, "wind":0, "get":"레이드"}
+				,{"name":"배모티스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207046", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.02, "avgDef":1.26, "avgAgi":1.76, "earth":0, "water":0, "fire":2, "wind":8, "get":"레이드"}
+				,{"name":"그램푸", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207044", "avgHp":10.66, "avgTotal":5.05, "avgAtk":2.05, "avgDef":1.88, "avgAgi":1.12, "earth":5, "water":5, "fire":0, "wind":0, "get":"레이드"}
+				,{"name":"베라라", "img":"http://saneo14.com/index.php?mid=Information&document_srl=207026", "avgHp":9.76, "avgTotal":5.00, "avgAtk":2.08, "avgDef":1.25, "avgAgi":1.67, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획"}
+				,{"name":"포레스트크랩", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111313", "avgHp":11.66, "avgTotal":4.61, "avgAtk":2.05, "avgDef":2.19, "avgAgi":0.37, "earth":5, "water":5, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"바우트", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111309", "avgHp":11.90, "avgTotal":4.81, "avgAtk":2.31, "avgDef":2.05, "avgAgi":0.45, "earth":0, "water":1, "fire":9, "wind":0, "get":"복권"}
+				,{"name":"샤크론", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111298", "avgHp":10.38, "avgTotal":4.93, "avgAtk":2.10, "avgDef":1.24, "avgAgi":1.59, "earth":0, "water":10, "fire":0, "wind":0, "get":"VIP 상점"}
+				,{"name":"흑귀", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111284", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.22, "avgDef":1.42, "avgAgi":1.41, "earth":7, "water":0, "fire":0, "wind":3, "get":"VIP 상점"}
+				,{"name":"아코로비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111272", "avgHp":10.57, "avgTotal":4.94, "avgAtk":2.21, "avgDef":1.52, "avgAgi":1.21, "earth":1, "water":9, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"골드로비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111267", "avgHp":9.76, "avgTotal":5.05, "avgAtk":2.05, "avgDef":1.36, "avgAgi":1.64, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획"}
+				,{"name":"피피아", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111262", "avgHp":9.92, "avgTotal":4.99, "avgAtk":1.98, "avgDef":1.36, "avgAgi":1.66, "earth":5, "water":5, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"포루나", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111259", "avgHp":9.97, "avgTotal":5.01, "avgAtk":2.05, "avgDef":1.40, "avgAgi":1.57, "earth":4, "water":6, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"지라크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=111257", "avgHp":10.03, "avgTotal":4.86, "avgAtk":2.21, "avgDef":1.44, "avgAgi":1.20, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"백기린", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59949", "avgHp":11.09, "avgTotal":4.92, "avgAtk":2.27, "avgDef":1.58, "avgAgi":1.07, "earth":2, "water":8, "fire":0, "wind":0, "get":"VIP 상점"}
+				,{"name":"마우트", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59944", "avgHp":11.99, "avgTotal":4.71, "avgAtk":2.22, "avgDef":2.05, "avgAgi":0.45, "earth":8, "water":2, "fire":0, "wind":0, "get":"VIP 상점"}
+				,{"name":"갈푸스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59920", "avgHp":9.92, "avgTotal":4.99, "avgAtk":2.25, "avgDef":1.23, "avgAgi":1.51, "earth":0, "water":0, "fire":9, "wind":1, "get":"VIP 상점"}
+				,{"name":"카우거", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59914", "avgHp":9.92, "avgTotal":4.99, "avgAtk":2.11, "avgDef":1.27, "avgAgi":1.61, "earth":8, "water":0, "fire":0, "wind":2, "get":"VIP 상점"}
+				,{"name":"파베로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59906", "avgHp":9.76, "avgTotal":5.00, "avgAtk":2.13, "avgDef":1.20, "avgAgi":1.67, "earth":0, "water":0, "fire":0, "wind":10, "get":"VIP 상점"}
+				,{"name":"푸키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59903", "avgHp":9.62, "avgTotal":5.09, "avgAtk":1.94, "avgDef":1.13, "avgAgi":2.02, "earth":0, "water":2, "fire":8, "wind":0, "get":"VIP 상점"}
+				,{"name":"우마왕", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59901", "avgHp":10.33, "avgTotal":5.08, "avgAtk":2.30, "avgDef":1.71, "avgAgi":1.07, "earth":0, "water":0, "fire":10, "wind":0, "get":"VIP 상점"}
+				,{"name":"켈푸스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59890", "avgHp":9.76, "avgTotal":5.01, "avgAtk":2.20, "avgDef":1.29, "avgAgi":1.52, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"카우제", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59878", "avgHp":11.80, "avgTotal":4.70, "avgAtk":2.26, "avgDef":2.00, "avgAgi":0.45, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"오르곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=59873", "avgHp":10.90, "avgTotal":4.91, "avgAtk":2.26, "avgDef":1.44, "avgAgi":1.21, "earth":0, "water":8, "fire":2, "wind":0, "get":"퀘스트"}
+				,{"name":"카리로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1854", "avgHp":9.98, "avgTotal":5.02, "avgAtk":2.26, "avgDef":1.29, "avgAgi":1.47, "earth":0, "water":0, "fire":8, "wind":2, "get":"일레포인트 상점"}
+				,{"name":"기계베르가", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1852", "avgHp":9.86, "avgTotal":5.12, "avgAtk":2.09, "avgDef":1.40, "avgAgi":1.62, "earth":0, "water":7, "fire":3, "wind":0, "get":"일레포인트 상점"}
+				,{"name":"기계프리토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1850", "avgHp":12.09, "avgTotal":4.82, "avgAtk":2.10, "avgDef":2.22, "avgAgi":0.50, "earth":0, "water":0, "fire":8, "wind":2, "get":"일레포인트 상점"}
+				,{"name":"기계쟈그", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1848", "avgHp":10.76, "avgTotal":4.95, "avgAtk":2.30, "avgDef":1.53, "avgAgi":1.12, "earth":0, "water":8, "fire":2, "wind":0, "get":"일레포인트 상점"}
+				,{"name":"흑곰", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1846", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.25, "avgDef":1.52, "avgAgi":1.21, "earth":7, "water":3, "fire":0, "wind":0, "get":"일레포인트 상점"}
+				,{"name":"우라노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1743", "avgHp":9.97, "avgTotal":5.01, "avgAtk":2.09, "avgDef":1.30, "avgAgi":1.62, "earth":7, "water":0, "fire":0, "wind":3, "get":"코스"}
+				,{"name":"웅이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1741", "avgHp":12.14, "avgTotal":4.67, "avgAtk":2.05, "avgDef":2.17, "avgAgi":0.45, "earth":3, "water":7, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"와일로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1606", "avgHp":10.95, "avgTotal":4.96, "avgAtk":2.01, "avgDef":1.88, "avgAgi":1.07, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"후치무노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1604", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.02, "avgDef":1.31, "avgAgi":1.71, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획"}
+				,{"name":"카누스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1602", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.31, "avgDef":1.42, "avgAgi":1.31, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획"}
+				,{"name":"후바티", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1600", "avgHp":11.04, "avgTotal":4.87, "avgAtk":2.16, "avgDef":1.31, "avgAgi":1.40, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"매그노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1598", "avgHp":10.47, "avgTotal":4.97, "avgAtk":2.24, "avgDef":1.57, "avgAgi":1.16, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"파투스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1593", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.29, "avgDef":1.48, "avgAgi":1.21, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"클리오스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1591", "avgHp":10.24, "avgTotal":4.98, "avgAtk":2.20, "avgDef":1.56, "avgAgi":1.21, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"브리샤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1589", "avgHp":9.92, "avgTotal":4.99, "avgAtk":2.08, "avgDef":1.41, "avgAgi":1.51, "earth":0, "water":6, "fire":4, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"스펑키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1587", "avgHp":9.76, "avgTotal":5.05, "avgAtk":2.00, "avgDef":1.32, "avgAgi":1.73, "earth":3, "water":0, "fire":0, "wind":7, "get":"일반 포획"}
+				,{"name":"쿠쿰버", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1585", "avgHp":11.51, "avgTotal":4.66, "avgAtk":2.05, "avgDef":2.14, "avgAgi":0.47, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"자크로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1579", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.11, "avgDef":1.51, "avgAgi":1.40, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"허미크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=1577", "avgHp":10.32, "avgTotal":5.01, "avgAtk":1.98, "avgDef":2.02, "avgAgi":1.01, "earth":0, "water":2, "fire":8, "wind":0, "get":"일반 포획"}
+				,{"name":"블랙펄", "img":"http://saneo14.com/index.php?mid=Information&document_srl=769", "avgHp":9.71, "avgTotal":5.00, "avgAtk":2.13, "avgDef":1.23, "avgAgi":1.64, "earth":0, "water":0, "fire":3, "wind":7, "get":"코스"}
+				,{"name":"핑코", "img":"http://saneo14.com/index.php?mid=Information&document_srl=767", "avgHp":9.92, "avgTotal":4.99, "avgAtk":2.26, "avgDef":1.28, "avgAgi":1.46, "earth":0, "water":2, "fire":8, "wind":0, "get":"코스"}
+				,{"name":"블루문", "img":"http://saneo14.com/index.php?mid=Information&document_srl=765", "avgHp":10.24, "avgTotal":4.98, "avgAtk":2.24, "avgDef":1.38, "avgAgi":1.35, "earth":2, "water":8, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"백여우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=763", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.27, "avgDef":1.37, "avgAgi":1.36, "earth":0, "water":5, "fire":5, "wind":0, "get":"코스"}
+				,{"name":"이구로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=760", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.07, "avgDef":1.31, "avgAgi":1.66, "earth":5, "water":0, "fire":0, "wind":5, "get":"일반 포획;코스"}
+				,{"name":"비트로돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=758", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.26, "avgDef":1.46, "avgAgi":1.31, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"바라", "img":"http://saneo14.com/index.php?mid=Information&document_srl=756", "avgHp":9.39, "avgTotal":5.05, "avgAtk":1.83, "avgDef":1.21, "avgAgi":2.01, "earth":2, "water":0, "fire":0, "wind":8, "get":"일반 포획;코스"}
+				,{"name":"볼케이노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=754", "avgHp":11.28, "avgTotal":4.73, "avgAtk":2.21, "avgDef":2.12, "avgAgi":0.40, "earth":0, "water":0, "fire":5, "wind":5, "get":"일반 포획"}
+				,{"name":"야무리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=752", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.33, "avgDef":1.52, "avgAgi":1.16, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획"}
+				,{"name":"가이록스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=750", "avgHp":10.57, "avgTotal":4.94, "avgAtk":2.20, "avgDef":1.43, "avgAgi":1.31, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"스톤크랩", "img":"http://saneo14.com/index.php?mid=Information&document_srl=748", "avgHp":10.84, "avgTotal":4.68, "avgAtk":1.96, "avgDef":2.28, "avgAgi":0.44, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"발로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=746", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.18, "avgDef":1.51, "avgAgi":1.31, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"금룡", "img":"http://saneo14.com/index.php?mid=Information&document_srl=744", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.31, "avgDef":1.29, "avgAgi":1.46, "earth":0, "water":0, "fire":1, "wind":9, "get":"복권"}
+				,{"name":"진주토로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=742", "avgHp":10.32, "avgTotal":5.01, "avgAtk":1.91, "avgDef":169, "avgAgi":1.41, "earth":5, "water":5, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"디로로크스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=740", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.04, "avgDef":1.60, "avgAgi":1.41, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"실버로크스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=738", "avgHp":10.62, "avgTotal":4.99, "avgAtk":1.95, "avgDef":1.69, "avgAgi":1.35, "earth":0, "water":5, "fire":5, "wind":0, "get":"일반 포획"}
+				,{"name":"노로로크스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=736", "avgHp":10.09, "avgTotal":5.02, "avgAtk":1.93, "avgDef":1.50, "avgAgi":1.59, "earth":2, "water":0, "fire":0, "wind":8, "get":"일반 포획"}
+				,{"name":"노스토로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=734", "avgHp":9.71, "avgTotal":4.95, "avgAtk":1.86, "avgDef":1.62, "avgAgi":1.47, "earth":0, "water":0, "fire":9, "wind":1, "get":"일반 포획;코스"}
+				,{"name":"코리토로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=732", "avgHp":10.14, "avgTotal":4.75, "avgAtk":1.67, "avgDef":1.77, "avgAgi":1.31, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"란베르스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=730", "avgHp":10.27, "avgTotal":4.70, "avgAtk":1.67, "avgDef":1.67, "avgAgi":1.36, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"바로로크스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=728", "avgHp":10.08, "avgTotal":4.69, "avgAtk":1.62, "avgDef":1.86, "avgAgi":1.20, "earth":4, "water":6, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"다리노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=726", "avgHp":10.28, "avgTotal":5.03, "avgAtk":2.24, "avgDef":1.43, "avgAgi":1.35, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"푸르노로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=724", "avgHp":10.62, "avgTotal":4.99, "avgAtk":2.13, "avgDef":1.70, "avgAgi":1.16, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"아리노로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=722", "avgHp":10.47, "avgTotal":5.04, "avgAtk":2.17, "avgDef":1.66, "avgAgi":1.21, "earth":6, "water":0, "fire":0, "wind":4, "get":"일반 포획"}
+				,{"name":"타르노로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=720", "avgHp":11.41, "avgTotal":4.55, "avgAtk":1.64, "avgDef":1.69, "avgAgi":1.21, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"모이토", "img":"http://saneo14.com/index.php?mid=Information&document_srl=718", "avgHp":9.67, "avgTotal":5.15, "avgAtk":1.80, "avgDef":1.71, "avgAgi":1.64, "earth":7, "water":0, "fire":0, "wind":3, "get":"맘모스 쿠폰"}
+				,{"name":"파라프", "img":"http://saneo14.com/index.php?mid=Information&document_srl=716", "avgHp":9.52, "avgTotal":5.19, "avgAtk":1.88, "avgDef":1.67, "avgAgi":1.64, "earth":0, "water":0, "fire":3, "wind":7, "get":"맘모스 쿠폰"}
+				,{"name":"차이혼", "img":"http://saneo14.com/index.php?mid=Information&document_srl=714", "avgHp":10.14, "avgTotal":5.07, "avgAtk":1.85, "avgDef":1.68, "avgAgi":1.54, "earth":3, "water":7, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"모나시프", "img":"http://saneo14.com/index.php?mid=Information&document_srl=712", "avgHp":9.83, "avgTotal":5.09, "avgAtk":1.72, "avgDef":1.76, "avgAgi":1.61, "earth":0, "water":0, "fire":0, "wind":10, "get":"퀘스트"}
+				,{"name":"노르곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=710", "avgHp":9.83, "avgTotal":5.09, "avgAtk":2.12, "avgDef":1.32, "avgAgi":1.66, "earth":0, "water":0, "fire":3, "wind":7, "get":"맘모스 쿠폰"}
+				,{"name":"칼로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=708", "avgHp":10.19, "avgTotal":5.12, "avgAtk":2.25, "avgDef":1.48, "avgAgi":1.40, "earth":0, "water":5, "fire":5, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"푸룡", "img":"http://saneo14.com/index.php?mid=Information&document_srl=706", "avgHp":10.71, "avgTotal":4.90, "avgAtk":2.29, "avgDef":1.31, "avgAgi":1.31, "earth":1, "water":9, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"지가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=704", "avgHp":10.17, "avgTotal":5.02, "avgAtk":2.26, "avgDef":1.61, "avgAgi":1.16, "earth":8, "water":0, "fire":0, "wind":2, "get":"맘모스 쿠폰"}
+				,{"name":"골로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=702", "avgHp":9.71, "avgTotal":5.20, "avgAtk":2.21, "avgDef":1.78, "avgAgi":1.21, "earth":0, "water":0, "fire":5, "wind":5, "get":"퀘스트"}
+				,{"name":"모가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=700", "avgHp":9.76, "avgTotal":5.25, "avgAtk":2.29, "avgDef":1.56, "avgAgi":1.40, "earth":0, "water":2, "fire":8, "wind":0, "get":"퀘스트"}
+				,{"name":"오가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=698", "avgHp":10.09, "avgTotal":5.02, "avgAtk":1.95, "avgDef":1.91, "avgAgi":1.16, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"타르쿠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=696", "avgHp":9.45, "avgTotal":5.10, "avgAtk":1.79, "avgDef":1.28, "avgAgi":2.03, "earth":7, "water":0, "fire":0, "wind":3, "get":"맘모스 쿠폰"}
+				,{"name":"쥬키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=694", "avgHp":9.48, "avgTotal":5.13, "avgAtk":1.78, "avgDef":1.20, "avgAgi":2.15, "earth":0, "water":0, "fire":5, "wind":5, "get":"맘모스 쿠폰"}
+				,{"name":"흑카키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=692", "avgHp":9.45, "avgTotal":5.10, "avgAtk":1.78, "avgDef":1.23, "avgAgi":2.09, "earth":6, "water":0, "fire":0, "wind":4, "get":"맘모스 쿠폰"}
+				,{"name":"푸타카", "img":"http://saneo14.com/index.php?mid=Information&document_srl=690", "avgHp":9.98, "avgTotal":5.02, "avgAtk":1.80, "avgDef":1.27, "avgAgi":1.95, "earth":2, "water":8, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"호르쿠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=688", "avgHp":9.57, "avgTotal":4.82, "avgAtk":1.47, "avgDef":1.27, "avgAgi":2.08, "earth":3, "water":0, "fire":0, "wind":7, "get":"맘모스 쿠폰"}
+				,{"name":"쿠쿠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=686", "avgHp":9.12, "avgTotal":4.98, "avgAtk":1.72, "avgDef":1.14, "avgAgi":2.11, "earth":0, "water":0, "fire":0, "wind":10, "get":"일반 포획"}
+				,{"name":"카키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=684", "avgHp":9.24, "avgTotal":5.15, "avgAtk":1.84, "avgDef":1.24, "avgAgi":2.08, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획"}
+				,{"name":"타키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=682", "avgHp":9.35, "avgTotal":4.81, "avgAtk":1.56, "avgDef":1.16, "avgAgi":2.08, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"테라돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=680", "avgHp":10.57, "avgTotal":4.94, "avgAtk":2.15, "avgDef":1.34, "avgAgi":1.45, "earth":1, "water":9, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"골드테라곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=678", "avgHp":9.81, "avgTotal":5.10, "avgAtk":2.05, "avgDef":1.37, "avgAgi":1.69, "earth":2, "water":0, "fire":0, "wind":8, "get":"맘모스 쿠폰"}
+				,{"name":"실버라곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=676", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.09, "avgDef":1.51, "avgAgi":1.46, "earth":5, "water":5, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"푸테라", "img":"http://saneo14.com/index.php?mid=Information&document_srl=674", "avgHp":10.24, "avgTotal":4.98, "avgAtk":2.06, "avgDef":1.42, "avgAgi":1.50, "earth":0, "water":8, "fire":2, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"포이비스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=672", "avgHp":9.86, "avgTotal":5.16, "avgAtk":1.98, "avgDef":1.73, "avgAgi":1.45, "earth":5, "water":0, "fire":0, "wind":5, "get":"일반 포획"}
+				,{"name":"카르곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=670", "avgHp":9.52, "avgTotal":5.19, "avgAtk":2.11, "avgDef":1.73, "avgAgi":1.35, "earth":0, "water":0, "fire":8, "wind":2, "get":"퀘스트"}
+				,{"name":"테라곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=668", "avgHp":9.62, "avgTotal":5.09, "avgAtk":2.02, "avgDef":1.68, "avgAgi":1.40, "earth":0, "water":0, "fire":2, "wind":8, "get":"코스"}
+				,{"name":"도라비스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=666", "avgHp":9.90, "avgTotal":5.21, "avgAtk":2.02, "avgDef":1.55, "avgAgi":1.64, "earth":0, "water":0, "fire":0, "wind":10, "get":"퀘스트"}
+				,{"name":"실버로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=664", "avgHp":13.23, "avgTotal":4.48, "avgAtk":1.88, "avgDef":2.14, "avgAgi":0.45, "earth":5, "water":5, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"만모드", "img":"http://saneo14.com/index.php?mid=Information&document_srl=662", "avgHp":12.71, "avgTotal":4.50, "avgAtk":1.88, "avgDef":2.17, "avgAgi":0.45, "earth":10, "water":0, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"푸모나스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=660", "avgHp":13.51, "avgTotal":4.39, "avgAtk":1.84, "avgDef":2.10, "avgAgi":0.45, "earth":2, "water":8, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"메모스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=658", "avgHp":13.09, "avgTotal":4.52, "avgAtk":1.88, "avgDef":2.14, "avgAgi":0.50, "earth":8, "water":0, "fire":0, "wind":2, "get":"맘모스 쿠폰"}
+				,{"name":"만모로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=656", "avgHp":12.99, "avgTotal":4.42, "avgAtk":1.91, "avgDef":1.96, "avgAgi":0.55, "earth":0, "water":5, "fire":5, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"마모나스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=654", "avgHp":13.13, "avgTotal":4.37, "avgAtk":1.87, "avgDef":2.00, "avgAgi":0.50, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"만모르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=652", "avgHp":12.80, "avgTotal":4.41, "avgAtk":2.04, "avgDef":1.91, "avgAgi":0.45, "earth":0, "water":2, "fire":8, "wind":0, "get":"일반 포획"}
+				,{"name":"만모", "img":"http://saneo14.com/index.php?mid=Information&document_srl=650", "avgHp":12.94, "avgTotal":4.36, "avgAtk":1.87, "avgDef":2.09, "avgAgi":0.40, "earth":9, "water":1, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"노라키토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=648", "avgHp":11.76, "avgTotal":4.85, "avgAtk":2.13, "avgDef":2.13, "avgAgi":0.59, "earth":5, "water":0, "fire":0, "wind":5, "get":"맘모스 쿠폰"}
+				,{"name":"브라키오스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=646", "avgHp":11.71, "avgTotal":4.80, "avgAtk":2.00, "avgDef":2.26, "avgAgi":0.55, "earth":8, "water":0, "fire":0, "wind":2, "get":"맘모스 쿠폰"}
+				,{"name":"푸비토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=644", "avgHp":11.90, "avgTotal":4.81, "avgAtk":2.05, "avgDef":2.22, "avgAgi":0.55, "earth":5, "water":5, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"스텐토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=642", "avgHp":12.18, "avgTotal":4.52, "avgAtk":1.82, "avgDef":2.25, "avgAgi":0.45, "earth":5, "water":5, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"프라키토스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=640", "avgHp":11.42, "avgTotal":4.69, "avgAtk":2.24, "avgDef":1.94, "avgAgi":0.50, "earth":0, "water":2, "fire":8, "wind":0, "get":"일반 포획"}
+				,{"name":"다이노스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=638", "avgHp":12.04, "avgTotal":4.37, "avgAtk":1.72, "avgDef":2.10, "avgAgi":0.55, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"다이노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=636", "avgHp":11.66, "avgTotal":4.55, "avgAtk":1.90, "avgDef":2.15, "avgAgi":0.50, "earth":9, "water":1, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"노보스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=634", "avgHp":11.28, "avgTotal":4.73, "avgAtk":2.07, "avgDef":2.07, "avgAgi":0.59, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획"}
+				,{"name":"루보스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=632", "avgHp":11.31, "avgTotal":4.65, "avgAtk":1.95, "avgDef":2.22, "avgAgi":0.47, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"가이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=630", "avgHp":12.47, "avgTotal":4.44, "avgAtk":1.87, "avgDef":2.12, "avgAgi":0.45, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"누이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=628", "avgHp":11.36, "avgTotal":4.60, "avgAtk":2.01, "avgDef":2.15, "avgAgi":0.44, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"투이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=626", "avgHp":11.36, "avgTotal":4.38, "avgAtk":1.79, "avgDef":1.84, "avgAgi":0.75, "earth":0, "water":5, "fire":5, "wind":0, "get":"퀘스트"}
+				,{"name":"씨보스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=624", "avgHp":11.85, "avgTotal":4.38, "avgAtk":1.66, "avgDef":2.00, "avgAgi":0.72, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"무이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=622", "avgHp":12.12, "avgTotal":4.23, "avgAtk":1.65, "avgDef":1.80, "avgAgi":0.78, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"루이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=620", "avgHp":11.85, "avgTotal":4.38, "avgAtk":1.71, "avgDef":1.90, "avgAgi":0.78, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"돌가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=618", "avgHp":11.05, "avgTotal":4.69, "avgAtk":2.06, "avgDef":2.24, "avgAgi":0.39, "earth":10, "water":0, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"노트로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=616", "avgHp":10.66, "avgTotal":5.05, "avgAtk":2.06, "avgDef":1.97, "avgAgi":1.02, "earth":2, "water":0, "fire":0, "wind":8, "get":"맘모스 쿠폰"}
+				,{"name":"기트로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=614", "avgHp":10.48, "avgTotal":4.93, "avgAtk":2.26, "avgDef":1.52, "avgAgi":1.16, "earth":5, "water":0, "fire":0, "wind":5, "get":"맘모스 쿠폰"}
+				,{"name":"라가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=612", "avgHp":11.09, "avgTotal":4.72, "avgAtk":2.20, "avgDef":2.07, "avgAgi":0.45, "earth":7, "water":3, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"가가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=610", "avgHp":10.76, "avgTotal":4.95, "avgAtk":2.15, "avgDef":2.02, "avgAgi":0.78, "earth":0, "water":2, "fire":8, "wind":0, "get":"코스"}
+				,{"name":"비트로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=608", "avgHp":10.38, "avgTotal":4.93, "avgAtk":2.13, "avgDef":1.92, "avgAgi":0.88, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"메가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=606", "avgHp":11.09, "avgTotal":4.72, "avgAtk":1.93, "avgDef":2.06, "avgAgi":0.74, "earth":4, "water":6, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"기가로스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=604", "avgHp":10.47, "avgTotal":5.04, "avgAtk":1.96, "avgDef":2.01, "avgAgi":1.07, "earth":3, "water":0, "fire":0, "wind":7, "get":"코스"}
+				,{"name":"쟈하드", "img":"http://saneo14.com/index.php?mid=Information&document_srl=602", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.27, "avgDef":1.37, "avgAgi":1.36, "earth":0, "water":0, "fire":2, "wind":8, "get":"맘모스 쿠폰"}
+				,{"name":"판그", "img":"http://saneo14.com/index.php?mid=Information&document_srl=600", "avgHp":10.43, "avgTotal":4.87, "avgAtk":2.21, "avgDef":1.51, "avgAgi":1.16, "earth":8, "water":2, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"판그라", "img":"http://saneo14.com/index.php?mid=Information&document_srl=598", "avgHp":10.48, "avgTotal":4.93, "avgAtk":2.30, "avgDef":1.47, "avgAgi":1.16, "earth":0, "water":2, "fire":8, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"석화케스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=596", "avgHp":10.79, "avgTotal":4.84, "avgAtk":2.21, "avgDef":1.42, "avgAgi":1.21, "earth":0, "water":8, "fire":2, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"판지", "img":"http://saneo14.com/index.php?mid=Information&document_srl=594", "avgHp":11.02, "avgTotal":4.54, "avgAtk":2.03, "avgDef":1.48, "avgAgi":1.03, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"쟈그", "img":"http://saneo14.com/index.php?mid=Information&document_srl=592", "avgHp":11.10, "avgTotal":4.46, "avgAtk":2.02, "avgDef":1.34, "avgAgi":1.10, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"쟈그라", "img":"http://saneo14.com/index.php?mid=Information&document_srl=590", "avgHp":10.46, "avgTotal":4.65, "avgAtk":2.16, "avgDef":1.39, "avgAgi":1.10, "earth":0, "water":5, "fire":5, "wind":0, "get":"일반 포획"}
+				,{"name":"고반케스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=588", "avgHp":10.91, "avgTotal":4.65, "avgAtk":2.09, "avgDef":1.54, "avgAgi":1.03, "earth":4, "water":6, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"타르프스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=586", "avgHp":10.96, "avgTotal":4.68, "avgAtk":1.90, "avgDef":2.26, "avgAgi":0.52, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"코발스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=584", "avgHp":11.71, "avgTotal":4.60, "avgAtk":1.98, "avgDef":2.07, "avgAgi":0.55, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"노타스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=582", "avgHp":10.62, "avgTotal":4.99, "avgAtk":1.92, "avgDef":1.96, "avgAgi":1.12, "earth":0, "water":0, "fire":0, "wind":10, "get":"일반 포획"}
+				,{"name":"타노프스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=580", "avgHp":11.16, "avgTotal":4.69, "avgAtk":1.85, "avgDef":2.03, "avgAgi":0.82, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"토르프스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=578", "avgHp":10.68, "avgTotal":4.64, "avgAtk":1.70, "avgDef":2.20, "avgAgi":0.75, "earth":10, "water":0, "fire":0, "wind":0, "get":"코스"}
+				,{"name":"토리케라", "img":"http://saneo14.com/index.php?mid=Information&document_srl=576", "avgHp":10.85, "avgTotal":4.59, "avgAtk":1.64, "avgDef":2.14, "avgAgi":0.80, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"펜타스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=574", "avgHp":11.07, "avgTotal":4.60, "avgAtk":1.60, "avgDef":2.15, "avgAgi":0.86, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"토리노프스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=572", "avgHp":10.41, "avgTotal":4.59, "avgAtk":1.73, "avgDef":1.98, "avgAgi":0.88, "earth":0, "water":3, "fire":7, "wind":0, "get":"코스"}
+				,{"name":"페르가", "img":"http://saneo14.com/index.php?mid=Information&document_srl=570", "avgHp":9.76, "avgTotal":5.05, "avgAtk":2.13, "avgDef":1.28, "avgAgi":1.64, "earth":0, "water":0, "fire":7, "wind":3, "get":"퀘스트"}
+				,{"name":"어린페르가", "img":"http://saneo14.com/index.php?mid=Information&document_srl=568", "avgHp":9.71, "avgTotal":4.95, "avgAtk":2.08, "avgDef":1.25, "avgAgi":1.62, "earth":0, "water":0, "fire":7, "wind":3, "get":"기타 획득"}
+				,{"name":"페루루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=565", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.11, "avgDef":1.27, "avgAgi":1.66, "earth":0, "water":0, "fire":5, "wind":5, "get":"맘모스 쿠폰"}
+				,{"name":"고루루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=563", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.14, "avgDef":1.28, "avgAgi":1.59, "earth":0, "water":5, "fire":5, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"성호", "img":"http://saneo14.com/index.php?mid=Information&document_srl=560", "avgHp":10.42, "avgTotal":4.91, "avgAtk":2.08, "avgDef":1.23, "avgAgi":1.61, "earth":0, "water":10, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"도르도르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=558", "avgHp":9.98, "avgTotal":5.02, "avgAtk":2.10, "avgDef":1.29, "avgAgi":1.63, "earth":3, "water":7, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"고르고르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=556", "avgHp":9.40, "avgTotal":5.04, "avgAtk":2.08, "avgDef":1.29, "avgAgi":1.67, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획;코스"}
+				,{"name":"노르노르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=554", "avgHp":9.81, "avgTotal":5.10, "avgAtk":2.09, "avgDef":1.32, "avgAgi":1.69, "earth":3, "water":0, "fire":0, "wind":7, "get":"복권"}
+				,{"name":"베루루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=552", "avgHp":9.60, "avgTotal":5.05, "avgAtk":2.08, "avgDef":1.29, "avgAgi":1.67, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"베르가", "img":"http://saneo14.com/index.php?mid=Information&document_srl=550", "avgHp":9.91, "avgTotal":4.96, "avgAtk":2.00, "avgDef":1.44, "avgAgi":1.52, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"바쿠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=548", "avgHp":9.45, "avgTotal":5.10, "avgAtk":1.86, "avgDef":1.77, "avgAgi":1.47, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"푸쿠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=546", "avgHp":9.30, "avgTotal":5.14, "avgAtk":2.00, "avgDef":1.63, "avgAgi":1.52, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획"}
+				,{"name":"바쿠우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=544", "avgHp":9.81, "avgTotal":5.06, "avgAtk":1.91, "avgDef":1.63, "avgAgi":1.52, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"바카우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=542", "avgHp":9.40, "avgTotal":5.26, "avgAtk":1.95, "avgDef":1.63, "avgAgi":1.67, "earth":0, "water":0, "fire":5, "wind":5, "get":"일반 포획"}
+				,{"name":"카우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=540", "avgHp":8.75, "avgTotal":5.24, "avgAtk":1.80, "avgDef":1.80, "avgAgi":1.63, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"바우", "img":"http://saneo14.com/index.php?mid=Information&document_srl=538", "avgHp":8.91, "avgTotal":5.19, "avgAtk":1.80, "avgDef":1.65, "avgAgi":1.74, "earth":2, "water":0, "fire":0, "wind":8, "get":"일반 포획"}
+				,{"name":"바카", "img":"http://saneo14.com/index.php?mid=Information&document_srl=536", "avgHp":9.18, "avgTotal":5.26, "avgAtk":1.96, "avgDef":1.62, "avgAgi":1.69, "earth":0, "water":0, "fire":4, "wind":6, "get":"일반 포획"}
+				,{"name":"카쿠", "img":"http://saneo14.com/index.php?mid=Information&document_srl=534", "avgHp":9.50, "avgTotal":4.94, "avgAtk":1.71, "avgDef":1.71, "avgAgi":1.52, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"노보", "img":"http://saneo14.com/index.php?mid=Information&document_srl=532", "avgHp":10.14, "avgTotal":5.07, "avgAtk":1.95, "avgDef":1.86, "avgAgi":1.26, "earth":2, "water":0, "fire":0, "wind":8, "get":"맘모스 쿠폰"}
+				,{"name":"타루쟈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=530", "avgHp":10.17, "avgTotal":5.06, "avgAtk":2.15, "avgDef":1.75, "avgAgi":1.16, "earth":0, "water":0, "fire":10, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"푸보", "img":"http://saneo14.com/index.php?mid=Information&document_srl=528", "avgHp":10.85, "avgTotal":4.86, "avgAtk":2.00, "avgDef":1.79, "avgAgi":1.07, "earth":0, "water":10, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"부르보", "img":"http://saneo14.com/index.php?mid=Information&document_srl=526", "avgHp":9.91, "avgTotal":4.96, "avgAtk":1.87, "avgDef":1.82, "avgAgi":1.26, "earth":0, "water":0, "fire":4, "wind":6, "get":"일반 포획"}
+				,{"name":"토로쟈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=524", "avgHp":10.22, "avgTotal":4.86, "avgAtk":1.93, "avgDef":1.88, "avgAgi":1.06, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"쿠보", "img":"http://saneo14.com/index.php?mid=Information&document_srl=522", "avgHp":10.12, "avgTotal":4.79, "avgAtk":1.86, "avgDef":1.86, "avgAgi":1.06, "earth":0, "water":5, "fire":5, "wind":0, "get":"퀘스트"}
+				,{"name":"포보", "img":"http://saneo14.com/index.php?mid=Information&document_srl=520", "avgHp":10.63, "avgTotal":4.67, "avgAtk":1.79, "avgDef":1.93, "avgAgi":0.95, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"휴보", "img":"http://saneo14.com/index.php?mid=Information&document_srl=518", "avgHp":10.12, "avgTotal":4.79, "avgAtk":1.96, "avgDef":1.82, "avgAgi":1.01, "earth":8, "water":2, "fire":0, "wind":0, "get":"퀘스트"}
+				,{"name":"노라돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=516", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.14, "avgDef":1.60, "avgAgi":1.26, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획"}
+				,{"name":"고라돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=514", "avgHp":10.22, "avgTotal":4.90, "avgAtk":1.96, "avgDef":1.83, "avgAgi":1.11, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"실버고르돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=512", "avgHp":11.09, "avgTotal":4.92, "avgAtk":2.05, "avgDef":1.80, "avgAgi":1.07, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"철기돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=510", "avgHp":10.57, "avgTotal":4.94, "avgAtk":2.09, "avgDef":1.79, "avgAgi":1.07, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"고르고", "img":"http://saneo14.com/index.php?mid=Information&document_srl=508", "avgHp":10.02, "avgTotal":4.89, "avgAtk":2.04, "avgDef":1.59, "avgAgi":1.26, "earth":0, "water":0, "fire":9, "wind":1, "get":"일반 포획"}
+				,{"name":"투르돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=506", "avgHp":10.57, "avgTotal":4.87, "avgAtk":2.01, "avgDef":1.65, "avgAgi":1.21, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"기라돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=504", "avgHp":10.52, "avgTotal":4.81, "avgAtk":1.91, "avgDef":1.74, "avgAgi":1.16, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"고르돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=502", "avgHp":10.24, "avgTotal":4.78, "avgAtk":1.90, "avgDef":1.81, "avgAgi":1.07, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"카이비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=500", "avgHp":9.86, "avgTotal":4.96, "avgAtk":1.75, "avgDef":1.66, "avgAgi":1.54, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"키라비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=498", "avgHp":9.76, "avgTotal":5.00, "avgAtk":1.91, "avgDef":1.63, "avgAgi":1.47, "earth":0, "water":2, "fire":8, "wind":0, "get":"일반 포획"}
+				,{"name":"연두큐이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=496", "avgHp":9.91, "avgTotal":4.96, "avgAtk":1.81, "avgDef":1.63, "avgAgi":1.52, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"블루카비트", "img":"http://saneo14.com/index.php?mid=Information&document_srl=493", "avgHp":10.43, "avgTotal":4.87, "avgAtk":1.72, "avgDef":1.58, "avgAgi":1.57, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"골드카비트", "img":"http://saneo14.com/index.php?mid=Information&document_srl=491", "avgHp":8.85, "avgTotal":4.96, "avgAtk":1.68, "avgDef":1.48, "avgAgi":1.80, "earth":0, "water":0, "fire":0, "wind":10, "get":"일반 포획"}
+				,{"name":"큐이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=489", "avgHp":8.37, "avgTotal":4.98, "avgAtk":1.72, "avgDef":1.56, "avgAgi":1.70, "earth":0, "water":0, "fire":5, "wind":5, "get":"일반 포획"}
+				,{"name":"케이비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=487", "avgHp":8.77, "avgTotal":5.18, "avgAtk":1.68, "avgDef":1.68, "avgAgi":1.81, "earth":2, "water":0, "fire":0, "wind":8, "get":"기타 획득"}
+				,{"name":"카비트", "img":"http://saneo14.com/index.php?mid=Information&document_srl=485", "avgHp":8.77, "avgTotal":5.18, "avgAtk":1.68, "avgDef":1.68, "avgAgi":1.81, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"범링", "img":"http://saneo14.com/index.php?mid=Information&document_srl=483", "avgHp":9.97, "avgTotal":5.01, "avgAtk":1.91, "avgDef":1.63, "avgAgi":1.47, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"토끼", "img":"http://saneo14.com/index.php?mid=Information&document_srl=481", "avgHp":10.27, "avgTotal":4.92, "avgAtk":1.96, "avgDef":1.49, "avgAgi":1.47, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"라스키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=479", "avgHp":9.60, "avgTotal":5.06, "avgAtk":2.06, "avgDef":1.48, "avgAgi":1.52, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"노스키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=477", "avgHp":9.82, "avgTotal":5.07, "avgAtk":1.96, "avgDef":1.43, "avgAgi":1.69, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획"}
+				,{"name":"리스키", "img":"http://saneo14.com/index.php?mid=Information&document_srl=473", "avgHp":9.52, "avgTotal":4.79, "avgAtk":1.53, "avgDef":1.68, "avgAgi":1.58, "earth":2, "water":8, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"포링", "img":"http://saneo14.com/index.php?mid=Information&document_srl=471", "avgHp":9.19, "avgTotal":4.86, "avgAtk":1.69, "avgDef":1.59, "avgAgi":1.58, "earth":0, "water":4, "fire":6, "wind":0, "get":"일반 포획"}
+				,{"name":"쿠쿠르", "img":"http://saneo14.com/index.php?mid=Information&document_srl=469", "avgHp":9.80, "avgTotal":4.87, "avgAtk":1.64, "avgDef":1.59, "avgAgi":1.64, "earth":0, "water":7, "fire":3, "wind":0, "get":"기타 획득"}
+				,{"name":"쿠링", "img":"http://saneo14.com/index.php?mid=Information&document_srl=467", "avgHp":9.63, "avgTotal":4.92, "avgAtk":1.65, "avgDef":1.75, "avgAgi":1.52, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"프로돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=465", "avgHp":10.85, "avgTotal":4.86, "avgAtk":2.25, "avgDef":1.35, "avgAgi":1.26, "earth":0, "water":10, "fire":0, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"기비노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=463", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.45, "avgDef":1.34, "avgAgi":1.26, "earth":0, "water":0, "fire":8, "wind":2, "get":"맘모스 쿠폰"}
+				,{"name":"기라노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=461", "avgHp":10.43, "avgTotal":4.99, "avgAtk":2.34, "avgDef":1.44, "avgAgi":1.21, "earth":0, "water":0, "fire":5, "wind":5, "get":"맘모스 쿠폰"}
+				,{"name":"부르돈", "img":"http://saneo14.com/index.php?mid=Information&document_srl=459", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.26, "avgDef":1.33, "avgAgi":1.41, "earth":0, "water":0, "fire":2, "wind":8, "get":"퀘스트;코스"}
+				,{"name":"반기노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=457", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.41, "avgDef":1.43, "avgAgi":1.21, "earth":0, "water":0, "fire":10, "wind":0, "get":"일반 포획;퀘스트"}
+				,{"name":"얀기로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=455", "avgHp":10.47, "avgTotal":4.97, "avgAtk":2.32, "avgDef":1.43, "avgAgi":1.21, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획;퀘스트;코스"}
+				,{"name":"반보로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=453", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.36, "avgDef":1.38, "avgAgi":1.26, "earth":0, "water":0, "fire":5, "wind":5, "get":"퀘스트;코스"}
+				,{"name":"리비노", "img":"http://saneo14.com/index.php?mid=Information&document_srl=451", "avgHp":10.09, "avgTotal":4.82, "avgAtk":2.28, "avgDef":1.51, "avgAgi":1.02, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획;퀘스트"}
+				,{"name":"카르기안", "img":"http://saneo14.com/index.php?mid=Information&document_srl=449", "avgHp":10.27, "avgTotal":4.92, "avgAtk":1.66, "avgDef":2.41, "avgAgi":0.85, "earth":2, "water":0, "fire":0, "wind":8, "get":"일반 포획;코스"}
+				,{"name":"쿠타스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=447", "avgHp":10.94, "avgTotal":4.73, "avgAtk":1.92, "avgDef":2.25, "avgAgi":0.56, "earth":0, "water":6, "fire":4, "wind":0, "get":"일반 포획"}
+				,{"name":"아이카스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=445", "avgHp":10.78, "avgTotal":4.78, "avgAtk":1.68, "avgDef":2.54, "avgAgi":0.56, "earth":5, "water":5, "fire":0, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"로기안", "img":"http://saneo14.com/index.php?mid=Information&document_srl=443", "avgHp":10.12, "avgTotal":4.75, "avgAtk":1.71, "avgDef":2.50, "avgAgi":0.54, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"코로카스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=441", "avgHp":10.48, "avgTotal":4.93, "avgAtk":1.87, "avgDef":2.47, "avgAgi":0.59, "earth":0, "water":4, "fire":6, "wind":0, "get":"일반 포획"}
+				,{"name":"쿠카스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=439", "avgHp":10.12, "avgTotal":4.75, "avgAtk":1.71, "avgDef":2.55, "avgAgi":0.49, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"카타르카스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=437", "avgHp":10.33, "avgTotal":4.98, "avgAtk":1.82, "avgDef":2.61, "avgAgi":0.54, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"쿠로로", "img":"http://saneo14.com/index.php?mid=Information&document_srl=435", "avgHp":10.32, "avgTotal":5.01, "avgAtk":1.91, "avgDef":1.69, "avgAgi":1.41, "earth":5, "water":5, "fire":0, "wind":0, "get":"기타 획득"}
+				,{"name":"쥬니", "img":"http://saneo14.com/index.php?mid=Information&document_srl=433", "avgHp":9.76, "avgTotal":5.05, "avgAtk":2.00, "avgDef":1.36, "avgAgi":1.69, "earth":3, "water":0, "fire":0, "wind":7, "get":"일반 포획"}
+				,{"name":"기바바", "img":"http://saneo14.com/index.php?mid=Information&document_srl=431", "avgHp":9.90, "avgTotal":5.01, "avgAtk":2.06, "avgDef":1.46, "avgAgi":1.50, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"라루루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=429", "avgHp":9.78, "avgTotal":5.04, "avgAtk":2.02, "avgDef":1.36, "avgAgi":1.66, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"푸고고", "img":"http://saneo14.com/index.php?mid=Information&document_srl=427", "avgHp":10.27, "avgTotal":4.96, "avgAtk":2.03, "avgDef":1.36, "avgAgi":1.56, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"루니", "img":"http://saneo14.com/index.php?mid=Information&document_srl=425", "avgHp":9.97, "avgTotal":5.01, "avgAtk":1.78, "avgDef":1.87, "avgAgi":1.36, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"토루루", "img":"http://saneo14.com/index.php?mid=Information&document_srl=423", "avgHp":9.68, "avgTotal":4.93, "avgAtk":1.76, "avgDef":1.71, "avgAgi":1.46, "earth":6, "water":0, "fire":0, "wind":4, "get":"일반 포획;코스"}
+				,{"name":"후바바", "img":"http://saneo14.com/index.php?mid=Information&document_srl=421", "avgHp":9.76, "avgTotal":5.00, "avgAtk":1.81, "avgDef":1.57, "avgAgi":1.62, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획;퀘스트"}
+				,{"name":"라고고", "img":"http://saneo14.com/index.php?mid=Information&document_srl=418", "avgHp":9.86, "avgTotal":5.12, "avgAtk":1.91, "avgDef":1.63, "avgAgi":1.57, "earth":0, "water":0, "fire":10, "wind":0, "get":"일반 포획;코스"}
+				,{"name":"골드곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=416", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.14, "avgDef":1.65, "avgAgi":1.26, "earth":2, "water":0, "fire":0, "wind":8, "get":"일반 포획"}
+				,{"name":"타로아", "img":"http://saneo14.com/index.php?mid=Information&document_srl=414", "avgHp":10.57, "avgTotal":4.94, "avgAtk":2.21, "avgDef":1.61, "avgAgi":1.12, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"기고아", "img":"http://saneo14.com/index.php?mid=Information&document_srl=412", "avgHp":10.12, "avgTotal":4.97, "avgAtk":2.16, "avgDef":1.70, "avgAgi":1.11, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"보크곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=410", "avgHp":9.60, "avgTotal":4.83, "avgAtk":1.75, "avgDef":1.61, "avgAgi":1.47, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획;코스"}
+				,{"name":"다고스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=408", "avgHp":10.08, "avgTotal":4.69, "avgAtk":1.77, "avgDef":1.72, "avgAgi":1.20, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"타로곤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=406", "avgHp":10.24, "avgTotal":4.85, "avgAtk":1.78, "avgDef":1.88, "avgAgi":1.19, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획;퀘스트"}
+				,{"name":"네고스", "img":"http://saneo14.com/index.php?mid=Information&document_srl=404", "avgHp":10.24, "avgTotal":4.62, "avgAtk":1.71, "avgDef":1.71, "avgAgi":1.19, "earth":4, "water":6, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"아고아", "img":"http://saneo14.com/index.php?mid=Information&document_srl=402", "avgHp":10.24, "avgTotal":4.85, "avgAtk":1.83, "avgDef":1.78, "avgAgi":1.25, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"자라북", "img":"http://saneo14.com/index.php?mid=Information&document_srl=400", "avgHp":9.91, "avgTotal":4.96, "avgAtk":1.77, "avgDef":2.75, "avgAgi":0.44, "earth":9, "water":1, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"철북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=397", "avgHp":9.91, "avgTotal":4.96, "avgAtk":2.09, "avgDef":2.32, "avgAgi":0.54, "earth":0, "water":0, "fire":7, "wind":3, "get":"일반 포획"}
+				,{"name":"킹북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=395", "avgHp":10.08, "avgTotal":4.91, "avgAtk":1.82, "avgDef":2.69, "avgAgi":0.40, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"물북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=393", "avgHp":11.36, "avgTotal":4.70, "avgAtk":1.83, "avgDef":2.45, "avgAgi":0.42, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"돌북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=389", "avgHp":9.60, "avgTotal":4.83, "avgAtk":1.66, "avgDef":2.72, "avgAgi":0.45, "earth":9, "water":0, "fire":0, "wind":1, "get":"일반 포획"}
+				,{"name":"깡북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=387", "avgHp":9.74, "avgTotal":5.00, "avgAtk":1.80, "avgDef":2.40, "avgAgi":0.80, "earth":0, "water":0, "fire":8, "wind":2, "get":"일반 포획"}
+				,{"name":"북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=385", "avgHp":9.41, "avgTotal":4.87, "avgAtk":1.69, "avgDef":2.49, "avgAgi":0.69, "earth":6, "water":0, "fire":0, "wind":4, "get":"일반 포획"}
+				,{"name":"노북이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=383", "avgHp":9.57, "avgTotal":4.82, "avgAtk":1.64, "avgDef":2.44, "avgAgi":0.75, "earth":3, "water":0, "fire":0, "wind":7, "get":"일반 포획"}
+				,{"name":"베로바드", "img":"http://saneo14.com/index.php?mid=Information&document_srl=381", "avgHp":10.76, "avgTotal":4.95, "avgAtk":1.96, "avgDef":1.92, "avgAgi":1.07, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"베노투리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=379", "avgHp":11.09, "avgTotal":4.92, "avgAtk":1.76, "avgDef":2.23, "avgAgi":0.93, "earth":8, "water":0, "fire":0, "wind":2, "get":"일반 포획"}
+				,{"name":"베톤", "img":"http://saneo14.com/index.php?mid=Information&document_srl=377", "avgHp":11.42, "avgTotal":4.89, "avgAtk":1.77, "avgDef":2.19, "avgAgi":0.93, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"베노노크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=375", "avgHp":10.90, "avgTotal":4.91, "avgAtk":1.79, "avgDef":2.00, "avgAgi":1.12, "earth":0, "water":0, "fire":2, "wind":8, "get":"일반 포획"}
+				,{"name":"베로포리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=373", "avgHp":10.74, "avgTotal":4.57, "avgAtk":1.46, "avgDef":2.11, "avgAgi":1.00, "earth":0, "water":3, "fire":7, "wind":0, "get":"일반 포획"}
+				,{"name":"베로보크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=371", "avgHp":11.21, "avgTotal":4.58, "avgAtk":1.36, "avgDef":2.23, "avgAgi":0.99, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"베로로크", "img":"http://saneo14.com/index.php?mid=Information&document_srl=369", "avgHp":11.05, "avgTotal":4.63, "avgAtk":1.41, "avgDef":2.28, "avgAgi":0.94, "earth":7, "water":3, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"베론", "img":"http://saneo14.com/index.php?mid=Information&document_srl=367", "avgHp":11.15, "avgTotal":4.52, "avgAtk":1.30, "avgDef":2.17, "avgAgi":1.04, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"푸투", "img":"http://saneo14.com/index.php?mid=Information&document_srl=364", "avgHp":9.98, "avgTotal":5.02, "avgAtk":1.95, "avgDef":1.23, "avgAgi":1.85, "earth":0, "water":5, "fire":5, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"노투투", "img":"http://saneo14.com/index.php?mid=Information&document_srl=362", "avgHp":9.40, "avgTotal":5.04, "avgAtk":1.78, "avgDef":1.13, "avgAgi":2.14, "earth":0, "water":0, "fire":3, "wind":7, "get":"맘모스 쿠폰"}
+				,{"name":"푸투투", "img":"http://saneo14.com/index.php?mid=Information&document_srl=360", "avgHp":9.91, "avgTotal":4.96, "avgAtk":1.83, "avgDef":1.09, "avgAgi":2.03, "earth":0, "water":8, "fire":2, "wind":0, "get":"맘모스 쿠폰"}
+				,{"name":"포포", "img":"http://saneo14.com/index.php?mid=Information&document_srl=358", "avgHp":9.58, "avgTotal":5.03, "avgAtk":1.82, "avgDef":1.11, "avgAgi":2.10, "earth":0, "water":0, "fire":8, "wind":2, "get":"맘모스 쿠폰"}
+				,{"name":"오투투", "img":"http://saneo14.com/index.php?mid=Information&document_srl=355", "avgHp":9.29, "avgTotal":5.02, "avgAtk":1.63, "avgDef":1.47, "avgAgi":1.93, "earth":6, "water":0, "fire":0, "wind":4, "get":"기타 획득"}
+				,{"name":"투투", "img":"http://saneo14.com/index.php?mid=Information&document_srl=353", "avgHp":10.32, "avgTotal":4.71, "avgAtk":1.69, "avgDef":1.27, "avgAgi":1.75, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"우푸", "img":"http://saneo14.com/index.php?mid=Information&document_srl=351", "avgHp":9.46, "avgTotal":4.97, "avgAtk":1.77, "avgDef":1.05, "avgAgi":2.16, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획"}
+				,{"name":"푸푸", "img":"http://saneo14.com/index.php?mid=Information&document_srl=349", "avgHp":9.29, "avgTotal":5.02, "avgAtk":1.72, "avgDef":1.20, "avgAgi":2.10, "earth":3, "water":0, "fire":0, "wind":7, "get":"일반 포획"}
+				,{"name":"푸미", "img":"http://saneo14.com/index.php?mid=Information&document_srl=347", "avgHp":10.24, "avgTotal":4.98, "avgAtk":2.11, "avgDef":1.42, "avgAgi":1.45, "earth":0, "water":7, "fire":3, "wind":0, "get":"일반 포획"}
+				,{"name":"돌꼬비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=345", "avgHp":9.97, "avgTotal":5.05, "avgAtk":2.04, "avgDef":1.55, "avgAgi":1.46, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"꼬이미", "img":"http://saneo14.com/index.php?mid=Information&document_srl=343", "avgHp":9.83, "avgTotal":5.09, "avgAtk":2.08, "avgDef":1.45, "avgAgi":1.56, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획"}
+				,{"name":"꼬꼬미", "img":"http://saneo14.com/index.php?mid=Information&document_srl=341", "avgHp":10.09, "avgTotal":5.02, "avgAtk":2.06, "avgDef":1.46, "avgAgi":1.50, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"꼬꼬비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=339", "avgHp":9.66, "avgTotal":4.89, "avgAtk":1.75, "avgDef":1.56, "avgAgi":1.58, "earth":0, "water":0, "fire":3, "wind":7, "get":"일반 포획"}
+				,{"name":"꼬비오", "img":"http://saneo14.com/index.php?mid=Information&document_srl=337", "avgHp":9.66, "avgTotal":4.89, "avgAtk":1.70, "avgDef":1.52, "avgAgi":1.67, "earth":0, "water":0, "fire":0, "wind":10, "get":"일반 포획"}
+				,{"name":"꼬비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=335", "avgHp":9.82, "avgTotal":5.07, "avgAtk":1.76, "avgDef":1.57, "avgAgi":1.74, "earth":5, "water":0, "fire":0, "wind":5, "get":"일반 포획"}
+				,{"name":"꼬미", "img":"http://saneo14.com/index.php?mid=Information&document_srl=333", "avgHp":9.87, "avgTotal":4.90, "avgAtk":1.81, "avgDef":1.62, "avgAgi":1.47, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획"}
+				,{"name":"깡우비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=331", "avgHp":10.24, "avgTotal":4.98, "avgAtk":2.29, "avgDef":1.57, "avgAgi":1.12, "earth":0, "water":0, "fire":6, "wind":4, "get":"일반 포획"}
+				,{"name":"푸이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=329", "avgHp":11.38, "avgTotal":4.83, "avgAtk":2.14, "avgDef":1.67, "avgAgi":1.02, "earth":0, "water":10, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"푸비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=327", "avgHp":10.71, "avgTotal":4.90, "avgAtk":2.17, "avgDef":1.70, "avgAgi":1.02, "earth":3, "water":7, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"부이비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=324", "avgHp":11.25, "avgTotal":4.48, "avgAtk":1.92, "avgDef":1.41, "avgAgi":1.16, "earth":0, "water":4, "fire":6, "wind":0, "get":"일반 포획"}
+				,{"name":"부이", "img":"http://saneo14.com/index.php?mid=Information&document_srl=322", "avgHp":13.26, "avgTotal":4.10, "avgAtk":1.71, "avgDef":1.48, "avgAgi":0.90, "earth":6, "water":4, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"골드부비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=320", "avgHp":10.87, "avgTotal":4.57, "avgAtk":1.61, "avgDef":2.14, "avgAgi":0.82, "earth":0, "water":0, "fire":3, "wind":7, "get":"퀘스트"}
+				,{"name":"부비", "img":"http://saneo14.com/index.php?mid=Information&document_srl=318", "avgHp":12.75, "avgTotal":3.96, "avgAtk":1.65, "avgDef":1.46, "avgAgi":0.85, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"녹우리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=316", "avgHp":10.12, "avgTotal":5.00, "avgAtk":2.09, "avgDef":1.51, "avgAgi":1.41, "earth":7, "water":0, "fire":0, "wind":3, "get":"일반 포획"}
+				,{"name":"푸우리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=314", "avgHp":10.27, "avgTotal":4.92, "avgAtk":2.00, "avgDef":1.40, "avgAgi":1.52, "earth":0, "water":8, "fire":2, "wind":0, "get":"일반 포획"}
+				,{"name":"얼룩우리[환]", "img":"http://saneo14.com/index.php?mid=Information&document_srl=312", "avgHp":10.76, "avgTotal":4.95, "avgAtk":1.73, "avgDef":1.86, "avgAgi":1.35, "earth":5, "water":0, "fire":0, "wind":5, "get":"퀘스트"}
+				,{"name":"얼룩우리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=310", "avgHp":9.92, "avgTotal":4.51, "avgAtk":1.59, "avgDef":1.69, "avgAgi":1.24, "earth":10, "water":0, "fire":0, "wind":0, "get":"일반 포획"}
+				,{"name":"두리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=307", "avgHp":10.15, "avgTotal":4.76, "avgAtk":1.90, "avgDef":1.28, "avgAgi":1.58, "earth":0, "water":4, "fire":6, "wind":0, "get":"기타 획득"}
+				,{"name":"우리", "img":"http://saneo14.com/index.php?mid=Information&document_srl=303", "avgHp":9.40, "avgTotal":4.42, "avgAtk":1.29, "avgDef":1.44, "avgAgi":1.70, "earth":8, "water":2, "fire":0, "wind":0, "get":"일반 포획"}
+			];
+		var printList;
+		valueInit();
+		
+		// JSON 정렬
+		function sortResults(prop, asc) {
+			printList.sort(function(a, b) {
+				if (asc) {
+					return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+				} else {
+					return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+				}
+			});
+		}
+		
+		// 이미지 및 스텟 성장률 초기화
+		function valueInit() {
+			for (var i = 0; i < pets.length; i++) {
+				pets[i].avgTotal = (pets[i].avgAtk + pets[i].avgDef + pets[i].avgAgi).toFixed(2);
+			}
+		}
+
+		// 초기화
+		function init() {
+			$("#inputSearch").val("");
+			$("#petInfo th > span").removeAttr("aria-hidden");
+			$("#petInfo th > span").removeAttr("class");
+			printList = pets;
+			sortResults('name', true);
+			print();
+		}
+		
+		// 리스트를 화면에 출력함
+		function print() {
+
+			$tbody.empty();
+			for (var i = 0; i < printList.length; i++) {
+				$tbody.append(
+					'<tr>'
+					+ '<td><a href="' + printList[i].img + '" target="_blank">' + printList[i].name + '</a></td>'
+					+ '<td class="text-right">' + (printList[i].avgHp).toFixed(2) + '</td>'
+					+ '<td class="text-right">' + printList[i].avgTotal + '</td>'
+					+ '<td class="text-right">' + (printList[i].avgAtk).toFixed(2) + '</td>'
+					+ '<td class="text-right">' + (printList[i].avgDef).toFixed(2) + '</td>'
+					+ '<td class="text-right">' + (printList[i].avgAgi).toFixed(2) + '</td>'
+					+ '<td class="green">' + printList[i].earth + '</td>'
+					+ '<td class="blue">' + printList[i].water + '</td>'
+					+ '<td class="red">' + printList[i].fire + '</td>'
+					+ '<td class="yellow">' + printList[i].wind + '</td>'
+					+ '<td>' + printList[i].get + '</td>'
+					+ '</tr>'
+				);
+			}
+		}
+		
+		// 검색기능
+		function search() {
+			$("#petInfo th > span").removeAttr("aria-hidden");
+			$("#petInfo th > span").removeAttr("class");
+
+			var input		= $("#inputSearch").val();		// 펫 이름
+			var minHp		= $("#minHp").val();			// 최소 내구력
+			var maxHp		= $("#maxHp").val();			// 최대 내구력
+			var minTotal	= $("#minTotal").val();			// 스텟 성장률 최소
+			var maxTotal	= $("#maxTotal").val();			// 스텟 성장률 최대
+			var minAtk		= $("#minAtk").val();			// 공격 성장률 최소
+			var maxAtk		= $("#maxAtk").val();			// 공격 성장률 최대
+			var minDef		= $("#minDef").val();
+			var maxDef		= $("#maxDef").val();
+			var minAgi		= $("#minAgi").val();
+			var maxAgi		= $("#maxAgi").val();
+			var minEarth	= $("#minEarth").val();
+			var maxEarth	= $("#maxEarth").val();
+			var minWater	= $("#minWater").val();
+			var maxWater	= $("#maxWater").val();
+			var minFire		= $("#minFire").val();
+			var maxFire		= $("#maxFire").val();
+			var minWind		= $("#minWind").val();
+			var maxWind		= $("#maxWind").val();
+			
+			/*
+			if (input == "") {
+				init();
+				return;
+			}
+			*/
+			
+			var cnt = 0;
+			if (input != "") {
+				printList = [];
+				var arrInput = input.split(",");
+				for (var i = 0; i < arrInput.length; i++) {
+					var name = arrInput[i].trim();
+					var filter = $(pets).filter(function(i, n){return n.name===name});
+					if (filter.length > 0) {
+						printList.push(filter[0]);
+					}
+				}
+				cnt++;
+			}
+			if (minHp != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgHp >= minHp});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgHp >= minHp});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxHp != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgHp <= maxHp});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgHp <= maxHp});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minTotal != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgTotal >= minTotal});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgTotal >= minTotal});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxTotal != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgTotal <= maxTotal});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgTotal <= maxTotal});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minAtk != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgAtk >= minAtk});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgAtk >= minAtk});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxAtk != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgAtk <= maxAtk});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgAtk <= maxAtk});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minDef != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgDef >= minDef});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgDef >= minDef});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxDef != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgDef <= maxDef});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgDef <= maxDef});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minAgi != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgAgi >= minAgi});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgAgi >= minAgi});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxAgi != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.avgAgi <= maxAgi});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.avgAgi <= maxAgi});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minEarth != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.earth >= minEarth});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.earth >= minEarth});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxEarth != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.earth <= maxEarth});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.earth <= maxEarth});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minWater != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.water >= minWater});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.water >= minWater});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxWater != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.water <= maxWater});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.water <= maxWater});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minFire != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.fire >= minFire});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.fire >= minFire});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxFire != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.fire <= maxFire});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.fire <= maxFire});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (minWind != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.wind >= minWind});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.wind >= minWind});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+				cnt++;
+			}
+			if (maxWind != "") {
+				var filter;
+				if (cnt > 0) {
+					filter = $(printList).filter(function(i, n){return n.wind <= maxWind});
+				} 
+				else {
+					filter = $(pets).filter(function(i, n){return n.wind <= maxWind});
+				}
+				
+				printList = [];
+				if (filter.length > 0) {
+					for (var i = 0; i < filter.length; i++) {
+						printList.push(filter[i]);
+					}
+				}
+			}
+
+			print();
+		}
+		
+		// 스크롤
+		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+		window.onscroll = function() {scrollFunction()};
+		function scrollFunction() {
+			if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+				btnTop.style.display = "block";
+			} else {
+				btnTop.style.display = "none";
+			}
+		}
+
+		// Auto 필터링
+		function keywordSearch(name) {
+			$("#inputSearch").val(name);
+			search();
+		}
+
+		// jQuery
+		$(document).ready(function() {
+
+			var btnTop = document.getElementById("btnTop");
+			$tbody = $('#petInfo tbody');
+			init();
+			
+			// 검색 버튼
+			$("#btnSearch").on("click", function() {
+				search();				
+			});
+			
+			// 검색 입력창
+			$("#inputSearch").keypress(function(e) {
+				if (e.keyCode == 13) {
+					search();
+				}
+			});
+			
+			// 정렬
+			$("#petInfo th").on("click", function() {
+				
+				var id = $(this).attr("id");
+				if (id == "img" || id == "get") {
+					return;
+				}
+				
+				// 내림차순을 오름차순으로 변경
+				if ($(this).find("span").attr("class") == "glyphicon glyphicon-sort-by-attributes-alt") {
+					$(this).find("span").attr("class", "glyphicon glyphicon-sort-by-attributes");
+					$(this).find("span").attr("aria-hidden", "true");
+					sortResults(id, true);
+					print();
+
+				}
+				// 오름차순을 내림차순으로 변경
+				else if ($(this).find("span").attr("class") == "glyphicon glyphicon-sort-by-attributes") {
+					$(this).find("span").attr("class", "glyphicon glyphicon-sort-by-attributes-alt");
+					$(this).find("span").attr("aria-hidden", "true");
+					sortResults(id, false);
+					print();
+				}
+				// 다른 타이틀 내림차순으로 정렬
+				else {
+					$("th > span").removeAttr("aria-hidden");
+					$("th > span").removeAttr("class");
+					$(this).find("span").addClass("glyphicon glyphicon-sort-by-attributes-alt");
+					$(this).find("span").attr("aria-hidden", "true");
+					sortResults(id, false);
+					print();
+				}
+			});
+
+			// 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
+			$("#btnTop").on("click", function() {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			});
+
+			// Auto 필터링
+			$("#reset").on("click", function() {
+				$("#inputSearch").val("");		// 펫 이름
+				$("#minHp").val("");			// 최소 내구력
+				$("#maxHp").val("");			// 최대 내구력
+				$("#minTotal").val("");			// 스텟 성장률 최소
+				$("#maxTotal").val("");			// 스텟 성장률 최대
+				$("#minAtk").val("");			// 공격 성장률 최소
+				$("#maxAtk").val("");			// 공격 성장률 최대
+				$("#minDef").val("");
+				$("#maxDef").val("");
+				$("#minAgi").val("");
+				$("#maxAgi").val("");
+				$("#minEarth").val("");
+				$("#maxEarth").val("");
+				$("#minWater").val("");
+				$("#maxWater").val("");
+				$("#minFire").val("");
+				$("#maxFire").val("");
+				$("#minWind").val("");
+				$("#maxWind").val("");
+				init();
+			});
+			$("#qpfmrk").on("click", function() {
+				var name = "베르가,베루루,고르고르,노르노르,아기설표,도르도르,초르초르,주르주르,고루루,은호,푸르가,(신)페루루,백호";
+				keywordSearch(name);
+			});
+			$("#disrlfh").on("click", function() {
+				var name = "리비노,얀기로,반보로,반기노,부르돈,기비노,기라노,프로돈,푸르돈,백기노,주기노,기루스,아르돈";
+				keywordSearch(name);
+			});
+			$("#ahrk").on("click", function() {
+				var name = "오가로스,오르곤,모가로스,골로스,칼로스,노르곤,푸룡,설곤,다크바로스,백가로스,로가로스,주가로스,지가로스,초르곤";
+				keywordSearch(name);
+			});
+			$("#zkzl").on("click", function() {
+				var name = "타키,쿠쿠,호르쿠,카키,타르쿠,푸타카,흑카키,쥬키,핑키";
+				keywordSearch(name);
+			});
+		});
+	
+	</script>
+</head>
+<body>
+	<div class="container">
+		<h2>Neo Server Pet Info</h2>
+		<hr>
+		<p class="lead">
+			
+		</p>
+		<blockquote>
+			<p>다중 검색은 구분자 <strong>,</strong> 를 붙여주세요.</p>
+			<footer>현무,주작,백호,청룡</footer>
+		</blockquote>
+		
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<colgroup>
+					<col width="">	
+					<col width="">
+					<col width="">
+					<col width="">
+				</colgroup>
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<th>내구 성장률</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minHp">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxHp">
+						</td>
+						<th></th>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<th>스텟 성장률</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minTotal">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxTotal">
+						</td>
+						<th>지 속 성</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minEarth">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxEarth">
+						</td>
+					</tr>
+					<tr>
+						<th>공격 성장률</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minAtk">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxAtk">
+						</td>
+						<th>수 속 성</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minWater">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxWater">
+						</td>
+					</tr>
+					<tr>
+						<th>방어 성장률</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minDef">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxDef">
+						</td>
+						<th>화 속 성</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minFire">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxFire">
+						</td>
+					</tr>
+					<tr>
+						<th>순발 성장률</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minAgi">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxAgi">
+						</td>
+						<th>풍 속 성</th>
+						<td>
+							<input type="text" class="form-control searchValue" id="minWind">
+							<strong>~</strong>
+							<input type="text" class="form-control searchValue" id="maxWind">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="navbar-form navbar-right" role="search">
+			<!--
+			<button class="btn btn btn-danger" type="button" id="zkzl">카키류</button>
+			<button class="btn btn-success" type="button" id="qpfmrk">베르가류</button>
+			<button class="btn btn-primary" type="button" id="disrlfh">얀기로류</button>
+			<button class="btn btn btn-danger" type="button" id="ahrk">모가류</button>
+			-->
+			<div class="form-group input-group">
+				<input type="text" class="form-control" id="inputSearch" placeholder="Search..">
+				<span class="input-group-btn">
+				<button class="btn btn-default" type="button" id="btnSearch">
+				<span class="glyphicon glyphicon-search"></span>
+				</button>
+				</span>        
+			</div>
+			<button class="btn btn-default" type="button" id="reset">초기화</button>
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<div class="table-responsive" id="petInfo">
+			<table class="table table-striped">
+				<colgroup>
+					<col width="">	<!-- 이름 -->
+					<col width="">	<!-- 내구 성장률 -->
+					<col width="">	<!-- 스텟 성장률 -->
+					<col width="">	<!-- 공격 성장률 -->
+					<col width="">	<!-- 방어 성장률 -->
+					<col width="">	<!-- 순발 성장률 -->
+					<col width="">	<!-- 지 -->
+					<col width="">	<!-- 수 -->
+					<col width="">	<!-- 화 -->
+					<col width="">	<!-- 풍 -->
+					<col width="">		<!-- 획득방법 -->
+				</colgroup>
+				<thead>
+					<th id="name">이름<span></span></th>
+					<th id="avgHp">내구 성장률<span></span></th>
+					<th id="avgTotal">스텟 성장률<span></span></th>
+					<th id="avgAtk">공격 성장률<span></span></th>
+					<th id="avgDef">방어 성장률<span></span></th>
+					<th id="avgAgi">순발 성장률<span></span></th>
+					<th id="earth">지<span></span></th>
+					<th id="water">수<span></span></th>
+					<th id="fire">화<span></span></th>
+					<th id="wind">풍<span></span></th>
+					<th id="get">획득방법</th>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<button id="btnTop" title="Go to top">Top</button>
+</body>
+</html>
