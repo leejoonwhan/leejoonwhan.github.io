@@ -551,7 +551,7 @@
             // 이름 검색 AND 조건
             if (searchValues["input-name"].length > 0) {
                 petList = pets.filter(function(row, j) {
-                            return row["name"] == searchValues["input-name"];
+                            return row["name"].indexOf(searchValues["input-name"] != -1
                         });
             }
 
