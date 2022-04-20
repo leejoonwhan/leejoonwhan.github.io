@@ -11,19 +11,19 @@
         body {
             background-color: #222222;
             color: white;
-        },
+        }
 
         input[type="number"] {
             text-align: right;
-        },
+        }
 
         th {
             cursor:pointer;
-        },
+        }
     </style>
     <script>
         // 정렬
-        let clickCount = {},;
+        let clickCount = {};
 
         // Data
         const pets = [
@@ -356,7 +356,7 @@
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", type="I", "name":"改造黃蠍", "vtl":20, "str":10, "tgh":43, "qui": 12, "mgc": 40, "tot": 125},
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876039.gif", type="I", "name":"R鍬型蟲", "vtl":12, "str":42, "tgh":29, "qui":34, "mgc":8, "tot":125},
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", type="I", "name":"改造水蜘蛛", "vtl":28, "str":20, "tgh":21, "qui":24, "mgc":32, "tot":125},
-			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", type="I", "name":"二次改造水蜘蛛", "vtl":33, "str":6, "tgh":6, "qui":30, "mgc":50, "tot":125},
+{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", type="I", "name":"二次改造水蜘蛛", "vtl":33, "str":6, "tgh":6, "qui":30, "mgc":50, "tot":125}
 		]
 
         let petList = pets;
@@ -378,26 +378,26 @@
                     case "equal":  cal.text("일치"); break;
                     case "except": cal.text("제외"); break;
                     default: break;
-                },
-            },);
+                }
+            });
 
             // 검색 Enter 이벤트
             $("input").keyup(function (event) {
                 if (event.keyCode == 13) {
                     search();
-                },
-            },);
+                }
+            });
 
             // 검색 클릭 이벤트
             $("#btnSearch").click(function() {
                 search();
-            },);
+            });
 
             $("th").click(function() {
                 let id = $(this).attr("id");
                 if (id.length <= 0) {
                     return;
-                },
+                }
                 
                 let upSort =
                 '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down" viewBox="0 0 16 16">' +
@@ -420,22 +420,22 @@
                     $(this).append(downSort);
                     petList.sort(function(a, b) {
                         return parseFloat(b[id]) - parseFloat(a[id]);
-                    },);
-                }, else if (clickCount.title == title) {
+                    });
+                } else if (clickCount.title == title) {
                     if (clickCount.sort == "down") {
                         clickCount.sort = "up";
                         $(this).append(upSort);
                         petList.sort(function(a, b) {
                             return parseFloat(a[id]) - parseFloat(b[id]);
-                        },);
-                    }, else if (clickCount.sort == "up") {
+                        });
+                    } else if (clickCount.sort == "up") {
                         clickCount.sort = "up";
                         $(this).append(downSort);
                         petList.sort(function(a, b) {
                             return parseFloat(b[id]) - parseFloat(a[id]);
-                        },);
-                    },
-                }, else if (clickCount.title != title) {
+                        });
+                    }
+                } else if (clickCount.title != title) {
                     $("#vtl").text("체력");
                     $("#str").text("공격력");
                     $("#tgh").text("방어력");
@@ -448,11 +448,11 @@
                     $(this).append(downSort);
                     petList.sort(function(a, b) {
                         return parseFloat(b[id]) - parseFloat(a[id]);
-                    },);
-                },
+                    });
+                }
                 print(petList);            
-            },);
-        },);
+            });
+        });
 
         // 초기화
         function print(data) {
@@ -461,7 +461,7 @@
                 let keyList = [];
                 for (var key in pet) {
                     keyList.push(key);
-                },
+                }
 
                 const tbody = $("tbody");
                 let tr = $("<tr></tr>");
@@ -474,10 +474,10 @@
                     let td = $("<td></td>");
                     td.text(pet[key]);
                     tr.append(td);
-                },);
+                });
                 tbody.append(tr);
-            },);
-        },
+            });
+        }
 
         function search() {
             let searchValues = {
@@ -488,15 +488,15 @@
                 "input-mgc" : Number($("#input-mgc").val()),
                 "input-tot" : Number($("#input-tot").val()),
                 "input-name": $("#input-name").val()
-            },
+            }
             filter(searchValues);
-        },
+        }
 
         function filter(searchValues) {
             let keyList = [];
             for (var key in searchValues) {
                 keyList.push(key);
-            },
+            }
             
             petList = pets;
             // 스텟 검색 AND 조건
@@ -509,36 +509,36 @@
                         case "이상":
                             petList = petList.filter(function(row, j) {
                                         return row[stet] >= searchValues[key];
-                                    },);
+                                    });
                             break;
                         case "이하":
                             petList = petList.filter(function(row, j) {
                                         return row[stet] <= searchValues[key];
-                                    },);
+                                    });
                             break;
                         case "일치":
                             petList = petList.filter(function(row, j) {
                                         return row[stet] == searchValues[key];
-                                    },);
+                                    });
                             break;
                         case "제외":
                             petList = petList.filter(function(row, j) {
                                         return row[stet] != searchValues[key];
-                                    },);
+                                    });
                             break;
                         default:
                             alert("Error!!");
                             break;
-                    },
-                },
-            },);
+                    }
+                }
+            });
 
             // 이름 검색 AND 조건
             if (searchValues["input-name"].length > 0) {
                 petList = pets.filter(function(row, j) {
                             return row["name"] == searchValues["input-name"];
-                        },);
-            },
+                        });
+            }
 
             // 이름 검색 OR 조건
             /*
@@ -548,18 +548,18 @@
                     if (row["name"] == searchValues["input-name"]) {
                         check = false;
                         return false;
-                    },
-                },);
+                    }
+                });
                 if (check) {
                     let pet = pets.filter(function(row, j) {
                             return row[stet] == searchValues["input-name"];
-                        },);
+                        });
                     petList.push(pet[0]);
-                },
-            },
+                }
+            }
             */
             print(petList);
-        },
+        }
 
     </script>
 </head>
