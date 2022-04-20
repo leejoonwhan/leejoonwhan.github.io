@@ -2,18 +2,18 @@
 
 <head>
     <title>BlueCG Monster</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset:"utf-8">
+    <meta "name":"viewport" content:"width:device-width, initial-scale:1">
+    <link href:"https://cdn.jsdelivr.net/npm/boot"str"ap@5.1.3/dist/css/boot"str"ap.min.css" rel:"stylesheet">
+    <script src:"https://cdn.jsdelivr.net/npm/boot"str"ap@5.1.3/dist/js/boot"str"ap.bundle.min.js"></script>
+    <script src:"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         body {
             background-color: #222222;
             color: white;
         }
 
-        input[type="number"] {
+        input["type":"number"] {
             text-align: right;
         }
 
@@ -23,181 +23,181 @@
     </style>
     <script>
         // 정렬
-        let clickCount = {};
+        let clickCount : {};
 
         // Data
-        const pets = [
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290001.gif", type="B", name="虎人", vtl=22, str=26, tgh=17, qui=19, mgc=16, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", type="B", name="貓人", vtl=23, str=27, tgh=15, qui=26, mgc=14, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290005.gif", type="B", name="惡魔貓", vtl=21, str=23, tgh=12, qui=27, mgc=22, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103001.gif", type="B", name="穴熊", vtl=34, str=34, tgh=19, qui=19, mgc=14, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103003.gif", type="B", name="北極熊", vtl=36, str=33, tgh=22, qui=18, mgc=11, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103004.gif", type="B", name="貓熊", vtl=32, str=40, tgh=18, qui=17, mgc=18, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177001.gif", type="B", name="火焰鼠", vtl=7, str=12, tgh=15, qui=34, mgc=32, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121006.gif", type="B", name="寶石鼠", vtl=7, str=7, tgh=22, qui=27, mgc=37, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507027315002.gif", type="B", name="鼠王", vtl=15, str=7, tgh=19, qui=32, mgc=42, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876002.gif", type="B", name="巨狼", vtl=22, str=37, tgh=11, qui=25, mgc=20, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876004.gif", type="B", name="地獄妖犬", vtl=23, str=40, tgh=13, qui=21, mgc=18, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261001.gif", type="B", name="天馬", vtl=22, str=22, tgh=12, qui=32, mgc=32, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261002.gif", type="B", name="地底龜", vtl=22, str=22, tgh=37, qui=10, mgc=19, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498005.gif", type="B", name="火焰龜", vtl=27, str=17, tgh=42, qui=7, mgc=17, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506011.gif", type="B", name="刀雞", vtl=4, str=32, tgh=12, qui=34, mgc=15, total=97},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506014.gif", type="B", name="大刀鴯苗", vtl=7, str=38, tgh=8, qui=36, mgc=21, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506016.gif", type="B", name="銀獅", vtl=18, str=42, tgh=10, qui=32, mgc=5, total=107},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506018.gif", type="B", name="鐵獅", vtl=19, str=40, tgh=10, qui=30, mgc=5, total=104},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788058.gif", type="B", name="布卡", vtl=27, str=22, tgh=13, qui=45, mgc=8, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788061.gif", type="B", name="樹精布卡", vtl=18, str=28, tgh=11, qui=42, mgc=16, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788064.gif", type="B", name="布卡四重奏", vtl=45, str=33, tgh=23, qui=16, mgc=8, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788068.gif", type="B", name="軍", vtl=15, str=28, tgh=28, qui=45, mgc=9, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284004.gif", type="B", name="組", vtl=23, str=18, tgh=33, qui=18, mgc=38, total=130},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788076.gif", type="B", name="第七星阿爾多拉", vtl=22, str=32, tgh=22, qui=27, mgc=22, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284003.gif", type="B", name="天狼星", vtl=32, str=32, tgh=22, qui=27, mgc=22, total=135},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177001.gif", type="B", name="改造火焰鼠", vtl=12, str=17, tgh=20, qui=39, mgc=37, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1510495904001.gif", type="B", name="雪兔", vtl=14, str=17, tgh=26, qui=11, mgc=37, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876005.gif", type="U", name="殭屍", vtl=37, str=32, tgh=12, qui=12, mgc=12, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876007.gif", type="U", name="食屍鬼", vtl=32, str=32, tgh=17, qui=7, mgc=17, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876009.gif", type="U", name="木乃伊", vtl=39, str=32, tgh=14, qui=8, mgc=17, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163002.gif", type="U", name="血骷髏", vtl=13, str=24, tgh=41, qui=10, mgc=22, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163005.gif", type="U", name="骷髏海盜", vtl=12, str=29, tgh=45, qui=13, mgc=16, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103005.gif", type="U", name="幽靈", vtl=19, str=18, tgh=31, qui=20, mgc=27, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103007.gif", type="U", name="亡靈", vtl=14, str=27, tgh=30, qui=15, mgc=29, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506004.gif", type="U", name="鐮刀魔", vtl=23, str=35, tgh=18, qui=17, mgc=32, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467002.gif", type="U", name="牙骨", vtl=27, str=32, tgh=32, qui=12, mgc=7, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467001.gif", type="U", name="巨牙", vtl=25, str=30, tgh=27, qui=17, mgc=11, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506022.gif", type="U", name="黃金龍骨", vtl=6, str=42, tgh=11, qui=12, mgc=32, total=103},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506024.gif", type="U", name="獅面女神", vtl=28, str=23, tgh=23, qui=25, mgc=16, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506026.gif", type="U", name="貓隊長", vtl=23, str=33, tgh=23, qui=25, mgc=11, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506305871002.gif", type="U", name="魔法師之鬼", vtl=17, str=12, tgh=16, qui=28, mgc=47, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505732558001.gif", type="U", name="紅鬼", vtl=12, str=46, tgh=16, qui=30, mgc=16, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506032.gif", type="U", name="卡爾克", vtl=12, str=45, tgh=20, qui=26, mgc=17, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876057.gif", type="U", name="修雷丁格", vtl=18, str=28, tgh=18, qui=33, mgc=28, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876005.gif", type="U", name="改造殭屍", vtl=41, str=36, tgh=16, qui=16, mgc=16, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", type="P", name="樹精", vtl=32, str=17, tgh=32, qui=12, mgc=17, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876023.gif", type="P", name="慘白樹精", vtl=29, str=16, tgh=28, qui=17, mgc=20, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876025.gif", type="P", name="沼澤樹精", vtl=31, str=14, tgh=29, qui=15, mgc=21, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449001.gif", type="P", name="妖草", vtl=26, str=11, tgh=16, qui=16, mgc=36, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449002.gif", type="P", name="妖花", vtl=27, str=12, tgh=12, qui=19, mgc=32, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876026.gif", type="P", name="綠色口臭鬼", vtl=38, str=23, tgh=16, qui=15, mgc=23, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876029.gif", type="P", name="紅色口臭鬼", vtl=44, str=21, tgh=14, qui=12, mgc=29, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289001.gif", type="P", name="兇暴仙人掌", vtl=27, str=29, tgh=22, qui=12, mgc=20, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289003.gif", type="P", name="兔耳仙人掌", vtl=28, str=35, tgh=19, qui=14, mgc=14, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289005.gif", type="P", name="火焰舞者", vtl=19, str=38, tgh=18, qui=15, mgc=25, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876040.gif", type="P", name="水藍菇", vtl=38, str=15, tgh=13, qui=15, mgc=34, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788008.gif", type="P", name="星菇", vtl=40, str=13, tgh=10, qui=13, mgc=39, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788030.gif", type="P", name="跑步花妖", vtl=14, str=41, tgh=16, qui=17, mgc=14, total=102},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788032.gif", type="P", name="侯爵花妖", vtl=28, str=33, tgh=12, qui=28, mgc=26, total=127},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788037.gif", type="P", name="亭登烏賊", vtl=23, str=13, tgh=40, qui=18, mgc=21, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", type="P", name="快枯死的樹精", vtl=7, str=12, tgh=17, qui=7, mgc=12, total=55},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427002.gif", type="P", name="寒冰霸王", vtl=23, str=31, tgh=11, qui=24, mgc=26, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427004.gif", type="P", name="疾風霸王", vtl=23, str=31, tgh=11, qui=24, mgc=26, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995001.gif", type="P", name="改造黃金樹精", vtl=17, str= 10, tgh= 28, qui= 38, mgc=22, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876040.gif", type="P", name="R水藍菇", vtl=15, str= 15, tgh= 13, qui=48, mgc=34, total= 125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874006.gif", type="F", name="小石像怪", vtl=16, str=21, tgh=11, qui=31, mgc=26, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874008.gif", type="F", name="水藍鳥魔", vtl=22, str=23, tgh=10, qui=25, mgc=25, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874010.gif", type="F", name="迷你石像怪", vtl=23, str=19, tgh=10, qui=24, mgc=29, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103009.gif", type="F", name="石像怪", vtl=14, str=30, tgh=32, qui=22, mgc=22, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103011.gif", type="F", name="墮天使", vtl=11, str=28, tgh=28, qui=27, mgc=26, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504863635001.gif", type="F", name="小蝙蝠", vtl=11, str=26, tgh=16, qui=31, mgc=21, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876010.gif", type="F", name="掃把蝙蝠", vtl=13, str=28, tgh=12, qui=29, mgc=18, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876012.gif", type="F", name="惡魔蝙蝠", vtl=13, str=34, tgh=10, qui=29, mgc=24, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874003.gif", type="F", name="大蝙蝠", vtl=23, str=28, tgh=23, qui=28, mgc=13, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874001.gif", type="F", name="巨蝙蝠", vtl=27, str=30, tgh=22, qui=24, mgc=12, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874005.gif", type="F", name="兔耳蝙蝠", vtl=21, str=26, tgh=18, qui=31, mgc=14, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876041.gif", type="F", name="沙地鯊", vtl=15, str=33, tgh=16, qui=29, mgc=8, total=101},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876043.gif", type="F", name="岩石鯊", vtl=27, str=36, tgh=7, qui=8, mgc=25, total=103},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054001.gif", type="F", name="托羅帝鳥", vtl=32, str=20, tgh=13, qui=35, mgc=10, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054003.gif", type="F", name="火焰啄木鳥", vtl=22, str=27, tgh=19, qui=29, mgc=13, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506414261003.gif", type="F", name="依格羅斯", vtl=18, str=36, tgh=11, qui=44, mgc=16, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700002.gif", type="F", name="鴨嘴獸", vtl=10, str=23, tgh=7, qui=23, mgc=28, total=91},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700004.gif", type="F", name="小兔子", vtl=11, str=23, tgh=7, qui=23, mgc=28, total=92},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788035.gif", type="F", name="拉扎魟怪", vtl=26, str=31, tgh=20, qui=24, mgc=9, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788081.gif", type="F", name="尤拉蝙蝠", vtl=22, str=22, tgh=22, qui=22, mgc=22, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788083.gif", type="F", name="韋伯蝙蝠", vtl=22, str=22, tgh=22, qui=22, mgc=22, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506028.gif", type="F", name="巴特溫", vtl=17, str=12, tgh=47, qui=12, mgc=32, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506030.gif", type="F", name="巴拉斯", vtl=16, str=9, tgh=50, qui=8, mgc=37, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876051.gif", type="F", name="米歇爾蝙蝠", vtl=22, str= 27, tgh= 23, qui=31, mgc= 27, total=130},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876010.gif", type="F", name="改造掃把蝙蝠", vtl=6, str=44, tgh=6, qui= 33, mgc=36, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876049.gif", type="F", name="陸行鯊後期型", vtl=36, str=30, tgh=36, qui= 24, mgc=9, total=135},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562003.gif", type="H", name="哥布林", vtl=27, str=27, tgh=27, qui=17, mgc=7, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505633764009.gif", type="H", name="火焰哥布林", vtl=22, str=28, tgh=26, qui=15, mgc=14, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449019.gif", type="H", name="巨人", vtl=38, str=35, tgh=24, qui=9, mgc=14, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788002.gif", type="H", name="泰坦巨人", vtl=39, str=30, tgh=28, qui=8, mgc=15, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498001.gif", type="H", name="幻歌妖", vtl=15, str=18, tgh=20, qui=38, mgc=19, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507468381001.gif", type="H", name="狠毒鳥人", vtl=18, str=19, tgh=14, qui=39, mgc=20, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152012.gif", type="H", name="黑暗鳥人", vtl=19, str=11, tgh=11, qui=43, mgc=31, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121002.gif", type="H", name="豬鬼", vtl=33, str=28, tgh=33, qui=11, mgc=10, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121004.gif", type="H", name="半獸人", vtl=32, str=27, tgh=32, qui=12, mgc=12, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924020001.gif", type="H", name="地之妖精", vtl=28, str=22, tgh=17, qui=16, mgc=27, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", type="H", name="小可愛優奈", vtl=28, str=28, tgh=28, qui=28, mgc=28, total=140},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177002.gif", type="H", name="改造鳥人", vtl=20, str=20, tgh=20, qui=40, mgc=25, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876033.gif", type="D", name="蜥蜴戰士", vtl=22, str=32, tgh=32, qui=12, mgc=12, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876035.gif", type="D", name="蜥蜴武士", vtl=20, str=31, tgh=30, qui=15, mgc=14, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284006.gif", type="D", name="大地翼龍", vtl=29, str=28, tgh=32, qui=20, mgc=11, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284007.gif", type="D", name="火焰翼龍", vtl=33, str=33, tgh=25, qui=16, mgc=13, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152010.gif", type="D", name="翼龍", vtl=32, str=30, tgh=26, qui=19, mgc=18, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067002.gif", type="D", name="水龍蜥", vtl=36, str=38, tgh=34, qui=11, mgc=6, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926192001.gif", type="D", name="風龍蜥", vtl=35, str=35, tgh=31, qui=10, mgc=9, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814026.gif", type="D", name="迷你龍", vtl=10, str=35, tgh=23, qui=21, mgc=26, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814024.gif", type="D", name="穴龍", vtl=11, str=31, tgh=20, qui=25, mgc=28, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788016.gif", type="D", name="毒蜥蜴", vtl=38, str=33, tgh=13, qui=11, mgc=20, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788047.gif", type="D", name="羅修", vtl=18, str=32, tgh=23, qui=24, mgc=14, total=111},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788050.gif", type="D", name="維爾斯", vtl=15, str=11, tgh=28, qui=22, mgc=34, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067002.gif", type="D", name="改造水龍蜥", vtl=10, str= 38, tgh=13, qui=43, mgc= 6, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876033.gif", type="D", name="改造蜥蜴戰士", vtl=31, str=31, tgh= 31, qui=31, mgc=6, total=130},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449007.gif", type="M", name="血腥之刃", vtl=9, str=39, tgh=34, qui=14, mgc=24, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449009.gif", type="M", name="火焰之刃", vtl=10, str=39, tgh=28, qui=12, mgc=31, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449011.gif", type="M", name="嚇人箱", vtl=11, str=26, tgh=26, qui=11, mgc=31, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449013.gif", type="M", name="紅魔嚇人箱", vtl=12, str=32, tgh=27, qui=12, mgc=27, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449015.gif", type="M", name="綠蛙嚇人箱", vtl=13, str=35, tgh=29, qui=10, mgc=23, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366001.gif", type="M", name="惡魔螃蟹", vtl=16, str=32, tgh=35, qui=11, mgc=11, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366003.gif", type="M", name="鐵剪螃蟹", vtl=14, str=34, tgh=37, qui=12, mgc=8, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506006.gif", type="M", name="盾", vtl=15, str=15, tgh=45, qui=15, mgc=30, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506009.gif", type="M", name="神盾", vtl=16, str=9, tgh=50, qui=8, mgc=37, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788011.gif", type="M", name="岩怪", vtl=29, str=22, tgh=40, qui=5, mgc=14, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788012.gif", type="M", name="熔岩", vtl=32, str=17, tgh=37, qui=7, mgc=17, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788023.gif", type="M", name="跳跳地雷", vtl=31, str=18, tgh=16, qui=8, mgc=33, total=106},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788026.gif", type="M", name="皮皮地雷", vtl=14, str=30, tgh=40, qui=7, mgc=14, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506034.gif", type="M", name="風獸", vtl=22, str=37, tgh=26, qui=16, mgc=21, total=122},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788042.gif", type="M", name="魔術機甲", vtl=24, str=23, tgh=33, qui=23, mgc=12, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284002.gif", type="M", name="魔術機戊", vtl=16, str=28, tgh=37, qui=9, mgc=35, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788053.gif", type="M", name="稜背龍", vtl=28, str=38, tgh=38, qui=4, mgc=8, total=116},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788014.gif", type="M", name="紅寶石怪", vtl=12, str=25, tgh=26, qui=6, mgc=33, total=102},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449017.gif", type="M", name="石怪", vtl=15, str=38, tgh=43, qui=6, mgc=13, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876030.gif", type="A", name="史萊姆", vtl=46, str=26, tgh=11, qui=6, mgc=16, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876031.gif", type="A", name="果凍史萊姆", vtl=45, str=31, tgh=6, qui=10, mgc=13, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131001.gif", type="A", name="火精", vtl=25, str=25, tgh=25, qui=25, mgc=25, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131003.gif", type="A", name="水精", vtl=25, str=25, tgh=25, qui=25, mgc=25, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449003.gif", type="A", name="頑皮炸彈", vtl=15, str=15, tgh=15, qui=15, mgc=40, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449005.gif", type="A", name="大炸彈", vtl=12, str=20, tgh=14, qui=14, mgc=40, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449006.gif", type="A", name="丸子炸彈", vtl=17, str=17, tgh=7, qui=17, mgc=47, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812002.gif", type="A", name="旋律影子", vtl=24, str=28, tgh=22, qui=19, mgc=27, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812004.gif", type="A", name="陰影", vtl=28, str=24, tgh=22, qui=22, mgc=24, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788010.gif", type="A", name="煙霧", vtl=23, str=23, tgh=8, qui=30, mgc=31, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261003.gif", type="A", name="棉球", vtl=25, str=26, tgh=9, qui=25, mgc=30, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788070.gif", type="A", name="牛奶粉怪", vtl=15, str=11, tgh=17, qui=26, mgc=43, total=112},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812005.gif", type="A", name="愛絲波波", vtl=34, str=35, tgh=18, qui=19, mgc=14, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812008.gif", type="A", name="絲諾波波", vtl=34, str=35, tgh=18, qui=19, mgc=14, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995002.gif", type="A", name="改造漂浮炸彈", vtl=21, str=19, tgh=19, qui= 22, mgc=44, total= 125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876047.gif", type="A", name="R煙羅", vtl=13, str=38, tgh=23, qui=14, mgc=37, total=125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876014.gif", type="I", name="藍蠍", vtl=20, str=27, tgh=47, qui=13, mgc=8, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", type="I", name="黃蠍", vtl=20, str=30, tgh=43, qui=12, mgc=10, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103013.gif", type="I", name="殺人蜂", vtl=12, str=37, tgh=12, qui=37, mgc=12, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103015.gif", type="I", name="虎頭蜂", vtl=13, str=40, tgh=8, qui=38, mgc=11, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103016.gif", type="I", name="死亡蜂", vtl=7, str=39, tgh=15, qui=41, mgc=8, total=110},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103017.gif", type="I", name="殺人螳螂", vtl=12, str=45, tgh=20, qui=26, mgc=17, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103020.gif", type="I", name="死灰螳螂", vtl=15, str=40, tgh=17, qui=33, mgc=15, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876018.gif", type="I", name="土蜘蛛", vtl=26, str=15, tgh=18, qui=23, mgc=23, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876019.gif", type="I", name="火蜘蛛", vtl=22, str=22, tgh=16, qui=25, mgc=20, total=105},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788004.gif", type="I", name="甲蟲", vtl=17, str=37, tgh=32, qui=12, mgc=17, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876039.gif", type="I", name="鍬型蟲", vtl=15, str=39, tgh=29, qui=14, mgc=18, total=115},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788019.gif", type="I", name="戴靴怪", vtl=9, str=9, tgh=30, qui=26, mgc=26, total=100},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788021.gif", type="I", name="潛靴怪", vtl=9, str=23, tgh=9, qui=34, mgc=26, total=101},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562001.gif", type="I", name="改造黃蜂", vtl=16, str=9, tgh=50, qui=8, mgc=37, total=120},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", type="I", name="改造黃蠍", vtl=20, str=10, tgh=43, qui= 12, mgc= 40, total= 125},
-			{img="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", type="I", name="改造水蜘蛛", vtl=28, str=20, tgh=21, qui=24, mgc=32, total=125}
+        const pets : [
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290001.gif", "type":"B", "name":"虎人", "vtl":22, "str":26, "tgh":17, "qui":19, "mgc":16, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", "type":"B", "name":"貓人", "vtl":23, "str":27, "tgh":15, "qui":26, "mgc":14, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290005.gif", "type":"B", "name":"惡魔貓", "vtl":21, "str":23, "tgh":12, "qui":27, "mgc":22, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103001.gif", "type":"B", "name":"穴熊", "vtl":34, "str":34, "tgh":19, "qui":19, "mgc":14, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103003.gif", "type":"B", "name":"北極熊", "vtl":36, "str":33, "tgh":22, "qui":18, "mgc":11, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103004.gif", "type":"B", "name":"貓熊", "vtl":32, "str":40, "tgh":18, "qui":17, "mgc":18, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177001.gif", "type":"B", "name":"火焰鼠", "vtl":7, "str":12, "tgh":15, "qui":34, "mgc":32, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121006.gif", "type":"B", "name":"寶石鼠", "vtl":7, "str":7, "tgh":22, "qui":27, "mgc":37, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507027315002.gif", "type":"B", "name":"鼠王", "vtl":15, "str":7, "tgh":19, "qui":32, "mgc":42, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876002.gif", "type":"B", "name":"巨狼", "vtl":22, "str":37, "tgh":11, "qui":25, "mgc":20, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876004.gif", "type":"B", "name":"地獄妖犬", "vtl":23, "str":40, "tgh":13, "qui":21, "mgc":18, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261001.gif", "type":"B", "name":"天馬", "vtl":22, "str":22, "tgh":12, "qui":32, "mgc":32, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261002.gif", "type":"B", "name":"地底龜", "vtl":22, "str":22, "tgh":37, "qui":10, "mgc":19, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498005.gif", "type":"B", "name":"火焰龜", "vtl":27, "str":17, "tgh":42, "qui":7, "mgc":17, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506011.gif", "type":"B", "name":"刀雞", "vtl":4, "str":32, "tgh":12, "qui":34, "mgc":15, "total":97},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506014.gif", "type":"B", "name":"大刀鴯苗", "vtl":7, "str":38, "tgh":8, "qui":36, "mgc":21, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506016.gif", "type":"B", "name":"銀獅", "vtl":18, "str":42, "tgh":10, "qui":32, "mgc":5, "total":107},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506018.gif", "type":"B", "name":"鐵獅", "vtl":19, "str":40, "tgh":10, "qui":30, "mgc":5, "total":104},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788058.gif", "type":"B", "name":"布卡", "vtl":27, "str":22, "tgh":13, "qui":45, "mgc":8, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788061.gif", "type":"B", "name":"樹精布卡", "vtl":18, "str":28, "tgh":11, "qui":42, "mgc":16, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788064.gif", "type":"B", "name":"布卡四重奏", "vtl":45, "str":33, "tgh":23, "qui":16, "mgc":8, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788068.gif", "type":"B", "name":"軍", "vtl":15, "str":28, "tgh":28, "qui":45, "mgc":9, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284004.gif", "type":"B", "name":"組", "vtl":23, "str":18, "tgh":33, "qui":18, "mgc":38, "total":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788076.gif", "type":"B", "name":"第七星阿爾多拉", "vtl":22, "str":32, "tgh":22, "qui":27, "mgc":22, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284003.gif", "type":"B", "name":"天狼星", "vtl":32, "str":32, "tgh":22, "qui":27, "mgc":22, "total":135},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177001.gif", "type":"B", "name":"改造火焰鼠", "vtl":12, "str":17, "tgh":20, "qui":39, "mgc":37, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1510495904001.gif", "type":"B", "name":"雪兔", "vtl":14, "str":17, "tgh":26, "qui":11, "mgc":37, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876005.gif", "type":"U", "name":"殭屍", "vtl":37, "str":32, "tgh":12, "qui":12, "mgc":12, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876007.gif", "type":"U", "name":"食屍鬼", "vtl":32, "str":32, "tgh":17, "qui":7, "mgc":17, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876009.gif", "type":"U", "name":"木乃伊", "vtl":39, "str":32, "tgh":14, "qui":8, "mgc":17, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163002.gif", "type":"U", "name":"血骷髏", "vtl":13, "str":24, "tgh":41, "qui":10, "mgc":22, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163005.gif", "type":"U", "name":"骷髏海盜", "vtl":12, "str":29, "tgh":45, "qui":13, "mgc":16, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103005.gif", "type":"U", "name":"幽靈", "vtl":19, "str":18, "tgh":31, "qui":20, "mgc":27, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103007.gif", "type":"U", "name":"亡靈", "vtl":14, "str":27, "tgh":30, "qui":15, "mgc":29, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506004.gif", "type":"U", "name":"鐮刀魔", "vtl":23, "str":35, "tgh":18, "qui":17, "mgc":32, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467002.gif", "type":"U", "name":"牙骨", "vtl":27, "str":32, "tgh":32, "qui":12, "mgc":7, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467001.gif", "type":"U", "name":"巨牙", "vtl":25, "str":30, "tgh":27, "qui":17, "mgc":11, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506022.gif", "type":"U", "name":"黃金龍骨", "vtl":6, "str":42, "tgh":11, "qui":12, "mgc":32, "total":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506024.gif", "type":"U", "name":"獅面女神", "vtl":28, "str":23, "tgh":23, "qui":25, "mgc":16, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506026.gif", "type":"U", "name":"貓隊長", "vtl":23, "str":33, "tgh":23, "qui":25, "mgc":11, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506305871002.gif", "type":"U", "name":"魔法師之鬼", "vtl":17, "str":12, "tgh":16, "qui":28, "mgc":47, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505732558001.gif", "type":"U", "name":"紅鬼", "vtl":12, "str":46, "tgh":16, "qui":30, "mgc":16, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506032.gif", "type":"U", "name":"卡爾克", "vtl":12, "str":45, "tgh":20, "qui":26, "mgc":17, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876057.gif", "type":"U", "name":"修雷丁格", "vtl":18, "str":28, "tgh":18, "qui":33, "mgc":28, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876005.gif", "type":"U", "name":"改造殭屍", "vtl":41, "str":36, "tgh":16, "qui":16, "mgc":16, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", "type":"P", "name":"樹精", "vtl":32, "str":17, "tgh":32, "qui":12, "mgc":17, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876023.gif", "type":"P", "name":"慘白樹精", "vtl":29, "str":16, "tgh":28, "qui":17, "mgc":20, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876025.gif", "type":"P", "name":"沼澤樹精", "vtl":31, "str":14, "tgh":29, "qui":15, "mgc":21, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449001.gif", "type":"P", "name":"妖草", "vtl":26, "str":11, "tgh":16, "qui":16, "mgc":36, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449002.gif", "type":"P", "name":"妖花", "vtl":27, "str":12, "tgh":12, "qui":19, "mgc":32, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876026.gif", "type":"P", "name":"綠色口臭鬼", "vtl":38, "str":23, "tgh":16, "qui":15, "mgc":23, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876029.gif", "type":"P", "name":"紅色口臭鬼", "vtl":44, "str":21, "tgh":14, "qui":12, "mgc":29, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289001.gif", "type":"P", "name":"兇暴仙人掌", "vtl":27, "str":29, "tgh":22, "qui":12, "mgc":20, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289003.gif", "type":"P", "name":"兔耳仙人掌", "vtl":28, "str":35, "tgh":19, "qui":14, "mgc":14, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289005.gif", "type":"P", "name":"火焰舞者", "vtl":19, "str":38, "tgh":18, "qui":15, "mgc":25, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876040.gif", "type":"P", "name":"水藍菇", "vtl":38, "str":15, "tgh":13, "qui":15, "mgc":34, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788008.gif", "type":"P", "name":"星菇", "vtl":40, "str":13, "tgh":10, "qui":13, "mgc":39, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788030.gif", "type":"P", "name":"跑步花妖", "vtl":14, "str":41, "tgh":16, "qui":17, "mgc":14, "total":102},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788032.gif", "type":"P", "name":"侯爵花妖", "vtl":28, "str":33, "tgh":12, "qui":28, "mgc":26, "total":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788037.gif", "type":"P", "name":"亭登烏賊", "vtl":23, "str":13, "tgh":40, "qui":18, "mgc":21, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", "type":"P", "name":"快枯死的樹精", "vtl":7, "str":12, "tgh":17, "qui":7, "mgc":12, "total":55},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427002.gif", "type":"P", "name":"寒冰霸王", "vtl":23, "str":31, "tgh":11, "qui":24, "mgc":26, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427004.gif", "type":"P", "name":"疾風霸王", "vtl":23, "str":31, "tgh":11, "qui":24, "mgc":26, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995001.gif", "type":"P", "name":"改造黃金樹精", "vtl":17, "str": 10, "tgh": 28, "qui": 38, "mgc":22, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876040.gif", "type":"P", "name":"R水藍菇", "vtl":15, "str": 15, "tgh": 13, "qui":48, "mgc":34, "total": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874006.gif", "type":"F", "name":"小石像怪", "vtl":16, "str":21, "tgh":11, "qui":31, "mgc":26, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874008.gif", "type":"F", "name":"水藍鳥魔", "vtl":22, "str":23, "tgh":10, "qui":25, "mgc":25, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874010.gif", "type":"F", "name":"迷你石像怪", "vtl":23, "str":19, "tgh":10, "qui":24, "mgc":29, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103009.gif", "type":"F", "name":"石像怪", "vtl":14, "str":30, "tgh":32, "qui":22, "mgc":22, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103011.gif", "type":"F", "name":"墮天使", "vtl":11, "str":28, "tgh":28, "qui":27, "mgc":26, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504863635001.gif", "type":"F", "name":"小蝙蝠", "vtl":11, "str":26, "tgh":16, "qui":31, "mgc":21, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876010.gif", "type":"F", "name":"掃把蝙蝠", "vtl":13, "str":28, "tgh":12, "qui":29, "mgc":18, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876012.gif", "type":"F", "name":"惡魔蝙蝠", "vtl":13, "str":34, "tgh":10, "qui":29, "mgc":24, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874003.gif", "type":"F", "name":"大蝙蝠", "vtl":23, "str":28, "tgh":23, "qui":28, "mgc":13, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874001.gif", "type":"F", "name":"巨蝙蝠", "vtl":27, "str":30, "tgh":22, "qui":24, "mgc":12, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874005.gif", "type":"F", "name":"兔耳蝙蝠", "vtl":21, "str":26, "tgh":18, "qui":31, "mgc":14, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876041.gif", "type":"F", "name":"沙地鯊", "vtl":15, "str":33, "tgh":16, "qui":29, "mgc":8, "total":101},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876043.gif", "type":"F", "name":"岩石鯊", "vtl":27, "str":36, "tgh":7, "qui":8, "mgc":25, "total":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054001.gif", "type":"F", "name":"托羅帝鳥", "vtl":32, "str":20, "tgh":13, "qui":35, "mgc":10, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054003.gif", "type":"F", "name":"火焰啄木鳥", "vtl":22, "str":27, "tgh":19, "qui":29, "mgc":13, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506414261003.gif", "type":"F", "name":"依格羅斯", "vtl":18, "str":36, "tgh":11, "qui":44, "mgc":16, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700002.gif", "type":"F", "name":"鴨嘴獸", "vtl":10, "str":23, "tgh":7, "qui":23, "mgc":28, "total":91},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700004.gif", "type":"F", "name":"小兔子", "vtl":11, "str":23, "tgh":7, "qui":23, "mgc":28, "total":92},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788035.gif", "type":"F", "name":"拉扎魟怪", "vtl":26, "str":31, "tgh":20, "qui":24, "mgc":9, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788081.gif", "type":"F", "name":"尤拉蝙蝠", "vtl":22, "str":22, "tgh":22, "qui":22, "mgc":22, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788083.gif", "type":"F", "name":"韋伯蝙蝠", "vtl":22, "str":22, "tgh":22, "qui":22, "mgc":22, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506028.gif", "type":"F", "name":"巴特溫", "vtl":17, "str":12, "tgh":47, "qui":12, "mgc":32, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506030.gif", "type":"F", "name":"巴拉斯", "vtl":16, "str":9, "tgh":50, "qui":8, "mgc":37, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876051.gif", "type":"F", "name":"米歇爾蝙蝠", "vtl":22, "str": 27, "tgh": 23, "qui":31, "mgc": 27, "total":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876010.gif", "type":"F", "name":"改造掃把蝙蝠", "vtl":6, "str":44, "tgh":6, "qui": 33, "mgc":36, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876049.gif", "type":"F", "name":"陸行鯊後期型", "vtl":36, "str":30, "tgh":36, "qui": 24, "mgc":9, "total":135},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562003.gif", "type":"H", "name":"哥布林", "vtl":27, "str":27, "tgh":27, "qui":17, "mgc":7, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505633764009.gif", "type":"H", "name":"火焰哥布林", "vtl":22, "str":28, "tgh":26, "qui":15, "mgc":14, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449019.gif", "type":"H", "name":"巨人", "vtl":38, "str":35, "tgh":24, "qui":9, "mgc":14, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788002.gif", "type":"H", "name":"泰坦巨人", "vtl":39, "str":30, "tgh":28, "qui":8, "mgc":15, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498001.gif", "type":"H", "name":"幻歌妖", "vtl":15, "str":18, "tgh":20, "qui":38, "mgc":19, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507468381001.gif", "type":"H", "name":"狠毒鳥人", "vtl":18, "str":19, "tgh":14, "qui":39, "mgc":20, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152012.gif", "type":"H", "name":"黑暗鳥人", "vtl":19, "str":11, "tgh":11, "qui":43, "mgc":31, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121002.gif", "type":"H", "name":"豬鬼", "vtl":33, "str":28, "tgh":33, "qui":11, "mgc":10, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121004.gif", "type":"H", "name":"半獸人", "vtl":32, "str":27, "tgh":32, "qui":12, "mgc":12, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924020001.gif", "type":"H", "name":"地之妖精", "vtl":28, "str":22, "tgh":17, "qui":16, "mgc":27, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", "type":"H", "name":"小可愛優奈", "vtl":28, "str":28, "tgh":28, "qui":28, "mgc":28, "total":140},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177002.gif", "type":"H", "name":"改造鳥人", "vtl":20, "str":20, "tgh":20, "qui":40, "mgc":25, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876033.gif", "type":"D", "name":"蜥蜴戰士", "vtl":22, "str":32, "tgh":32, "qui":12, "mgc":12, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876035.gif", "type":"D", "name":"蜥蜴武士", "vtl":20, "str":31, "tgh":30, "qui":15, "mgc":14, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284006.gif", "type":"D", "name":"大地翼龍", "vtl":29, "str":28, "tgh":32, "qui":20, "mgc":11, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284007.gif", "type":"D", "name":"火焰翼龍", "vtl":33, "str":33, "tgh":25, "qui":16, "mgc":13, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152010.gif", "type":"D", "name":"翼龍", "vtl":32, "str":30, "tgh":26, "qui":19, "mgc":18, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067002.gif", "type":"D", "name":"水龍蜥", "vtl":36, "str":38, "tgh":34, "qui":11, "mgc":6, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926192001.gif", "type":"D", "name":"風龍蜥", "vtl":35, "str":35, "tgh":31, "qui":10, "mgc":9, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814026.gif", "type":"D", "name":"迷你龍", "vtl":10, "str":35, "tgh":23, "qui":21, "mgc":26, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814024.gif", "type":"D", "name":"穴龍", "vtl":11, "str":31, "tgh":20, "qui":25, "mgc":28, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788016.gif", "type":"D", "name":"毒蜥蜴", "vtl":38, "str":33, "tgh":13, "qui":11, "mgc":20, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788047.gif", "type":"D", "name":"羅修", "vtl":18, "str":32, "tgh":23, "qui":24, "mgc":14, "total":111},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788050.gif", "type":"D", "name":"維爾斯", "vtl":15, "str":11, "tgh":28, "qui":22, "mgc":34, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067002.gif", "type":"D", "name":"改造水龍蜥", "vtl":10, "str": 38, "tgh":13, "qui":43, "mgc": 6, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876033.gif", "type":"D", "name":"改造蜥蜴戰士", "vtl":31, "str":31, "tgh": 31, "qui":31, "mgc":6, "total":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449007.gif", "type":"M", "name":"血腥之刃", "vtl":9, "str":39, "tgh":34, "qui":14, "mgc":24, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449009.gif", "type":"M", "name":"火焰之刃", "vtl":10, "str":39, "tgh":28, "qui":12, "mgc":31, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449011.gif", "type":"M", "name":"嚇人箱", "vtl":11, "str":26, "tgh":26, "qui":11, "mgc":31, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449013.gif", "type":"M", "name":"紅魔嚇人箱", "vtl":12, "str":32, "tgh":27, "qui":12, "mgc":27, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449015.gif", "type":"M", "name":"綠蛙嚇人箱", "vtl":13, "str":35, "tgh":29, "qui":10, "mgc":23, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366001.gif", "type":"M", "name":"惡魔螃蟹", "vtl":16, "str":32, "tgh":35, "qui":11, "mgc":11, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366003.gif", "type":"M", "name":"鐵剪螃蟹", "vtl":14, "str":34, "tgh":37, "qui":12, "mgc":8, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506006.gif", "type":"M", "name":"盾", "vtl":15, "str":15, "tgh":45, "qui":15, "mgc":30, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506009.gif", "type":"M", "name":"神盾", "vtl":16, "str":9, "tgh":50, "qui":8, "mgc":37, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788011.gif", "type":"M", "name":"岩怪", "vtl":29, "str":22, "tgh":40, "qui":5, "mgc":14, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788012.gif", "type":"M", "name":"熔岩", "vtl":32, "str":17, "tgh":37, "qui":7, "mgc":17, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788023.gif", "type":"M", "name":"跳跳地雷", "vtl":31, "str":18, "tgh":16, "qui":8, "mgc":33, "total":106},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788026.gif", "type":"M", "name":"皮皮地雷", "vtl":14, "str":30, "tgh":40, "qui":7, "mgc":14, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506034.gif", "type":"M", "name":"風獸", "vtl":22, "str":37, "tgh":26, "qui":16, "mgc":21, "total":122},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788042.gif", "type":"M", "name":"魔術機甲", "vtl":24, "str":23, "tgh":33, "qui":23, "mgc":12, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284002.gif", "type":"M", "name":"魔術機戊", "vtl":16, "str":28, "tgh":37, "qui":9, "mgc":35, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788053.gif", "type":"M", "name":"稜背龍", "vtl":28, "str":38, "tgh":38, "qui":4, "mgc":8, "total":116},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788014.gif", "type":"M", "name":"紅寶石怪", "vtl":12, "str":25, "tgh":26, "qui":6, "mgc":33, "total":102},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449017.gif", "type":"M", "name":"石怪", "vtl":15, "str":38, "tgh":43, "qui":6, "mgc":13, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876030.gif", "type":"A", "name":"史萊姆", "vtl":46, "str":26, "tgh":11, "qui":6, "mgc":16, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876031.gif", "type":"A", "name":"果凍史萊姆", "vtl":45, "str":31, "tgh":6, "qui":10, "mgc":13, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131001.gif", "type":"A", "name":"火精", "vtl":25, "str":25, "tgh":25, "qui":25, "mgc":25, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131003.gif", "type":"A", "name":"水精", "vtl":25, "str":25, "tgh":25, "qui":25, "mgc":25, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449003.gif", "type":"A", "name":"頑皮炸彈", "vtl":15, "str":15, "tgh":15, "qui":15, "mgc":40, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449005.gif", "type":"A", "name":"大炸彈", "vtl":12, "str":20, "tgh":14, "qui":14, "mgc":40, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449006.gif", "type":"A", "name":"丸子炸彈", "vtl":17, "str":17, "tgh":7, "qui":17, "mgc":47, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812002.gif", "type":"A", "name":"旋律影子", "vtl":24, "str":28, "tgh":22, "qui":19, "mgc":27, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812004.gif", "type":"A", "name":"陰影", "vtl":28, "str":24, "tgh":22, "qui":22, "mgc":24, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788010.gif", "type":"A", "name":"煙霧", "vtl":23, "str":23, "tgh":8, "qui":30, "mgc":31, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261003.gif", "type":"A", "name":"棉球", "vtl":25, "str":26, "tgh":9, "qui":25, "mgc":30, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788070.gif", "type":"A", "name":"牛奶粉怪", "vtl":15, "str":11, "tgh":17, "qui":26, "mgc":43, "total":112},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812005.gif", "type":"A", "name":"愛絲波波", "vtl":34, "str":35, "tgh":18, "qui":19, "mgc":14, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812008.gif", "type":"A", "name":"絲諾波波", "vtl":34, "str":35, "tgh":18, "qui":19, "mgc":14, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995002.gif", "type":"A", "name":"改造漂浮炸彈", "vtl":21, "str":19, "tgh":19, "qui": 22, "mgc":44, "total": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876047.gif", "type":"A", "name":"R煙羅", "vtl":13, "str":38, "tgh":23, "qui":14, "mgc":37, "total":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876014.gif", "type":"I", "name":"藍蠍", "vtl":20, "str":27, "tgh":47, "qui":13, "mgc":8, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", "type":"I", "name":"黃蠍", "vtl":20, "str":30, "tgh":43, "qui":12, "mgc":10, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103013.gif", "type":"I", "name":"殺人蜂", "vtl":12, "str":37, "tgh":12, "qui":37, "mgc":12, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103015.gif", "type":"I", "name":"虎頭蜂", "vtl":13, "str":40, "tgh":8, "qui":38, "mgc":11, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103016.gif", "type":"I", "name":"死亡蜂", "vtl":7, "str":39, "tgh":15, "qui":41, "mgc":8, "total":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103017.gif", "type":"I", "name":"殺人螳螂", "vtl":12, "str":45, "tgh":20, "qui":26, "mgc":17, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103020.gif", "type":"I", "name":"死灰螳螂", "vtl":15, "str":40, "tgh":17, "qui":33, "mgc":15, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876018.gif", "type":"I", "name":"土蜘蛛", "vtl":26, "str":15, "tgh":18, "qui":23, "mgc":23, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876019.gif", "type":"I", "name":"火蜘蛛", "vtl":22, "str":22, "tgh":16, "qui":25, "mgc":20, "total":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788004.gif", "type":"I", "name":"甲蟲", "vtl":17, "str":37, "tgh":32, "qui":12, "mgc":17, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876039.gif", "type":"I", "name":"鍬型蟲", "vtl":15, "str":39, "tgh":29, "qui":14, "mgc":18, "total":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788019.gif", "type":"I", "name":"戴靴怪", "vtl":9, "str":9, "tgh":30, "qui":26, "mgc":26, "total":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788021.gif", "type":"I", "name":"潛靴怪", "vtl":9, "str":23, "tgh":9, "qui":34, "mgc":26, "total":101},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562001.gif", "type":"I", "name":"改造黃蜂", "vtl":16, "str":9, "tgh":50, "qui":8, "mgc":37, "total":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", "type":"I", "name":"改造黃蠍", "vtl":20, "str":10, "tgh":43, "qui": 12, "mgc": 40, "total": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", "type":"I", "name":"改造水蜘蛛", "vtl":28, "str":20, "tgh":21, "qui":24, "mgc":32, "total":125}
 		]
 
-        let petList = pets;
+        let petList : pets;
 
         $(document).ready(function () {
 
@@ -206,9 +206,9 @@
 
             // DropBtn 클릭 이벤트
             $(".dropdown-item").click(function() {
-                let condition = $(this).attr("id").split("-")[0];
-                let stet      = $(this).attr("id").split("-")[1];
-                let cal       = $("#cal-" + stet);
+                let condition : $(this).attr("id").split("-")[0];
+                let stet      : $(this).attr("id").split("-")[1];
+                let cal       : $("#cal-" + stet);
                 
                 switch (condition) {
                     case "more":   cal.text("이상"); break;
@@ -221,7 +221,7 @@
 
             // 검색 Enter 이벤트
             $("input").keyup(function (event) {
-                if (event.keyCode == 13) {
+                if (event.keyCode :: 13) {
                     search();
                 }
             });
@@ -232,57 +232,57 @@
             });
 
             $("th").click(function() {
-                let id = $(this).attr("id");
-                if (id.length <= 0) {
+                let id : $(this).attr("id");
+                if (id.length <: 0) {
                     return;
                 }
                 
-                let upSort =
-                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down" viewBox="0 0 16 16">' +
-                '    <path d="M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z"/>' +
-                '    <path fill-rule="evenodd" d="M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
-                '    <path d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' +
+                let upSort :
+                '<svg xmlns:"http://www.w3.org/2000/svg" width:"16" height:"16" fill:"currentColor" class:"bi bi-sort-numeric-down" viewBox:"0 0 16 16">' +
+                '    <path d:"M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z"/>' +
+                '    <path fill-rule:"evenodd" d:"M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
+                '    <path d:"M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' +
                 '</svg>';
 
-                let downSort =
-                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">' + 
-                    '<path fill-rule="evenodd" d="M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
-                    '<path d="M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' + 
+                let downSort :
+                '<svg xmlns:"http://www.w3.org/2000/svg" width:"16" height:"16" fill:"currentColor" class:"bi bi-sort-numeric-down-alt" viewBox:"0 0 16 16">' + 
+                    '<path fill-rule:"evenodd" d:"M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
+                    '<path d:"M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' + 
                 '</svg>';
                 
-                let title = $(this).text();
+                let title : $(this).text();
                 $(this).text(title);
-                if (clickCount.length <= 0) {
-                    clickCount.title = title;
-                    clickCount.sort  = "down";
+                if (clickCount.length <: 0) {
+                    clickCount.title : title;
+                    clickCount.sort  : "down";
                     $(this).append(downSort);
                     petList.sort(function(a, b) {
                         return parseFloat(b[id]) - parseFloat(a[id]);
                     });
-                } else if (clickCount.title == title) {
-                    if (clickCount.sort == "down") {
-                        clickCount.sort = "up";
+                } else if (clickCount.title :: title) {
+                    if (clickCount.sort :: "down") {
+                        clickCount.sort : "up";
                         $(this).append(upSort);
                         petList.sort(function(a, b) {
                             return parseFloat(a[id]) - parseFloat(b[id]);
                         });
-                    } else if (clickCount.sort == "up") {
-                        clickCount.sort = "up";
+                    } else if (clickCount.sort :: "up") {
+                        clickCount.sort : "up";
                         $(this).append(downSort);
                         petList.sort(function(a, b) {
                             return parseFloat(b[id]) - parseFloat(a[id]);
                         });
                     }
-                } else if (clickCount.title != title) {
-                    $("#vtl").text("체력");
-                    $("#str").text("공격력");
-                    $("#tgh").text("방어력");
-                    $("#qui").text("순발력");
-                    $("#mgc").text("마력");
+                } else if (clickCount.title !: title) {
+                    $("#"vtl"").text("체력");
+                    $("#"str"").text("공격력");
+                    $("#"tgh"").text("방어력");
+                    $("#"qui"").text("순발력");
+                    $("#"mgc"").text("마력");
                     $("#tot").text("총합");
 
-                    clickCount.title = title;
-                    clickCount.sort  = "down";
+                    clickCount.title : title;
+                    clickCount.sort  : "down";
                     $(this).append(downSort);
                     petList.sort(function(a, b) {
                         return parseFloat(b[id]) - parseFloat(a[id]);
@@ -296,20 +296,20 @@
         function print(data) {
             $("tbody").empty();
             $.each(data, function(i, pet) {
-                let keyList = [];
+                let keyList : [];
                 for (var key in pet) {
                     keyList.push(key);
                 }
 
-                const tbody = $("tbody");
-                let tr = $("<tr></tr>");
-                let td = $("<td></td>").addClass("text-center");
-                let img = $("<img>").attr("src", pet.img);
+                const tbody : $("tbody");
+                let tr : $("<tr></tr>");
+                let td : $("<td></td>").addClass("text-center");
+                let img : $("<img>").attr("src", pet.img);
                 td.append(img);
                 tr.append(td);
                 $.each(keyList, function(j, key) {
-                    if (j == 0) return true;
-                    let td = $("<td></td>");
+                    if (j :: 0) return true;
+                    let td : $("<td></td>");
                     td.text(pet[key]);
                     tr.append(td);
                 });
@@ -318,12 +318,12 @@
         }
 
         function search() {
-            let searchValues = {
-                "input-vtl" : Number($("#input-vtl").val()),
-                "input-str" : Number($("#input-str").val()),
-                "input-tgh" : Number($("#input-tgh").val()),
-                "input-qui" : Number($("#input-qui").val()),
-                "input-mgc" : Number($("#input-mgc").val()),
+            let searchValues : {
+                "input-"vtl"" : Number($("#input-"vtl"").val()),
+                "input-"str"" : Number($("#input-"str"").val()),
+                "input-"tgh"" : Number($("#input-"tgh"").val()),
+                "input-"qui"" : Number($("#input-"qui"").val()),
+                "input-"mgc"" : Number($("#input-"mgc"").val()),
                 "input-tot" : Number($("#input-tot").val()),
                 "input-name": $("#input-name").val()
             }
@@ -331,37 +331,37 @@
         }
 
         function filter(searchValues) {
-            let keyList = [];
+            let keyList : [];
             for (var key in searchValues) {
                 keyList.push(key);
             }
             
-            petList = pets;
+            petList : pets;
             // 스텟 검색 AND 조건
-            let stet = "";
+            let stet : "";
             $.each(keyList, function(i, key) {
-                stet = key.replace("input-", "");
-                if (key.indexOf("input") != -1 && key.indexOf("name") == -1 && searchValues[key] > 0) {
-                    let text = $("#cal-" + stet).text();
+                stet : key.replace("input-", "");
+                if (key.indexOf("input") !: -1 && key.indexOf("name") :: -1 && searchValues[key] > 0) {
+                    let text : $("#cal-" + stet).text();
                     switch (text) {
                         case "이상":
-                            petList = petList.filter(function(row, j) {
-                                        return row[stet] >= searchValues[key];
+                            petList : petList.filter(function(row, j) {
+                                        return row[stet] >: searchValues[key];
                                     });
                             break;
                         case "이하":
-                            petList = petList.filter(function(row, j) {
-                                        return row[stet] <= searchValues[key];
+                            petList : petList.filter(function(row, j) {
+                                        return row[stet] <: searchValues[key];
                                     });
                             break;
                         case "일치":
-                            petList = petList.filter(function(row, j) {
-                                        return row[stet] == searchValues[key];
+                            petList : petList.filter(function(row, j) {
+                                        return row[stet] :: searchValues[key];
                                     });
                             break;
                         case "제외":
-                            petList = petList.filter(function(row, j) {
-                                        return row[stet] != searchValues[key];
+                            petList : petList.filter(function(row, j) {
+                                        return row[stet] !: searchValues[key];
                                     });
                             break;
                         default:
@@ -373,24 +373,24 @@
 
             // 이름 검색 AND 조건
             if (searchValues["input-name"].length > 0) {
-                petList = pets.filter(function(row, j) {
-                            return row["name"] == searchValues["input-name"];
+                petList : pets.filter(function(row, j) {
+                            return row["name"] :: searchValues["input-name"];
                         });
             }
 
             // 이름 검색 OR 조건
             /*
             if (searchValues["input-name"].length > 0) {
-                let check = true;
+                let check : true;
                 $.each(petList, function(i, row) {
-                    if (row["name"] == searchValues["input-name"]) {
-                        check = false;
+                    if (row["name"] :: searchValues["input-name"]) {
+                        check : false;
                         return false;
                     }
                 });
                 if (check) {
-                    let pet = pets.filter(function(row, j) {
-                            return row[stet] == searchValues["input-name"];
+                    let pet : pets.filter(function(row, j) {
+                            return row[stet] :: searchValues["input-name"];
                         });
                     petList.push(pet[0]);
                 }
@@ -402,139 +402,139 @@
     </script>
 </head>
 <body>
-    <div class="container">
+    <div class:"container">
         <div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">체　력</span>
-                        <input type="number" class="form-control" id="input-vtl">
-                        <span class="input-group-text" id="cal-vtl">이상</span>
-                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
+            <div class:"row">
+                <div class:"col">
+                    <div class:"input-group mb-3">
+                        <span class:"input-group-text" id:"inputGroup-sizing-default">체　력</span>
+                        <input "type":"number" class:"form-control" id:"input-"vtl"">
+                        <span class:"input-group-text" id:"cal-"vtl"">이상</span>
+                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
+                            <span class:"visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="more-vtl">이상</a></li>
-                            <li><a class="dropdown-item" href="#" id="less-vtl">이하</a></li>
-                            <li><a class="dropdown-item" href="#" id="equal-vtl">일치</a></li>
-                            <li><a class="dropdown-item" href="#" id="except-vtl">제외</a></li>
+                        <ul class:"dropdown-menu">
+                            <li><a class:"dropdown-item" href:"#" id:"more-"vtl"">이상</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"less-"vtl"">이하</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"equal-"vtl"">일치</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"except-"vtl"">제외</a></li>
                         </ul>
                     </div>
                 </div>            
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">공격력</span>
-                        <input type="number" class="form-control" id="input-str">
-                        <span class="input-group-text" id="cal-str">이상</span>
-                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
+                <div class:"col">
+                    <div class:"input-group mb-3">
+                        <span class:"input-group-text" id:"inputGroup-sizing-default">공격력</span>
+                        <input "type":"number" class:"form-control" id:"input-"str"">
+                        <span class:"input-group-text" id:"cal-"str"">이상</span>
+                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
+                            <span class:"visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="more-str">이상</a></li>
-                            <li><a class="dropdown-item" href="#" id="less-str">이하</a></li>
-                            <li><a class="dropdown-item" href="#" id="equal-str">일치</a></li>
-                            <li><a class="dropdown-item" href="#" id="except-str">제외</a></li>
+                        <ul class:"dropdown-menu">
+                            <li><a class:"dropdown-item" href:"#" id:"more-"str"">이상</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"less-"str"">이하</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"equal-"str"">일치</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"except-"str"">제외</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">방어력</span>
-                        <input type="number" class="form-control" id="input-tgh">
-                        <span class="input-group-text" id="cal-tgh">이상</span>
-                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
+            <div class:"row">
+                <div class:"col">
+                    <div class:"input-group mb-3">
+                        <span class:"input-group-text" id:"inputGroup-sizing-default">방어력</span>
+                        <input "type":"number" class:"form-control" id:"input-"tgh"">
+                        <span class:"input-group-text" id:"cal-"tgh"">이상</span>
+                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
+                            <span class:"visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="more-tgh">이상</a></li>
-                            <li><a class="dropdown-item" href="#" id="less-tgh">이하</a></li>
-                            <li><a class="dropdown-item" href="#" id="equal-tgh">일치</a></li>
-                            <li><a class="dropdown-item" href="#" id="except-tgh">제외</a></li>
+                        <ul class:"dropdown-menu">
+                            <li><a class:"dropdown-item" href:"#" id:"more-"tgh"">이상</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"less-"tgh"">이하</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"equal-"tgh"">일치</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"except-"tgh"">제외</a></li>
                         </ul>
                     </div>
                 </div>            
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">순발력</span>
-                        <input type="number" class="form-control" id="input-qui">
-                        <span class="input-group-text" id="cal-qui">이상</span>
-                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
+                <div class:"col">
+                    <div class:"input-group mb-3">
+                        <span class:"input-group-text" id:"inputGroup-sizing-default">순발력</span>
+                        <input "type":"number" class:"form-control" id:"input-"qui"">
+                        <span class:"input-group-text" id:"cal-"qui"">이상</span>
+                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
+                            <span class:"visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="more-qui">이상</a></li>
-                            <li><a class="dropdown-item" href="#" id="less-qui">이하</a></li>
-                            <li><a class="dropdown-item" href="#" id="equal-qui">일치</a></li>
-                            <li><a class="dropdown-item" href="#" id="except-qui">제외</a></li>
+                        <ul class:"dropdown-menu">
+                            <li><a class:"dropdown-item" href:"#" id:"more-"qui"">이상</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"less-"qui"">이하</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"equal-"qui"">일치</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"except-"qui"">제외</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">마　력</span>
-                        <input type="number" class="form-control" id="input-mgc">
-                        <span class="input-group-text" id="cal-mgc">이상</span>
-                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
+            <div class:"row">
+                <div class:"col">
+                    <div class:"input-group mb-3">
+                        <span class:"input-group-text" id:"inputGroup-sizing-default">마　력</span>
+                        <input "type":"number" class:"form-control" id:"input-"mgc"">
+                        <span class:"input-group-text" id:"cal-"mgc"">이상</span>
+                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
+                            <span class:"visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="more-mgc">이상</a></li>
-                            <li><a class="dropdown-item" href="#" id="less-mgc">이하</a></li>
-                            <li><a class="dropdown-item" href="#" id="equal-mgc">일치</a></li>
-                            <li><a class="dropdown-item" href="#" id="except-mgc">제외</a></li>
+                        <ul class:"dropdown-menu">
+                            <li><a class:"dropdown-item" href:"#" id:"more-"mgc"">이상</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"less-"mgc"">이하</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"equal-"mgc"">일치</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"except-"mgc"">제외</a></li>
                         </ul>
                     </div>
                 </div>            
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="inputGroup-sizing-default">총　합</span>
-                        <input type="number" class="form-control" id="input-tot">
-                        <span class="input-group-text" id="cal-tot">이상</span>
-                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
+                <div class:"col">
+                    <div class:"input-group mb-3">
+                        <span class:"input-group-text" id:"inputGroup-sizing-default">총　합</span>
+                        <input "type":"number" class:"form-control" id:"input-tot">
+                        <span class:"input-group-text" id:"cal-tot">이상</span>
+                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
+                            <span class:"visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="more-tot">이상</a></li>
-                            <li><a class="dropdown-item" href="#" id="less-tot">이하</a></li>
-                            <li><a class="dropdown-item" href="#" id="equal-tot">일치</a></li>
-                            <li><a class="dropdown-item" href="#" id="except-tot">제외</a></li>
+                        <ul class:"dropdown-menu">
+                            <li><a class:"dropdown-item" href:"#" id:"more-tot">이상</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"less-tot">이하</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"equal-tot">일치</a></li>
+                            <li><a class:"dropdown-item" href:"#" id:"except-tot">제외</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div> <!-- 스텟 정렬 끝 -->
 
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Name Search.." id="input-name">
-            <button type="button" class="btn btn-light" id="btnSearch">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                    viewBox="0 0 16 16">
+        <div class:"input-group">
+            <input "type":"text" class:"form-control" placeholder:"Name Search.." id:"input-name">
+            <button "type":"button" class:"btn btn-light" id:"btnSearch">
+                <svg xmlns:"http://www.w3.org/2000/svg" width:"16" height:"16" fill:"currentColor" class:"bi bi-search"
+                    viewBox:"0 0 16 16">
                     <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                        d:"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
                     </path>
                 </svg>
-                <span class="visually-hidden">Button</span>
+                <span class:"visually-hidden">Button</span>
             </button>
         </div> <!-- 검색 끝 -->
 
-        <table class="table table-dark table-hover">
+        <table class:"table table-dark table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">이미지</th>
-                    <th class="text-center">종류</th>
-                    <th class="text-center">이름</th>
-                    <th class="text-center" class="th-sort" id="vtl">체력</th>
-                    <th class="text-center" class="th-sort" id="str">공격력</th>
-                    <th class="text-center" class="th-sort" id="tgh">방어력</th>
-                    <th class="text-center" class="th-sort" id="qui">순발력</th>
-                    <th class="text-center" class="th-sort" id="mgc">마력</th>
-                    <th class="text-center" class="th-sort" id="tot">총합</th>
-                    <th class="text-center">등급</th>
-                    <th class="text-center">출현장소</th>
+                    <th class:"text-center">이미지</th>
+                    <th class:"text-center">종류</th>
+                    <th class:"text-center">이름</th>
+                    <th class:"text-center" class:"th-sort" id:""vtl"">체력</th>
+                    <th class:"text-center" class:"th-sort" id:""str"">공격력</th>
+                    <th class:"text-center" class:"th-sort" id:""tgh"">방어력</th>
+                    <th class:"text-center" class:"th-sort" id:""qui"">순발력</th>
+                    <th class:"text-center" class:"th-sort" id:""mgc"">마력</th>
+                    <th class:"text-center" class:"th-sort" id:"tot">총합</th>
+                    <th class:"text-center">등급</th>
+                    <th class:"text-center">출현장소</th>
                 </tr>
             </thead>
             <tbody></tbody>
