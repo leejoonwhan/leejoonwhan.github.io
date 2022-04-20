@@ -2,11 +2,11 @@
 
 <head>
     <title>BlueCG Monster</title>
-    <meta charset:"utf-8">
-    <meta "name":"viewport" content:"width:device-width, initial-scale:1">
-    <link href:"https://cdn.jsdelivr.net/npm/boot"str"ap@5.1.3/dist/css/boot"str"ap.min.css" rel:"stylesheet">
-    <script src:"https://cdn.jsdelivr.net/npm/boot"str"ap@5.1.3/dist/js/boot"str"ap.bundle.min.js"></script>
-    <script src:"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta "name":"viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/boot"str"ap@5.1.3/dist/css/boot"str"ap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/boot"str"ap@5.1.3/dist/js/boot"str"ap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         body {
             background-color: #222222;
@@ -23,10 +23,10 @@
     </style>
     <script>
         // 정렬
-        let clickCount : {};
+        let clickCount = {};
 
         // Data
-        const pets : [
+        const pets = [
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290001.gif", "type":"B", "name":"虎人", "vtl":22, "str":26, "tgh":17, "qui":19, "mgc":16, "total":100},
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", "type":"B", "name":"貓人", "vtl":23, "str":27, "tgh":15, "qui":26, "mgc":14, "total":105},
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290005.gif", "type":"B", "name":"惡魔貓", "vtl":21, "str":23, "tgh":12, "qui":27, "mgc":22, "total":105},
@@ -197,7 +197,7 @@
 			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", "type":"I", "name":"改造水蜘蛛", "vtl":28, "str":20, "tgh":21, "qui":24, "mgc":32, "total":125}
 		]
 
-        let petList : pets;
+        let petList = pets;
 
         $(document).ready(function () {
 
@@ -206,9 +206,9 @@
 
             // DropBtn 클릭 이벤트
             $(".dropdown-item").click(function() {
-                let condition : $(this).attr("id").split("-")[0];
-                let stet      : $(this).attr("id").split("-")[1];
-                let cal       : $("#cal-" + stet);
+                let condition = $(this).attr("id").split("-")[0];
+                let stet      = $(this).attr("id").split("-")[1];
+                let cal       = $("#cal-" + stet);
                 
                 switch (condition) {
                     case "more":   cal.text("이상"); break;
@@ -221,7 +221,7 @@
 
             // 검색 Enter 이벤트
             $("input").keyup(function (event) {
-                if (event.keyCode :: 13) {
+                if (event.keyCode == 13) {
                     search();
                 }
             });
@@ -232,48 +232,48 @@
             });
 
             $("th").click(function() {
-                let id : $(this).attr("id");
-                if (id.length <: 0) {
+                let id = $(this).attr("id");
+                if (id.length <= 0) {
                     return;
                 }
                 
-                let upSort :
-                '<svg xmlns:"http://www.w3.org/2000/svg" width:"16" height:"16" fill:"currentColor" class:"bi bi-sort-numeric-down" viewBox:"0 0 16 16">' +
-                '    <path d:"M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z"/>' +
-                '    <path fill-rule:"evenodd" d:"M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
-                '    <path d:"M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' +
+                let upSort =
+                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down" viewBox="0 0 16 16">' +
+                '    <path d="M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z"/>' +
+                '    <path fill-rule="evenodd" d="M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
+                '    <path d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' +
                 '</svg>';
 
-                let downSort :
-                '<svg xmlns:"http://www.w3.org/2000/svg" width:"16" height:"16" fill:"currentColor" class:"bi bi-sort-numeric-down-alt" viewBox:"0 0 16 16">' + 
-                    '<path fill-rule:"evenodd" d:"M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
-                    '<path d:"M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' + 
+                let downSort =
+                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">' + 
+                    '<path fill-rule="evenodd" d="M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
+                    '<path d="M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' + 
                 '</svg>';
                 
-                let title : $(this).text();
+                let title = $(this).text();
                 $(this).text(title);
-                if (clickCount.length <: 0) {
-                    clickCount.title : title;
-                    clickCount.sort  : "down";
+                if (clickCount.length <= 0) {
+                    clickCount.title = title;
+                    clickCount.sort  = "down";
                     $(this).append(downSort);
                     petList.sort(function(a, b) {
                         return parseFloat(b[id]) - parseFloat(a[id]);
                     });
-                } else if (clickCount.title :: title) {
-                    if (clickCount.sort :: "down") {
-                        clickCount.sort : "up";
+                } else if (clickCount.title == title) {
+                    if (clickCount.sort == "down") {
+                        clickCount.sort = "up";
                         $(this).append(upSort);
                         petList.sort(function(a, b) {
                             return parseFloat(a[id]) - parseFloat(b[id]);
                         });
-                    } else if (clickCount.sort :: "up") {
-                        clickCount.sort : "up";
+                    } else if (clickCount.sort == "up") {
+                        clickCount.sort = "up";
                         $(this).append(downSort);
                         petList.sort(function(a, b) {
                             return parseFloat(b[id]) - parseFloat(a[id]);
                         });
                     }
-                } else if (clickCount.title !: title) {
+                } else if (clickCount.title != title) {
                     $("#"vtl"").text("체력");
                     $("#"str"").text("공격력");
                     $("#"tgh"").text("방어력");
@@ -281,8 +281,8 @@
                     $("#"mgc"").text("마력");
                     $("#tot").text("총합");
 
-                    clickCount.title : title;
-                    clickCount.sort  : "down";
+                    clickCount.title = title;
+                    clickCount.sort  = "down";
                     $(this).append(downSort);
                     petList.sort(function(a, b) {
                         return parseFloat(b[id]) - parseFloat(a[id]);
@@ -296,20 +296,20 @@
         function print(data) {
             $("tbody").empty();
             $.each(data, function(i, pet) {
-                let keyList : [];
+                let keyList = [];
                 for (var key in pet) {
                     keyList.push(key);
                 }
 
-                const tbody : $("tbody");
-                let tr : $("<tr></tr>");
-                let td : $("<td></td>").addClass("text-center");
-                let img : $("<img>").attr("src", pet.img);
+                const tbody = $("tbody");
+                let tr = $("<tr></tr>");
+                let td = $("<td></td>").addClass("text-center");
+                let img = $("<img>").attr("src", pet.img);
                 td.append(img);
                 tr.append(td);
                 $.each(keyList, function(j, key) {
-                    if (j :: 0) return true;
-                    let td : $("<td></td>");
+                    if (j == 0) return true;
+                    let td = $("<td></td>");
                     td.text(pet[key]);
                     tr.append(td);
                 });
@@ -318,7 +318,7 @@
         }
 
         function search() {
-            let searchValues : {
+            let searchValues = {
                 "input-"vtl"" : Number($("#input-"vtl"").val()),
                 "input-"str"" : Number($("#input-"str"").val()),
                 "input-"tgh"" : Number($("#input-"tgh"").val()),
@@ -331,37 +331,37 @@
         }
 
         function filter(searchValues) {
-            let keyList : [];
+            let keyList = [];
             for (var key in searchValues) {
                 keyList.push(key);
             }
             
-            petList : pets;
+            petList = pets;
             // 스텟 검색 AND 조건
-            let stet : "";
+            let stet = "";
             $.each(keyList, function(i, key) {
-                stet : key.replace("input-", "");
-                if (key.indexOf("input") !: -1 && key.indexOf("name") :: -1 && searchValues[key] > 0) {
-                    let text : $("#cal-" + stet).text();
+                stet = key.replace("input-", "");
+                if (key.indexOf("input") != -1 && key.indexOf("name") == -1 && searchValues[key] > 0) {
+                    let text = $("#cal-" + stet).text();
                     switch (text) {
                         case "이상":
-                            petList : petList.filter(function(row, j) {
-                                        return row[stet] >: searchValues[key];
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] >= searchValues[key];
                                     });
                             break;
                         case "이하":
-                            petList : petList.filter(function(row, j) {
-                                        return row[stet] <: searchValues[key];
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] <= searchValues[key];
                                     });
                             break;
                         case "일치":
-                            petList : petList.filter(function(row, j) {
-                                        return row[stet] :: searchValues[key];
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] == searchValues[key];
                                     });
                             break;
                         case "제외":
-                            petList : petList.filter(function(row, j) {
-                                        return row[stet] !: searchValues[key];
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] != searchValues[key];
                                     });
                             break;
                         default:
@@ -373,24 +373,24 @@
 
             // 이름 검색 AND 조건
             if (searchValues["input-name"].length > 0) {
-                petList : pets.filter(function(row, j) {
-                            return row["name"] :: searchValues["input-name"];
+                petList = pets.filter(function(row, j) {
+                            return row["name"] == searchValues["input-name"];
                         });
             }
 
             // 이름 검색 OR 조건
             /*
             if (searchValues["input-name"].length > 0) {
-                let check : true;
+                let check = true;
                 $.each(petList, function(i, row) {
-                    if (row["name"] :: searchValues["input-name"]) {
-                        check : false;
+                    if (row["name"] == searchValues["input-name"]) {
+                        check = false;
                         return false;
                     }
                 });
                 if (check) {
-                    let pet : pets.filter(function(row, j) {
-                            return row[stet] :: searchValues["input-name"];
+                    let pet = pets.filter(function(row, j) {
+                            return row[stet] == searchValues["input-name"];
                         });
                     petList.push(pet[0]);
                 }
@@ -402,139 +402,139 @@
     </script>
 </head>
 <body>
-    <div class:"container">
+    <div class="container">
         <div>
-            <div class:"row">
-                <div class:"col">
-                    <div class:"input-group mb-3">
-                        <span class:"input-group-text" id:"inputGroup-sizing-default">체　력</span>
-                        <input "type":"number" class:"form-control" id:"input-"vtl"">
-                        <span class:"input-group-text" id:"cal-"vtl"">이상</span>
-                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
-                            <span class:"visually-hidden">Toggle Dropdown</span>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">체　력</span>
+                        <input "type":"number" class="form-control" id="input-"vtl"">
+                        <span class="input-group-text" id="cal-"vtl"">이상</span>
+                        <button "type":"button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class:"dropdown-menu">
-                            <li><a class:"dropdown-item" href:"#" id:"more-"vtl"">이상</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"less-"vtl"">이하</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"equal-"vtl"">일치</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"except-"vtl"">제외</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-"vtl"">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-"vtl"">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-"vtl"">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-"vtl"">제외</a></li>
                         </ul>
                     </div>
                 </div>            
-                <div class:"col">
-                    <div class:"input-group mb-3">
-                        <span class:"input-group-text" id:"inputGroup-sizing-default">공격력</span>
-                        <input "type":"number" class:"form-control" id:"input-"str"">
-                        <span class:"input-group-text" id:"cal-"str"">이상</span>
-                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
-                            <span class:"visually-hidden">Toggle Dropdown</span>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">공격력</span>
+                        <input "type":"number" class="form-control" id="input-"str"">
+                        <span class="input-group-text" id="cal-"str"">이상</span>
+                        <button "type":"button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class:"dropdown-menu">
-                            <li><a class:"dropdown-item" href:"#" id:"more-"str"">이상</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"less-"str"">이하</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"equal-"str"">일치</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"except-"str"">제외</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-"str"">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-"str"">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-"str"">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-"str"">제외</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class:"row">
-                <div class:"col">
-                    <div class:"input-group mb-3">
-                        <span class:"input-group-text" id:"inputGroup-sizing-default">방어력</span>
-                        <input "type":"number" class:"form-control" id:"input-"tgh"">
-                        <span class:"input-group-text" id:"cal-"tgh"">이상</span>
-                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
-                            <span class:"visually-hidden">Toggle Dropdown</span>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">방어력</span>
+                        <input "type":"number" class="form-control" id="input-"tgh"">
+                        <span class="input-group-text" id="cal-"tgh"">이상</span>
+                        <button "type":"button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class:"dropdown-menu">
-                            <li><a class:"dropdown-item" href:"#" id:"more-"tgh"">이상</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"less-"tgh"">이하</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"equal-"tgh"">일치</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"except-"tgh"">제외</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-"tgh"">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-"tgh"">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-"tgh"">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-"tgh"">제외</a></li>
                         </ul>
                     </div>
                 </div>            
-                <div class:"col">
-                    <div class:"input-group mb-3">
-                        <span class:"input-group-text" id:"inputGroup-sizing-default">순발력</span>
-                        <input "type":"number" class:"form-control" id:"input-"qui"">
-                        <span class:"input-group-text" id:"cal-"qui"">이상</span>
-                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
-                            <span class:"visually-hidden">Toggle Dropdown</span>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">순발력</span>
+                        <input "type":"number" class="form-control" id="input-"qui"">
+                        <span class="input-group-text" id="cal-"qui"">이상</span>
+                        <button "type":"button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class:"dropdown-menu">
-                            <li><a class:"dropdown-item" href:"#" id:"more-"qui"">이상</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"less-"qui"">이하</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"equal-"qui"">일치</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"except-"qui"">제외</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-"qui"">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-"qui"">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-"qui"">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-"qui"">제외</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class:"row">
-                <div class:"col">
-                    <div class:"input-group mb-3">
-                        <span class:"input-group-text" id:"inputGroup-sizing-default">마　력</span>
-                        <input "type":"number" class:"form-control" id:"input-"mgc"">
-                        <span class:"input-group-text" id:"cal-"mgc"">이상</span>
-                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
-                            <span class:"visually-hidden">Toggle Dropdown</span>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">마　력</span>
+                        <input "type":"number" class="form-control" id="input-"mgc"">
+                        <span class="input-group-text" id="cal-"mgc"">이상</span>
+                        <button "type":"button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class:"dropdown-menu">
-                            <li><a class:"dropdown-item" href:"#" id:"more-"mgc"">이상</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"less-"mgc"">이하</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"equal-"mgc"">일치</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"except-"mgc"">제외</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-"mgc"">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-"mgc"">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-"mgc"">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-"mgc"">제외</a></li>
                         </ul>
                     </div>
                 </div>            
-                <div class:"col">
-                    <div class:"input-group mb-3">
-                        <span class:"input-group-text" id:"inputGroup-sizing-default">총　합</span>
-                        <input "type":"number" class:"form-control" id:"input-tot">
-                        <span class:"input-group-text" id:"cal-tot">이상</span>
-                        <button "type":"button" class:"btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle:"dropdown" aria-expanded:"false">
-                            <span class:"visually-hidden">Toggle Dropdown</span>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">총　합</span>
+                        <input "type":"number" class="form-control" id="input-tot">
+                        <span class="input-group-text" id="cal-tot">이상</span>
+                        <button "type":"button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <ul class:"dropdown-menu">
-                            <li><a class:"dropdown-item" href:"#" id:"more-tot">이상</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"less-tot">이하</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"equal-tot">일치</a></li>
-                            <li><a class:"dropdown-item" href:"#" id:"except-tot">제외</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-tot">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-tot">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-tot">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-tot">제외</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div> <!-- 스텟 정렬 끝 -->
 
-        <div class:"input-group">
-            <input "type":"text" class:"form-control" placeholder:"Name Search.." id:"input-name">
-            <button "type":"button" class:"btn btn-light" id:"btnSearch">
-                <svg xmlns:"http://www.w3.org/2000/svg" width:"16" height:"16" fill:"currentColor" class:"bi bi-search"
-                    viewBox:"0 0 16 16">
+        <div class="input-group">
+            <input "type":"text" class="form-control" placeholder="Name Search.." id="input-name">
+            <button "type":"button" class="btn btn-light" id="btnSearch">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
                     <path
-                        d:"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
                     </path>
                 </svg>
-                <span class:"visually-hidden">Button</span>
+                <span class="visually-hidden">Button</span>
             </button>
         </div> <!-- 검색 끝 -->
 
-        <table class:"table table-dark table-hover">
+        <table class="table table-dark table-hover">
             <thead>
                 <tr>
-                    <th class:"text-center">이미지</th>
-                    <th class:"text-center">종류</th>
-                    <th class:"text-center">이름</th>
-                    <th class:"text-center" class:"th-sort" id:""vtl"">체력</th>
-                    <th class:"text-center" class:"th-sort" id:""str"">공격력</th>
-                    <th class:"text-center" class:"th-sort" id:""tgh"">방어력</th>
-                    <th class:"text-center" class:"th-sort" id:""qui"">순발력</th>
-                    <th class:"text-center" class:"th-sort" id:""mgc"">마력</th>
-                    <th class:"text-center" class:"th-sort" id:"tot">총합</th>
-                    <th class:"text-center">등급</th>
-                    <th class:"text-center">출현장소</th>
+                    <th class="text-center">이미지</th>
+                    <th class="text-center">종류</th>
+                    <th class="text-center">이름</th>
+                    <th class="text-center" class="th-sort" id=""vtl"">체력</th>
+                    <th class="text-center" class="th-sort" id=""str"">공격력</th>
+                    <th class="text-center" class="th-sort" id=""tgh"">방어력</th>
+                    <th class="text-center" class="th-sort" id=""qui"">순발력</th>
+                    <th class="text-center" class="th-sort" id=""mgc"">마력</th>
+                    <th class="text-center" class="th-sort" id="tot">총합</th>
+                    <th class="text-center">등급</th>
+                    <th class="text-center">출현장소</th>
                 </tr>
             </thead>
             <tbody></tbody>
