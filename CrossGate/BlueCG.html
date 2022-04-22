@@ -1,0 +1,1042 @@
+<html>
+
+<head>
+    <title>BlueCG Monster</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #222222;
+            color: white;
+        }
+
+        input[type="number"] {
+            text-align: right;
+        }
+
+        th {
+            cursor:pointer;
+        }
+
+		.text-red {color: red;}
+		.text-blue {color: blue;}
+
+		#remote-control button, #remote-control a {
+			position: fixed;
+			z-index: 99;
+			border: none;
+			outline: none;
+			cursor: ointer;
+			right: 30px;
+			padding: 15px;
+			border-radius: 4px;
+			width: 50px;
+			height: 50px;
+		}
+
+		#btnB { bottom: 680px; display: none; }
+		#btnU { bottom: 620px; display: none; }
+		#btnP { bottom: 560px; display: none; }
+		#btnF { bottom: 500px; display: none; }
+		#btnH { bottom: 440px; display: none; }
+		#btnD { bottom: 380px; display: none; }
+		#btnM { bottom: 320px; display: none; }
+		#btnA { bottom: 260px; display: none; }
+		#btnI { bottom: 200px; display: none; }
+		#btnBox { bottom: 140px; }
+		#btnComparison { bottom: 80px; }
+		#btnTop { bottom: 20px; display: none; }
+
+		#exampleModal {
+			color: black;
+		}
+
+		.w-40 {width: 40%!important;}
+		.w-20 {width: 20%!important;}
+
+    </style>
+    <script>
+        // 정렬
+        let clickCount = {};
+
+        // Data
+        const pets = [
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290001.gif", "type":"B", "name":"워타이거", "vtl":22, "str":26, "tgh":17, "qui":19, "mgc":16, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290002.gif", "type":"B", "name":"캣시", "vtl":19, "str":24, "tgh":17, "qui":28, "mgc":17, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", "type":"B", "name":"라크샤샤", "vtl":23, "str":27, "tgh":15, "qui":26, "mgc":14, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290003.gif", "type":"B", "name":"워캣", "vtl":24, "str":25, "tgh":14, "qui":22, "mgc":20, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290005.gif", "type":"B", "name":"묘차", "vtl":21, "str":23, "tgh":12, "qui":27, "mgc":22, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290006.gif", "type":"B", "name":"레이디큐르", "vtl":18, "str":30, "tgh":11, "qui":25, "mgc":26, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103001.gif", "type":"B", "name":"케이브베어", "vtl":34, "str":34, "tgh":19, "qui":19, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103002.gif", "type":"B", "name":"스칼렛베어", "vtl":35, "str":36, "tgh":15, "qui":20, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103003.gif", "type":"B", "name":"폴라베어", "vtl":36, "str":33, "tgh":22, "qui":18, "mgc":11, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507616437001.gif", "type":"B", "name":"레드아이", "vtl":33, "str":35, "tgh":14, "qui":22, "mgc":16, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103004.gif", "type":"B", "name":"팬더", "vtl":32, "str":40, "tgh":18, "qui":17, "mgc":18, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505633764018.gif", "type":"B", "name":"놋커", "vtl":6, "str":13, "tgh":20, "qui":26, "mgc":35, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177001.gif", "type":"B", "name":"페이크렛", "vtl":7, "str":12, "tgh":15, "qui":34, "mgc":32, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121005.gif", "type":"B", "name":"나이트메어", "vtl":4, "str":8, "tgh":18, "qui":33, "mgc":37, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121006.gif", "type":"B", "name":"카방클", "vtl":7, "str":7, "tgh":22, "qui":27, "mgc":37, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507027315001.gif", "type":"B", "name":"큐", "vtl":11, "str":15, "tgh":28, "qui":28, "mgc":33, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507027315002.gif", "type":"B", "name":"킹큐", "vtl":15, "str":7, "tgh":19, "qui":32, "mgc":42, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876001.gif", "type":"B", "name":"켈베로스", "vtl":26, "str":36, "tgh":12, "qui":23, "mgc":18, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876002.gif", "type":"B", "name":"펜닐", "vtl":22, "str":37, "tgh":11, "qui":25, "mgc":20, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876003.gif", "type":"B", "name":"헬하운드", "vtl":24, "str":35, "tgh":19, "qui":22, "mgc":15, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876004.gif", "type":"B", "name":"가룸", "vtl":23, "str":40, "tgh":13, "qui":21, "mgc":18, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498002.gif", "type":"B", "name":"유니콘", "vtl":17, "str":25, "tgh":13, "qui":28, "mgc":37, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261001.gif", "type":"B", "name":"페가수스", "vtl":22, "str":22, "tgh":12, "qui":32, "mgc":32, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498003.gif", "type":"B", "name":"기린", "vtl":19, "str":27, "tgh":10, "qui":34, "mgc":30, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261002.gif", "type":"B", "name":"토타스크", "vtl":22, "str":22, "tgh":37, "qui":10, "mgc":19, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498004.gif", "type":"B", "name":"칼라파스", "vtl":23, "str":20, "tgh":45, "qui":4, "mgc":18, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498005.gif", "type":"B", "name":"히트셀", "vtl":27, "str":17, "tgh":42, "qui":7, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498006.gif", "type":"B", "name":"아다만타스", "vtl":26, "str":16, "tgh":47, "qui":5, "mgc":16, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506011.gif", "type":"B", "name":"나이프치킨", "vtl":4, "str":32, "tgh":12, "qui":34, "mgc":15, "tot":97},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506013.gif", "type":"B", "name":"소드리치", "vtl":28, "str":20, "tgh":17, "qui":23, "mgc":16, "tot":104},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506014.gif", "type":"B", "name":"쵸파에뮤", "vtl":7, "str":38, "tgh":8, "qui":36, "mgc":21, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506015.gif", "type":"B", "name":"블레이드무", "vtl":7, "str":28, "tgh":22, "qui":23, "mgc":23, "tot":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506016.gif", "type":"B", "name":"백은", "vtl":18, "str":42, "tgh":10, "qui":32, "mgc":5, "tot":107},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506017.gif", "type":"B", "name":"황동", "vtl":32, "str":21, "tgh":10, "qui":34, "mgc":18, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506018.gif", "type":"B", "name":"흑강", "vtl":19, "str":40, "tgh":10, "qui":30, "mgc":5, "tot":104},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506019.gif", "type":"B", "name":"적동", "vtl":27, "str":30, "tgh":13, "qui":26, "mgc":19, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788058.gif", "type":"B", "name":"푸카", "vtl":27, "str":22, "tgh":13, "qui":45, "mgc":8, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788059.gif", "type":"B", "name":"카쥬마르", "vtl":11, "str":8, "tgh":21, "qui":44, "mgc":31, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788061.gif", "type":"B", "name":"키지무나", "vtl":18, "str":28, "tgh":11, "qui":42, "mgc":16, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788062.gif", "type":"B", "name":"스네코스리", "vtl":18, "str":15, "tgh":16, "qui":51, "mgc":15, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788064.gif", "type":"B", "name":"카루텟토", "vtl":45, "str":33, "tgh":23, "qui":16, "mgc":8, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788066.gif", "type":"B", "name":"플래톤", "vtl":18, "str":8, "tgh":28, "qui":25, "mgc":46, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788068.gif", "type":"B", "name":"컴패니", "vtl":15, "str":28, "tgh":28, "qui":45, "mgc":9, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876050.gif", "type":"B", "name":"아미", "vtl":38, "str":23, "tgh":28, "qui":38, "mgc":3, "tot":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284004.gif", "type":"B", "name":"밴드", "vtl":23, "str":18, "tgh":33, "qui":18, "mgc":38, "tot":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788080.gif", "type":"B", "name":"마요루", "vtl":22, "str":32, "tgh":22, "qui":27, "mgc":22, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788076.gif", "type":"B", "name":"알드라", "vtl":22, "str":32, "tgh":22, "qui":27, "mgc":22, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788075.gif", "type":"B", "name":"루바스", "vtl":28, "str":26, "tgh":22, "qui":22, "mgc":27, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284003.gif", "type":"B", "name":"天狼星", "vtl":32, "str":32, "tgh":22, "qui":27, "mgc":22, "tot":135},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505633764018.gif", "type":"B", "name":"개조놋커", "vtl":11, "str":18, "tgh":25, "qui":31, "mgc":40, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177001.gif", "type":"B", "name":"개조페이크크렛", "vtl":12, "str":17, "tgh":20, "qui":39, "mgc":37, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876004.gif", "type":"B", "name":"개조가룸", "vtl":22, "str":55, "tgh":20, "qui":21, "mgc":17, "tot":135},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1510495904001.gif", "type":"B", "name":"雪兔", "vtl":14, "str":17, "tgh":26, "qui":11, "mgc":37, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876005.gif", "type":"U", "name":"좀비", "vtl":37, "str":32, "tgh":12, "qui":12, "mgc":12, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876006.gif", "type":"U", "name":"라세돈", "vtl":34, "str":34, "tgh":7, "qui":15, "mgc":14, "tot":104},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876007.gif", "type":"U", "name":"와이트", "vtl":32, "str":32, "tgh":17, "qui":7, "mgc":17, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876008.gif", "type":"U", "name":"거스트", "vtl":42, "str":37, "tgh":12, "qui":7, "mgc":7, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876009.gif", "type":"U", "name":"머미", "vtl":39, "str":32, "tgh":14, "qui":8, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163001.gif", "type":"U", "name":"스켈레톤", "vtl":12, "str":27, "tgh":42, "qui":12, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163002.gif", "type":"U", "name":"카완챠", "vtl":13, "str":24, "tgh":41, "qui":10, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163003.gif", "type":"U", "name":"스파토이", "vtl":14, "str":30, "tgh":40, "qui":11, "mgc":15, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163005.gif", "type":"U", "name":"리지트프레임", "vtl":12, "str":29, "tgh":45, "qui":13, "mgc":16, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1555176163004.gif", "type":"U", "name":"암드본", "vtl":9, "str":26, "tgh":47, "qui":8, "mgc":20, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103005.gif", "type":"U", "name":"고스트", "vtl":19, "str":18, "tgh":31, "qui":20, "mgc":27, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103006.gif", "type":"U", "name":"스펙터", "vtl":9, "str":21, "tgh":27, "qui":25, "mgc":33, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103007.gif", "type":"U", "name":"팬텀", "vtl":14, "str":27, "tgh":30, "qui":15, "mgc":29, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103008.gif", "type":"U", "name":"레버넌트", "vtl":10, "str":28, "tgh":32, "qui":17, "mgc":28, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506004.gif", "type":"U", "name":"그림리퍼", "vtl":23, "str":35, "tgh":18, "qui":17, "mgc":32, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506005.gif", "type":"U", "name":"앙쿠우", "vtl":19, "str":42, "tgh":20, "qui":15, "mgc":29, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467002.gif", "type":"U", "name":"리빙트랩", "vtl":27, "str":32, "tgh":32, "qui":12, "mgc":7, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467003.gif", "type":"U", "name":"크랜쳐", "vtl":32, "str":29, "tgh":37, "qui":7, "mgc":5, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467001.gif", "type":"U", "name":"튜잉본", "vtl":25, "str":30, "tgh":27, "qui":17, "mgc":11, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927467004.gif", "type":"U", "name":"파워풀검", "vtl":30, "str":37, "tgh":30, "qui":9, "mgc":4, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506022.gif", "type":"U", "name":"골드스컬", "vtl":6, "str":42, "tgh":11, "qui":12, "mgc":32, "tot":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506023.gif", "type":"U", "name":"포이즌스컬", "vtl":6, "str":32, "tgh":12, "qui":22, "mgc":32, "tot":104},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506024.gif", "type":"U", "name":"세크메트", "vtl":28, "str":23, "tgh":23, "qui":25, "mgc":16, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506025.gif", "type":"U", "name":"바스테트", "vtl":18, "str":23, "tgh":26, "qui":23, "mgc":25, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506026.gif", "type":"U", "name":"캣캡", "vtl":23, "str":33, "tgh":23, "qui":25, "mgc":11, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506027.gif", "type":"U", "name":"풀페이스", "vtl":18, "str":16, "tgh":30, "qui":33, "mgc":18, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506305871002.gif", "type":"U", "name":"메이지고스트", "vtl":17, "str":12, "tgh":16, "qui":28, "mgc":47, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506305871001.gif", "type":"U", "name":"드루이드고스트", "vtl":16, "str":12, "tgh":23, "qui":22, "mgc":47, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505732558001.gif", "type":"U", "name":"레드고스트", "vtl":12, "str":46, "tgh":16, "qui":30, "mgc":16, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505732558002.gif", "type":"U", "name":"위즈고스트", "vtl":16, "str":31, "tgh":17, "qui":40, "mgc":16, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506032.gif", "type":"U", "name":"卡爾克", "vtl":12, "str":45, "tgh":20, "qui":26, "mgc":17, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506033.gif", "type":"U", "name":"卡卡特", "vtl":20, "str":43, "tgh":18, "qui":27, "mgc":12, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876057.gif", "type":"U", "name":"修雷丁格", "vtl":18, "str":28, "tgh":18, "qui":33, "mgc":28, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284005.gif", "type":"U", "name":"惡夢貓", "vtl":23, "str":13, "tgh":18, "qui":33, "mgc":38, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876005.gif", "type":"U", "name":"개조좀비", "vtl":41, "str":36, "tgh":16, "qui":16, "mgc":16, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", "type":"P", "name":"트렌트", "vtl":32, "str":17, "tgh":32, "qui":12, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876022.gif", "type":"P", "name":"페트로틴버", "vtl":28, "str":20, "tgh":37, "qui":9, "mgc":16, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876023.gif", "type":"P", "name":"화이트바치", "vtl":29, "str":16, "tgh":28, "qui":17, "mgc":20, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876024.gif", "type":"P", "name":"드라이어드", "vtl":30, "str":15, "tgh":27, "qui":16, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876025.gif", "type":"P", "name":"모스그론", "vtl":31, "str":14, "tgh":29, "qui":15, "mgc":21, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995001.gif", "type":"P", "name":"골드마인", "vtl":38, "str":22, "tgh":28, "qui":10, "mgc":17, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449001.gif", "type":"P", "name":"베라돈나", "vtl":26, "str":11, "tgh":16, "qui":16, "mgc":36, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652157001.gif", "type":"P", "name":"맨드레이크", "vtl":25, "str":13, "tgh":14, "qui":15, "mgc":38, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449002.gif", "type":"P", "name":"라플레시아", "vtl":27, "str":12, "tgh":12, "qui":19, "mgc":32, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289006.gif", "type":"P", "name":"알라우네", "vtl":22, "str":17, "tgh":11, "qui":14, "mgc":41, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876026.gif", "type":"P", "name":"몰볼", "vtl":38, "str":23, "tgh":16, "qui":15, "mgc":23, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876027.gif", "type":"P", "name":"오츄", "vtl":37, "str":27, "tgh":18, "qui":11, "mgc":22, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876029.gif", "type":"P", "name":"카니보아", "vtl":44, "str":21, "tgh":14, "qui":12, "mgc":29, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876028.gif", "type":"P", "name":"리퍼", "vtl":35, "str":25, "tgh":15, "qui":18, "mgc":27, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289001.gif", "type":"P", "name":"캬크터스", "vtl":27, "str":29, "tgh":22, "qui":12, "mgc":20, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289002.gif", "type":"P", "name":"프릭크리", "vtl":24, "str":32, "tgh":27, "qui":10, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289003.gif", "type":"P", "name":"니들리암", "vtl":28, "str":35, "tgh":19, "qui":14, "mgc":14, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289004.gif", "type":"P", "name":"카르돈", "vtl":26, "str":36, "tgh":24, "qui":9, "mgc":15, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506416289005.gif", "type":"P", "name":"파이어댄서", "vtl":19, "str":38, "tgh":18, "qui":15, "mgc":25, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506845003001.gif", "type":"P", "name":"폴카팡카스", "vtl":37, "str":12, "tgh":12, "qui":17, "mgc":37, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876040.gif", "type":"P", "name":"블루미니스", "vtl":38, "str":15, "tgh":13, "qui":15, "mgc":34, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788007.gif", "type":"P", "name":"플라이아가릭", "vtl":35, "str":10, "tgh":15, "qui":14, "mgc":41, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788008.gif", "type":"P", "name":"스타맷쉬", "vtl":40, "str":13, "tgh":10, "qui":13, "mgc":39, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788029.gif", "type":"P", "name":"하나아루키", "vtl":8, "str":39, "tgh":25, "qui":12, "mgc":19, "tot":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788030.gif", "type":"P", "name":"하나바시리", "vtl":14, "str":41, "tgh":16, "qui":17, "mgc":14, "tot":102},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788031.gif", "type":"P", "name":"하나오도리", "vtl":45, "str":14, "tgh":11, "qui":7, "mgc":38, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788032.gif", "type":"P", "name":"하나토마리", "vtl":28, "str":33, "tgh":12, "qui":28, "mgc":26, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788036.gif", "type":"P", "name":"우제이", "vtl":29, "str":33, "tgh":38, "qui":7, "mgc":8, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788037.gif", "type":"P", "name":"틴텐", "vtl":23, "str":13, "tgh":40, "qui":18, "mgc":21, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788038.gif", "type":"P", "name":"세이슈", "vtl":23, "str":41, "tgh":38, "qui":3, "mgc":10, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", "type":"P", "name":"快枯死的樹精", "vtl":7, "str":12, "tgh":17, "qui":7, "mgc":12, "tot":55},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427001.gif", "type":"P", "name":"大地霸王", "vtl":23, "str":31, "tgh":11, "qui":24, "mgc":26, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427002.gif", "type":"P", "name":"寒冰霸王", "vtl":23, "str":31, "tgh":11, "qui":24, "mgc":26, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427003.gif", "type":"P", "name":"烈焰霸王", "vtl":23, "str":31, "tgh":11, "qui":24, "mgc":26, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506557427004.gif", "type":"P", "name":"疾風霸王", "vtl":23, "str":31, "tgh":11, "qui":24, "mgc":26, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876026.gif", "type":"P", "name":"개조몰볼", "vtl":40, "str":25, "tgh":18, "qui": 17, "mgc":25, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995001.gif", "type":"P", "name":"개조골드마인", "vtl":17, "str": 10, "tgh": 28, "qui": 38, "mgc":22, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876021.gif", "type":"P", "name":"개조트렌트", "vtl":51, "str": 24, "tgh":34, "qui": 10, "mgc":6, "tot": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876040.gif", "type":"P", "name":"R水藍菇", "vtl":15, "str": 15, "tgh": 13, "qui":48, "mgc":34, "tot": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874006.gif", "type":"F", "name":"리틀가고일", "vtl":16, "str":21, "tgh":11, "qui":31, "mgc":26, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874007.gif", "type":"F", "name":"임프", "vtl":21, "str":20, "tgh":15, "qui":27, "mgc":27, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874008.gif", "type":"F", "name":"스파이브", "vtl":22, "str":23, "tgh":10, "qui":25, "mgc":25, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874009.gif", "type":"F", "name":"그렘린", "vtl":21, "str":20, "tgh":9, "qui":25, "mgc":30, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874010.gif", "type":"F", "name":"쁘치가고", "vtl":23, "str":19, "tgh":10, "qui":24, "mgc":29, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504978025001.gif", "type":"F", "name":"큐피트", "vtl":12, "str":22, "tgh":7, "qui":37, "mgc":37, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103009.gif", "type":"F", "name":"가고일", "vtl":14, "str":30, "tgh":32, "qui":22, "mgc":22, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103010.gif", "type":"F", "name":"오카스", "vtl":13, "str":31, "tgh":26, "qui":25, "mgc":25, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103011.gif", "type":"F", "name":"플레티", "vtl":11, "str":28, "tgh":28, "qui":27, "mgc":26, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103012.gif", "type":"F", "name":"렛서데몬", "vtl":10, "str":27, "tgh":26, "qui":26, "mgc":31, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504863635001.gif", "type":"F", "name":"쁘치배트", "vtl":11, "str":26, "tgh":16, "qui":31, "mgc":21, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504863635002.gif", "type":"F", "name":"피그미배트", "vtl":11, "str":26, "tgh":20, "qui":27, "mgc":16, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876010.gif", "type":"F", "name":"미저리배트", "vtl":13, "str":28, "tgh":12, "qui":29, "mgc":18, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876011.gif", "type":"F", "name":"후르츠배트", "vtl":17, "str":25, "tgh":15, "qui":26, "mgc":17, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876012.gif", "type":"F", "name":"데빌배트", "vtl":13, "str":34, "tgh":10, "qui":29, "mgc":24, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876013.gif", "type":"F", "name":"엔젤배트", "vtl":9, "str":22, "tgh":12, "qui":37, "mgc":30, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874003.gif", "type":"F", "name":"그레이트배트", "vtl":23, "str":28, "tgh":23, "qui":28, "mgc":13, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874002.gif", "type":"F", "name":"씨배트", "vtl":18, "str":29, "tgh":27, "qui":30, "mgc":11, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874001.gif", "type":"F", "name":"헤비배트", "vtl":27, "str":30, "tgh":22, "qui":24, "mgc":12, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874004.gif", "type":"F", "name":"스피어배트", "vtl":25, "str":24, "tgh":20, "qui":26, "mgc":20, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504931874005.gif", "type":"F", "name":"래빗배트", "vtl":21, "str":26, "tgh":18, "qui":31, "mgc":14, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876049.gif", "type":"F", "name":"육지상어", "vtl":29, "str":15, "tgh":36, "qui":14, "mgc":9, "tot":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876041.gif", "type":"F", "name":"모래샤크", "vtl":15, "str":33, "tgh":16, "qui":29, "mgc":8, "tot":101},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876042.gif", "type":"F", "name":"언덕후카", "vtl":23, "str":28, "tgh":8, "qui":35, "mgc":8, "tot":102},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876043.gif", "type":"F", "name":"바위슈모크", "vtl":27, "str":36, "tgh":7, "qui":8, "mgc":25, "tot":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054004.gif", "type":"F", "name":"킥키", "vtl":25, "str":24, "tgh":18, "qui":36, "mgc":7, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054001.gif", "type":"F", "name":"토롯티", "vtl":32, "str":20, "tgh":13, "qui":35, "mgc":10, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054002.gif", "type":"F", "name":"버그런너", "vtl":27, "str":22, "tgh":17, "qui":32, "mgc":12, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054003.gif", "type":"F", "name":"핫펫카", "vtl":22, "str":27, "tgh":19, "qui":29, "mgc":13, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506414261004.gif", "type":"F", "name":"그리폰", "vtl":22, "str":32, "tgh":12, "qui":42, "mgc":17, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506414261003.gif", "type":"F", "name":"이그로스", "vtl":18, "str":36, "tgh":11, "qui":44, "mgc":16, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700001.gif", "type":"F", "name":"병아리", "vtl":7, "str":8, "tgh":5, "qui":38, "mgc":39, "tot":97},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700002.gif", "type":"F", "name":"오리너구리", "vtl":10, "str":23, "tgh":7, "qui":23, "mgc":28, "tot":91},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700003.gif", "type":"F", "name":"집오리", "vtl":8, "str":14, "tgh":7, "qui":34, "mgc":28, "tot":91},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924700004.gif", "type":"F", "name":"토끼", "vtl":11, "str":23, "tgh":7, "qui":23, "mgc":28, "tot":92},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788033.gif", "type":"F", "name":"레이", "vtl":35, "str":23, "tgh":31, "qui":6, "mgc":15, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788035.gif", "type":"F", "name":"라져", "vtl":26, "str":31, "tgh":20, "qui":24, "mgc":9, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507998551001.gif", "type":"F", "name":"라쟈", "vtl":35, "str":24, "tgh":13, "qui":31, "mgc":7, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788081.gif", "type":"F", "name":"오일러배트", "vtl":22, "str":22, "tgh":22, "qui":22, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788082.gif", "type":"F", "name":"오빌배트", "vtl":22, "str":22, "tgh":22, "qui":22, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788083.gif", "type":"F", "name":"윌버배트", "vtl":22, "str":22, "tgh":22, "qui":22, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788084.gif", "type":"F", "name":"오토배트", "vtl":22, "str":22, "tgh":22, "qui":22, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506028.gif", "type":"F", "name":"巴特溫", "vtl":17, "str":12, "tgh":47, "qui":12, "mgc":32, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506029.gif", "type":"F", "name":"布特拉", "vtl":15, "str":15, "tgh":45, "qui":15, "mgc":30, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506030.gif", "type":"F", "name":"巴拉斯", "vtl":16, "str":9, "tgh":50, "qui":8, "mgc":37, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504927054004.gif", "type":"F", "name":"허약한병아리", "vtl":5, "str":5, "tgh":5, "qui":5, "mgc":5, "tot":25},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876051.gif", "type":"F", "name":"미쉘배트", "vtl":22, "str": 27, "tgh": 23, "qui":31, "mgc": 27, "tot":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876058.gif", "type":"F", "name":"愛丁奴蝙蝠", "vtl":22, "str": 20, "tgh": 27, "qui":29, "mgc": 32, "tot":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876010.gif", "type":"F", "name":"개조미저리배트", "vtl":6, "str":44, "tgh":6, "qui": 33, "mgc":36, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504863635002.gif", "type":"F", "name":"개조피그미배트", "vtl":14, "str": 49, "tgh":4, "qui": 49, "mgc": 4, "tot": 120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876049.gif", "type":"F", "name":"육지상어후기형", "vtl":36, "str":30, "tgh":36, "qui": 24, "mgc":9, "tot":135},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562003.gif", "type":"H", "name":"고블린", "vtl":27, "str":27, "tgh":27, "qui":17, "mgc":7, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876037.gif", "type":"H", "name":"홉고블린", "vtl":23, "str":30, "tgh":29, "qui":20, "mgc":5, "tot":107},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505633764009.gif", "type":"H", "name":"레드고블린", "vtl":22, "str":28, "tgh":26, "qui":15, "mgc":14, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876046.gif", "type":"H", "name":"디그고블린", "vtl":30, "str":26, "tgh":24, "qui":23, "mgc":4, "tot":107},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449019.gif", "type":"H", "name":"자이언트", "vtl":38, "str":35, "tgh":24, "qui":9, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788001.gif", "type":"H", "name":"사이클롭스", "vtl":34, "str":34, "tgh":20, "qui":12, "mgc":20, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788002.gif", "type":"H", "name":"타이탄", "vtl":39, "str":30, "tgh":28, "qui":8, "mgc":15, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788003.gif", "type":"H", "name":"아틀라스", "vtl":37, "str":37, "tgh":17, "qui":17, "mgc":12, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652498001.gif", "type":"H", "name":"세이렌", "vtl":15, "str":18, "tgh":20, "qui":38, "mgc":19, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177002.gif", "type":"H", "name":"하피", "vtl":17, "str":17, "tgh":17, "qui":37, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507468381001.gif", "type":"H", "name":"네반", "vtl":18, "str":19, "tgh":14, "qui":39, "mgc":20, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507468381002.gif", "type":"H", "name":"메가엘라", "vtl":13, "str":20, "tgh":12, "qui":42, "mgc":23, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152012.gif", "type":"H", "name":"아엘로", "vtl":19, "str":11, "tgh":11, "qui":43, "mgc":31, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121001.gif", "type":"H", "name":"페리드오크", "vtl":34, "str":25, "tgh":35, "qui":10, "mgc":11, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121002.gif", "type":"H", "name":"그리디혹", "vtl":33, "str":28, "tgh":33, "qui":11, "mgc":10, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121003.gif", "type":"H", "name":"래셔", "vtl":30, "str":30, "tgh":30, "qui":16, "mgc":9, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930121004.gif", "type":"H", "name":"오크", "vtl":32, "str":27, "tgh":32, "qui":12, "mgc":12, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924020002.gif", "type":"H", "name":"風之妖精", "vtl":27, "str":21, "tgh":17, "qui":17, "mgc":28, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504924020001.gif", "type":"H", "name":"地之妖精", "vtl":28, "str":22, "tgh":17, "qui":16, "mgc":27, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", "type":"H", "name":"유나", "vtl":15, "str":25, "tgh":33, "qui":19, "mgc":33, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506404290004.gif", "type":"H", "name":"큐티유나", "vtl":28, "str":28, "tgh":28, "qui":28, "mgc":28, "tot":140},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562003.gif", "type":"H", "name":"개조고블린", "vtl":7, "str":7, "tgh":7, "qui":32, "mgc":52, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923177002.gif", "type":"H", "name":"개조하피", "vtl":20, "str":20, "tgh":20, "qui":40, "mgc":25, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876046.gif", "type":"H", "name":"개조디그고블린", "vtl":26, "str":49, "tgh": 22, "qui": 22, "mgc": 8, "tot": 127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876033.gif", "type":"D", "name":"리자드맨", "vtl":22, "str":32, "tgh":32, "qui":12, "mgc":12, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876034.gif", "type":"D", "name":"프렉스케일", "vtl":18, "str":37, "tgh":37, "qui":8, "mgc":10, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876035.gif", "type":"D", "name":"코랄스케일", "vtl":20, "str":31, "tgh":30, "qui":15, "mgc":14, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876036.gif", "type":"D", "name":"팔드리자드", "vtl":23, "str":36, "tgh":28, "qui":10, "mgc":13, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284006.gif", "type":"D", "name":"와이번", "vtl":29, "str":28, "tgh":32, "qui":20, "mgc":11, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923408001.gif", "type":"D", "name":"와이암", "vtl":30, "str":30, "tgh":31, "qui":17, "mgc":12, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284007.gif", "type":"D", "name":"피네이트드래곤", "vtl":33, "str":33, "tgh":25, "qui":16, "mgc":13, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284009.gif", "type":"D", "name":"베인드래곤", "vtl":32, "str":30, "tgh":23, "qui":20, "mgc":15, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152010.gif", "type":"D", "name":"윙드래곤", "vtl":32, "str":30, "tgh":26, "qui":19, "mgc":18, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067001.gif", "type":"D", "name":"크로커다일", "vtl":29, "str":34, "tgh":34, "qui":15, "mgc":8, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067002.gif", "type":"D", "name":"바질리스크", "vtl":36, "str":38, "tgh":34, "qui":11, "mgc":6, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067003.gif", "type":"D", "name":"드레이크", "vtl":32, "str":37, "tgh":37, "qui":12, "mgc":7, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926192001.gif", "type":"D", "name":"랜드크로울러", "vtl":35, "str":35, "tgh":31, "qui":10, "mgc":9, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814023.gif", "type":"D", "name":"포켓드래곤", "vtl":15, "str":34, "tgh":21, "qui":20, "mgc":25, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814026.gif", "type":"D", "name":"푸치드래곤", "vtl":10, "str":35, "tgh":23, "qui":21, "mgc":26, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814025.gif", "type":"D", "name":"드래곤퍼피", "vtl":12, "str":32, "tgh":22, "qui":22, "mgc":27, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506327814024.gif", "type":"D", "name":"스컬리드래곤", "vtl":11, "str":31, "tgh":20, "qui":25, "mgc":28, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506021601005.gif", "type":"D", "name":"파이어리자드", "vtl":26, "str":30, "tgh":17, "qui":7, "mgc":20, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788016.gif", "type":"D", "name":"포이즌리자드", "vtl":38, "str":33, "tgh":13, "qui":11, "mgc":20, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788017.gif", "type":"D", "name":"아이스리자드", "vtl":26, "str":11, "tgh":34, "qui":7, "mgc":27, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788047.gif", "type":"D", "name":"로슈", "vtl":18, "str":32, "tgh":23, "qui":24, "mgc":14, "tot":111},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788048.gif", "type":"D", "name":"로챠", "vtl":11, "str":20, "tgh":25, "qui":35, "mgc":19, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788050.gif", "type":"D", "name":"베루스", "vtl":15, "str":11, "tgh":28, "qui":22, "mgc":34, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284001.gif", "type":"D", "name":"스이뤼엘", "vtl":33, "str":23, "tgh":28, "qui":18, "mgc":18, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504926067002.gif", "type":"D", "name":"개조바질리스크", "vtl":10, "str": 38, "tgh":13, "qui":43, "mgc": 6, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923408001.gif", "type":"D", "name":"개조와이암", "vtl":31, "str":31, "tgh": 32, "qui":18, "mgc":13, "tot": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876033.gif", "type":"D", "name":"개조리자드맨", "vtl":31, "str":31, "tgh": 31, "qui":31, "mgc":6, "tot":130},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506010.gif", "type":"D", "name":"히드라", "vtl":42, "str":42, "tgh":27, "qui":7, "mgc":7, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449007.gif", "type":"M", "name":"브랜디슈", "vtl":9, "str":39, "tgh":34, "qui":14, "mgc":24, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449008.gif", "type":"M", "name":"드래곤엣지", "vtl":17, "str":37, "tgh":41, "qui":11, "mgc":19, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449009.gif", "type":"M", "name":"프레임브란치", "vtl":10, "str":39, "tgh":28, "qui":12, "mgc":31, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449010.gif", "type":"M", "name":"그레나딘", "vtl":12, "str":44, "tgh":29, "qui":13, "mgc":27, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449011.gif", "type":"M", "name":"미믹", "vtl":11, "str":26, "tgh":26, "qui":11, "mgc":31, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449012.gif", "type":"M", "name":"래피드미믹", "vtl":9, "str":24, "tgh":23, "qui":16, "mgc":33, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449013.gif", "type":"M", "name":"맨이터", "vtl":12, "str":32, "tgh":27, "qui":12, "mgc":27, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449014.gif", "type":"M", "name":"스타틀러", "vtl":15, "str":37, "tgh":28, "qui":8, "mgc":22, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449015.gif", "type":"M", "name":"라커", "vtl":13, "str":35, "tgh":29, "qui":10, "mgc":23, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449016.gif", "type":"M", "name":"퓨어미믹", "vtl":9, "str":24, "tgh":29, "qui":11, "mgc":37, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366001.gif", "type":"M", "name":"크라비", "vtl":16, "str":32, "tgh":35, "qui":11, "mgc":11, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366002.gif", "type":"M", "name":"크라스탈", "vtl":18, "str":31, "tgh":36, "qui":10, "mgc":10, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366003.gif", "type":"M", "name":"아이언시저", "vtl":14, "str":34, "tgh":37, "qui":12, "mgc":8, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504925366004.gif", "type":"M", "name":"피델러크랩", "vtl":22, "str":30, "tgh":34, "qui":7, "mgc":12, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506006.gif", "type":"M", "name":"피카브", "vtl":15, "str":15, "tgh":45, "qui":15, "mgc":30, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506007.gif", "type":"M", "name":"스카르크", "vtl":17, "str":12, "tgh":47, "qui":12, "mgc":32, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506009.gif", "type":"M", "name":"아이기스", "vtl":16, "str":9, "tgh":50, "qui":8, "mgc":37, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506008.gif", "type":"M", "name":"하이퍼피스트", "vtl":19, "str":13, "tgh":49, "qui":11, "mgc":28, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788011.gif", "type":"M", "name":"크라그", "vtl":29, "str":22, "tgh":40, "qui":5, "mgc":14, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261004.gif", "type":"M", "name":"팜헤일", "vtl":30, "str":20, "tgh":42, "qui":6, "mgc":12, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788012.gif", "type":"M", "name":"파호이호이", "vtl":32, "str":17, "tgh":37, "qui":7, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876048.gif", "type":"M", "name":"그릿트", "vtl":31, "str":15, "tgh":32, "qui":12, "mgc":20, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788023.gif", "type":"M", "name":"폽마인", "vtl":31, "str":18, "tgh":16, "qui":8, "mgc":33, "tot":106},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788025.gif", "type":"M", "name":"칩마인", "vtl":17, "str":27, "tgh":37, "qui":7, "mgc":17, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788026.gif", "type":"M", "name":"핍마인", "vtl":14, "str":30, "tgh":40, "qui":7, "mgc":14, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788027.gif", "type":"M", "name":"삽마인", "vtl":13, "str":32, "tgh":40, "qui":8, "mgc":27, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1508127506034.gif", "type":"M", "name":"風獸", "vtl":22, "str":37, "tgh":26, "qui":16, "mgc":21, "tot":122},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876048.gif", "type":"M", "name":"개조그릿트", "vtl":27, "str":27, "tgh":47, "qui":12, "mgc":12, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788042.gif", "type":"M", "name":"마술기갑", "vtl":24, "str":23, "tgh":33, "qui":23, "mgc":12, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788044.gif", "type":"M", "name":"마술기병", "vtl":18, "str":23, "tgh":34, "qui":31, "mgc":9, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506572284002.gif", "type":"M", "name":"마술기무", "vtl":16, "str":28, "tgh":37, "qui":9, "mgc":35, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788055.gif", "type":"M", "name":"타라루루스", "vtl":38, "str":38, "tgh":28, "qui":4, "mgc":8, "tot":116},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788053.gif", "type":"M", "name":"스케리드사우르스", "vtl":28, "str":38, "tgh":38, "qui":4, "mgc":8, "tot":116},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788057.gif", "type":"M", "name":"탓첼불룸", "vtl":33, "str":38, "tgh":33, "qui":4, "mgc":8, "tot":116},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788014.gif", "type":"M", "name":"루비", "vtl":12, "str":25, "tgh":26, "qui":6, "mgc":33, "tot":102},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507467647001.gif", "type":"M", "name":"아이스골렘", "vtl":20, "str":30, "tgh":46, "qui":7, "mgc":12, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449017.gif", "type":"M", "name":"크레이골렘", "vtl":15, "str":38, "tgh":43, "qui":6, "mgc":13, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876030.gif", "type":"A", "name":"슬라임", "vtl":46, "str":26, "tgh":11, "qui":6, "mgc":16, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152009.gif", "type":"A", "name":"우즈", "vtl":49, "str":24, "tgh":15, "qui":5, "mgc":12, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876031.gif", "type":"A", "name":"젤리", "vtl":45, "str":31, "tgh":6, "qui":10, "mgc":13, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876032.gif", "type":"A", "name":"푸딩", "vtl":40, "str":25, "tgh":12, "qui":8, "mgc":20, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131001.gif", "type":"A", "name":"살라만더", "vtl":25, "str":25, "tgh":25, "qui":25, "mgc":25, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131002.gif", "type":"A", "name":"실프", "vtl":25, "str":25, "tgh":25, "qui":25, "mgc":25, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131003.gif", "type":"A", "name":"운디네", "vtl":25, "str":25, "tgh":25, "qui":25, "mgc":25, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504933131004.gif", "type":"A", "name":"놈", "vtl":25, "str":25, "tgh":25, "qui":25, "mgc":25, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449003.gif", "type":"A", "name":"폴터가이스트", "vtl":15, "str":15, "tgh":15, "qui":15, "mgc":40, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449004.gif", "type":"A", "name":"크릿터", "vtl":14, "str":17, "tgh":11, "qui":16, "mgc":42, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449005.gif", "type":"A", "name":"봄", "vtl":12, "str":20, "tgh":14, "qui":14, "mgc":40, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995002.gif", "type":"A", "name":"플로터", "vtl":16, "str":14, "tgh":14, "qui":17, "mgc":39, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652449006.gif", "type":"A", "name":"덤프링", "vtl":17, "str":17, "tgh":7, "qui":17, "mgc":47, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812001.gif", "type":"A", "name":"쉐도우", "vtl":20, "str":26, "tgh":25, "qui":17, "mgc":32, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812002.gif", "type":"A", "name":"툰쉐이드", "vtl":24, "str":28, "tgh":22, "qui":19, "mgc":27, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812003.gif", "type":"A", "name":"쉐이드", "vtl":25, "str":23, "tgh":23, "qui":26, "mgc":26, "tot":123},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812004.gif", "type":"A", "name":"데코이", "vtl":28, "str":24, "tgh":22, "qui":22, "mgc":24, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788009.gif", "type":"A", "name":"플랑크스모그", "vtl":20, "str":20, "tgh":14, "qui":25, "mgc":36, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788010.gif", "type":"A", "name":"틸헤이즈", "vtl":23, "str":23, "tgh":8, "qui":30, "mgc":31, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876047.gif", "type":"A", "name":"앵라앵라", "vtl":22, "str":22, "tgh":12, "qui":27, "mgc":32, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507485261003.gif", "type":"A", "name":"캔디후로스", "vtl":25, "str":26, "tgh":9, "qui":25, "mgc":30, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788069.gif", "type":"A", "name":"로즈크리프", "vtl":7, "str":23, "tgh":46, "qui":28, "mgc":6, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788070.gif", "type":"A", "name":"밀크리프", "vtl":15, "str":11, "tgh":17, "qui":26, "mgc":43, "tot":112},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788072.gif", "type":"A", "name":"와인리프", "vtl":11, "str":45, "tgh":17, "qui":28, "mgc":9, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812005.gif", "type":"A", "name":"愛絲波波", "vtl":34, "str":35, "tgh":18, "qui":19, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812007.gif", "type":"A", "name":"雪兒波波", "vtl":34, "str":35, "tgh":18, "qui":19, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812008.gif", "type":"A", "name":"絲諾波波", "vtl":34, "str":35, "tgh":18, "qui":19, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504922812006.gif", "type":"A", "name":"聖誕波波", "vtl":34, "str":35, "tgh":18, "qui":19, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504930995002.gif", "type":"A", "name":"개조플로터", "vtl":21, "str":19, "tgh":19, "qui": 22, "mgc":44, "tot": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876030.gif", "type":"A", "name":"개조슬라임", "vtl":27, "str":16, "tgh":16, "qui": 50, "mgc":16, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876047.gif", "type":"A", "name":"개조앵라앵라", "vtl":13, "str":38, "tgh":23, "qui":14, "mgc":37, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876014.gif", "type":"I", "name":"블루스팅", "vtl":20, "str":27, "tgh":47, "qui":13, "mgc":8, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876015.gif", "type":"I", "name":"레드슬레이어", "vtl":19, "str":28, "tgh":42, "qui":19, "mgc":7, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", "type":"I", "name":"랭독", "vtl":20, "str":30, "tgh":43, "qui":12, "mgc":10, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876017.gif", "type":"I", "name":"물킬러", "vtl":30, "str":29, "tgh":38, "qui":11, "mgc":7, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103013.gif", "type":"I", "name":"킬러비", "vtl":12, "str":37, "tgh":12, "qui":37, "mgc":12, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103014.gif", "type":"I", "name":"베넘비", "vtl":14, "str":33, "tgh":11, "qui":35, "mgc":17, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103015.gif", "type":"I", "name":"와습", "vtl":13, "str":40, "tgh":8, "qui":38, "mgc":11, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562001.gif", "type":"I", "name":"호넷", "vtl":10, "str":38, "tgh":13, "qui":43, "mgc":6, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103016.gif", "type":"I", "name":"바자", "vtl":7, "str":39, "tgh":15, "qui":41, "mgc":8, "tot":110},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103013.gif", "type":"I", "name":"각성킬러비", "vtl":22, "str":37, "tgh":17, "qui":37, "mgc":12, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103014.gif", "type":"I", "name":"각성베넘비", "vtl":24, "str":33, "tgh":16, "qui":35, "mgc":17, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103015.gif", "type":"I", "name":"각성와습", "vtl":23, "str":40, "tgh":13, "qui":38, "mgc":11, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562001.gif", "type":"I", "name":"각성호넷", "vtl":20, "str":38, "tgh":18, "qui":43, "mgc":6, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103016.gif", "type":"I", "name":"각성바자", "vtl":17, "str":39, "tgh":20, "qui":41, "mgc":8, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562002.gif", "type":"I", "name":"버그릿퍼", "vtl":16, "str":44, "tgh":22, "qui":27, "mgc":11, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103017.gif", "type":"I", "name":"킬러블레이드", "vtl":12, "str":45, "tgh":20, "qui":26, "mgc":17, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103019.gif", "type":"I", "name":"크레이지엣지", "vtl":14, "str":44, "tgh":19, "qui":29, "mgc":14, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103020.gif", "type":"I", "name":"맨티스그레이", "vtl":15, "str":40, "tgh":17, "qui":33, "mgc":15, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103021.gif", "type":"I", "name":"아쿠아맨티스", "vtl":20, "str":43, "tgh":18, "qui":27, "mgc":12, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562002.gif", "type":"I", "name":"각성1버그릿퍼", "vtl":29, "str":41, "tgh":16, "qui":30, "mgc":11, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103017.gif", "type":"I", "name":"각성1킬러블레이드", "vtl":27, "str":45, "tgh":20, "qui":23, "mgc":12, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103019.gif", "type":"I", "name":"각성1크레이지엣지", "vtl":26, "str":44, "tgh":29, "qui":19, "mgc":9, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103020.gif", "type":"I", "name":"각성1맨티스그레이", "vtl":25, "str":40, "tgh":17, "qui":34, "mgc":11, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103021.gif", "type":"I", "name":"각성1아쿠아맨티스", "vtl":27, "str":47, "tgh":14, "qui":27, "mgc":12, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562002.gif", "type":"I", "name":"각성2버그릿퍼", "vtl":41, "str":26, "tgh":28, "qui":20, "mgc":12, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103017.gif", "type":"I", "name":"각성2킬러블레이드", "vtl":25, "str":10, "tgh":18, "qui":33, "mgc":41, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103019.gif", "type":"I", "name":"각성2크레이지엣지", "vtl":20, "str":43, "tgh":11, "qui":42, "mgc":11, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103020.gif", "type":"I", "name":"각성2맨티스그레이", "vtl":26, "str":44, "tgh":28, "qui":19, "mgc":10, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652103021.gif", "type":"I", "name":"각성2아쿠아맨티스", "vtl":44, "str":27, "tgh":26, "qui":17, "mgc":13, "tot":127},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876018.gif", "type":"I", "name":"팬위드", "vtl":26, "str":15, "tgh":18, "qui":23, "mgc":23, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", "type":"I", "name":"모노아이", "vtl":24, "str":16, "tgh":17, "qui":20, "mgc":28, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876019.gif", "type":"I", "name":"아라크노이드", "vtl":22, "str":22, "tgh":16, "qui":25, "mgc":20, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876020.gif", "type":"I", "name":"타란츄라", "vtl":25, "str":28, "tgh":15, "qui":19, "mgc":18, "tot":105},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788004.gif", "type":"I", "name":"쿨비덴스", "vtl":17, "str":37, "tgh":32, "qui":12, "mgc":17, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788005.gif", "type":"I", "name":"그런트", "vtl":20, "str":35, "tgh":36, "qui":8, "mgc":16, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876039.gif", "type":"I", "name":"키크로마토스", "vtl":15, "str":39, "tgh":29, "qui":14, "mgc":18, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788006.gif", "type":"I", "name":"아쿠타에온", "vtl":18, "str":41, "tgh":34, "qui":9, "mgc":14, "tot":116},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788019.gif", "type":"I", "name":"부츠카부리", "vtl":9, "str":9, "tgh":30, "qui":26, "mgc":26, "tot":100},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788020.gif", "type":"I", "name":"부츠마이마이", "vtl":9, "str":16, "tgh":31, "qui":36, "mgc":11, "tot":103},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788021.gif", "type":"I", "name":"부츠모그리", "vtl":9, "str":23, "tgh":9, "qui":34, "mgc":26, "tot":101},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1507652788022.gif", "type":"I", "name":"부츠덴덴", "vtl":7, "str":22, "tgh":25, "qui":38, "mgc":12, "tot":104},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562001.gif", "type":"I", "name":"개조호넷", "vtl":16, "str":9, "tgh":50, "qui":8, "mgc":37, "tot":120},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1504923562002.gif", "type":"I", "name":"개조버그릿퍼", "vtl":9, "str": 21, "tgh":27, "qui": 25, "mgc":33, "tot":115},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876016.gif", "type":"I", "name":"개조랭독", "vtl":20, "str":10, "tgh":43, "qui": 12, "mgc": 40, "tot": 125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876039.gif", "type":"I", "name":"개조키크로마토스", "vtl":12, "str":42, "tgh":29, "qui":34, "mgc":8, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", "type":"I", "name":"개조모노아이", "vtl":28, "str":20, "tgh":21, "qui":24, "mgc":32, "tot":125},
+			{"img":"https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1506536876044.gif", "type":"I", "name":"개조개조모노아이", "vtl":33, "str":6, "tgh":6, "qui":30, "mgc":50, "tot":125}
+		]
+
+        let petList = pets;
+		let nameList = [];
+		let basePet;
+		let comparisonPet;
+        $(document).ready(function () {
+
+            // 초기화
+            print(pets);
+
+            // DropBtn 클릭 이벤트
+            $(".dropdown-item").click(function() {
+                let condition = $(this).attr("id").split("-")[0];
+                let stet      = $(this).attr("id").split("-")[1];
+                let cal       = $("#cal-" + stet);
+                
+                switch (condition) {
+                    case "more":   cal.text("이상"); break;
+                    case "less":   cal.text("이하"); break;
+                    case "equal":  cal.text("일치"); break;
+                    case "except": cal.text("제외"); break;
+                    default: break;
+                }
+            });
+
+			// 자동완성
+			$.each(pets, function(i, pet) {
+				nameList.push(pet["name"]);
+			});
+			// 자동완성 메인
+			$("#search-name").autocomplete({
+				source : nameList,
+				focus: function( event, ui ) {
+        			return false;
+      			},
+				select : function(event, ui) {
+					$("#search-name").val(ui.item.label);
+					search();
+					return false;
+				}
+			});
+			// 자동완성 베이스
+			$("#base-name").autocomplete({
+				source : nameList,
+				focus: function( event, ui ) {
+        			return false;
+      			},
+				select : function(event, ui) {
+					$("#base-name").val(ui.item.label);
+					basePet = pets.filter(function(row, j) {
+                            return row["name"] == ui.item.label
+                        })[0];
+					comparison("base");
+					return false;
+				}
+			});
+			// 자동완성 비교대상
+			$("#comparison-name").autocomplete({
+				source : nameList,
+				focus: function( event, ui ) {
+        			return false;
+      			},
+				select : function(event, ui) {
+					$("#comparison-name").val(ui.item.label);
+					comparisonPet = pets.filter(function(row, j) {
+                            return row["name"] == ui.item.label;
+                        })[0];
+					comparison("comparison");
+					return false;
+				}
+			});
+
+            // 검색 Enter 이벤트
+            $(".search-main").keyup(function (event) {
+                if (event.keyCode == 13) {
+                    search();
+                }
+            });
+			
+			// 베이스 검색 Enter 이벤트
+            $("#base-name").keyup(function (event) {
+                if (event.keyCode == 13) {
+					basePet = pets.filter(function(row, j) {
+                            return row["name"] == $("#base-name").val();
+                        })[0];
+					comparison("base");
+                }
+            });
+
+			// 비교 대상 검색 Enter 이벤트
+            $("#comparison-name").keyup(function (event) {
+                if (event.keyCode == 13) {
+					comparisonPet = pets.filter(function(row, j) {
+                            return row["name"] == $("#comparison-name").val();
+                        })[0];
+					comparison("comparison");
+                }
+            });
+
+            // 검색 클릭 이벤트
+            $("#btnSearch").click(function() {
+                search();
+            });
+
+			// Data Sort 기능
+            $("th").click(function() {
+                let id = $(this).attr("id");
+                if (id.length <= 0) {
+                    return;
+                }
+                
+                let upSort =
+                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down" viewBox="0 0 16 16">' +
+                '    <path d="M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z"/>' +
+                '    <path fill-rule="evenodd" d="M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
+                '    <path d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' +
+                '</svg>';
+
+                let downSort =
+                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-numeric-down-alt" viewBox="0 0 16 16">' + 
+                    '<path fill-rule="evenodd" d="M11.36 7.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.836 1.973-1.836 1.09 0 2.063.637 2.063 2.688 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98z"/>' +
+                    '<path d="M12.438 8.668V14H11.39V9.684h-.051l-1.211.859v-.969l1.262-.906h1.046zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>' + 
+                '</svg>';
+                
+                let title = $(this).text();
+                $(this).text(title);
+                if (clickCount.length <= 0) {
+                    clickCount.title = title;
+                    clickCount.sort  = "down";
+                    $(this).append(downSort);
+                    petList.sort(function(a, b) {
+                        return parseFloat(b[id]) - parseFloat(a[id]);
+                    });
+                } else if (clickCount.title == title) {
+                    if (clickCount.sort == "down") {
+                        clickCount.sort = "up";
+                        $(this).append(upSort);
+                        petList.sort(function(a, b) {
+                            return parseFloat(a[id]) - parseFloat(b[id]);
+                        });
+                    } else if (clickCount.sort == "up") {
+                        clickCount.sort = "up";
+                        $(this).append(downSort);
+                        petList.sort(function(a, b) {
+                            return parseFloat(b[id]) - parseFloat(a[id]);
+                        });
+                    }
+                } else if (clickCount.title != title) {
+                    $("#vtl").text("체력");
+                    $("#str").text("공격력");
+                    $("#tgh").text("방어력");
+                    $("#qui").text("순발력");
+                    $("#mgc").text("마력");
+                    $("#tot").text("총합");
+
+                    clickCount.title = title;
+                    clickCount.sort  = "down";
+                    $(this).append(downSort);
+                    petList.sort(function(a, b) {
+                        return parseFloat(b[id]) - parseFloat(a[id]);
+                    });
+                }
+                print(petList);            
+            });
+
+			// 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
+			$("#btnTop").click(function() {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			});
+
+			// 박스 매뉴
+			$("#btnBox").click(function() {
+				let display = $("#btnB").css('display');
+				if (display == "none") {
+					$("#remote-control > a").css("display", "block");
+				} else {
+					$("#remote-control > a").css("display", "none");
+				}
+			});
+        });
+
+        // 초기화
+        function print(data) {
+            $("#tblPet > tbody").empty();
+			let type = "";
+            $.each(data, function(i, pet) {
+                let keyList = [];
+                for (var key in pet) {
+                    keyList.push(key);
+                }
+
+                const tbody = $("#tblPet > tbody");
+                let tr = $("<tr></tr>");
+				if (type != pet["type"]) {
+					type = pet["type"];
+					tr.attr("id", type);
+				}
+                let td = $("<td></td>").addClass("text-center");
+                let img = $("<img>").attr("src", pet.img);
+                td.append(img);
+                tr.append(td);
+                $.each(keyList, function(j, key) {
+                    if (j == 0) return true;
+                    let td = $("<td></td>");
+                    td.text(pet[key]);
+                    tr.append(td);
+                });
+                tbody.append(tr);
+            });
+        }
+
+        function search() {
+            let searchValues = {
+                "input-vtl" : Number($("#input-vtl").val()),
+                "input-str" : Number($("#input-str").val()),
+                "input-tgh" : Number($("#input-tgh").val()),
+                "input-qui" : Number($("#input-qui").val()),
+                "input-mgc" : Number($("#input-mgc").val()),
+                "input-tot" : Number($("#input-tot").val()),
+                "search-name": $("#search-name").val()
+            }
+            filter(searchValues);
+        }
+
+        function filter(searchValues) {
+            let keyList = [];
+            for (var key in searchValues) {
+                keyList.push(key);
+            }
+            
+            petList = pets;
+            // 스텟 검색 AND 조건
+            let stet = "";
+            $.each(keyList, function(i, key) {
+                stet = key.replace("input-", "");
+                if (key.indexOf("input") != -1 && key.indexOf("name") == -1 && searchValues[key] > 0) {
+                    let text = $("#cal-" + stet).text();
+                    switch (text) {
+                        case "이상":
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] >= searchValues[key];
+                                    });
+                            break;
+                        case "이하":
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] <= searchValues[key];
+                                    });
+                            break;
+                        case "일치":
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] == searchValues[key];
+                                    });
+                            break;
+                        case "제외":
+                            petList = petList.filter(function(row, j) {
+                                        return row[stet] != searchValues[key];
+                                    });
+                            break;
+                        default:
+                            alert("Error!!");
+                            break;
+                    }
+                }
+            });
+
+            // 이름 검색 AND 조건
+            if (searchValues["search-name"].length > 0) {
+                petList = pets.filter(function(row, j) {
+                            return row["name"].indexOf(searchValues["search-name"]) != -1
+                        });
+            }
+
+            // 이름 검색 OR 조건
+            /*
+            if (searchValues["search-name"].length > 0) {
+                let check = true;
+                $.each(petList, function(i, row) {
+                    if (row["name"] == searchValues["search-name"]) {
+                        check = false;
+                        return false;
+                    }
+                });
+                if (check) {
+                    let pet = pets.filter(function(row, j) {
+                            return row[stet] == searchValues["search-name"];
+                        });
+                    petList.push(pet[0]);
+                }
+            }
+            */
+            print(petList);
+        }
+
+		// 스크롤
+		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+		window.onscroll = function() {scrollFunction()};
+		function scrollFunction() {
+			if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+				btnTop.style.display = "block";
+			} else {
+				btnTop.style.display = "none";
+			}
+		}
+
+		function comparison(target) {
+			let pet;
+			if (target == "base") {
+				pet = basePet;
+			} else {
+				pet = comparisonPet;
+			}
+
+			let keyList = [];
+            for (var key in pet) {
+                keyList.push(key);
+            }
+
+			$.each(keyList, function(i, key) {
+				if (key == "img") {
+					$("#" + target + "-img").attr("src", pet.img);
+					return true;
+				} 				
+				$("#td-" + target + "-" + key).text(pet[key]);
+				if (target == "base" && comparisonPet != null) {
+					$("#td-comparison-" + key).text(comparisonPet[key]);
+				} else if (target == "comparison" && basePet != null) {
+					$("#td-base-" + key).text(basePet[key]);
+				}
+
+				if (basePet != null && comparisonPet != null) {
+					let upSpan = $("<span></span>").addClass("text-red").text(" ▲");
+					let downSpan = $("<span></span>").addClass("text-blue").text(" ▼");
+					if (basePet[key] > 0 && comparisonPet[key] > 0) {
+						let number = basePet[key] - comparisonPet[key];
+						if (number > 0) {
+							$("#td-base-" + key).append(upSpan.append(Math.abs(number)));
+							$("#td-comparison-" + key).append(downSpan.append(Math.abs(number)));
+						} else if (number == 0) {
+							$("#td-base-" + key).append(" ■" + number);
+							$("#td-comparison-" + key).append(" ■" + number);
+						} else if (number < 0) {
+							$("#td-base-" + key).append(downSpan.append(Math.abs(number)));
+							$("#td-comparison-" + key).append(upSpan.append(Math.abs(number)));
+						}
+					}
+				}
+			});
+			/*
+			$.each(keyList, function(i, key) {
+				if (key == "img") {
+					return true;
+				}
+				let upSpan = $("<span></span>").addClass("text-red").text(" ▲");
+				let downSpan = $("<span></span>").addClass("text-blue").text(" ▼");
+				if (basePet[key] > 0 && comparisonPet[key] > 0) {
+					let number = basePet[key] - comparisonPet[key];
+					if (number > 0) {
+						$("#td-base-" + key).append(upSpan.append(Math.abs(number)));
+						$("#td-comparison-" + key).append(downSpan.append(Math.abs(number)));
+					} else if (number == 0) {
+						$("#td-base-" + key).append(" ■" + number);
+						$("#td-comparison-" + key).append(" ■" + number);
+					} else if (number < 0) {
+						$("#td-base-" + key).append(downSpan.append(Math.abs(number)));
+						$("#td-comparison-" + key).append(upSpan.append(Math.abs(number)));
+					}
+				}
+			});
+			*/
+		}
+
+
+    </script>
+</head>
+<body>
+	<div id="remote-control">
+		<a href="#B" class="btn btn-success" id="btnB" role="button" data-bs-toggle="button">B</a>
+		<a href="#U" class="btn btn-success" id="btnU" role="button" data-bs-toggle="button">U</a>
+		<a href="#P" class="btn btn-success" id="btnP" role="button" data-bs-toggle="button">P</a>
+		<a href="#F" class="btn btn-success" id="btnF" role="button" data-bs-toggle="button">F</a>
+		<a href="#H" class="btn btn-success" id="btnH" role="button" data-bs-toggle="button">H</a>
+		<a href="#D" class="btn btn-success" id="btnD" role="button" data-bs-toggle="button">D</a>
+		<a href="#M" class="btn btn-success" id="btnM" role="button" data-bs-toggle="button">M</a>
+		<a href="#A" class="btn btn-success" id="btnA" role="button" data-bs-toggle="button">A</a>
+		<a href="#I" class="btn btn-success" id="btnI" role="button" data-bs-toggle="button">I</a>
+		
+		<!-- 리모콘 열기/닫기 버튼 -->
+		<button type="button" class="btn btn-warning" id="btnBox">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box" viewBox="0 0 16 16">
+				<path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+			</svg>
+		</button>
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" id="btnComparison" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-window-split" viewBox="0 0 16 16">
+				<path d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Zm1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"/>
+				<path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2Zm12 1a1 1 0 0 1 1 1v2H1V3a1 1 0 0 1 1-1h12ZM1 13V6h6.5v8H2a1 1 0 0 1-1-1Zm7.5 1V6H15v7a1 1 0 0 1-1 1H8.5Z"/>
+			</svg>
+		</button>
+
+		<!-- 상단으로 이동 버튼 -->
+		<button type="button" class="btn btn-danger" id="btnTop" title="Go to top">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+				<path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+			</svg>
+		</button>
+	</div>
+	
+    <div class="container">	
+        <div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">체　력</span>
+                        <input type="number" class="form-control search-main" id="input-vtl">
+                        <span class="input-group-text" id="cal-vtl">이상</span>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-vtl">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-vtl">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-vtl">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-vtl">제외</a></li>
+                        </ul>
+                    </div>
+                </div>            
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">공격력</span>
+                        <input type="number" class="form-control search-main" id="input-str">
+                        <span class="input-group-text" id="cal-str">이상</span>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-str">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-str">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-str">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-str">제외</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">방어력</span>
+                        <input type="number" class="form-control search-main" id="input-tgh">
+                        <span class="input-group-text" id="cal-tgh">이상</span>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-tgh">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-tgh">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-tgh">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-tgh">제외</a></li>
+                        </ul>
+                    </div>
+                </div>            
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">순발력</span>
+                        <input type="number" class="form-control search-main" id="input-qui">
+                        <span class="input-group-text" id="cal-qui">이상</span>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-qui">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-qui">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-qui">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-qui">제외</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">마　력</span>
+                        <input type="number" class="form-control search-main" id="input-mgc">
+                        <span class="input-group-text" id="cal-mgc">이상</span>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-mgc">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-mgc">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-mgc">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-mgc">제외</a></li>
+                        </ul>
+                    </div>
+                </div>            
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">총　합</span>
+                        <input type="number" class="form-control search-main" id="input-tot">
+                        <span class="input-group-text" id="cal-tot">이상</span>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="more-tot">이상</a></li>
+                            <li><a class="dropdown-item" href="#" id="less-tot">이하</a></li>
+                            <li><a class="dropdown-item" href="#" id="equal-tot">일치</a></li>
+                            <li><a class="dropdown-item" href="#" id="except-tot">제외</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- 스텟 정렬 끝 -->
+
+        <div class="input-group">
+            <input type="text" class="form-control search-main" placeholder="Name Search.." id="search-name">
+            <button type="button" class="btn btn-light" id="btnSearch">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                    </path>
+                </svg>
+                <span class="visually-hidden">Button</span>
+            </button>
+        </div> <!-- 검색 끝 -->
+
+        <table class="table table-dark table-hover" id="tblPet">
+            <thead>
+                <tr>
+                    <th class="text-center">이미지</th>
+                    <th class="text-center">종류</th>
+                    <th class="text-center">이름</th>
+                    <th class="text-center" class="th-sort" id="vtl">체력</th>
+                    <th class="text-center" class="th-sort" id="str">공격력</th>
+                    <th class="text-center" class="th-sort" id="tgh">방어력</th>
+                    <th class="text-center" class="th-sort" id="qui">순발력</th>
+                    <th class="text-center" class="th-sort" id="mgc">마력</th>
+                    <th class="text-center" class="th-sort" id="tot">총합</th>
+                    <th class="text-center">등급</th>
+                    <th class="text-center">출현장소</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">수마 비교</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body ui-front">
+				<table class="table table-bordered table align-middle">
+					<thead>
+						<th class="text-center w-40">베이스 수마</th>
+						<th class="text-center w-20">항 목</th>
+						<th class="text-center w-40">비교 수마</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="text" class="form-control" id="base-name">
+							</td>
+							<td class="table-active text-center">
+								이　름
+							</td>
+							<td>
+								<input type="text" class="form-control" id="comparison-name">
+							</td>
+						</tr>
+						<tr class="text-center">
+							<td><img id="base-img"></td>
+							<td class="table-active text-center">이미지</td>
+							<td><img id="comparison-img"></td>
+						</tr>
+						<tr class="text-end">
+							<td id="td-base-vtl"></td>
+							<td class="table-active text-center">체　력</td>
+							<td id="td-comparison-vtl"></td>
+						</tr>
+						<tr class="text-end">
+							<td id="td-base-str"></td>
+							<td class="table-active text-center">공격력</td>
+							<td id="td-comparison-str"></td>
+						</tr>
+						<tr class="text-end">
+							<td id="td-base-tgh"></td>
+							<td class="table-active text-center">방어력</td>
+							<td id="td-comparison-tgh"></td>
+						</tr>
+						<tr class="text-end">
+							<td id="td-base-qui"></td>
+							<td class="table-active text-center">순발력</td>
+							<td id="td-comparison-qui"></td>
+						</tr>
+						<tr class="text-end">
+							<td id="td-base-mgc"></td>
+							<td class="table-active text-center">마　력</td>
+							<td id="td-comparison-mgc"></td>
+						</tr>
+						<tr class="text-end">
+							<td id="td-base-tot"></td>
+							<td class="table-active text-center">총　합</td>
+							<td id="td-comparison-tot"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<!--
+					<button type="button" class="btn btn-primary">실행</button>
+				-->
+			</div>
+		</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
