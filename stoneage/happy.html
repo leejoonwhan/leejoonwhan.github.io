@@ -51,7 +51,7 @@
 	<script>
 		var pets = [
 //			 {"no":"001","name":"!우리","hp":18,"atk":2,"def":2,"agi":2,"avgHp":10.3,"avgTotal":4.42,"avgAtk":1.47,"avgDef":1.44,"avgAgi":1.51,"earth":8,"water":2,"fire":0,"wind":0,"slot":6,"etc":"지8수2","get":"마리너스 마을 근처"}
-//			,{"no":"002","name":"!두리","hp":36,"atk":6,"def":4,"agi":5,"avgHp":10.15,"avgTotal":4.75,"avgAtk":1.89,"avgDef":1.3,"avgAgi":1.56,"earth":0,"water":4,"fire":6,"wind":0,"slot":6,"etc":"수4화6","get":"샴기르마을 초기페트"}
+			,{"no":"002","name":"두리","hp":35,"atk":6,"def":4,"agi":5,"avgHp":10.15,"avgAtk":1.90,"avgDef":1.28,"avgAgi":1.58,"earth":0,"water":4,"fire":6,"wind":0,"slot":6,"etc":"수4화6","get":"샴기르 초기 지원페트"}
 //			,{"no":"003","name":"!얼룩우리","hp":26,"atk":4,"def":4,"agi":3,"avgHp":9.9,"avgTotal":4.48,"avgAtk":1.58,"avgDef":1.68,"avgAgi":1.22,"earth":10,"water":0,"fire":0,"wind":0,"slot":6,"etc":"지10","get":"마리너스 마을 근처"}
 //			,{"no":"004","name":"!불그리","hp":20,"atk":3,"def":3,"agi":3,"avgHp":9.73,"avgTotal":4.85,"avgAtk":1.62,"avgDef":1.43,"avgAgi":1.8,"earth":0,"water":0,"fire":7,"wind":3,"slot":7,"etc":"화7풍3","get":"B코스"}
 //			,{"no":"005","name":"!실버우리","hp":39,"atk":6,"def":6,"agi":6,"avgHp":9.4,"avgTotal":4.9,"avgAtk":1.65,"avgDef":1.72,"avgAgi":1.53,"earth":5,"water":0,"fire":0,"wind":5,"slot":7,"etc":"지5풍5","get":"이벤트"}
@@ -67,7 +67,7 @@
 //			,{"no":"015","name":"!푸푸","hp":21,"atk":3,"def":2,"agi":4,"avgHp":9.26,"avgTotal":5,"avgAtk":1.71,"avgDef":1.2,"avgAgi":2.09,"earth":3,"water":0,"fire":0,"wind":7,"slot":6,"etc":"지3풍7","get":"쟈쟈 마을근처"}
 //			,{"no":"016","name":"!우푸","hp":25,"atk":4,"def":2,"agi":5,"avgHp":9.46,"avgTotal":4.95,"avgAtk":1.74,"avgDef":1.05,"avgAgi":2.16,"earth":0,"water":0,"fire":6,"wind":4,"slot":6,"etc":"화6풍4","get":"쟈쟈 마을근처"}
 //			,{"no":"017","name":"!투투","hp":33,"atk":5,"def":3,"agi":5,"avgHp":10.26,"avgTotal":4.67,"avgAtk":1.68,"avgDef":1.282,"avgAgi":1.73,"earth":3,"water":7,"fire":0,"wind":0,"slot":6,"etc":"지3수7","get":"쿠오마을 해저통로지하 1층 전역"}
-//			,{"no":"018","name":"!오투투","hp":33,"atk":5,"def":5,"agi":6,"avgHp":9.31,"avgTotal":5,"avgAtk":1.65,"avgDef":1.42,"avgAgi":1.93,"earth":6,"water":0,"fire":0,"wind":4,"slot":6,"etc":"지6풍4","get":"샴기르 촌장집 - 얼룩우리에게 대화하여 두리를 교환"}
+			,{"no":"018","name":"오투투","hp":35,"atk":5,"def":5,"agi":6,"avgHp":9.74,"avgAtk":1.64,"avgDef":1.44,"avgAgi":1.91,"earth":6,"water":0,"fire":0,"wind":4,"slot":6,"etc":"지6풍4","get":"카루타나 초기 지원페트"}
 //			,{"no":"019","name":"!베론","hp":50,"atk":5,"def":9,"agi":4,"avgHp":11.11,"avgTotal":4.5,"avgAtk":1.24,"avgDef":2.2,"avgAgi":1.06,"earth":0,"water":10,"fire":0,"wind":0,"slot":5,"etc":"수10","get":"쿠링 마을 가는 동굴1층(12,21)"}
 //			,{"no":"020","name":"!베로로크","hp":39,"atk":5,"def":7,"agi":3,"avgHp":11.04,"avgTotal":4.6,"avgAtk":1.39,"avgDef":2.29,"avgAgi":0.92,"earth":7,"water":3,"fire":0,"wind":0,"slot":5,"etc":"지7수3","get":"쿠링 마을 가는 동굴1층(9,12)"}
 //			,{"no":"021","name":"!베로보크","hp":48,"atk":5,"def":9,"agi":4,"avgHp":11.22,"avgTotal":4.55,"avgAtk":1.34,"avgDef":2.25,"avgAgi":0.96,"earth":3,"water":7,"fire":0,"wind":0,"slot":5,"etc":"지3수7","get":"아름산의 동굴지하7층(42,21)"}
@@ -85,6 +85,7 @@
 //			,{"no":"033","name":"!후바바","hp":46,"atk":8,"def":7,"agi":7,"avgHp":9.72,"avgTotal":4.98,"avgAtk":1.81,"avgDef":1.56,"avgAgi":1.61,"earth":0,"water":0,"fire":6,"wind":4,"slot":5,"etc":"화6풍4","get":"고야산이벤트"}
 //			,{"no":"034","name":"!토루루","hp":37,"atk":6,"def":6,"agi":5,"avgHp":9.62,"avgTotal":4.9,"avgAtk":1.73,"avgDef":1.71,"avgAgi":1.46,"earth":6,"water":0,"fire":0,"wind":4,"slot":4,"etc":"지6풍4","get":"D코스"}
 //			,{"no":"035","name":"!루니","hp":42,"atk":7,"def":8,"agi":6,"avgHp":9.9,"avgTotal":4.95,"avgAtk":1.75,"avgDef":1.85,"avgAgi":1.35,"earth":10,"water":0,"fire":0,"wind":0,"slot":5,"etc":"지10","get":"사이너스섬 (526,144), 리온을 찾아라"}
+			,{"no":"035","name":"쿠로로","hp":51,"atk":8,"def":6,"agi":7,"avgHp":10.66,"avgAtk":1.84,"avgDef":1.41,"avgAgi":1.59,"earth":3,"water":7,"fire":0,"wind":0,"slot":0,"etc":"지3수7","get":"초기 지원페트"}
 //			,{"no":"036","name":"!카타르카스","hp":44,"atk":7,"def":11,"agi":2,"avgHp":10.25,"avgTotal":4.95,"avgAtk":1.82,"avgDef":2.58,"avgAgi":0.55,"earth":10,"water":0,"fire":0,"wind":0,"slot":5,"etc":"지10","get":"동쿠링광산1층 (30,45)"}
 //			,{"no":"037","name":"!쿠카스","hp":43,"atk":7,"def":10,"agi":1,"avgHp":10.08,"avgTotal":4.75,"avgAtk":1.72,"avgDef":2.51,"avgAgi":0.52,"earth":8,"water":2,"fire":0,"wind":0,"slot":5,"etc":"지8수2","get":"동쿠링광산2층 (5,7)"}
 //			,{"no":"038","name":"!코로카스","hp":34,"atk":6,"def":8,"agi":2,"avgHp":10.42,"avgTotal":4.87,"avgAtk":1.85,"avgDef":2.46,"avgAgi":0.56,"earth":0,"water":4,"fire":6,"wind":0,"slot":5,"etc":"수4화6","get":"도둑의 동굴 지하4층 (15,4)"}
@@ -101,11 +102,11 @@
 			,{"no":"048","name":"부르돈","hp":51,"atk":11,"def":6,"agi":7,"avgHp":10.12,"avgAtk":2.26,"avgDef":1.33,"avgAgi":1.41,"earth":0,"water":0,"fire":2,"wind":8,"slot":4,"etc":"화2풍8","get":"오형제의 시험 보상"}
 			
 //          ,{"no":"049","name":"!쿠링","hp":32,"atk":5,"def":5,"agi":5,"avgHp":9.65,"avgTotal":4.88,"avgAtk":1.63,"avgDef":1.74,"avgAgi":1.51,"earth":6,"water":4,"fire":0,"wind":0,"slot":6,"etc":"지6수4","get":"카루타나 마을 근처"}
-//			,{"no":"050","name":"!쿠쿠르","hp":35,"atk":5,"def":5,"agi":5,"avgHp":9.78,"avgTotal":4.85,"avgAtk":1.65,"avgDef":1.56,"avgAgi":1.64,"earth":0,"water":7,"fire":3,"wind":0,"slot":6,"etc":"수7화3","get":"샴기르 촌장집 - 얼룩우리에게 대화하여 두리를 교환"}
+			,{"no":"050","name":"쿠쿠르","hp":38,"atk":6,"def":6,"agi":6,"avgHp":10.30,"avgAtk":1.67,"avgDef":1.62,"avgAgi":1.63,"earth":0,"water":7,"fire":3,"wind":0,"slot":6,"etc":"수7화3","get":"쟈쟈 초기 지원페트"}
 //			,{"no":"051","name":"!포링","hp":29,"atk":5,"def":5,"agi":5,"avgHp":9.18,"avgTotal":4.84,"avgAtk":1.68,"avgDef":1.58,"avgAgi":1.58,"earth":0,"water":4,"fire":6,"wind":0,"slot":6,"etc":"수4화6","get":"쟈루섬 (512,336)"}
 //			,{"no":"052","name":"!리스키","hp":29,"atk":4,"def":5,"agi":4,"avgHp":9.48,"avgTotal":4.78,"avgAtk":1.52,"avgDef":1.68,"avgAgi":1.58,"earth":2,"water":8,"fire":0,"wind":0,"slot":6,"etc":"지2수8","get":"카루타나마을 근처"}
 //			,{"no":"053","name":"!카비트","hp":28,"atk":5,"def":5,"agi":5,"avgHp":8.74,"avgTotal":5.12,"avgAtk":1.66,"avgDef":1.66,"avgAgi":1.8,"earth":0,"water":0,"fire":7,"wind":3,"slot":6,"etc":"화7풍3","get":"사이너스섬 (304,328)"}
-//			,{"no":"054","name":"!케이비","hp":32,"atk":5,"def":5,"agi":6,"avgHp":8.73,"avgTotal":5.15,"avgAtk":1.67,"avgDef":1.69,"avgAgi":1.79,"earth":2,"water":0,"fire":0,"wind":8,"slot":6,"etc":"지2풍8","get":"샴기르 촌장집 - 얼룩우리에게 대화하여 두리를 교환"}
+			,{"no":"054","name":"케이비","hp":30,"atk":5,"def":5,"agi":6,"avgHp":8.77,"avgAtk":1.68,"avgDef":1.68,"avgAgi":1.81,"earth":2,"water":0,"fire":0,"wind":8,"slot":6,"etc":"지2풍8","get":"마리너스 초기 지원페트"}
 //			,{"no":"055","name":"!큐이","hp":22,"atk":4,"def":4,"agi":4,"avgHp":8.42,"avgTotal":4.95,"avgAtk":1.73,"avgDef":1.52,"avgAgi":1.7,"earth":0,"water":0,"fire":5,"wind":5,"slot":6,"etc":"화5풍5","get":"샴기르마을 근처"}
 //			,{"no":"056","name":"!골드카비트","hp":32,"atk":5,"def":5,"agi":6,"avgHp":8.92,"avgTotal":4.95,"avgAtk":1.73,"avgDef":1.45,"avgAgi":1.77,"earth":0,"water":0,"fire":0,"wind":10,"slot":6,"etc":"풍10","get":"샴기르마을 근처"}
 //			,{"no":"057","name":"!고르돈","hp":61,"atk":10,"def":10,"agi":6,"avgHp":10.25,"avgTotal":4.77,"avgAtk":1.9,"avgDef":1.8,"avgAgi":1.07,"earth":10,"water":0,"fire":0,"wind":0,"slot":4,"etc":"지10","get":"폐허가 된 탄광 2층 전역"}
