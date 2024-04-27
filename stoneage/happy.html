@@ -793,7 +793,8 @@
 			for (var i = 0; i < printList.length; i++) {
 				$tbody.append(
 					'<tr>'
-					+ '<td class="text-center"><div id="imgBox"><img src="' + printList[i].img + '"></div></td>'
+					//+ '<td class="text-center"><div id="imgBox"><img src="' + printList[i].img + '"></div></td>'
+					+ '<td class="text-center"></td>'
 					+ '<td><a href="' + printList[i].link + '" target="_blank">' + printList[i].name + '</a></td>'
 					+ '<td>' + Number(printList[i].hp) + '</td>'
 					+ '<td>' + Number(printList[i].atk) + '</td>'
@@ -1429,7 +1430,7 @@
 					<col width="">		<!-- 획득방법 -->
 				</colgroup>
 				<thead>
-					<th id="img">이미지</th>
+					<th id="img"> <!-- 이미지 --> </th>
 					<th id="name">이름<span></span></th>
 					<th id="hp">내구력<span></span></th>
 					<th id="atk">공격력<span></span></th>
