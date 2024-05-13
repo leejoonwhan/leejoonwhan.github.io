@@ -69,17 +69,40 @@
 
             }
 
-            
-
+            var a = foundPet.hp  + baseHp;
+            var b = foundPet.atk + baseAtk;
+            var c = foundPet.def + baseDef;
+            var d = foundPet.agi + baseAgi;
+            result(foundPet, a, b, c, d);
         }
 
-        function result(a, b, c, d) {
-            var resultHp  = (a * 4) + b + c + d;
-            var resultAtk = (a * 0.1) + b + (c * 0.1) + (d * 0.05);
-            var resultDef = (a * 0.1) + (b * 0.1) + c + (d * 0.05);
-            var resultAgi = d;
+        function result(foundPet, a, b, c, d) {
+
+            var hp  = foundPet.beginning * a / 100;
+            var atk = foundPet.beginning * b / 100;
+            var def = foundPet.beginning * c / 100;
+            var agi = foundPet.beginning * d / 100;
+
+            var resultHp  = (hp * 4) + atk + def + agi;
+            var resultAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
+            var resultDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+            var resultAgi = agi;
             console(a + "," + b + "," + c + "," + d);
             console(resultHp.toFixed(2) + "," + resultAtk.toFixed(2) + "," + resultDef.toFixed(2) + "," + resultAgi.toFixed(2));
+
+            $tbody = $('#result tbody');
+            $tbody.empty();
+			if (a == resultHp && b == resultAtk && c == resultDef && d == resultAgi) {
+				$tbody.append(''
+					+ '<tr>'
+					+ '<td class="text-right">' + 0 + '</td>'
+					+ '<td class="text-right">' + resultHp.toFixed(2) + '</td>'
+					+ '<td class="text-right">' + resultAtk.toFixed(2) + '</td>'
+					+ '<td class="text-right">' + resultDef.toFixed(2) + '</td>'
+					+ '<td class="text-right">' + resultAgi.toFixed(2) + '</td>'
+					+ '</tr>'
+				);
+			}
         }
 
         // jQuery
@@ -119,7 +142,7 @@
 		<br>
 		<br>
 
-		<div class="table-responsive" id="petInfo">
+		<div class="table-responsive">
 			<table class="table table-striped">
 				<colgroup>
 					
@@ -145,16 +168,16 @@
                             </select>
                         </td>
                         <td class="form-group">
-                            <input type="number" class="form-control" id="a1">
+                            <input type="number" class="form-control" id="hp" placeholder="내구력">
                         </td>
                         <td class="form-group">
-                            <input type="number" class="form-control" id="a2">
+                            <input type="number" class="form-control" id="atk" placeholder="공격력">
                         </td>
                         <td class="form-group">
-                            <input type="number" class="form-control" id="a3">
+                            <input type="number" class="form-control" id="def" placeholder="방어력">
                         </td>
                         <td class="form-group">
-                            <input type="number" class="form-control" id="a4">
+                            <input type="number" class="form-control" id="agi" placeholder="순발력">
                         </td>
                     </tr>
 				</tbody>
@@ -162,7 +185,7 @@
 		</div>
     </div>
 
-    <div class="table-responsive" id="petInfo">
+    <div class="table-responsive" id="result">
         <table class="table table-striped">
             <colgroup>
                 
@@ -178,25 +201,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        1 등급
-                    </td>
-                    <td class="input-group">
-                        <span class="input-group-addon">Text</span>
-                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-                    </td>
-                    <td class="input-group">
-                        <span class="input-group-addon">Text</span>
-                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-                    </td>
-                    <td class="input-group">
-                        <span class="input-group-addon">Text</span>
-                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-                    </td>
-                    <td class="input-group">
-                        <span class="input-group-addon">Text</span>
-                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
-                    </td>
+                    <td>1등급</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
