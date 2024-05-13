@@ -81,6 +81,11 @@
 				calculation();
 			});
 
+            $("#select").on("change", function() {
+				alert(123);
+                //calculation();
+			});
+
         });
     </script>
 </head>
@@ -122,15 +127,26 @@
 				<tbody>
                     <tr>
                         <td class="form-group">
-                            <select class="form-control">
-                                <option>1123123123</option>
+                            <select class="form-control" id="select">
+                                <option>리비노</option>
+                                <option>얀기로</option>
+                                <option>반보로</option>
+                                <option>반기노</option>
+                                <option>부르돈</option>
                             </select>
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="a1">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="a2">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="a3">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="a4">
+                        </td>
                     </tr>
 				</tbody>
 			</table>
