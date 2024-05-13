@@ -109,8 +109,12 @@
 		$(document).ready(function() {
 
             // 실행 버튼
-			$("#btn").on("click", function() {
-				//calculation();
+			$("#calculation").on("click", function() {
+                var foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                }
+				calculation();
 			});
 
             $("#select").on("change", function() {
@@ -149,16 +153,18 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+						<th>이름</th>
+                        <th>내구력</th>
+                        <th>공격력</th>
+                        <th>방어력</th>
+                        <th>순발력</th>
                         <th></th>
 					</tr>
 				</thead>
 				<tbody>
                     <tr>
                         <td class="form-group">
+                            <!--
                             <select class="form-control" id="select">
                                 <option>리비노</option>
                                 <option>얀기로</option>
@@ -166,6 +172,8 @@
                                 <option>반기노</option>
                                 <option>부르돈</option>
                             </select>
+                            -->
+                            <input type="number" class="form-control" id="name" placeholder="이름">
                         </td>
                         <td class="form-group">
                             <input type="number" class="form-control" id="hp" placeholder="내구력">
@@ -179,36 +187,39 @@
                         <td class="form-group">
                             <input type="number" class="form-control" id="agi" placeholder="순발력">
                         </td>
+                        <td class="form-group">
+                            <button type="button" class="form-control" id="calculation">계산</button>
+                        </td>
                     </tr>
 				</tbody>
 			</table>
 		</div>
-    </div>
 
-    <div class="table-responsive" id="result">
-        <table class="table table-striped">
-            <colgroup>
-                
-            </colgroup>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1등급</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive" id="result">
+            <table class="table table-striped">
+                <colgroup>
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1등급</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
