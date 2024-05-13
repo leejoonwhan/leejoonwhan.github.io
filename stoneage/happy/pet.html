@@ -58,19 +58,28 @@
 			}
 		}
 
-        function calculation() {
+        function calculation(foundPet) {
 
             var baseHp  = -2;
             var baseAtk = -2;
             var baseDef = -2;
             var baseAgi = -2;
 
+            for (var i = 0; i <= 4; i++) {
 
-            var hp  = (24 * 4) + 38 + 16 + 20;
-            var atk = (24 * 0.1) + 38 + (16 * 0.1) + (20 * 0.05);
-            var def = (24 * 0.1) + (38 * 0.1) + 16 + (20 * 0.05);
-            var agi = 20;
+            }
 
+            
+
+        }
+
+        function result(a, b, c, d) {
+            var resultHp  = (a * 4) + b + c + d;
+            var resultAtk = (a * 0.1) + b + (c * 0.1) + (d * 0.05);
+            var resultDef = (a * 0.1) + (b * 0.1) + c + (d * 0.05);
+            var resultAgi = d;
+            console(a + "," + b + "," + c + "," + d);
+            console(resultHp.toFixed(2) + "," + resultAtk.toFixed(2) + "," + resultDef.toFixed(2) + "," + resultAgi.toFixed(2));
         }
 
         // jQuery
@@ -78,12 +87,12 @@
 
             // 실행 버튼
 			$("#btn").on("click", function() {
-				calculation();
+				//calculation();
 			});
 
             $("#select").on("change", function() {
-				alert(123);
-                //calculation();
+                var foundPet = pet.find(p => p.name === $("#select").val());
+                calculation(foundPet);
 			});
 
         });
@@ -152,5 +161,46 @@
 			</table>
 		</div>
     </div>
+
+    <div class="table-responsive" id="petInfo">
+        <table class="table table-striped">
+            <colgroup>
+                
+            </colgroup>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        1 등급
+                    </td>
+                    <td class="input-group">
+                        <span class="input-group-addon">Text</span>
+                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+                    </td>
+                    <td class="input-group">
+                        <span class="input-group-addon">Text</span>
+                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+                    </td>
+                    <td class="input-group">
+                        <span class="input-group-addon">Text</span>
+                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+                    </td>
+                    <td class="input-group">
+                        <span class="input-group-addon">Text</span>
+                        <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
