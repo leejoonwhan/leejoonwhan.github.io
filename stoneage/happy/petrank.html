@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Happy Server Pet Info</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		body { cursor: default; }
+		#btnTop {
+		  display: none;
+		  position: fixed;
+		  bottom: 20px;
+		  right: 30px;
+		  z-index: 99;
+		  font-size: 18px;
+		  border: none;
+		  outline: none;
+		  background-color: red;
+		  color: white;
+		  cursor: pointer;
+		  padding: 15px;
+		  border-radius: 4px;
+		}
+
+		#btnTop:hover {
+		  background-color: #555;
+		}
+		.searchValue {
+			display: inline;
+			width: 100px;
+		}
+
+		.green { color: #fff; background-color: #5cb85c;}
+		.blue { color: #fff; background-color: #337ab7;}
+		.red { color: #fff; background-color: #d9534f;}
+		.yellow { color: #fff; background-color: #f0ad4e;}
+	</style>
+	<script>
+        var pet = [
+            //{"no":"044","name":"리비노","beginning":22,"hp":27,"atk":37,"def":19,"agi":17}
+			//,{"no":"045","name":"얀기로","beginning":29,"hp":27,"atk":36,"def":16,"agi":20}
+			//,{"no":"046","name":"반보로","beginning":27,"hp":25,"atk":37,"def":15,"agi":21}
+			{"no":"047","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
+			,{"no":"048","name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24}
+        ]
+
+        const result = [];
+
+        // 스크롤
+		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+		window.onscroll = function() {scrollFunction()};
+		function scrollFunction() {
+			if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+				btnTop.style.display = "block";
+			} else {
+				btnTop.style.display = "none";
+			}
+		}
+
+        function setSRank(copiedPet) {
+
+            $(".srank").remove();
+
+            // base
+            copiedPet.hp  = copiedPet.hp  + 2;
+            copiedPet.atk = copiedPet.atk + 2;
+            copiedPet.def = copiedPet.def + 2;
+            copiedPet.agi = copiedPet.agi + 2;
+            
+            // bonus
+            copiedPet.hp  = copiedPet.hp  + 3;
+            copiedPet.atk = copiedPet.atk + 3;
+            copiedPet.def = copiedPet.def + 2;
+            copiedPet.agi = copiedPet.agi + 2;
+
+            // 계산
+            const hp  = copiedPet.beginning * copiedPet.hp  / 100;
+            const atk = copiedPet.beginning * copiedPet.atk / 100;
+            const def = copiedPet.beginning * copiedPet.def / 100;
+            const agi = copiedPet.beginning * copiedPet.agi / 100;
+
+            const resultHp  = (hp * 4) + atk + def + agi;
+            const resultAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
+            const resultDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+            const resultAgi = agi;
+
+            $('#myPet tbody').append(''
+                + '<tr class="srank">'
+                + '<td>S 등급</td>'
+                + '<td>' + parseInt(resultHp,  10) + '</td>'
+                + '<td>' + parseInt(resultAtk, 10) + '</td>'
+                + '<td>' + parseInt(resultDef, 10) + '</td>'
+                + '<td>' + parseInt(resultAgi, 10) + '</td>'
+                + '<td>' + '' + '</td>'
+                + '</tr>'
+            );
+        }
+
+        function setBase(foundPet) {
+
+            $('#result tbody').empty();
+            result.length = 0;
+            const base = {"hp":-2,"atk":-2,"def":-2,"agi":-2};
+            
+            for (let i = 0; i < 5; i++) {
+                for (let ii = 0; ii < 5; ii++) {
+                    for (let iii = 0; iii < 5; iii++) {
+                        for (let iiii = 0; iiii < 5; iiii++) {
+                            setBonus(foundPet, base);
+                            base.hp++;
+                            if (base.hp == 3) {
+                                base.hp = -2;
+                            }
+                        }
+                        base.atk++;
+                        if (base.atk == 3) {
+                            base.atk = -2;
+                        }
+                    }
+                    base.def++;
+                    if (base.def == 3) {
+                        base.def = -2;
+                    }
+                }
+                base.agi++;
+                if (base.agi == 3) {
+                    base.agi = -2;
+                }
+            }
+            
+            
+            result.sort(function(a, b) {
+                if (b['rank'] !== a['rank']) {
+                    return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
+                } else if (b['baseHp'] !== a['baseHp']) {
+                    return b['baseHp'] - a['baseHp']; // hp를 기준으로 내림차순 정렬
+                } else if (b['baseAtk'] !== a['baseAtk']) {
+                    return b['baseAtk'] - a['baseAtk']; // atk를 기준으로 내림차순 정렬
+                } else if (b['baseDef'] !== a['baseDef']) {
+                    return b['baseDef'] - a['baseDef']; // def를 기준으로 내림차순 정렬
+                } else {
+                    return b['baseAgi'] - a['baseAgi']; // agi를 기준으로 내림차순 정렬
+                }
+            });
+
+
+            for (let i = 0; i < result.length; i++) {
+                $('#result tbody').append(''
+					+ '<tr>'
+					+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+					+ '<td>' + result[i].hp.toFixed(2)  + '(' + result[i].baseHp  + ')(' + result[i].bonusHp  + ')</td>'
+					+ '<td>' + result[i].atk.toFixed(2) + '(' + result[i].baseAtk + ')(' + result[i].bonusAtk + ')</td>'
+					+ '<td>' + result[i].def.toFixed(2) + '(' + result[i].baseDef + ')(' + result[i].bonusDef + ')</td>'
+					+ '<td>' + result[i].agi.toFixed(2) + '(' + result[i].baseAgi + ')(' + result[i].bonusAgi + ')</td>'
+					+ '</tr>'
+				);
+            }
+
+            // 각 rank 값의 등장 횟수를 저장할 객체
+            const rankCounts = {};
+
+            // 배열 순회하면서 각 rank 값의 개수 체크
+            for (let i = 0; i < result.length; i++) {
+                const rank = result[i].rank;
+                if (rankCounts[rank] === undefined) {
+                    rankCounts[rank] = 1;
+                } else {
+                    rankCounts[rank]++;
+                }
+            }
+
+            // 객체를 배열로 변환하고 rank에 대해 내림차순으로 정렬
+            const ranks = Object.keys(rankCounts).sort((a, b) => b - a); // rank를 내림차순으로 정렬한 배열
+
+            // 결과 출력
+            let message = '계산이 끝났습니다!\n';
+            const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
+            for (const rank of ranks) {
+                const count = rankCounts[rank];
+                const percentage = (count / totalCount * 100).toFixed(2); // 소수점 둘째 자리까지 표시
+                message += `${rank} 등급: ${count} 건 (${percentage}%) \n`;
+            }
+            alert(message);
+        }
+
+        function setBonus(foundPet, base) {
+
+            const bonus = {"hp":0,"atk":0,"def":0,"agi":0};
+
+            for (let i = 0; i < 11; i++) {
+                for (let ii = 0; ii < 11; ii++) {
+                    for (let iii = 0; iii < 11; iii++) {
+                        for (let iiii = 0; iiii < 11; iiii++) {
+                            const sum = bonus.hp + bonus.atk + bonus.def + bonus.agi;
+                            if (sum == 10) {
+                                // 계산
+                                print(foundPet, base, bonus);
+                            }
+                            bonus.hp++;
+                            if (bonus.hp == 11) {
+                                bonus.hp = 0;
+                            }
+                        }
+                        bonus.atk++;
+                        if (bonus.atk == 11) {
+                            bonus.atk = 0;
+                        }
+                    }
+                    bonus.def++;
+                    if (bonus.def == 11) {
+                        bonus.def = 0;
+                    }
+                }
+                bonus.agi++;
+                if (bonus.agi == 11) {
+                    bonus.agi = 0;
+                }
+            }
+        }
+
+        function print(foundPet, base, bonus) {
+            
+            const hp  = foundPet.beginning * (foundPet.hp  + base.hp  + bonus.hp)  / 100;
+            const atk = foundPet.beginning * (foundPet.atk + base.atk + bonus.atk) / 100;
+            const def = foundPet.beginning * (foundPet.def + base.def + bonus.def) / 100;
+            const agi = foundPet.beginning * (foundPet.agi + base.agi + bonus.agi) / 100;
+            //console.log(foundPet);
+            //console.log(base);
+            //console.log(bonus);
+            
+            const stat = {"rank":0,"hp":0,"atk":0,"def":0,"agi":0,"baseHp":0,"baseAtk":0,"baseDef":0,"baseAgi":0,"bonusHp":0,"bonusAtk":0,"bonusDef":0,"bonusAgi":0};
+            stat.hp  = (hp * 4) + atk + def + agi;
+            stat.atk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
+            stat.def = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+            stat.agi = agi;
+
+            if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
+                Math.floor(stat.atk) === parseInt($("#atk").val(), 10) &&
+                Math.floor(stat.def) === parseInt($("#def").val(), 10) &&
+                Math.floor(stat.agi) === parseInt($("#agi").val(), 10)) {
+                stat.rank     = base.hp + base.atk + base.def + base.agi;
+                stat.baseHp   = base.hp;
+                stat.baseAtk  = base.atk;
+                stat.baseDef  = base.def;
+                stat.baseAgi  = base.agi;
+                stat.bonusHp  = bonus.hp;
+                stat.bonusAtk = bonus.atk;
+                stat.bonusDef = bonus.def;
+                stat.bonusAgi = bonus.agi;
+                result.push(stat);
+
+                /*
+                $('#result tbody').append(''
+					+ '<tr>'
+					+ '<td class="text-right">' + (base.hp + base.atk + base.def + base.agi) + '</td>'
+					+ '<td class="text-right">' + stat.hp.toFixed(2)  + '(' + base.hp  + ')</td>'
+					+ '<td class="text-right">' + stat.atk.toFixed(2) + '(' + base.atk + ')</td>'
+					+ '<td class="text-right">' + stat.def.toFixed(2) + '(' + base.def + ')</td>'
+					+ '<td class="text-right">' + stat.agi.toFixed(2) + '(' + base.agi + ')</td>'
+					+ '</tr>'
+				);
+                */
+            }
+        }
+
+        /*
+        function calculate(foundPet) {
+
+            var base  = [-2, -2, -2, -2];
+            var bonus = [0, 0, 0, 0];
+
+            for (var i = 0; i <= 4; i++) {
+
+            }
+
+            var a = foundPet.hp  + baseHp;
+            var b = foundPet.atk + baseAtk;
+            var c = foundPet.def + baseDef;
+            var d = foundPet.agi + baseAgi;
+            result(foundPet, a, b, c, d);
+        }
+
+        function result(foundPet, a, b, c, d) {
+
+            var hp  = foundPet.beginning * a / 100;
+            var atk = foundPet.beginning * b / 100;
+            var def = foundPet.beginning * c / 100;
+            var agi = foundPet.beginning * d / 100;
+
+            var resultHp  = (hp * 4) + atk + def + agi;
+            var resultAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
+            var resultDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+            var resultAgi = agi;
+            console(a + "," + b + "," + c + "," + d);
+            console(resultHp.toFixed(2) + "," + resultAtk.toFixed(2) + "," + resultDef.toFixed(2) + "," + resultAgi.toFixed(2));
+
+            $tbody = $('#result tbody');
+            $tbody.empty();
+			if (a == resultHp && b == resultAtk && c == resultDef && d == resultAgi) {
+				$tbody.append(''
+					+ '<tr>'
+					+ '<td class="text-right">' + 0 + '</td>'
+					+ '<td class="text-right">' + resultHp.toFixed(2) + '</td>'
+					+ '<td class="text-right">' + resultAtk.toFixed(2) + '</td>'
+					+ '<td class="text-right">' + resultDef.toFixed(2) + '</td>'
+					+ '<td class="text-right">' + resultAgi.toFixed(2) + '</td>'
+					+ '</tr>'
+				);
+			}
+        }
+        */
+
+        // jQuery
+		$(document).ready(function() {
+
+            // 실행 버튼
+			$("#calculate").on("click", function() {
+                $("#memo").text($("#name").val());
+                const foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                    $("#alert").text("페트 정보를 찾을 수 없습니다.");
+                    return;
+                }
+                // foundPet을 깊은 복사하여 새로운 객체를 생성
+                const copiedPet = JSON.parse(JSON.stringify(foundPet));
+                setSRank(copiedPet);
+				setBase(foundPet);
+			});
+
+            // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
+            var btnTop = document.getElementById("btnTop");
+			$("#btnTop").on("click", function() {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			});
+        });
+    </script>
+</head>
+<body>
+	<div class="container">
+		<h2>Happy Server Pet Rank Info</h2>
+		<hr>
+		<p class="lead">
+			아직 미완성입니다. 수정 또는 추가가 필요한 경우 디스코드 <strong>칸쵸</strong>를 호출해주세요.
+		</p>
+		<blockquote>
+			<p>펫 이름과 초기치를 입력해주세요. 만약, 입력값과 출력되는 S급 초기치가 다르다면 신뢰할 수 없는 데이터입니다.</p>
+            <p>8 등급부터 -8 등급까지 존재하며 8등급이 S급 확률입니다.</p>
+			<footer>예) 반기노, 부르돈의 경우 신뢰할 수 있지만 얀기로의 경우 신뢰할 수 없음</footer>
+		</blockquote>
+
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<div class="table-responsive" id="myPet">
+			<table class="table table-striped">
+				<colgroup>
+					
+				</colgroup>
+				<thead>
+					<tr>
+						<th>이름</th>
+                        <th>내구력</th>
+                        <th>공격력</th>
+                        <th>방어력</th>
+                        <th>순발력</th>
+                        <th></th>
+					</tr>
+				</thead>
+				<tbody>
+                    <tr>
+                        <td class="form-group">
+                            <!--
+                            <select class="form-control" id="select">
+                                <option>리비노</option>
+                                <option>얀기로</option>
+                                <option>반보로</option>
+                                <option>반기노</option>
+                                <option>부르돈</option>
+                            </select>
+                            -->
+                            <input type="text" class="form-control" id="name" placeholder="반기노">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="hp" placeholder="52">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="atk" placeholder="12">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="def" placeholder="7">
+                        </td>
+                        <td class="form-group">
+                            <input type="number" class="form-control" id="agi" placeholder="6">
+                        </td>
+                        <td class="form-group">
+                            <button type="button" class="form-control" id="calculate">계산</button>
+                        </td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+
+        <div class="table-responsive" id="result">
+            <table class="table table-striped">
+                <colgroup>
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>등급</th>
+                        <th>내구력</th>
+                        <th>공격력</th>
+                        <th>방어력</th>
+                        <th>순발력</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button id="btnTop" title="Go to top">Top</button>
+</div>
+</body>
+</html>
