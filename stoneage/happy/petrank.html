@@ -251,67 +251,8 @@
                 stat.bonusDef = bonus.def;
                 stat.bonusAgi = bonus.agi;
                 result.push(stat);
-
-                /*
-                $('#result tbody').append(''
-					+ '<tr>'
-					+ '<td class="text-right">' + (base.hp + base.atk + base.def + base.agi) + '</td>'
-					+ '<td class="text-right">' + stat.hp.toFixed(2)  + '(' + base.hp  + ')</td>'
-					+ '<td class="text-right">' + stat.atk.toFixed(2) + '(' + base.atk + ')</td>'
-					+ '<td class="text-right">' + stat.def.toFixed(2) + '(' + base.def + ')</td>'
-					+ '<td class="text-right">' + stat.agi.toFixed(2) + '(' + base.agi + ')</td>'
-					+ '</tr>'
-				);
-                */
             }
         }
-
-        /*
-        function calculate(foundPet) {
-
-            var base  = [-2, -2, -2, -2];
-            var bonus = [0, 0, 0, 0];
-
-            for (var i = 0; i <= 4; i++) {
-
-            }
-
-            var a = foundPet.hp  + baseHp;
-            var b = foundPet.atk + baseAtk;
-            var c = foundPet.def + baseDef;
-            var d = foundPet.agi + baseAgi;
-            result(foundPet, a, b, c, d);
-        }
-
-        function result(foundPet, a, b, c, d) {
-
-            var hp  = foundPet.beginning * a / 100;
-            var atk = foundPet.beginning * b / 100;
-            var def = foundPet.beginning * c / 100;
-            var agi = foundPet.beginning * d / 100;
-
-            var resultHp  = (hp * 4) + atk + def + agi;
-            var resultAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
-            var resultDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
-            var resultAgi = agi;
-            console(a + "," + b + "," + c + "," + d);
-            console(resultHp.toFixed(2) + "," + resultAtk.toFixed(2) + "," + resultDef.toFixed(2) + "," + resultAgi.toFixed(2));
-
-            $tbody = $('#result tbody');
-            $tbody.empty();
-			if (a == resultHp && b == resultAtk && c == resultDef && d == resultAgi) {
-				$tbody.append(''
-					+ '<tr>'
-					+ '<td class="text-right">' + 0 + '</td>'
-					+ '<td class="text-right">' + resultHp.toFixed(2) + '</td>'
-					+ '<td class="text-right">' + resultAtk.toFixed(2) + '</td>'
-					+ '<td class="text-right">' + resultDef.toFixed(2) + '</td>'
-					+ '<td class="text-right">' + resultAgi.toFixed(2) + '</td>'
-					+ '</tr>'
-				);
-			}
-        }
-        */
 
         // jQuery
 		$(document).ready(function() {
@@ -345,7 +286,7 @@
 		<h2>Happy Server Pet Rank Info</h2>
 		<hr>
 		<p class="lead">
-			아직 미완성입니다. 수정 또는 추가가 필요한 경우 디스코드 <strong>칸쵸</strong>를 호출해주세요.
+			현재 조회 가능한 펫은 반기노와 부르돈 뿐입니다.
 		</p>
 		<blockquote>
 			<p>펫 이름과 초기치를 입력해주세요. 만약, 입력값과 출력되는 S급 초기치가 다르다면 신뢰할 수 없는 데이터입니다.</p>
