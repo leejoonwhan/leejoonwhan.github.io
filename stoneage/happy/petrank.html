@@ -51,8 +51,9 @@
 			,{"no":"073","name":"노르노르","beginning":25,"hp":22,"atk":30,"def":17,"agi":29}
             
             ,{"no":"100","name":"카르곤","beginning":26,"hp":23,"atk":31,"def":13,"agi":30}
+            ,{"no":"102","name":"도라비스","beginning":26,"hp":24,"atk":31,"def":14,"agi":33}
             
-
+            
             //,{"no":"103","name":"타키","beginning":17,"hp":19,"atk":18,"def":10,"agi":33}
             //,{"no":"104","name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":35}
             //,{"no":"105","name":"호르쿠","beginning":18,"hp":21,"atk":20,"def":14,"agi":40}
@@ -370,8 +371,18 @@
             return (Math.floor(number * power) / power).toFixed(places);
         }
 
+        function getListName() {
+            var text = "";
+            pet.forEach(function(obj) {
+                text += obj.name + ", ";
+            });
+            $("#listName").text(text);
+        }
+
         // jQuery
 		$(document).ready(function() {
+
+            getListName();
 
             // 검색 버튼
 			$("#search").on("click", function() {
@@ -414,8 +425,8 @@
 	<div class="container">
 		<h2>Happy Server Pet Rank Info</h2>
 		<hr>
-		<p class="lead">
-			리비노, 얀기로, 반보로, 반기노, 부르돈, 베르가, 고르고르, 노르노르, 카르곤, 카키, 오가로스, 오르곤, 모가로스
+		<p class="lead" id="listName">
+			
 		</p>
         <p class="lead">
 			오가로스, 오르곤, 모가로스는 신뢰성이 높지 않으니 참고해주시기 바랍니다.
