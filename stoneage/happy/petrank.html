@@ -40,11 +40,20 @@
 	</style>
 	<script>
         var pet = [
-            //{"no":"044","name":"리비노","beginning":22,"hp":27,"atk":37,"def":19,"agi":17}
-			//,{"no":"045","name":"얀기로","beginning":29,"hp":27,"atk":36,"def":16,"agi":20}
-			//,{"no":"046","name":"반보로","beginning":27,"hp":25,"atk":37,"def":15,"agi":21}
-			{"no":"047","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
+             {"no":"044","name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17}
+			,{"no":"045","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
+			,{"no":"046","name":"반보로","beginning":27,"hp":25,"atk":37,"def":15,"agi":21}
+			,{"no":"047","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
 			,{"no":"048","name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24}
+            //,{"no":"070","name":"베르가","beginning":24,"hp":23,"atk":28,"def":16,"agi":25}
+			//,{"no":"071","name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28}
+			,{"no":"072","name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":28}
+			//,{"no":"073","name":"노르노르","beginning":25,"hp":19,"atk":29,"def":18,"agi":29}
+
+            //,{"no":"103","name":"타키","beginning":17,"hp":19,"atk":18,"def":10,"agi":33}
+            //,{"no":"104","name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":35}
+            //,{"no":"105","name":"호르쿠","beginning":18,"hp":21,"atk":20,"def":14,"agi":40}
+            //,{"no":"106","name":"카키","beginning":20,"hp":18,"atk":24,"def":11,"agi":40}
         ]
 
         const result = [];
@@ -71,10 +80,10 @@
             copiedPet.agi = copiedPet.agi + 2;
             
             // bonus
-            copiedPet.hp  = copiedPet.hp  + 3;
-            copiedPet.atk = copiedPet.atk + 3;
-            copiedPet.def = copiedPet.def + 2;
-            copiedPet.agi = copiedPet.agi + 2;
+            copiedPet.hp  = copiedPet.hp  + 2.5;
+            copiedPet.atk = copiedPet.atk + 2.5;
+            copiedPet.def = copiedPet.def + 2.5;
+            copiedPet.agi = copiedPet.agi + 2.5;
 
             // 계산
             const hp  = copiedPet.beginning * copiedPet.hp  / 100;
@@ -148,6 +157,11 @@
 
 
             for (let i = 0; i < result.length; i++) {
+                if (result[i].atk.toFixed(2) = 13.00) {
+                    console.log(result[i].atk);
+                    console.log(result[i].atk.toFixed(2));
+                }
+                
                 $('#result tbody').append(''
 					+ '<tr>'
 					+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
