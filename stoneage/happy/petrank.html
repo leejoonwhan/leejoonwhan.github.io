@@ -306,7 +306,7 @@
 
                 // 배열을 반복하면서 각 요소의 값을 카운트
                 result.forEach(function(obj) {
-                    var key = obj.hp + ', ' + obj.atk + ', ' + obj.def + ', ' + obj.agi;
+                    var key = parseInt(obj.hp + ', ' + obj.atk + ', ' + obj.def + ', ' + obj.agi, 10);
                     countMap[key] = (countMap[key] || 0) + 1;
                 });
 
