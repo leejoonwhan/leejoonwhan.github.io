@@ -45,11 +45,11 @@
 			,{"no":"046","name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21}
 			,{"no":"047","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
 			,{"no":"048","name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24}
-            //,{"no":"070","name":"베르가","beginning":24,"hp":23,"atk":28,"def":16,"agi":25}
+            ,{"no":"070","name":"베르가","beginning":24,"hp":24,"atk":29,"def":14,"agi":26}
 			//,{"no":"071","name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28}
 			,{"no":"072","name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":28}
-			//,{"no":"073","name":"노르노르","beginning":25,"hp":19,"atk":29,"def":18,"agi":29}
-
+			,{"no":"073","name":"노르노르","beginning":25,"hp":22,"atk":30,"def":17,"agi":29}
+            
             //,{"no":"103","name":"타키","beginning":17,"hp":19,"atk":18,"def":10,"agi":33}
             //,{"no":"104","name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":35}
             //,{"no":"105","name":"호르쿠","beginning":18,"hp":21,"atk":20,"def":14,"agi":40}
@@ -59,7 +59,6 @@
             //,{"no":"108","name":"오르곤","beginning":26,"hp":28,"atk":30,"def":22,"agi":22}
             //,{"no":"109","name":"모가로스","beginning":27,"hp":23,"atk":37,"def":20,"agi":25}
             ,{"no":"109","name":"모가로스","beginning":27,"hp":24.3,"atk":36.4,"def":17,"agi":25.2}
-
         ]
 
         let btnName = "";
@@ -79,6 +78,26 @@
         function setSRank(copiedPet) {
 
             $(".srank").remove();
+
+            let rank = 0;
+            if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi > 100) {
+                rank = 475;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi > 95) {
+                rank = 495;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi > 90) {
+                rank = 515;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi > 85) {
+                rank = 535;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi > 80) {
+                rank = 555;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi > 0) {
+                rank = 575;
+            }
 
             // base
             copiedPet.hp  = copiedPet.hp  + 2;
@@ -103,13 +122,31 @@
             const resultDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
             const resultAgi = agi;
 
+            const upHp  = copiedPet.hp  * rank / 10000;
+            const upAtk = copiedPet.atk * rank / 10000;
+            const upDef = copiedPet.def * rank / 10000;
+            const upAgi = copiedPet.agi * rank / 10000;
+
+            const resultUpHp  = (upHp * 4) + upAtk + upDef + upAgi;
+            const resultUpAtk = (upHp * 0.1) + upAtk + (upDef * 0.1) + (upAgi * 0.05);
+            const resultUpDef = (upHp * 0.1) + (upAtk * 0.1) + upDef + (upAgi * 0.05);
+            const resultUpAgi = upAgi;
+
             $('#myPet tbody').append(''
                 + '<tr class="srank">'
-                + '<td>S 등급</td>'
+                + '<td>S 초기치</td>'
                 + '<td>' + resultHp.toFixed(2) + '</td>'
                 + '<td>' + resultAtk.toFixed(2) + '</td>'
                 + '<td>' + resultDef.toFixed(2) + '</td>'
                 + '<td>' + resultAgi.toFixed(2) + '</td>'
+                + '<td>' + '' + '</td>'
+                + '</tr>'
+                + '<tr class="srank">'
+                + '<td>S 성장률</td>'
+                + '<td>' + resultUpHp.toFixed(2) + '</td>'
+                + '<td>' + resultUpAtk.toFixed(2) + '</td>'
+                + '<td>' + resultUpDef.toFixed(2) + '</td>'
+                + '<td>' + resultUpAgi.toFixed(2) + '</td>'
                 + '<td>' + '' + '</td>'
                 + '</tr>'
             );
