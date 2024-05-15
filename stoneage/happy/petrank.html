@@ -42,7 +42,7 @@
         var pet = [
              {"no":"044","name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17}
 			,{"no":"045","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
-			,{"no":"046","name":"반보로","beginning":27,"hp":25,"atk":37,"def":15,"agi":21}
+			,{"no":"046","name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21}
 			,{"no":"047","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
 			,{"no":"048","name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24}
             //,{"no":"070","name":"베르가","beginning":24,"hp":23,"atk":28,"def":16,"agi":25}
@@ -53,9 +53,16 @@
             //,{"no":"103","name":"타키","beginning":17,"hp":19,"atk":18,"def":10,"agi":33}
             //,{"no":"104","name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":35}
             //,{"no":"105","name":"호르쿠","beginning":18,"hp":21,"atk":20,"def":14,"agi":40}
-            //,{"no":"106","name":"카키","beginning":20,"hp":18,"atk":24,"def":11,"agi":40}
+            ,{"no":"106","name":"카키","beginning":20,"hp":17,"atk":23,"def":11,"agi":33}
+            
+            //,{"no":"107","name":"오가로스","beginning":17,"hp":19,"atk":16,"def":19,"agi":23}
+            //,{"no":"108","name":"오르곤","beginning":26,"hp":28,"atk":30,"def":22,"agi":22}
+            //,{"no":"109","name":"모가로스","beginning":27,"hp":23,"atk":37,"def":20,"agi":25}
+            ,{"no":"109","name":"모가로스","beginning":27,"hp":24.3,"atk":36.4,"def":17,"agi":25.2}
+
         ]
 
+        let btnName = "";
         const result = [];
 
         // 스크롤
@@ -99,10 +106,10 @@
             $('#myPet tbody').append(''
                 + '<tr class="srank">'
                 + '<td>S 등급</td>'
-                + '<td>' + parseInt(resultHp,  10) + '</td>'
-                + '<td>' + parseInt(resultAtk, 10) + '</td>'
-                + '<td>' + parseInt(resultDef, 10) + '</td>'
-                + '<td>' + parseInt(resultAgi, 10) + '</td>'
+                + '<td>' + resultHp.toFixed(2) + '</td>'
+                + '<td>' + resultAtk.toFixed(2) + '</td>'
+                + '<td>' + resultDef.toFixed(2) + '</td>'
+                + '<td>' + resultAgi.toFixed(2) + '</td>'
                 + '<td>' + '' + '</td>'
                 + '</tr>'
             );
@@ -191,20 +198,37 @@
             stat.def = limitDecimalPlaces((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 2);
             stat.agi = limitDecimalPlaces(agi, 2);
 
-            if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
-                Math.floor(stat.atk) === parseInt($("#atk").val(), 10) &&
-                Math.floor(stat.def) === parseInt($("#def").val(), 10) &&
-                Math.floor(stat.agi) === parseInt($("#agi").val(), 10)) {
-                stat.rank     = base.hp + base.atk + base.def + base.agi;
-                stat.baseHp   = base.hp;
-                stat.baseAtk  = base.atk;
-                stat.baseDef  = base.def;
-                stat.baseAgi  = base.agi;
-                stat.bonusHp  = bonus.hp;
-                stat.bonusAtk = bonus.atk;
-                stat.bonusDef = bonus.def;
-                stat.bonusAgi = bonus.agi;
-                result.push(stat);
+            if (btnName == "calculate") {
+                if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
+                    Math.floor(stat.atk) === parseInt($("#atk").val(), 10) &&
+                    Math.floor(stat.def) === parseInt($("#def").val(), 10) &&
+                    Math.floor(stat.agi) === parseInt($("#agi").val(), 10)) {
+                    stat.rank     = base.hp + base.atk + base.def + base.agi;
+                    stat.baseHp   = base.hp;
+                    stat.baseAtk  = base.atk;
+                    stat.baseDef  = base.def;
+                    stat.baseAgi  = base.agi;
+                    stat.bonusHp  = bonus.hp;
+                    stat.bonusAtk = bonus.atk;
+                    stat.bonusDef = bonus.def;
+                    stat.bonusAgi = bonus.agi;
+                    result.push(stat);
+                }
+            }
+
+            if (btnName == "search") {
+                if (base.hp + base.atk + base.def + base.agi == 8) {
+                    stat.rank     = base.hp + base.atk + base.def + base.agi;
+                    stat.baseHp   = base.hp;
+                    stat.baseAtk  = base.atk;
+                    stat.baseDef  = base.def;
+                    stat.baseAgi  = base.agi;
+                    stat.bonusHp  = bonus.hp;
+                    stat.bonusAtk = bonus.atk;
+                    stat.bonusDef = bonus.def;
+                    stat.bonusAgi = bonus.agi;
+                    result.push(stat);
+                }
             }
         }
 
@@ -285,13 +309,28 @@
         // jQuery
 		$(document).ready(function() {
 
-            // 실행 버튼
+            // 검색 버튼
+			$("#search").on("click", function() {
+                const foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                    return;
+                }
+                btnName = "search";
+                // foundPet을 깊은 복사하여 새로운 객체를 생성
+                const copiedPet = JSON.parse(JSON.stringify(foundPet));
+                setSRank(copiedPet);
+				setBase(foundPet);
+			});
+
+            // 계산 버튼
 			$("#calculate").on("click", function() {
                 const foundPet = pet.find(p => p.name === $("#name").val());
                 if (foundPet == undefined) {
                     alert("페트 정보를 찾을 수 없습니다.");
                     return;
                 }
+                btnName = "calculate";
                 // foundPet을 깊은 복사하여 새로운 객체를 생성
                 const copiedPet = JSON.parse(JSON.stringify(foundPet));
                 setSRank(copiedPet);
@@ -312,12 +351,12 @@
 		<h2>Happy Server Pet Rank Info</h2>
 		<hr>
 		<p class="lead">
-			현재 조회 가능한 펫은 반기노와 부르돈 뿐입니다.
+			미완성 입니다.
 		</p>
 		<blockquote>
-			<p>펫 이름과 초기치를 입력해주세요. 만약, 입력값과 출력되는 S급 초기치가 다르다면 신뢰할 수 없는 데이터입니다.</p>
+			<p>펫 이름과 초기치를 입력해주세요. 만약, 입력값과 출력되는 S급 초기치가 다르다면 작업중인 데이터입니다.</p>
             <p>8 등급부터 -8 등급까지 존재하며 8등급이 S급 확률입니다.</p>
-			<footer>예) 반기노, 부르돈의 경우 신뢰할 수 있지만 얀기로의 경우 신뢰할 수 없음</footer>
+			<footer></footer>
 		</blockquote>
 
 		<br>
@@ -342,7 +381,7 @@
 				</thead>
 				<tbody>
                     <tr>
-                        <td class="form-group">
+                        <td>
                             <!--
                             <select class="form-control" id="select">
                                 <option>리비노</option>
@@ -352,21 +391,26 @@
                                 <option>부르돈</option>
                             </select>
                             -->
-                            <input type="text" class="form-control" id="name" placeholder="반기노">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="얀기로">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="search"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
                         </td>
-                        <td class="form-group">
+                        <td>
                             <input type="number" class="form-control" id="hp" placeholder="52">
                         </td>
-                        <td class="form-group">
+                        <td>
                             <input type="number" class="form-control" id="atk" placeholder="12">
                         </td>
-                        <td class="form-group">
+                        <td>
                             <input type="number" class="form-control" id="def" placeholder="7">
                         </td>
-                        <td class="form-group">
+                        <td>
                             <input type="number" class="form-control" id="agi" placeholder="6">
                         </td>
-                        <td class="form-group">
+                        <td>
                             <button type="button" class="form-control" id="calculate">계산</button>
                         </td>
                     </tr>
