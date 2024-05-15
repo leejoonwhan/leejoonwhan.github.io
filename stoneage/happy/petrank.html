@@ -210,6 +210,7 @@
 
         function print() {
             result.sort(function(a, b) {
+                /*
                 if (b['rank'] !== a['rank']) {
                     return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
                 } else if (b['baseHp'] !== a['baseHp']) {
@@ -220,6 +221,19 @@
                     return b['baseDef'] - a['baseDef']; // def를 기준으로 내림차순 정렬
                 } else {
                     return b['baseAgi'] - a['baseAgi']; // agi를 기준으로 내림차순 정렬
+                }
+                */
+
+                if (b['rank'] !== a['rank']) {
+                    return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
+                } else if (b['hp'] !== a['hp']) {
+                    return b['hp'] - a['hp']; // hp를 기준으로 내림차순 정렬
+                } else if (b['atk'] !== a['atk']) {
+                    return b['atk'] - a['atk']; // atk를 기준으로 내림차순 정렬
+                } else if (b['def'] !== a['def']) {
+                    return b['def'] - a['def']; // def를 기준으로 내림차순 정렬
+                } else {
+                    return b['agi'] - a['agi']; // agi를 기준으로 내림차순 정렬
                 }
             });
 
