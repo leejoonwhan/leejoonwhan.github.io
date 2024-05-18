@@ -123,20 +123,20 @@
             const upAgi   = Number($("#upAgi").val());
 
             // beginning
-            for (var i = 0; i <= 15; i = i + 0.1) {
+            for (var i = 0; i <= 15; i = i + 1) {
                 // agi
-                for (var ii = 0; ii <= 40; ii = ii + 0.1) {
+                for (var ii = 0; ii <= 40; ii = ii + 1) {
                     const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
                     
                     if (parseInt(agi, 10) == statAgi) {
                         // hp
-                        for (var iii = 0; iii <= 40; iii = iii + 0.1) {
+                        for (var iii = 0; iii <= 40; iii = iii + 1) {
                             const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
                             // atk 
-                            for (var iiii = 0; iiii <= 40; iiii = iiii + 0.1) {
+                            for (var iiii = 0; iiii <= 40; iiii = iiii + 1) {
                                 const atk = base.beginning * (base.atk + 2 + 2.5) / 100;
                                 // def
-                                for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 0.1) {
+                                for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
                                     const def = base.beginning * (base.def + 2 + 2.5) / 100;
                                     // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
                                     /*
@@ -148,12 +148,14 @@
                                     }
                                     */
                                     // {"no":"106","name":"모가로스","beginning":27.2,"hp":24.3,"atk":36.4,"def":17,"agi":25.2}
+                                    /*
                                     if (base.beginning == 27.2 && base.hp == 24.3 && base.atk == 36.4 && base.def == 17 && base.agi == 25.2) {
                                         console.log("BEST!!");
                                         console.log("beginning:" + base.beginning + ", HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
                                         console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
                                         console.log("HP: " + ((hp * 4) + atk + def + agi) + ", ATK: " + ((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)) + ", DEF: " + ((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)) + ", AGI: " + agi);
                                     }
+                                    */
                                     if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
                                         parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
                                         parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
@@ -197,7 +199,7 @@
                                         
                                     }
 
-                                    base.def += 0.1;
+                                    base.def += 1;
                                     if (base.def > 47) {
                                         base.def = 5;
                                     }
@@ -207,7 +209,7 @@
                                     break;
                                 }
 
-                                base.atk += 0.1;
+                                base.atk += 1;
                                 if (base.atk > 47) {
                                     base.atk = 5;
                                 }
@@ -217,7 +219,7 @@
                                 break;
                             }
 
-                            base.hp += 0.1;
+                            base.hp += 1;
                             if (base.hp > 47) {
                                 base.hp = 5;
                             }
@@ -228,7 +230,7 @@
                             break;
                         }
                     }
-                    base.agi += 0.1;
+                    base.agi += 1;
                     if (base.agi > 47) {
                         base.agi = 5;
                     }
@@ -237,7 +239,7 @@
                     stop = false;
                     break;
                 }
-                base.beginning += 0.1;
+                base.beginning += 1;
             }
 
             alert("계산이 끝났습니다!");
