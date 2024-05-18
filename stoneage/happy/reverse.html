@@ -122,20 +122,20 @@
             // beginning
             for (var i = 0; i <= 15; i = i + 1) {
                 // agi
-                for (var ii = 0; ii <= 45; ii = ii + 1) {
+                for (var ii = 0; ii <= 40; ii = ii + 1) {
                     const agi = parseInt(base.beginning * (base.agi + 2 + 2.5) / 100, 10);
                     //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + '<br>');
                     if (agi == statAgi) {
                         //$("#memo").append('AGI: ' + base.beginning + ' ' + base.agi + ' ' + agi + '<br>');  
                         
 
-                        for (var iii = 0; iii <= 45; iii = iii + 1) {
+                        for (var iii = 0; iii <= 40; iii = iii + 1) {
                             const hp = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
                             
-                            for (var iiii = 0; iiii <= 45; iiii = iiii + 1) {
+                            for (var iiii = 0; iiii <= 40; iiii = iiii + 1) {
                                 const atk = parseInt(base.beginning * (base.atk + 2 + 2.5) / 100, 10);
 
-                                for (var iiiii = 0; iiiii <= 45; iiiii = iiiii + 1) {
+                                for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
                                     const def = parseInt(base.beginning * (base.def + 2 + 2.5) / 100, 10);
                                     //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
 
@@ -154,7 +154,7 @@
                                     }
 
                                     base.def += 1;
-                                    if (base.def > 50) {
+                                    if (base.def > 47) {
                                         base.def = 5;
                                     }
                                 }
@@ -164,7 +164,7 @@
                                 }
 
                                 base.atk += 1;
-                                if (base.atk > 50) {
+                                if (base.atk > 47) {
                                     base.atk = 5;
                                 }
                             }
@@ -174,7 +174,7 @@
                             }
 
                             base.hp += 1;
-                            if (base.hp > 50) {
+                            if (base.hp > 47) {
                                 base.hp = 5;
                             }
                         }
@@ -185,7 +185,7 @@
                         }
                     }
                     base.agi += 1;
-                    if (base.agi > 50) {
+                    if (base.agi > 47) {
                         base.agi = 5;
                     }
                 }
