@@ -85,7 +85,7 @@
 
         let stop = false;
         const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"base":0};
-        const result = [];
+        const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
 
         // 스크롤
 		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
@@ -127,11 +127,9 @@
                 // agi
                 for (var ii = 0; ii <= 40; ii = ii + 1) {
                     const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
-                    //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + '<br>');
+                    
                     if (parseInt(agi, 10) == statAgi) {
-                        //$("#memo").append('AGI: ' + base.beginning + ' ' + base.agi + ' ' + agi + '<br>');  
-                        
-
+                    
                         for (var iii = 0; iii <= 40; iii = iii + 1) {
                             const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
                             
@@ -140,33 +138,18 @@
 
                                 for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
                                     const def = base.beginning * (base.def + 2 + 2.5) / 100;
-                                    //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
-
-                                    //console.log(base);
-
                                     // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
                                     if (base.beginning == 27 && base.hp == 27 && base.atk == 36 && base.def == 16 && base.agi == 20) {
                                         console.log("BEST!!");
-                                        console.log(base);
                                         console.log("beginning:" + base.beginning + ", HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
                                         console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
                                         console.log("HP: " + ((hp * 4) + atk + def + agi) + ", ATK: " + ((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)) + ", DEF: " + ((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)) + ", AGI: " + agi);
                                     }
 
-                                    //console.log("HP: " + parseInt((hp * 4) + atk + def + agi, 10) + ", ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ", DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10));
-                                    //console.log("ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10));
-                                    //console.log("DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10));
-
                                     if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
                                         parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
                                         parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
                                         
-                                        //console.log("Check");    
-                                        //console.log(base);
-                                        //console.log("HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
-                                        //console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
-                                        //console.log("HP: " + parseInt((hp * 4) + atk + def + agi, 10) + ", ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ", DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) + ", AGI: " + agi);
-
                                         const sumStat = base.hp + base.atk + base.def + base.agi;
                                         for (var iiiiii = 0; iiiiii < rank.length; iiiiii++) {
                                             if (sumStat > rank[iiiiii].base) {
@@ -182,17 +165,25 @@
                                         const baseUpDef = (base.def + 2 + 2.5) * base.base / 10000;
                                         const baseUpAgi = (base.agi + 2 + 2.5) * base.base / 10000;
 
+                                        // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
                                         if (base.beginning == 27 && base.hp == 27 && base.atk == 36 && base.def == 16 && base.agi == 20) {
                                             console.log("HP: " + ((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ", ATK: " + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ", DEF: " + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ", AGI: " + baseUpAgi.toFixed(2));
                                         }
-
 
                                         if (((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) == upHp &&
                                             ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) == upAtk &&
                                             ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) == upDef &&
                                             baseUpAgi.toFixed(2) == upAgi) {
-                                            $("#memo").append('Break!!');
-                                            console.log("Break!!");
+
+                                            result.statHp  = (hp * 4) + atk + def + agi;
+                                            result.statAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
+                                            result.statDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+                                            result.statAgi = agi;
+                                            result.upHp    = (baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi;
+                                            result.upAtk   = (baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05);
+                                            result.upDef   = (baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05);
+                                            result.upAgi   = baseUpAgi;
+                                            print();
                                             stop = true;
                                             break;
                                         }
@@ -243,52 +234,43 @@
             }
         }
 
-        function test11(base) {
-            let hp  = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
-            let atk = parseInt(base.beginning * (base.atk + 2 + 2.5) / 100, 10);
-            let def = parseInt(base.beginning * (base.def + 2 + 2.5) / 100, 10);
-            const statHp  = $("#statHp").val();
-            const statAtk = $("#statAtk").val();
-            const statDef = $("#statDef").val();
 
-            for (var ii = 0; ii <= 45; ii++) {
-                const value = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
-                if (value == statHp) {
-                    
-                    if (stop) {
-                        break;
-                    }
-                }
-                base.agi += 1;
-                if (base.agi > 50) {
-                    base.agi = 5;
-                }
-            }
+        function print() {
+            $(".result").remove();
+            $('tbody').append(''
+                + '<tr class="result">'
+                + '<td>' + "계산 베이스" + '</td>'
+                + '<td>' + base.hp + '</td>'
+                + '<td>' + base.atk + '</td>'
+                + '<td>' + base.def + '</td>'
+                + '<td>' + base.agi + '</td>'
+                + '<td>' + '</td>'
+                + '</tr>'
+                + '<tr class="result">'
+                + '<td>' + "계산 초기치"   + '</td>'
+                + '<td>' + result.statHp  + '</td>'
+                + '<td>' + result.statAtk + '</td>'
+                + '<td>' + result.statDef + '</td>'
+                + '<td>' + result.statAgi + '</td>'
+                + '<td>' + '</td>'
+                + '</tr>'
+                + '<tr class="result">'
+                + '<td>' + "계산 성장률" + '</td>'
+                + '<td>' + result.upHp  + '</td>'
+                + '<td>' + result.upAtk + '</td>'
+                + '<td>' + result.upDef + '</td>'
+                + '<td>' + result.upAgi + '</td>'
+                + '<td>' + '</td>'
+                + '</tr>'
+            );
         }
 
-        function test2(base, rank) {
+        
+        ().toFixed(2) == upHp &&
+                                            ().toFixed(2) == upAtk &&
+                                            ().toFixed(2) == upDef &&
+                                            baseUpAgi.toFixed(2) == upAgi) {
 
-            rank.forEach(element => {
-                element.avg = (element.min + element.max) / 2;
-                $("#memo").append(element.avg + " / ");
-            });
-
-            const statHp  = $("#statHp").val();
-            const statAtk = $("#statAtk").val();
-            const statDef = $("#statDef").val();
-            const statAgi = $("#statAgi").val();
-            const upHp    = $("#upHp").val();
-            const upAtk   = $("#upAtk").val();
-            const upDef   = $("#upDef").val();
-            const upAgi   = $("#upAgi").val();
-
-            for (var i = 0; i < rank.length; i++) {
-                // (21+2+2.5)*475/10000
-                if ((base.agi + 2 + 2.5) * rank[i].avg / 10000 == upAgi) {
-                    $("#memo").append(base.agi);
-                }
-            }
-        }
 
         
 
@@ -336,7 +318,7 @@
 
         <div id="memo"></div>
 
-		<div class="table-responsive" id="myPet">
+		<div class="table-responsive">
 			<table class="table table-striped">
 				<colgroup>
 					<col width="100px">	
@@ -400,6 +382,7 @@
 			</table>
 		</div>
 
+        <!--
         <div class="table-responsive" id="result">
             <table class="table table-striped">
                 <colgroup>
@@ -420,6 +403,7 @@
             </table>
         </div>
     </div>
+    -->
     <button id="btnTop" title="Go to top">Top</button>
 </div>
 </body>
