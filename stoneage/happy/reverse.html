@@ -84,7 +84,7 @@
         ]
 
         let stop = false;
-        const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7};
+        const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"base":0};
         const result = [];
 
         // 스크롤
@@ -123,9 +123,9 @@
             for (var i = 0; i <= 15; i = i + 1) {
                 // agi
                 for (var ii = 0; ii <= 40; ii = ii + 1) {
-                    const agi = parseInt(base.beginning * (base.agi + 2 + 2.5) / 100, 10);
+                    const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
                     //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + '<br>');
-                    if (agi == statAgi) {
+                    if (parseInt(agi, 10) == statAgi) {
                         //$("#memo").append('AGI: ' + base.beginning + ' ' + base.agi + ' ' + agi + '<br>');  
                         
 
@@ -143,6 +143,7 @@
 
                                     // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
                                     if (base.beginning == 27 && base.hp == 27 && base.atk == 36 && base.def == 16 && base.agi == 20) {
+                                        console.log("BEST!!");
                                         console.log(base);
                                         console.log("HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
                                         console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
@@ -156,10 +157,35 @@
                                     if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
                                         parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
                                         parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
-                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
-                                        $("#memo").append('Break!!');
-                                        stop = true;
-                                        break;
+                                        
+                                        console.log("Check");    
+                                        console.log(base);
+                                        console.log("HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
+                                        console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
+                                        console.log("HP: " + parseInt((hp * 4) + atk + def + agi, 10) + ", ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ", DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) + ", AGI: " + agi);
+
+                                        const sumStat = base.hp + base.atk + base.def + base.agi;
+                                        for (var iiiiii = 0; iiiiii < rank.length; iiiiii++) {
+                                            if (sumStat > rank[iiiiii].base) {
+                                                base.base = rank[iiiiii].base;
+                                            }
+                                        }
+
+                                        const baseUpHp  = (base.hp  + 2 + 2.5) * base.base / 10000;
+                                        const baseUpAtk = (base.atk + 2 + 2.5) * base.base / 10000;
+                                        const baseUpDef = (base.def + 2 + 2.5) * base.base / 10000;
+                                        const baseUpAgi = (base.agi + 2 + 2.5) * base.base / 10000;
+
+                                        if (((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) == upHp &&
+                                            ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) == upAtk &&
+                                            ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) == upDef &&
+                                            baseUpAgi.toFixed(2) == upAgi) {
+                                            $("#memo").append('Break!!');
+                                            console.log("Break!!");
+                                            stop = true;
+                                            break;
+                                        }
+                                        
                                     }
 
                                     base.def += 1;
