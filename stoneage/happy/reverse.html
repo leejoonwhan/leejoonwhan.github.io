@@ -130,13 +130,13 @@
                         
 
                         for (var iii = 0; iii <= 40; iii = iii + 1) {
-                            const hp = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
+                            const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
                             
                             for (var iiii = 0; iiii <= 40; iiii = iiii + 1) {
-                                const atk = parseInt(base.beginning * (base.atk + 2 + 2.5) / 100, 10);
+                                const atk = base.beginning * (base.atk + 2 + 2.5) / 100;
 
                                 for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
-                                    const def = parseInt(base.beginning * (base.def + 2 + 2.5) / 100, 10);
+                                    const def = base.beginning * (base.def + 2 + 2.5) / 100;
                                     //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
 
                                     //console.log(base);
@@ -144,7 +144,9 @@
                                     // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
                                     if (base.beginning == 27 && base.hp == 27 && base.atk == 36 && base.def == 16 && base.agi == 20) {
                                         console.log(base);
-                                        console.log("HP: " + parseInt((hp * 4) + atk + def + agi, 10) + ", ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ", DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10));
+                                        console.log("HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
+                                        console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
+                                        console.log("HP: " + parseInt((hp * 4) + atk + def + agi, 10) + ", ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ", DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) + ", AGI: " + agi);
                                     }
 
                                     //console.log("HP: " + parseInt((hp * 4) + atk + def + agi, 10) + ", ATK: " + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ", DEF: " + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10));
