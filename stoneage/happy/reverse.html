@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Happy Server Pet Info</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		body { cursor: default; }
+		#btnTop {
+		  display: none;
+		  position: fixed;
+		  bottom: 20px;
+		  right: 30px;
+		  z-index: 99;
+		  font-size: 18px;
+		  border: none;
+		  outline: none;
+		  background-color: red;
+		  color: white;
+		  cursor: pointer;
+		  padding: 15px;
+		  border-radius: 4px;
+		}
+
+		#btnTop:hover {
+		  background-color: #555;
+		}
+		.searchValue {
+			display: inline;
+			width: 100px;
+		}
+
+		.green { color: #fff; background-color: #5cb85c;}
+		.blue { color: #fff; background-color: #337ab7;}
+		.red { color: #fff; background-color: #d9534f;}
+		.yellow { color: #fff; background-color: #f0ad4e;}
+	</style>
+	<script>
+        var pet = [
+             {"no":"091","name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17}
+			,{"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
+			,{"no":"093","name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21}
+			,{"no":"094","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
+			,{"no":"095","name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24}
+            ,{"no":"191","name":"베르가","beginning":24,"hp":24,"atk":29,"def":14,"agi":26}
+			            
+            //,{"no":"104","name":"오가로스","beginning":17,"hp":19,"atk":16,"def":19,"agi":23}
+            ,{"no":"104","name":"오가로스","beginning":27,"hp":25.8,"atk":32,"def":24,"agi":17.2}
+            //,{"no":"105","name":"오르곤","beginning":26,"hp":28,"atk":30,"def":22,"agi":22}
+            ,{"no":"105","name":"오르곤","beginning":28.4,"hp":29.8,"atk":34.5,"def":19.8,"agi":21.7}
+            //,{"no":"106","name":"모가로스","beginning":27,"hp":23,"atk":37,"def":20,"agi":25}
+            ,{"no":"106","name":"모가로스","beginning":27.2,"hp":24.3,"atk":36.4,"def":17,"agi":25.2}
+            
+            //,{"no":"192","name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28}
+			,{"no":"193","name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":28}
+			,{"no":"194","name":"노르노르","beginning":25,"hp":22,"atk":30,"def":17,"agi":29}
+            ,{"no":"777","name":"성호","beginning":24,"hp":29,"atk":32,"def":13,"agi":29}
+            
+            ,{"no":"272","name":"테라곤","beginning":26,"hp":24,"atk":31,"def":15,"agi":32}
+            ,{"no":"272","name":"카르곤","beginning":26,"hp":23,"atk":31,"def":13,"agi":30}
+            //,{"no":"272","name":"포이비스","beginning":24,"hp":24,"atk":30,"def":24,"agi":26}
+            ,{"no":"272","name":"포이비스","beginning":26.1,"hp":24.3,"atk":30.8,"def":18.8,"agi":29}
+            ,{"no":"274","name":"도라비스","beginning":26,"hp":24,"atk":31,"def":14,"agi":33}
+            
+            //,{"no":"291","name":"타키","beginning":17,"hp":19,"atk":18,"def":10,"agi":33}
+            //,{"no":"292","name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":35}
+            //,{"no":"293","name":"호르쿠","beginning":18,"hp":21,"atk":20,"def":14,"agi":40}
+            ,{"no":"294","name":"카키","beginning":20,"hp":17,"atk":23,"def":11,"agi":33}
+            
+            
+            ,{"no":"901","name":"베르푸스","beginning":26,"hp":21,"atk":30,"def":12,"agi":26}
+            ,{"no":"902","name":"울푸스","beginning":26,"hp":23,"atk":28,"def":11,"agi":25}
+            ,{"no":"903","name":"토라","beginning":26,"hp":21,"atk":26,"def":12,"agi":26}
+            ,{"no":"904","name":"페르페","beginning":26,"hp":23,"atk":25,"def":11,"agi":24}
+            
+            ,{"no":"911","name":"타키온","beginning":24,"hp":27,"atk":29,"def":12,"agi":26}
+
+            ,{"no":"991","name":"구루마루","beginning":27.2,"hp":27.1,"atk":36.2,"def":15.2,"agi":26.2}
+            ,{"no":"992","name":"흑풍","beginning":27.4,"hp":26.2,"atk":34.5,"def":12.4,"agi":30.6}
+
+        ]
+
+        let stop = false;
+        const base = {"beginning":15,"hp":5,"atk":5,"def":5,"agi":5};
+        const result = [];
+
+        // 스크롤
+		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+		window.onscroll = function() {scrollFunction()};
+		function scrollFunction() {
+			if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+				btnTop.style.display = "block";
+			} else {
+				btnTop.style.display = "none";
+			}
+		}
+
+        function test() {
+
+            // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
+            const rank = [
+                {"rank":1,"base":100,min:450,max:500,avg:0},
+                {"rank":2,"base": 95,min:470,max:520,avg:0},
+                {"rank":3,"base": 90,min:490,max:540,avg:0},
+                {"rank":4,"base": 85,min:510,max:560,avg:0},
+                {"rank":5,"base": 80,min:530,max:580,avg:0},
+                {"rank":6,"base":  0,min:550,max:600,avg:0}
+            ];
+
+            const statHp  = Number($("#statHp").val());
+            const statAtk = Number($("#statAtk").val());
+            const statDef = Number($("#statDef").val());
+            const statAgi = Number($("#statAgi").val());
+            const upHp    = Number($("#upHp").val());
+            const upAtk   = Number($("#upAtk").val());
+            const upDef   = Number($("#upDef").val());
+            const upAgi   = Number($("#upAgi").val());
+
+            // beginning
+            for (var i = 0; i <= 15; i = i + 1) {
+                // agi
+                for (var ii = 0; ii <= 45; ii = ii + 1) {
+                    const agi = parseInt(base.beginning * (base.agi + 2 + 2.5) / 100, 10);
+                    //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + '<br>');
+                    if (agi == statAgi) {
+                        //$("#memo").append('AGI: ' + base.beginning + ' ' + base.agi + ' ' + agi + '<br>');  
+                        
+
+                        for (var iii = 0; iii <= 45; iii = iii + 1) {
+                            const hp = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
+                            
+                            for (var iiii = 0; iiii <= 45; iiii = iiii + 1) {
+                                const atk = parseInt(base.beginning * (base.atk + 2 + 2.5) / 100, 10);
+
+                                for (var iiiii = 0; iiiii <= 45; iiiii = iiiii + 1) {
+                                    const def = parseInt(base.beginning * (base.def + 2 + 2.5) / 100, 10);
+                                    //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
+                                    if ((hp * 4) + atk + def + agi == statHp &&
+                                        (hp * 0.1) + atk + (def * 0.1)+ (agi * 0.05) == statAtk &&
+                                        (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05) == statDef) {
+                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
+                                        $("#memo").append('Break!!');
+                                        stop = true;
+                                        break;
+                                    }
+
+                                    base.def += 1;
+                                    if (base.def > 50) {
+                                        base.def = 5;
+                                    }
+                                }
+
+                                if (stop) {
+                                    break;
+                                }
+
+                                base.atk += 1;
+                                if (base.atk > 50) {
+                                    base.atk = 5;
+                                }
+                            }
+                            
+                            if (stop) {
+                                break;
+                            }
+
+                            base.hp += 1;
+                            if (base.hp > 50) {
+                                base.hp = 5;
+                            }
+                        }
+
+                       
+                        if (stop) {
+                            break;
+                        }
+                    }
+                    base.agi += 1;
+                    if (base.agi > 50) {
+                        base.agi = 5;
+                    }
+                }
+                if (stop == true) {
+                    stop = false;
+                    break;
+                }
+                base.beginning += 1;
+            }
+        }
+
+        function test11(base) {
+            let hp  = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
+            let atk = parseInt(base.beginning * (base.atk + 2 + 2.5) / 100, 10);
+            let def = parseInt(base.beginning * (base.def + 2 + 2.5) / 100, 10);
+            const statHp  = $("#statHp").val();
+            const statAtk = $("#statAtk").val();
+            const statDef = $("#statDef").val();
+
+            for (var ii = 0; ii <= 45; ii++) {
+                const value = parseInt(base.beginning * (base.hp + 2 + 2.5) / 100, 10);
+                if (value == statHp) {
+                    
+                    if (stop) {
+                        break;
+                    }
+                }
+                base.agi += 1;
+                if (base.agi > 50) {
+                    base.agi = 5;
+                }
+            }
+        }
+
+        function test2(base, rank) {
+
+            rank.forEach(element => {
+                element.avg = (element.min + element.max) / 2;
+                $("#memo").append(element.avg + " / ");
+            });
+
+            const statHp  = $("#statHp").val();
+            const statAtk = $("#statAtk").val();
+            const statDef = $("#statDef").val();
+            const statAgi = $("#statAgi").val();
+            const upHp    = $("#upHp").val();
+            const upAtk   = $("#upAtk").val();
+            const upDef   = $("#upDef").val();
+            const upAgi   = $("#upAgi").val();
+
+            for (var i = 0; i < rank.length; i++) {
+                // (21+2+2.5)*475/10000
+                if ((base.agi + 2 + 2.5) * rank[i].avg / 10000 == upAgi) {
+                    $("#memo").append(base.agi);
+                }
+            }
+        }
+
+        
+
+        // jQuery
+		$(document).ready(function() {
+
+            // 검색 버튼
+			$("#search").on("click", function() {
+                
+			});
+
+            // 계산 버튼
+			$("#calculate").on("click", function() {
+                test();
+			});
+
+            // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
+            var btnTop = document.getElementById("btnTop");
+			$("#btnTop").on("click", function() {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			});
+        });
+    </script>
+</head>
+<body>
+	<div class="container">
+		<h2>Happy Server Pet Rank Info</h2>
+		<hr>
+		<p class="lead" id="listName">
+			
+		</p>
+        <p class="lead">
+			
+		</p>
+		<blockquote>
+			<p></p>
+            <p></p>
+		</blockquote>
+
+		<br>
+		<br>
+		<br>
+		<br>
+
+        <div id="memo"></div>
+
+		<div class="table-responsive" id="myPet">
+			<table class="table table-striped">
+				<colgroup>
+					<col width="100px">	
+					<col width="">
+					<col width="">
+					<col width="">
+                    <col width="">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>구분</th>
+                        <th>내구력</th>
+                        <th>공격력</th>
+                        <th>방어력</th>
+                        <th>순발력</th>
+                        <th></th>
+					</tr>
+				</thead>
+				<tbody>
+                    <tr>
+                        <td>
+                            S급 초기치
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="statHp" value="57">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="statAtk" value="12">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="statDef" value="7">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="statAgi" value="6">
+                        </td>
+                        <td>
+                            <button type="button" class="form-control" id="calculate">계산</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            S급 성장률
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="upHp" value="10.47">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="upAtk" value="2.32">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="upDef" value="1.43">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="upAgi" value="1.21">
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+				</tbody>
+			</table>
+		</div>
+
+        <div class="table-responsive" id="result">
+            <table class="table table-striped">
+                <colgroup>
+                    
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>순번</th>
+                        <th>등급</th>
+                        <th>내구력</th>
+                        <th>공격력</th>
+                        <th>방어력</th>
+                        <th>순발력</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button id="btnTop" title="Go to top">Top</button>
+</div>
+</body>
+</html>
