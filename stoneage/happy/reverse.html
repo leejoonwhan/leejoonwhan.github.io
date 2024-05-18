@@ -109,6 +109,9 @@
                 {"rank":5,"base": 80,min:530,max:580,avg:0},
                 {"rank":6,"base":  0,min:550,max:600,avg:0}
             ];
+            rank.forEach(element => {
+                element.avg = (element.min + element.max) / 2;
+            });
 
             const statHp  = Number($("#statHp").val());
             const statAtk = Number($("#statAtk").val());
