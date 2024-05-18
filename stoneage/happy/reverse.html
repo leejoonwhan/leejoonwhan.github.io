@@ -139,13 +139,14 @@
                                 for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
                                     const def = base.beginning * (base.def + 2 + 2.5) / 100;
                                     // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
+                                    /*
                                     if (base.beginning == 27 && base.hp == 27 && base.atk == 36 && base.def == 16 && base.agi == 20) {
                                         console.log("BEST!!");
                                         console.log("beginning:" + base.beginning + ", HP: " + base.hp + ", ATK: " + base.atk + ", DEF: " + base.def + ", AGI: " + base.agi);
                                         console.log("HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", AGI: " + agi);
                                         console.log("HP: " + ((hp * 4) + atk + def + agi) + ", ATK: " + ((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)) + ", DEF: " + ((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)) + ", AGI: " + agi);
                                     }
-
+                                    */
                                     if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
                                         parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
                                         parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
@@ -166,10 +167,11 @@
                                         const baseUpAgi = (base.agi + 2 + 2.5) * base.base / 10000;
 
                                         // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
+                                        /*
                                         if (base.beginning == 27 && base.hp == 27 && base.atk == 36 && base.def == 16 && base.agi == 20) {
                                             console.log("HP: " + ((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ", ATK: " + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ", DEF: " + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ", AGI: " + baseUpAgi.toFixed(2));
                                         }
-
+                                        */
                                         if (((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) == upHp &&
                                             ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) == upAtk &&
                                             ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) == upDef &&
