@@ -238,7 +238,6 @@
 
 
         function print() {
-            $(".result").remove();
             $('tbody').append(''
                 + '<tr class="result">'
                 + '<td>' + "계산 베이스" + '</td>'
@@ -277,6 +276,7 @@
 
             // 계산 버튼
 			$("#calculate").on("click", function() {
+                $(".result").remove();
                 test();
 			});
 
