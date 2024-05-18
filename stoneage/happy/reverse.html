@@ -138,8 +138,14 @@
                                 for (var iiiii = 0; iiiii <= 45; iiiii = iiiii + 1) {
                                     const def = parseInt(base.beginning * (base.def + 2 + 2.5) / 100, 10);
                                     //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
+
+                                    console.log(base);
+                                    console.log("HP : " + (hp * 4) + atk + def + agi);
+                                    console.log("ATK: " + (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
+                                    console.log("DEF: " + (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
+
                                     if ((hp * 4) + atk + def + agi == statHp &&
-                                        (hp * 0.1) + atk + (def * 0.1)+ (agi * 0.05) == statAtk &&
+                                        (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05) == statAtk &&
                                         (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05) == statDef) {
                                         //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
                                         $("#memo").append('Break!!');
