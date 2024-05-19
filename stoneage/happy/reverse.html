@@ -56,7 +56,7 @@
 		}
 
         function getBase() {
-            const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"rank":0};
+            const base = {"beginning":15,"hp":5,"atk":5,"def":5,"agi":5,"rank":0};
             // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
             const rank = [
                 {"rank":1,"base":100,min:450,max:500,avg:0},
@@ -137,7 +137,7 @@
                                     }
 
                                     base.def += 1;
-                                    if (base.def > 47) {
+                                    if (base.def > 45) {
                                         base.def = 5;
                                     }
                                 }
@@ -147,7 +147,7 @@
                                 }
 
                                 base.atk += 1;
-                                if (base.atk > 47) {
+                                if (base.atk > 45) {
                                     base.atk = 5;
                                 }
                             }
@@ -157,7 +157,7 @@
                             }
 
                             base.hp += 1;
-                            if (base.hp > 47) {
+                            if (base.hp > 45) {
                                 base.hp = 5;
                             }
                         }
@@ -168,7 +168,7 @@
                         }
                     }
                     base.agi += 1;
-                    if (base.agi > 47) {
+                    if (base.agi > 45) {
                         base.agi = 5;
                     }
                 }
