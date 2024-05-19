@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Happy Server Reverse Info</title>
+	<title>Happy Server Pet Info</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -39,10 +39,53 @@
 		.yellow { color: #fff; background-color: #f0ad4e;}
 	</style>
 	<script>
-        
-        let stop = false;
-        const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"rank":0};
-        const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
+        var pet = [
+             {"no":"091","name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17}
+			,{"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
+			,{"no":"093","name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21}
+			,{"no":"094","name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20}
+			,{"no":"095","name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24}
+            ,{"no":"191","name":"베르가","beginning":24,"hp":24,"atk":29,"def":14,"agi":26}
+			            
+            //,{"no":"104","name":"오가로스","beginning":17,"hp":19,"atk":16,"def":19,"agi":23}
+            ,{"no":"104","name":"오가로스","beginning":27,"hp":25.8,"atk":32,"def":24,"agi":17.2}
+            //,{"no":"105","name":"오르곤","beginning":26,"hp":28,"atk":30,"def":22,"agi":22}
+            ,{"no":"105","name":"오르곤","beginning":28.4,"hp":29.8,"atk":34.5,"def":19.8,"agi":21.7}
+            //,{"no":"106","name":"모가로스","beginning":27,"hp":23,"atk":37,"def":20,"agi":25}
+            ,{"no":"106","name":"모가로스","beginning":27.2,"hp":24.3,"atk":36.4,"def":17,"agi":25.2}
+            
+            //,{"no":"192","name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28}
+			,{"no":"193","name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":28}
+			,{"no":"194","name":"노르노르","beginning":25,"hp":22,"atk":30,"def":17,"agi":29}
+            ,{"no":"777","name":"성호","beginning":24,"hp":29,"atk":32,"def":13,"agi":29}
+            
+            ,{"no":"272","name":"테라곤","beginning":26,"hp":24,"atk":31,"def":15,"agi":32}
+            ,{"no":"272","name":"카르곤","beginning":26,"hp":23,"atk":31,"def":13,"agi":30}
+            //,{"no":"272","name":"포이비스","beginning":24,"hp":24,"atk":30,"def":24,"agi":26}
+            ,{"no":"272","name":"포이비스","beginning":26.1,"hp":24.3,"atk":30.8,"def":18.8,"agi":29}
+            ,{"no":"274","name":"도라비스","beginning":26,"hp":24,"atk":31,"def":14,"agi":33}
+            
+            //,{"no":"291","name":"타키","beginning":17,"hp":19,"atk":18,"def":10,"agi":33}
+            //,{"no":"292","name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":35}
+            //,{"no":"293","name":"호르쿠","beginning":18,"hp":21,"atk":20,"def":14,"agi":40}
+            ,{"no":"294","name":"카키","beginning":20,"hp":17,"atk":23,"def":11,"agi":33}
+            
+            ,{"no":"801","name":"크랩","beginning":23,"hp":29.8,"atk":32.6,"def":23.5,"agi":18.8}
+            
+            ,{"no":"901","name":"베르푸스","beginning":26,"hp":21,"atk":30,"def":12,"agi":26}
+            ,{"no":"902","name":"울푸스","beginning":26,"hp":23,"atk":28,"def":11,"agi":25}
+            ,{"no":"903","name":"토라","beginning":26,"hp":21,"atk":26,"def":12,"agi":26}
+            ,{"no":"904","name":"페르페","beginning":26,"hp":23,"atk":25,"def":11,"agi":24}
+            
+            ,{"no":"911","name":"타키온","beginning":24,"hp":27,"atk":29,"def":12,"agi":26}
+
+            ,{"no":"991","name":"구루마루","beginning":27.2,"hp":27.1,"atk":36.2,"def":15.2,"agi":26.2}
+            ,{"no":"992","name":"흑풍","beginning":27.4,"hp":26.2,"atk":34.5,"def":12.4,"agi":30.6}
+
+        ]
+
+        let btnName = "";
+        const result = [];
 
         // 스크롤
 		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
@@ -55,249 +98,335 @@
 			}
 		}
 
-        function getBase() {
+        function setSRank(copiedPet) {
 
-            // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
-            const rank = [
-                {"rank":1,"base":100,min:450,max:500,avg:0},
-                {"rank":2,"base": 95,min:470,max:520,avg:0},
-                {"rank":3,"base": 90,min:490,max:540,avg:0},
-                {"rank":4,"base": 85,min:510,max:560,avg:0},
-                {"rank":5,"base": 80,min:530,max:580,avg:0},
-                {"rank":6,"base":  0,min:550,max:600,avg:0}
-            ];
-            rank.forEach(element => {
-                element.avg = (element.min + element.max) / 2;
-            });
+            $(".srank").remove();
 
-            const statHp  = Number($("#statHp").val());
-            const statAtk = Number($("#statAtk").val());
-            const statDef = Number($("#statDef").val());
-            const statAgi = Number($("#statAgi").val());
-            const upHp    = Number($("#upHp").val());
-            const upAtk   = Number($("#upAtk").val());
-            const upDef   = Number($("#upDef").val());
-            const upAgi   = Number($("#upAgi").val());
-
-            // beginning
-            for (var i = 0; i <= 15; i = i + 1) {
-                // agi
-                for (var ii = 0; ii <= 40; ii = ii + 1) {
-                    const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
-                    
-                    // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
-                    if (parseInt(agi, 10) == statAgi) {
-                        // hp
-                        for (var iii = 0; iii <= 40; iii = iii + 1) {
-                            const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
-                            // atk 
-                            for (var iiii = 0; iiii <= 40; iiii = iiii + 1) {
-                                const atk = base.beginning * (base.atk + 2 + 2.5) / 100;
-                                // def
-                                for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
-                                    const def = base.beginning * (base.def + 2 + 2.5) / 100;
-                                    
-                                    // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
-                                    if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
-                                        parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
-                                        parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
-                                        
-                                        const sumStat = base.hp + base.atk + base.def + base.agi;
-                                        for (var iiiiii = 0; iiiiii < rank.length; iiiiii++) {
-                                            if (sumStat >= rank[iiiiii].base) {
-                                                base.rank = rank[iiiiii].avg;
-                                                break;
-                                            }
-                                        }
-
-                                        const baseUpHp  = (base.hp  + 2 + 2.5) * base.rank / 10000;
-                                        const baseUpAtk = (base.atk + 2 + 2.5) * base.rank / 10000;
-                                        const baseUpDef = (base.def + 2 + 2.5) * base.rank / 10000;
-                                        const baseUpAgi = (base.agi + 2 + 2.5) * base.rank / 10000;
-
-                                        // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
-                                        if (((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) == upHp &&
-                                            ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) == upAtk &&
-                                            ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) == upDef &&
-                                            baseUpAgi.toFixed(2) == upAgi) {
-
-                                            result.statHp  = (hp * 4) + atk + def + agi;
-                                            result.statAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
-                                            result.statDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
-                                            result.statAgi = agi;
-                                            result.upHp    = (baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi;
-                                            result.upAtk   = (baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05);
-                                            result.upDef   = (baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05);
-                                            result.upAgi   = baseUpAgi;
-                                            print1();
-                                            stop = true;
-                                            break;
-                                        }
-                                        
-                                    }
-
-                                    base.def += 1;
-                                    if (base.def > 47) {
-                                        base.def = 5;
-                                    }
-                                }
-
-                                if (stop) {
-                                    break;
-                                }
-
-                                base.atk += 1;
-                                if (base.atk > 47) {
-                                    base.atk = 5;
-                                }
-                            }
-                            
-                            if (stop) {
-                                break;
-                            }
-
-                            base.hp += 1;
-                            if (base.hp > 47) {
-                                base.hp = 5;
-                            }
-                        }
-
-                       
-                        if (stop) {
-                            break;
-                        }
-                    }
-                    base.agi += 1;
-                    if (base.agi > 47) {
-                        base.agi = 5;
-                    }
-                }
-                if (stop == true) {
-                    stop = false;
-                    break;
-                }
-                base.beginning += 1;
+            let rank = 0;
+            if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 100) {
+                rank = 475;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 95) {
+                rank = 495;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 90) {
+                rank = 515;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 85) {
+                rank = 535;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 80) {
+                rank = 555;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 0) {
+                rank = 575;
             }
 
-            alert("계산이 끝났습니다!");
-        }
+            // base
+            copiedPet.hp  = copiedPet.hp  + 2;
+            copiedPet.atk = copiedPet.atk + 2;
+            copiedPet.def = copiedPet.def + 2;
+            copiedPet.agi = copiedPet.agi + 2;
+            
+            // bonus
+            copiedPet.hp  = copiedPet.hp  + 2.5;
+            copiedPet.atk = copiedPet.atk + 2.5;
+            copiedPet.def = copiedPet.def + 2.5;
+            copiedPet.agi = copiedPet.agi + 2.5;
 
+            // 계산
+            const hp  = copiedPet.beginning * copiedPet.hp  / 100;
+            const atk = copiedPet.beginning * copiedPet.atk / 100;
+            const def = copiedPet.beginning * copiedPet.def / 100;
+            const agi = copiedPet.beginning * copiedPet.agi / 100;
 
-        function print1() {
-            // 첫 번째 테이블에 데이터 출력
-            $('#base tbody').append(''
-                + '<tr class="result1">'
-                + '<td>' + "계산 베이스" + '</td>'
-                + '<td colspan="5">' + base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '</td>'
+            const resultHp  = (hp * 4) + atk + def + agi;
+            const resultAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
+            const resultDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+            const resultAgi = agi;
+
+            const upHp  = copiedPet.hp  * rank / 10000;
+            const upAtk = copiedPet.atk * rank / 10000;
+            const upDef = copiedPet.def * rank / 10000;
+            const upAgi = copiedPet.agi * rank / 10000;
+
+            const resultUpHp  = (upHp * 4) + upAtk + upDef + upAgi;
+            const resultUpAtk = (upHp * 0.1) + upAtk + (upDef * 0.1) + (upAgi * 0.05);
+            const resultUpDef = (upHp * 0.1) + (upAtk * 0.1) + upDef + (upAgi * 0.05);
+            const resultUpAgi = upAgi;
+
+            $('#myPet tbody').append(''
+                + '<tr class="srank">'
+                + '<td>S 초기치</td>'
+                + '<td>' + resultHp.toFixed(2) + '</td>'
+                + '<td>' + resultAtk.toFixed(2) + '</td>'
+                + '<td>' + resultDef.toFixed(2) + '</td>'
+                + '<td>' + resultAgi.toFixed(2) + '</td>'
+                + '<td>' + '' + '</td>'
                 + '</tr>'
-                + '<tr class="result1">'
-                + '<td>' + "계산 초기치"   + '</td>'
-                + '<td>' + result.statHp  + '</td>'
-                + '<td>' + result.statAtk + '</td>'
-                + '<td>' + result.statDef + '</td>'
-                + '<td>' + result.statAgi + '</td>'
-                + '<td>' + '</td>'
-                + '</tr>'
-                + '<tr class="result1">'
-                + '<td>' + "계산 성장률" + '</td>'
-                + '<td>' + result.upHp  + '</td>'
-                + '<td>' + result.upAtk + '</td>'
-                + '<td>' + result.upDef + '</td>'
-                + '<td>' + result.upAgi + '</td>'
-                + '<td>' + '</td>'
+                + '<tr class="srank">'
+                + '<td>S 성장률</td>'
+                + '<td>' + resultUpHp.toFixed(2) + '</td>'
+                + '<td>' + resultUpAtk.toFixed(2) + '</td>'
+                + '<td>' + resultUpDef.toFixed(2) + '</td>'
+                + '<td>' + resultUpAgi.toFixed(2) + '</td>'
+                + '<td>' + '' + '</td>'
                 + '</tr>'
             );
-            
-            // 두 번째 테이블 베이스에 데이터 입력
-            $("#baseBeginning").val(base.beginning);
-            $("#baseHp").val(base.hp);
-            $("#baseAtk").val(base.atk);
-            $("#baseDef").val(base.def);
-            $("#baseAgi").val(base.agi);
-            $("#baseRank").val(base.rank);
-
         }
 
-        function getRank() {
+        function setBase(foundPet) {
+
+            $('#result tbody').empty();
+            result.length = 0;
+            const base = {"hp":-2,"atk":-2,"def":-2,"agi":-2};
             
-            const baseBeginning = Number($("#baseBeginning").val());
-            const baseHp = Number($("#baseHp").val());
-            const baseAtk = Number($("#baseAtk").val());
-            const baseDef = Number($("#baseDef").val());
-            const baseAgi = Number($("#baseAgi").val());
-            const baseRank = Number($("#baseRank").val());
-            
-            const myBaseHp = Number($("#myBaseHp").val());
-            const myBaseAtk = Number($("#myBaseAtk").val());
-            const myBaseDef = Number($("#myBaseDef").val());
-            const myBaseAgi = Number($("#myBaseAgi").val());
-
-            const myLv = Number($("#myLv").val());
-            const myHp = Number($("#myHp").val());
-            const myAtk = Number($("#myAtk").val());
-            const myDef = Number($("#myDef").val());
-            const myAgi = Number($("#myAgi").val());
-
-            // 내 펫 성장률 계산
-            const myUpHp  = (myHp - myBaseHp)   / (myLv - 1);
-            const myUpAtk = (myAtk - myBaseAtk) / (myLv - 1);
-            const myUpDef = (myDef - myBaseDef) / (myLv - 1);
-            const myUpAgi = (myAgi - myBaseAgi) / (myLv - 1);
-
-            // 바로 계산 및 출력
-            for (var i = 0; i < 4; i++) {
-                for (var ii = 0; ii < 4; ii++) {
-                    for (var iii = 0; iii < 4; iii++) {
-                        for (var iiii = 0; iiii < 4; iiii++) {
-                            const upHp  = (baseHp  + (2 - i)    + 2.5) * baseRank / 10000;
-                            const upAtk = (baseAtk + (2 - ii)   + 2.5) * baseRank / 10000;
-                            const upDef = (baseDef + (2 - iii)  + 2.5) * baseRank / 10000;
-                            const upAgi = (baseAgi + (2 - iiii) + 2.5) * baseRank / 10000;
-
-                            const hp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / baseRank - (baseHp + (2 - i));
-                            const atk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseAtk + 2 - ii)
-                            const def = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseDef + 2 - iii)
-                            const agi = myUpAgi * 10000 / baseRank - (baseAgi + 2 - iiii);
-                            //(10.42-2.00475-1.01475-1.21275)/4*10000/495-(27+2)
-                            //(2.32-(1.55925*0.1)-(1.01475*0.1)-(1.21275*0.05))*10000/495-(36+2)
-                            //(1.41-(1.55925*0.1)-(2.00475*0.1)-(1.21275*0.05))*10000/495-(16+2)
-                            //1.21*10000/495-(20+2)
-
-
-                            
-                            if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
-                                // 두 번째 테이블에 데이터 출력
-                                $('#rank tbody').append(''
-                                    + '<tr class="result1">'
-                                    + '<td>' + "계산 베이스" + '</td>'
-                                    + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + (hp + atk + def + agi).toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - i)    + ']' + hp.toFixed(2)  + '</td>'
-                                    + '<td>[' + (2 - ii)   + ']' + atk.toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - iii)  + ']' + def.toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - iiii) + ']' + agi.toFixed(2) + '</td>'
-                                    + '<td>' + '</td>'
-                                    + '</tr>'
-                                );
+            for (let i = 0; i < 5; i++) {
+                for (let ii = 0; ii < 5; ii++) {
+                    for (let iii = 0; iii < 5; iii++) {
+                        for (let iiii = 0; iiii < 5; iiii++) {
+                            setBonus(foundPet, base);
+                            base.hp++;
+                            if (base.hp == 3) {
+                                base.hp = -2;
                             }
                         }
+                        base.atk++;
+                        if (base.atk == 3) {
+                            base.atk = -2;
+                        }
+                    }
+                    base.def++;
+                    if (base.def == 3) {
+                        base.def = -2;
+                    }
+                }
+                base.agi++;
+                if (base.agi == 3) {
+                    base.agi = -2;
+                }
+            }
+            
+            print();
+        }
+
+        function setBonus(foundPet, base) {
+
+            const bonus = {"hp":0,"atk":0,"def":0,"agi":0};
+
+            for (let i = 0; i < 11; i++) {
+                for (let ii = 0; ii < 11; ii++) {
+                    for (let iii = 0; iii < 11; iii++) {
+                        for (let iiii = 0; iiii < 11; iiii++) {
+                            const sum = bonus.hp + bonus.atk + bonus.def + bonus.agi;
+                            if (sum == 10) {
+                                // 계산
+                                addData(foundPet, base, bonus);
+                            }
+                            bonus.hp++;
+                            if (bonus.hp == 11) {
+                                bonus.hp = 0;
+                            }
+                        }
+                        bonus.atk++;
+                        if (bonus.atk == 11) {
+                            bonus.atk = 0;
+                        }
+                    }
+                    bonus.def++;
+                    if (bonus.def == 11) {
+                        bonus.def = 0;
+                    }
+                }
+                bonus.agi++;
+                if (bonus.agi == 11) {
+                    bonus.agi = 0;
+                }
+            }
+        }
+
+        function addData(foundPet, base, bonus) {
+            
+            const hp  = foundPet.beginning * (foundPet.hp  + base.hp  + bonus.hp)  / 100;
+            const atk = foundPet.beginning * (foundPet.atk + base.atk + bonus.atk) / 100;
+            const def = foundPet.beginning * (foundPet.def + base.def + bonus.def) / 100;
+            const agi = foundPet.beginning * (foundPet.agi + base.agi + bonus.agi) / 100;
+            
+            const stat = {"rank":0,"hp":0,"atk":0,"def":0,"agi":0,"baseHp":0,"baseAtk":0,"baseDef":0,"baseAgi":0,"bonusHp":0,"bonusAtk":0,"bonusDef":0,"bonusAgi":0};
+            stat.hp  = limitDecimalPlaces((hp * 4) + atk + def + agi, 2);
+            stat.atk = limitDecimalPlaces((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 2);
+            stat.def = limitDecimalPlaces((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 2);
+            stat.agi = limitDecimalPlaces(agi, 2);
+
+            if (btnName == "calculate") {
+                if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
+                    Math.floor(stat.atk) === parseInt($("#atk").val(), 10) &&
+                    Math.floor(stat.def) === parseInt($("#def").val(), 10) &&
+                    Math.floor(stat.agi) === parseInt($("#agi").val(), 10)) {
+                    stat.rank     = base.hp + base.atk + base.def + base.agi;
+                    stat.baseHp   = base.hp;
+                    stat.baseAtk  = base.atk;
+                    stat.baseDef  = base.def;
+                    stat.baseAgi  = base.agi;
+                    stat.bonusHp  = bonus.hp;
+                    stat.bonusAtk = bonus.atk;
+                    stat.bonusDef = bonus.def;
+                    stat.bonusAgi = bonus.agi;
+                    result.push(stat);
+                }
+            }
+            else if (btnName == "search") {
+                if (base.hp + base.atk + base.def + base.agi == 8) {
+                    stat.rank     = base.hp + base.atk + base.def + base.agi;
+                    stat.baseHp   = base.hp;
+                    stat.baseAtk  = base.atk;
+                    stat.baseDef  = base.def;
+                    stat.baseAgi  = base.agi;
+                    stat.bonusHp  = bonus.hp;
+                    stat.bonusAtk = bonus.atk;
+                    stat.bonusDef = bonus.def;
+                    stat.bonusAgi = bonus.agi;
+                    result.push(stat);
+                }
+            }
+        }
+
+        function print() {
+            result.sort(function(a, b) {
+                /*
+                if (b['rank'] !== a['rank']) {
+                    return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
+                } else if (b['baseHp'] !== a['baseHp']) {
+                    return b['baseHp'] - a['baseHp']; // hp를 기준으로 내림차순 정렬
+                } else if (b['baseAtk'] !== a['baseAtk']) {
+                    return b['baseAtk'] - a['baseAtk']; // atk를 기준으로 내림차순 정렬
+                } else if (b['baseDef'] !== a['baseDef']) {
+                    return b['baseDef'] - a['baseDef']; // def를 기준으로 내림차순 정렬
+                } else {
+                    return b['baseAgi'] - a['baseAgi']; // agi를 기준으로 내림차순 정렬
+                }
+                */
+
+                if (b['rank'] !== a['rank']) {
+                    return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
+                } else if (b['hp'] !== a['hp']) {
+                    return b['hp'] - a['hp']; // hp를 기준으로 내림차순 정렬
+                } else if (b['atk'] !== a['atk']) {
+                    return b['atk'] - a['atk']; // atk를 기준으로 내림차순 정렬
+                } else if (b['def'] !== a['def']) {
+                    return b['def'] - a['def']; // def를 기준으로 내림차순 정렬
+                } else {
+                    return b['agi'] - a['agi']; // agi를 기준으로 내림차순 정렬
+                }
+            });
+
+
+            for (let i = 0; i < result.length; i++) {
+                $('#result tbody').append(''
+					+ '<tr>'
+                    + '<td>' + (i + 1) + '</td>'
+					+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+					+ '<td>' + result[i].hp  + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
+					+ '<td>' + result[i].atk + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
+					+ '<td>' + result[i].def + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
+					+ '<td>' + result[i].agi + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
+					+ '</tr>'
+				);
+            }
+
+            // 각 rank 값의 등장 횟수를 저장할 객체
+            const rankCounts = {};
+
+            // 배열 순회하면서 각 rank 값의 개수 체크
+            for (let i = 0; i < result.length; i++) {
+                const rank = result[i].rank;
+                if (rankCounts[rank] === undefined) {
+                    rankCounts[rank] = 1;
+                } else {
+                    rankCounts[rank]++;
+                }
+            }
+
+            // 객체를 배열로 변환하고 rank에 대해 내림차순으로 정렬
+            const ranks = Object.keys(rankCounts).sort((a, b) => b - a); // rank를 내림차순으로 정렬한 배열
+
+            // 결과 출력
+            let message = '계산이 끝났습니다!\n';
+            if (btnName == "calculate") {
+                const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
+                for (const rank of ranks) {
+                    const count = rankCounts[rank];
+                    const percentage = (count / totalCount * 100).toFixed(2); // 소수점 둘째 자리까지 표시
+                    message += `${rank} 등급: ${count} 건 (${percentage}%) \n`;
+                }
+            }
+            else if (btnName == "search") {
+                // 값을 카운트할 객체 생성
+                var countMap = {};
+                var totalCount = result.length;
+
+                // 배열을 반복하면서 각 요소의 값을 카운트
+                result.forEach(function(obj) {
+                    var key = parseInt(obj.hp, 10) + ', ' + parseInt(obj.atk, 10) + ', ' + parseInt(obj.def, 10) + ', ' + parseInt(obj.agi, 10);
+                    countMap[key] = (countMap[key] || 0) + 1;
+                });
+
+                // 결과를 문자열로 변환하여 출력
+                for (var key in countMap) {
+                    if (countMap.hasOwnProperty(key)) {
+                        var count = countMap[key];
+                        var percentage = (count / totalCount * 100).toFixed(2); // 백분율 계산 및 소수점 이하 두 자리까지만 표시
+                        message += key + ' ' + countMap[key] + '건 (' + percentage + '%)\n';
                     }
                 }
             }
+            alert(message);
+        }
+
+        function limitDecimalPlaces(number, places) {
+            var power = Math.pow(10, places);
+            return (Math.floor(number * power) / power).toFixed(places);
+        }
+
+        function getListName() {
+            var text = "";
+            pet.forEach(function(obj) {
+                text += obj.name + ", ";
+            });
+            $("#listName").text(text);
         }
 
         // jQuery
 		$(document).ready(function() {
 
-            // 계산 버튼
-			$("#calculate1").on("click", function() {
-                $(".result1").remove();
-                getBase();
+            getListName();
+
+            // 검색 버튼
+			$("#search").on("click", function() {
+                const foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                    return;
+                }
+                btnName = "search";
+                // foundPet을 깊은 복사하여 새로운 객체를 생성
+                const copiedPet = JSON.parse(JSON.stringify(foundPet));
+                setSRank(copiedPet);
+				setBase(foundPet);
 			});
 
-             // 검색 버튼
-			$("#calculate2").on("click", function() {
-                $(".result2").remove();
-                getRank();
+            // 계산 버튼
+			$("#calculate").on("click", function() {
+                const foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                    return;
+                }
+                btnName = "calculate";
+                // foundPet을 깊은 복사하여 새로운 객체를 생성
+                const copiedPet = JSON.parse(JSON.stringify(foundPet));
+                setSRank(copiedPet);
+				setBase(foundPet);
 			});
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
@@ -311,7 +440,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2>Happy Server Pet Reverse Info</h2>
+		<h2>Happy Server Pet Rank Info</h2>
 		<hr>
         <a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
@@ -320,14 +449,19 @@
 			
 		</p>
         <p class="lead">
-			내가 키운 펫이 S급인지 확인하는 계산기입니다.
+			오가로스, 오르곤, 모가로스, 포이비스, 크랩, 구루마루, 흑풍은 계산이 딱 떨어지지 않아 신뢰성이 높지 않으니 참고해주시기 바랍니다.
 		</p>
 		<blockquote>
-			<p>STEP1. 게임 채팅으로 /검색 얀기로 엔터</p>
-            <p>STEP2. S급 초기치, S급 성장률 입력 후 계산 클릭</p>
-            <p>STEP3. 게임 채팅으로 /페트 1~5 엔터</p>
-            <p>STEP4. 내 펫의 초기치 및 현재 성장률 입력 후 계산 클릭</p>
-            <p>[ 8 ] 이 나오면 S급!!</p>
+			<p>펫 이름과 초기치를 입력해주세요. 만약, 입력값과 출력되는 S급 초기치가 다르다면 작업중인 데이터입니다.</p>
+            <p>8 등급부터 -8 등급까지 존재하며 8등급이 S급 확률입니다.</p>
+		</blockquote>
+        <blockquote>
+			<p>[ 숫자 ] 와 ( 숫자 ) 에 대해서 설명을 드립니다.</p>
+            <p>[ 숫자 ] 는 [-2, -1, 0, 1, 2] 이렇게 총 5가지가 존재합니다.</p>
+            <p>[ 숫자 ] 는 초기치와 성장률에 영향을 줍니다. 따라서 내구력, 공격력, 방어력, 순발력 모두 [2]가 붙어야 8등급(S급)입니다.</p>
+            <p>( 숫자 ) 는 (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10) 이렇게 총 11가지가 존재합니다.</p>
+            <p>( 숫자 ) 는 초기치만 영향을 줍니다. 따라서, 내구력, 공격력, 방어력, 순발력에 (0)이 붙더라도 S급과는 연관이 없습니다.</p>
+            <p>( 숫자 ) 의 내구력 + 공격력 + 방어력 + 순발력 합은 S급도 10, F급도 10, 무조건 10입니다.</p>
 		</blockquote>
 
 		<br>
@@ -335,12 +469,10 @@
 		<br>
 		<br>
 
-        <div id="memo"></div>
-
-		<div class="table-responsive" id="base">
+		<div class="table-responsive" id="myPet">
 			<table class="table table-striped">
 				<colgroup>
-					<col width="10%">	
+                    <col width="20%">	
 					<col width="10%">
 					<col width="10%">
 					<col width="10%">
@@ -349,7 +481,7 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th>구분</th>
+						<th>이름</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
@@ -360,135 +492,62 @@
 				<tbody>
                     <tr>
                         <td>
-                            S급 초기치
+                            <!--
+                            <select class="form-control" id="select">
+                                <option>리비노</option>
+                                <option>얀기로</option>
+                                <option>반보로</option>
+                                <option>반기노</option>
+                                <option>부르돈</option>
+                            </select>
+                            -->
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="name" placeholder="얀기로">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="search"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statHp" placeholder="57">
+                            <input type="number" class="form-control" id="hp" placeholder="57">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statAtk" placeholder="12">
+                            <input type="number" class="form-control" id="atk" placeholder="12">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statDef" placeholder="7">
+                            <input type="number" class="form-control" id="def" placeholder="7">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statAgi" placeholder="6">
+                            <input type="number" class="form-control" id="agi" placeholder="6">
                         </td>
                         <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            S급 성장률
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upHp" placeholder="10.47">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upAtk" placeholder="2.32">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upDef" placeholder="1.43">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upAgi" placeholder="1.21">
-                        </td>
-                        <td>
-                            <button type="button" class="form-control" id="calculate1">계산</button>
+                            <button type="button" class="form-control" id="calculate">계산</button>
                         </td>
                     </tr>
 				</tbody>
 			</table>
 		</div>
 
-        <div class="table-responsive" id="rank">
+        <div class="table-responsive" id="result">
             <table class="table table-striped">
                 <colgroup>
-                    <col width="10%">	
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
+                    
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>구분</th>
-                        <th>레벨</th>
+                        <th>순번</th>
+                        <th>등급</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
                         <th>순발력</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>베이스</td>
-                        <td>
-                            <input type="number" class="form-control" id="baseBeginning" placeholder="27">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseHp" placeholder="27">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseAtk" placeholder="36">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseDef" placeholder="16">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseAgi" placeholder="20">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseRank" placeholder="495">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>초기치</td>
-                        <td>1</td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseHp" placeholder="57">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseAtk" placeholder="12">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseDef" placeholder="7">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseAgi" placeholder="7">
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>현재</td>
-                        <td>
-                            <input type="number" class="form-control" id="myLv" placeholder="127">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myHp" placeholder="1370">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myAtk" placeholder="304">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myDef" placeholder="185">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myAgi" placeholder="159">
-                        </td>
-                        <td>
-                            <button type="button" class="form-control" id="calculate2">계산</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    
     <button id="btnTop" title="Go to top">Top</button>
 </div>
 </body>
