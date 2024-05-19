@@ -244,31 +244,31 @@
             const myUpDef = (myDef - myBaseDef) / (myLv - 1);
             const myUpAgi = (myAgi - myBaseAgi) / (myLv - 1);
 
+            const upHp  = (baseHp  + 2 + 2.5) * baseRank / 10000;
+            const upAtk = (baseAtk + 2 + 2.5) * baseRank / 10000;
+            const upDef = (baseDef + 2 + 2.5) * baseRank / 10000;
+            const upAgi = (baseAgi + 2 + 2.5) * baseRank / 10000;
+
             // 바로 계산 및 출력
             for (var i = 0; i < 4; i++) {
                 for (var ii = 0; ii < 4; ii++) {
                     for (var iii = 0; iii < 4; iii++) {
                         for (var iiii = 0; iiii < 4; iiii++) {
-                            const upHp  = (baseHp  + (2 - i)    + 2.5) * baseRank / 10000;
-                            const upAtk = (baseAtk + (2 - ii)   + 2.5) * baseRank / 10000;
-                            const upDef = (baseDef + (2 - iii)  + 2.5) * baseRank / 10000;
-                            const upAgi = (baseAgi + (2 - iiii) + 2.5) * baseRank / 10000;
-
+                            
+                            //$("#memo").append(upHp + ' ' + upAtk + ' ' + upDef + ' ' + upAgi + '<br>');
                             const hp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / baseRank - (baseHp + (2 - i));
-                            const atk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseAtk + 2 - ii)
-                            const def = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseDef + 2 - iii)
+                            const atk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseAtk + 2 - ii);
+                            const def = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseDef + 2 - iii);
                             const agi = myUpAgi * 10000 / baseRank - (baseAgi + 2 - iiii);
                             //(10.42-2.00475-1.01475-1.21275)/4*10000/495-(27+2)
                             //(2.32-(1.55925*0.1)-(1.01475*0.1)-(1.21275*0.05))*10000/495-(36+2)
                             //(1.41-(1.55925*0.1)-(2.00475*0.1)-(1.21275*0.05))*10000/495-(16+2)
                             //1.21*10000/495-(20+2)
 
-
-                            
                             if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
                                 // 두 번째 테이블에 데이터 출력
                                 $('#rank tbody').append(''
-                                    + '<tr class="result1">'
+                                    + '<tr class="result2">'
                                     + '<td>' + "계산 베이스" + '</td>'
                                     + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + (hp + atk + def + agi).toFixed(2) + '</td>'
                                     + '<td>[' + (2 - i)    + ']' + hp.toFixed(2)  + '</td>'
@@ -294,7 +294,7 @@
                 getBase();
 			});
 
-             // 검색 버튼
+             // 계산 버튼
 			$("#calculate2").on("click", function() {
                 $(".result2").remove();
                 getRank();
