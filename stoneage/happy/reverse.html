@@ -41,7 +41,7 @@
 	<script>
         
         let stop = false;
-        const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"rank":0};
+        
         const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
 
         // 스크롤
@@ -56,7 +56,7 @@
 		}
 
         function getBase() {
-
+            const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"rank":0};
             // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
             const rank = [
                 {"rank":1,"base":100,min:450,max:500,avg:0},
@@ -129,7 +129,7 @@
                                             result.upAtk   = (baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05);
                                             result.upDef   = (baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05);
                                             result.upAgi   = baseUpAgi;
-                                            print1();
+                                            print1(base);
                                             stop = true;
                                             break;
                                         }
@@ -183,7 +183,7 @@
         }
 
 
-        function print1() {
+        function print1(base) {
             // 첫 번째 테이블에 데이터 출력
             $('#base tbody').append(''
                 + '<tr class="result1">'
