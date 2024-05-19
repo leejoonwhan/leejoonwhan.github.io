@@ -84,7 +84,7 @@
         ]
 
         let stop = false;
-        const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"base":0};
+        const base = {"beginning":15,"hp":7,"atk":7,"def":7,"agi":7,"rank":0};
         const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
 
         // 스크롤
@@ -98,7 +98,7 @@
 			}
 		}
 
-        function test() {
+        function getBase() {
 
             // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
             const rank = [
@@ -128,6 +128,7 @@
                 for (var ii = 0; ii <= 40; ii = ii + 1) {
                     const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
                     
+                    // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
                         // hp
                         for (var iii = 0; iii <= 40; iii = iii + 1) {
@@ -156,6 +157,8 @@
                                         console.log("HP: " + ((hp * 4) + atk + def + agi) + ", ATK: " + ((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)) + ", DEF: " + ((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)) + ", AGI: " + agi);
                                     }
                                     */
+
+                                    // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
                                     if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
                                         parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
                                         parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
@@ -163,15 +166,15 @@
                                         const sumStat = base.hp + base.atk + base.def + base.agi;
                                         for (var iiiiii = 0; iiiiii < rank.length; iiiiii++) {
                                             if (sumStat >= rank[iiiiii].base) {
-                                                base.base = rank[iiiiii].avg;
+                                                base.rank = rank[iiiiii].avg;
                                                 break;
                                             }
                                         }
 
-                                        const baseUpHp  = (base.hp  + 2 + 2.5) * base.base / 10000;
-                                        const baseUpAtk = (base.atk + 2 + 2.5) * base.base / 10000;
-                                        const baseUpDef = (base.def + 2 + 2.5) * base.base / 10000;
-                                        const baseUpAgi = (base.agi + 2 + 2.5) * base.base / 10000;
+                                        const baseUpHp  = (base.hp  + 2 + 2.5) * base.rank / 10000;
+                                        const baseUpAtk = (base.atk + 2 + 2.5) * base.rank / 10000;
+                                        const baseUpDef = (base.def + 2 + 2.5) * base.rank / 10000;
+                                        const baseUpAgi = (base.agi + 2 + 2.5) * base.rank / 10000;
 
                                         // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
                                         /*
@@ -179,6 +182,8 @@
                                             console.log("HP: " + ((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ", ATK: " + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ", DEF: " + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ", AGI: " + baseUpAgi.toFixed(2));
                                         }
                                         */
+
+                                        // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
                                         if (((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) == upHp &&
                                             ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) == upAtk &&
                                             ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) == upDef &&
@@ -192,7 +197,7 @@
                                             result.upAtk   = (baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05);
                                             result.upDef   = (baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05);
                                             result.upAgi   = baseUpAgi;
-                                            print();
+                                            print1();
                                             stop = true;
                                             break;
                                         }
@@ -246,17 +251,14 @@
         }
 
 
-        function print() {
-            $('tbody').append(''
-                + '<tr class="result">'
+        function print1() {
+            // 첫 번째 테이블에 데이터 출력
+            $('#base tbody').append(''
+                + '<tr class="result1">'
                 + '<td>' + "계산 베이스" + '</td>'
-                + '<td>' + base.hp + '</td>'
-                + '<td>' + base.atk + '</td>'
-                + '<td>' + base.def + '</td>'
-                + '<td>' + base.agi + '</td>'
-                + '<td>' + base.beginning + ' ' + base.base + '</td>'
+                + '<td colspan="5">' + base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '</td>'
                 + '</tr>'
-                + '<tr class="result">'
+                + '<tr class="result1">'
                 + '<td>' + "계산 초기치"   + '</td>'
                 + '<td>' + result.statHp  + '</td>'
                 + '<td>' + result.statAtk + '</td>'
@@ -264,7 +266,7 @@
                 + '<td>' + result.statAgi + '</td>'
                 + '<td>' + '</td>'
                 + '</tr>'
-                + '<tr class="result">'
+                + '<tr class="result1">'
                 + '<td>' + "계산 성장률" + '</td>'
                 + '<td>' + result.upHp  + '</td>'
                 + '<td>' + result.upAtk + '</td>'
@@ -273,20 +275,97 @@
                 + '<td>' + '</td>'
                 + '</tr>'
             );
+            
+            // 두 번째 테이블 베이스에 데이터 입력
+            $("#baseBeginning").val(base.beginning);
+            $("#baseHp").val(base.hp);
+            $("#baseAtk").val(base.atk);
+            $("#baseDef").val(base.def);
+            $("#baseAgi").val(base.agi);
+            $("#baseRank").val(base.rank);
+
+        }
+
+        function getRank() {
+            
+            const baseBeginning = Number($("#baseBeginning").val());
+            const baseHp = Number($("#baseHp").val());
+            const baseAtk = Number($("#baseAtk").val());
+            const baseDef = Number($("#baseDef").val());
+            const baseAgi = Number($("#baseAgi").val());
+            const baseRank = Number($("#baseRank").val());
+            
+            const myBaseHp = Number($("#myBaseHp").val());
+            const myBaseAtk = Number($("#myBaseAtk").val());
+            const myBaseDef = Number($("#myBaseDef").val());
+            const myBaseAgi = Number($("#myBaseAgi").val());
+
+            const myLv = Number($("#myLv").val());
+            const myHp = Number($("#myHp").val());
+            const myAtk = Number($("#myAtk").val());
+            const myDef = Number($("#myDef").val());
+            const myAgi = Number($("#myAgi").val());
+
+            // 내 펫 성장률 계산
+            const myUpHp  = (myHp - myBaseHp)   / (myLv - 1);
+            const myUpAtk = (myAtk - myBaseAtk) / (myLv - 1);
+            const myUpDef = (myDef - myBaseDef) / (myLv - 1);
+            const myUpAgi = (myAgi - myBaseAgi) / (myLv - 1);
+
+            // 바로 계산 및 출력
+            for (var i = 0; i < 4; i++) {
+                for (var ii = 0; ii < 4; ii++) {
+                    for (var iii = 0; iii < 4; iii++) {
+                        for (var iiii = 0; iiii < 4; iiii++) {
+                            const upHp  = (baseHp  + (2 - i)    + 2.5) * baseRank / 10000;
+                            const upAtk = (baseAtk + (2 - ii)   + 2.5) * baseRank / 10000;
+                            const upDef = (baseDef + (2 - iii)  + 2.5) * baseRank / 10000;
+                            const upAgi = (baseAgi + (2 - iiii) + 2.5) * baseRank / 10000;
+
+                            const hp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / baseRank - (baseHp + (2 - i));
+                            const atk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseAtk + 2 - ii)
+                            const def = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseDef + 2 - iii)
+                            const agi = myUpAgi * 10000 / baseRank - (baseAgi + 2 - iiii);
+                            //(10.42-2.00475-1.01475-1.21275)/4*10000/495-(27+2)
+                            //(2.32-(1.55925*0.1)-(1.01475*0.1)-(1.21275*0.05))*10000/495-(36+2)
+                            //(1.41-(1.55925*0.1)-(2.00475*0.1)-(1.21275*0.05))*10000/495-(16+2)
+                            //1.21*10000/495-(20+2)
+
+
+                            
+                            if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
+                                // 두 번째 테이블에 데이터 출력
+                                $('#rank tbody').append(''
+                                    + '<tr class="result1">'
+                                    + '<td>' + "계산 베이스" + '</td>'
+                                    + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + (hp + atk + def + agi).toFixed(2) + '</td>'
+                                    + '<td>[' + (2 - i)    + ']' + hp.toFixed(2)  + '</td>'
+                                    + '<td>[' + (2 - ii)   + ']' + atk.toFixed(2) + '</td>'
+                                    + '<td>[' + (2 - iii)  + ']' + def.toFixed(2) + '</td>'
+                                    + '<td>[' + (2 - iiii) + ']' + agi.toFixed(2) + '</td>'
+                                    + '<td>' + '</td>'
+                                    + '</tr>'
+                                );
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // jQuery
 		$(document).ready(function() {
 
-            // 검색 버튼
-			$("#search").on("click", function() {
-                
+            // 계산 버튼
+			$("#calculate1").on("click", function() {
+                $(".result1").remove();
+                getBase();
 			});
 
-            // 계산 버튼
-			$("#calculate").on("click", function() {
-                $(".result").remove();
-                test();
+             // 검색 버튼
+			$("#calculate2").on("click", function() {
+                $(".result2").remove();
+                getRank();
 			});
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
@@ -320,14 +399,15 @@
 
         <div id="memo"></div>
 
-		<div class="table-responsive">
+		<div class="table-responsive" id="base">
 			<table class="table table-striped">
 				<colgroup>
-					<col width="100px">	
-					<col width="">
-					<col width="">
-					<col width="">
-                    <col width="">
+					<col width="10%">	
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+                    <col width="10%">
+                    <col width="10%">
 				</colgroup>
 				<thead>
 					<tr>
@@ -345,16 +425,16 @@
                             S급 초기치
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statHp" value="57">
+                            <input type="number" class="form-control" id="statHp" placeholder="57">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statAtk" value="12">
+                            <input type="number" class="form-control" id="statAtk" placeholder="12">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statDef" value="7">
+                            <input type="number" class="form-control" id="statDef" placeholder="7">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="statAgi" value="6">
+                            <input type="number" class="form-control" id="statAgi" placeholder="6">
                         </td>
                         <td>
                             
@@ -365,47 +445,112 @@
                             S급 성장률
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="upHp" value="10.47">
+                            <input type="number" class="form-control" id="upHp" placeholder="10.47">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="upAtk" value="2.32">
+                            <input type="number" class="form-control" id="upAtk" placeholder="2.32">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="upDef" value="1.43">
+                            <input type="number" class="form-control" id="upDef" placeholder="1.43">
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="upAgi" value="1.21">
+                            <input type="number" class="form-control" id="upAgi" placeholder="1.21">
                         </td>
                         <td>
-                            <button type="button" class="form-control" id="calculate">계산</button>
+                            <button type="button" class="form-control" id="calculate1">계산</button>
                         </td>
                     </tr>
 				</tbody>
 			</table>
 		</div>
 
-        <!--
-        <div class="table-responsive" id="result">
+        <div class="table-responsive" id="rank">
             <table class="table table-striped">
                 <colgroup>
-                    
+                    <col width="10%">	
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>순번</th>
-                        <th>등급</th>
+                        <th>구분</th>
+                        <th>레벨</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
                         <th>순발력</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>베이스</td>
+                        <td>
+                            <input type="number" class="form-control" id="baseBeginning" placeholder="27">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="baseHp" placeholder="27">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="baseAtk" placeholder="36">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="baseDef" placeholder="16">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="baseAgi" placeholder="20">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="baseRank" placeholder="495">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>초기치</td>
+                        <td>1</td>
+                        <td>
+                            <input type="number" class="form-control" id="myBaseHp" placeholder="57">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myBaseAtk" placeholder="12">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myBaseDef" placeholder="7">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myBaseAgi" placeholder="7">
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>현재</td>
+                        <td>
+                            <input type="number" class="form-control" id="myLv" placeholder="127">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myHp" placeholder="1370">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myAtk" placeholder="304">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myDef" placeholder="185">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="myAgi" placeholder="159">
+                        </td>
+                        <td>
+                            <button type="button" class="form-control" id="calculate2">계산</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    -->
+    
     <button id="btnTop" title="Go to top">Top</button>
 </div>
 </body>
