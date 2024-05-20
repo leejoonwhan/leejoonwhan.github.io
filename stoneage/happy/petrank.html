@@ -62,7 +62,7 @@
             
             {"no":"242","name":"무이","beginning":22,"hp":39.9,"atk":27.2,"def":29.8,"agi":8.8},
             
-            {"no":"261","name":"만모","beginning":27,"hp":42.7,"atk":23.3,"def":35.3,"agi":5.1},
+            {"no":"261","name":"만모","beginning":27.3,"hp":42.7,"atk":23.3,"def":35.3,"agi":5.1},
             
 
             {"no":"272","name":"테라곤","beginning":26,"hp":24,"atk":31,"def":15,"agi":32},
@@ -189,6 +189,8 @@
                 $("#def").val(parseInt(resultDef, 10));
                 $("#agi").val(parseInt(resultAgi, 10));
             }
+
+            //$("#memo").append(resultHp);
         }
 
         function setBase(foundPet) {
@@ -490,7 +492,7 @@
 		<br>
 		<br>
 		<br>
-
+        <div id="memo"></div>
 		<div class="table-responsive" id="myPet">
 			<table class="table table-striped">
 				<colgroup>
