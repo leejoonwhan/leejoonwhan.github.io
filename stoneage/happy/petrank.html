@@ -54,6 +54,7 @@
             //{"no":"105","name":"오르곤","beginning":28.4,"hp":29.8,"atk":34.5,"def":19.8,"agi":21.7},
             //,{"no":"106","name":"모가로스","beginning":27,"hp":23,"atk":37,"def":20,"agi":25}
             //{"no":"106","name":"모가로스","beginning":27.2,"hp":24.3,"atk":36.4,"def":17,"agi":25.2},
+            {"no":"106","name":"모가로스","beginning":25,"hp":27,"atk":40,"def":19,"agi":28},
             
             //,{"no":"192","name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28}
 			{"no":"193","name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":27},
@@ -118,7 +119,13 @@
             $(".srank").remove();
 
             let rank = 0;
-            if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 100) {
+            if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 110) {
+                rank = 435;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 105) {
+                rank = 455;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 100) {
                 rank = 475;
             }
             else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 95) {
