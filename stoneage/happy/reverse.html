@@ -257,6 +257,11 @@
                     for (var iii = 0; iii < 4; iii++) {
                         for (var iiii = 0; iiii < 4; iiii++) {
                             
+                            const rankHp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / (baseHp + (2 + i + 2.5));
+                            const rankAtk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / (baseAtk + 2 - ii + 2.5);
+                            const rankDef = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / (baseDef + 2 - iii + 2.5);
+                            const rankAgi = myUpAgi * 10000 / (baseAgi + 2 + iiii + 2.5);
+
                             //$("#memo").append(upHp + ' ' + upAtk + ' ' + upDef + ' ' + upAgi + '<br>');
                             const hp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / baseRank - (baseHp + (2 - i));
                             const atk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / baseRank - (baseAtk + 2 - ii);
@@ -270,6 +275,15 @@
                             if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
                                 // 두 번째 테이블에 데이터 출력
                                 $('#rank tbody').append(''
+                                    + '<tr class="result2">'
+                                    + '<td>' + "계산 베이스" + '</td>'
+                                    + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) + '</td>'
+                                    + '<td>[' + (2 - i)    + ']' + rankHp.toFixed(2)  + '</td>'
+                                    + '<td>[' + (2 - ii)   + ']' + rankAtk.toFixed(2) + '</td>'
+                                    + '<td>[' + (2 - iii)  + ']' + rankDef.toFixed(2) + '</td>'
+                                    + '<td>[' + (2 - iiii) + ']' + rankAgi.toFixed(2) + '</td>'
+                                    + '<td>' + '</td>'
+                                    + '</tr>'
                                     + '<tr class="result2">'
                                     + '<td>' + "계산 베이스" + '</td>'
                                     + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + (hp + atk + def + agi).toFixed(2) + '</td>'
