@@ -84,19 +84,19 @@
             // beginning
             for (var i = 0; i <= 15; i = i + 1) {
                 // agi
-                for (var ii = 0; ii <= 40; ii = ii + 1) {
+                for (var ii = 0; ii <= 45; ii = ii + 1) {
                     const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
                     
                     // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
                         // hp
-                        for (var iii = 0; iii <= 40; iii = iii + 1) {
+                        for (var iii = 0; iii <= 45; iii = iii + 1) {
                             const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
                             // atk 
-                            for (var iiii = 0; iiii <= 40; iiii = iiii + 1) {
+                            for (var iiii = 0; iiii <= 45; iiii = iiii + 1) {
                                 const atk = base.beginning * (base.atk + 2 + 2.5) / 100;
                                 // def
-                                for (var iiiii = 0; iiiii <= 40; iiiii = iiiii + 1) {
+                                for (var iiiii = 0; iiiii <= 45; iiiii = iiiii + 1) {
                                     const def = base.beginning * (base.def + 2 + 2.5) / 100;
                                     
                                     // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
@@ -139,7 +139,7 @@
                                     }
 
                                     base.def += 1;
-                                    if (base.def > 45) {
+                                    if (base.def > 50) {
                                         base.def = 5;
                                     }
                                 }
@@ -149,7 +149,7 @@
                                 }
 
                                 base.atk += 1;
-                                if (base.atk > 45) {
+                                if (base.atk > 50) {
                                     base.atk = 5;
                                 }
                             }
@@ -159,7 +159,7 @@
                             }
 
                             base.hp += 1;
-                            if (base.hp > 45) {
+                            if (base.hp > 50) {
                                 base.hp = 5;
                             }
                         }
@@ -170,7 +170,7 @@
                         }
                     }
                     base.agi += 1;
-                    if (base.agi > 45) {
+                    if (base.agi > 50) {
                         base.agi = 5;
                     }
                 }
