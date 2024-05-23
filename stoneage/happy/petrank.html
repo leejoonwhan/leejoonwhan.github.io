@@ -456,6 +456,7 @@
         // jQuery
 		$(document).ready(function() {
 
+            scheduleNextPlayback(); // 첫 실행 예약
             getListName();
 
             $("#name").on("keydown", function(event) {
@@ -499,12 +500,41 @@
 				document.documentElement.scrollTop = 0;
 			});
         });
+
+        function scheduleNextPlayback() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = 일요일, 1 = 월요일, ..., 5 = 금요일, 6 = 토요일
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            let nextPlaybackTime = new Date(now);
+            nextPlaybackTime.setHours(21, 55, 0, 0); // 오늘 21시 55분 0초
+
+            // 만약 현재 시간이 이미 오늘 21시 55분을 지난 경우 다음 날로 설정
+            if (now > nextPlaybackTime) {
+                nextPlaybackTime.setDate(nextPlaybackTime.getDate() + 1);
+            }
+
+            // 만약 다음 실행 시간이 토요일이나 일요일이면 월요일로 조정
+            while (nextPlaybackTime.getDay() === 0 || nextPlaybackTime.getDay() === 6) {
+                nextPlaybackTime.setDate(nextPlaybackTime.getDate() + 1);
+            }
+
+            const timeUntilNextPlayback = nextPlaybackTime - now;
+            
+            setTimeout(function() {
+                $('#scheduled-audio')[0].play();
+                scheduleNextPlayback(); // 다음 실행 예약
+            }, timeUntilNextPlayback);
+        }
     </script>
 </head>
 <body>
 	<div class="container">
 		<h2>Happy Server Pet Rank Info</h2>
 		<hr>
+        <audio id="scheduled-audio" src="https://github.com/leejoonwhan/leejoonwhan.github.io/raw/master/wow/sound/SylvanasWindrunnerGreeting04.ogg" preload="auto"></audio>
         <a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
