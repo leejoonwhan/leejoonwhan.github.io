@@ -56,7 +56,7 @@
 		}
 
         function getBase() {
-            const base = {"beginning":15,"hp":5,"atk":5,"def":5,"agi":5,"rank":0};
+            const base = {"beginning":15,"hp":0,"atk":0,"def":0,"agi":0,"rank":0};
             // {"no":"092","name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20}
             const rank = [
                 {"rank":1,"base":110,min:410,max:460,avg:0},    
@@ -84,19 +84,19 @@
             // beginning
             for (var i = 0; i <= 15; i = i + 1) {
                 // agi
-                for (var ii = 0; ii <= 45; ii = ii + 1) {
+                for (var ii = 0; ii <= 50; ii = ii + 1) {
                     const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
                     
                     // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
                         // hp
-                        for (var iii = 0; iii <= 45; iii = iii + 1) {
+                        for (var iii = 0; iii <= 50; iii = iii + 1) {
                             const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
                             // atk 
-                            for (var iiii = 0; iiii <= 45; iiii = iiii + 1) {
+                            for (var iiii = 0; iiii <= 50; iiii = iiii + 1) {
                                 const atk = base.beginning * (base.atk + 2 + 2.5) / 100;
                                 // def
-                                for (var iiiii = 0; iiiii <= 45; iiiii = iiiii + 1) {
+                                for (var iiiii = 0; iiiii <= 50; iiiii = iiiii + 1) {
                                     const def = base.beginning * (base.def + 2 + 2.5) / 100;
                                     
                                     // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
@@ -180,8 +180,6 @@
                 }
                 base.beginning += 1;
             }
-
-            alert("계산이 끝났습니다!");
         }
 
 
