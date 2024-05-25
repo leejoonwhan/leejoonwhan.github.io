@@ -40,62 +40,151 @@
 	</style>
     <script>
         var pet = [
-        
-			{"name":"케이비","beginning":20,"hp":14,"atk":19,"def":19,"agi":27},
-			{"name":"두리","beginning":20,"hp":22,"atk":23,"def":11,"agi":23},
-			{"name":"오투투","beginning":20,"hp":20,"atk":19,"def":15,"agi":30},
-			{"name":"쿠쿠르","beginning":20,"hp":24,"atk":20,"def":19,"agi":26},
-			
-			{"name":"토끼","beginning":17,"hp":32,"atk":30,"def":23,"agi":33},
-			{"name":"부비","beginning":15,"hp":42,"atk":20,"def":16,"agi":12},
+            {"name":"우리","beginning":10,"hp":20,"atk":12,"def":15,"agi":25},
+            {"name":"두리","beginning":20,"hp":22,"atk":23,"def":11,"agi":23},
+            {"name":"얼룩우리","beginning":15,"hp":22,"atk":17,"def":19,"agi":17},
+            {"name":"불그리","beginning":10,"hp":25,"atk":23,"def":19,"agi":33},
+            {"name":"실버우리","beginning":20,"hp":22,"atk":22,"def":24,"agi":27},
+            {"name":"환생얼룩우리","beginning":25,"hp":30,"atk":24,"def":27,"agi":24},
+            {"name":"복우리","beginning":21,"hp":21,"atk":19,"def":19,"agi":28},
+            {"name":"푸우리","beginning":21,"hp":25,"atk":27,"def":11,"agi":25},
+            {"name":"녹우리","beginning":20,"hp":26,"atk":32,"def":21,"agi":24},
+            
+            {"name":"부비","beginning":15,"hp":42,"atk":20,"def":16,"agi":12},
+            {"name":"골드부비","beginning":25,"hp":31,"atk":20,"def":32,"agi":12},
 			{"name":"부이","beginning":22,"hp":44,"atk":21,"def":16,"agi":13},
-			{"name":"베론","beginning":23,"hp":42,"atk":18,"def":37,"agi":18},
-			
-			{"name":"카타르카스","beginning":22,"hp":25,"atk":24,"def":40,"agi":5},
-			{"name":"로기안","beginning":23,"hp":25,"atk":22,"def":39,"agi":7},
-			
-			{"name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17},
+            {"name":"부이비","beginning":16,"hp":32,"atk":26,"def":15,"agi":18},
+            {"name":"얼룩부이비","beginning":23,"hp":30,"atk":28,"def":14,"agi":20},
+            {"name":"푸비","beginning":24,"hp":31,"atk":34,"def":24,"agi":18},
+            //{"name":"푸이","beginning":24,"hp":34,"atk":36,"def":21,"agi":18},
+            {"name":"깡우비","beginning":18,"hp":29,"atk":30,"def":15,"agi":20},
+            
+            {"name":"꼬미","beginning":22,"hp":22,"atk":28,"def":15,"agi":27},
+            {"name":"꼬비","beginning":22,"hp":22,"atk":27,"def":17,"agi":27},
+            {"name":"꼬비오","beginning":22,"hp":21,"atk":27,"def":15,"agi":29},
+            {"name":"꼬꼬비","beginning":22,"hp":21,"atk":28,"def":15,"agi":28},
+            {"name":"꼬꼬미","beginning":22,"hp":25,"atk":29,"def":17,"agi":28},
+            {"name":"꼬이미","beginning":22,"hp":21,"atk":26,"def":18,"agi":22},
+            {"name":"돌꼬비","beginning":22,"hp":25,"atk":31,"def":17,"agi":25},
+            {"name":"푸미","beginning":22,"hp":27,"atk":31,"def":16,"agi":25},
+            
+            {"name":"푸푸","beginning":13,"hp":18,"atk":20,"def":8,"agi":33},
+            {"name":"우푸","beginning":15,"hp":18,"atk":22,"def":7,"agi":32},
+            {"name":"투투","beginning":17,"hp":23,"atk":22,"def":8,"agi":26},
+            {"name":"오투투","beginning":20,"hp":20,"atk":19,"def":15,"agi":30},
+            {"name":"포포","beginning":16,"hp":20,"atk":24,"def":8,"agi":36},
+            {"name":"푸투투","beginning":14,"hp":29,"atk":23,"def":14,"agi":31},
+            {"name":"노투투","beginning":15,"hp":22,"atk":24,"def":13,"agi":39},
+            {"name":"푸투","beginning":15,"hp":22,"atk":24,"def":9,"agi":33},
+            
+            {"name":"베론","beginning":23,"hp":42,"atk":18,"def":37,"agi":18},
+            {"name":"베로로크","beginning":19,"hp":39,"atk":19,"def":37,"agi":17},
+            {"name":"베로보크","beginning":23,"hp":38,"atk":18,"def":36,"agi":14},
+            {"name":"베로포리","beginning":22,"hp":34,"atk":25,"def":35,"agi":15},
+            {"name":"베노노크","beginning":22,"hp":36,"atk":27,"def":32,"agi":22},
+            {"name":"베톤","beginning":22,"hp":40,"atk":24,"def":42,"agi":14},
+            {"name":"베노투리","beginning":22,"hp":37,"atk":25,"def":41,"agi":17},
+            {"name":"베로바드","beginning":22,"hp":36,"atk":33,"def":31,"agi":19},
+            
+            {"name":"노북이","beginning":14,"hp":22,"atk":18,"def":34,"agi":6},
+            {"name":"북이","beginning":14,"hp":22,"atk":19,"def":35,"agi":5},
+            {"name":"깡북이","beginning":12,"hp":21,"atk":24,"def":33,"agi":5},
+            {"name":"돌북이","beginning":20,"hp":23,"atk":19,"def":41,"agi":4},
+
+            
+            {"name":"아고아","beginning":20,"hp":25,"atk":39,"def":24,"agi":19},
+            {"name":"네고스","beginning":20,"hp":26,"atk":37,"def":26,"agi":18},
+            {"name":"타로곤","beginning":20,"hp":25,"atk":37,"def":26,"agi":18},
+            {"name":"다고스","beginning":20,"hp":27,"atk":38,"def":23,"agi":18},
+            {"name":"보크곤","beginning":20,"hp":23,"atk":38,"def":22,"agi":24},
+
+            {"name":"라고고","beginning":23,"hp":22,"atk":28,"def":17,"agi":26},
+            {"name":"후바바","beginning":24,"hp":22,"atk":25,"def":18,"agi":28},
+            {"name":"토루루","beginning":21,"hp":23,"atk":25,"def":23,"agi":27},
+            {"name":"루니","beginning":22,"hp":24,"atk":23,"def":25,"agi":22},
+            
+            {"name":"카타르카스","beginning":22,"hp":25,"atk":24,"def":40,"agi":5},
+            {"name":"쿠타스","beginning":22,"hp":27,"atk":21,"def":39,"agi":6},
+            {"name":"코로카스","beginning":17,"hp":29,"atk":26,"def":37,"agi":5},
+            {"name":"로기안","beginning":23,"hp":25,"atk":22,"def":39,"agi":7},
+            {"name":"램가스","beginning":20,"hp":32,"atk":25,"def":52,"agi":5},
+            {"name":"아이카스","beginning":22,"hp":31,"atk":23,"def":40,"agi":5},
+            {"name":"쿠타스","beginning":22,"hp":31,"atk":25,"def":33,"agi":5},
+            {"name":"카르기안","beginning":20,"hp":25,"atk":22,"def":36,"agi":10},
+            
+            {"name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17},
 			{"name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20},
 			{"name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21},
 			{"name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20},
 			{"name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24},
-			
-			
+
+            {"name":"쿠링","beginning":19,"hp":23,"atk":20,"def":22,"agi":24},
+            {"name":"쿠쿠르","beginning":20,"hp":24,"atk":20,"def":19,"agi":26},
+            {"name":"포링","beginning":18,"hp":22,"atk":20,"def":18,"agi":24},
+            {"name":"리스키","beginning":17,"hp":26,"atk":18,"def":21,"agi":24},
+            {"name":"토끼","beginning":17,"hp":32,"atk":30,"def":23,"agi":33},
+            
+            {"name":"카비트","beginning":18,"hp":14,"atk":19,"def":19,"agi":27},
+			{"name":"케이비","beginning":20,"hp":14,"atk":19,"def":19,"agi":27},
+			{"name":"큐이","beginning":15,"hp":13,"atk":20,"def":17,"agi":25},
+			{"name":"골드카비트","beginning":19,"hp":16,"atk":20,"def":16,"agi":28},
+
+            {"name":"고르돈","beginning":24,"hp":27,"atk":31,"def":24,"agi":18},
+            {"name":"기라돈","beginning":24,"hp":28,"atk":31,"def":22,"agi":19},
+            {"name":"투르돈","beginning":24,"hp":26,"atk":28,"def":16,"agi":16},
+            {"name":"고르고","beginning":24,"hp":22,"atk":29,"def":16,"agi":16},
+            
 			{"name":"휴보","beginning":18,"hp":26,"atk":28,"def":25,"agi":16},
+            {"name":"포보","beginning":19,"hp":28,"atk":23,"def":26,"agi":14},
 			{"name":"쿠보","beginning":25,"hp":26,"atk":26,"def":26,"agi":17},
-			
-			
-			
-			
-			
-			
-			
-			
+            {"name":"토로쟈","beginning":21,"hp":25,"atk":26,"def":25,"agi":16},
+            {"name":"부르보","beginning":20,"hp":23,"atk":25,"def":24,"agi":20},
+            
+            {"name":"카쿠","beginning":18,"hp":28,"atk":29,"def":25,"agi":32},
+            {"name":"바카","beginning":20,"hp":19,"atk":27,"def":20,"agi":28},
+            {"name":"바우","beginning":17,"hp":18,"atk":23,"def":20,"agi":28},
+            {"name":"카우","beginning":17,"hp":16,"atk":23,"def":23,"agi":26},
+            
 			{"name":"베르가","beginning":24,"hp":24,"atk":29,"def":14,"agi":26},
 			{"name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28},
 			{"name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":27},
 			{"name":"노르노르","beginning":25,"hp":22,"atk":30,"def":17,"agi":29},
 			{"name":"성호","beginning":24,"hp":29,"atk":32,"def":13,"agi":29},
 			
-			
+            {"name":"토리노프스","beginning":12,"hp":26,"atk":21,"def":26,"agi":12},
+            {"name":"펜타스","beginning":16,"hp":28,"atk":17,"def":28,"agi":11},
+            {"name":"토리케라","beginning":18,"hp":27,"atk":18,"def":28,"agi":10},
+            {"name":"토르프스","beginning":14,"hp":26,"atk":19,"def":29,"agi":9},
 			{"name":"코발스","beginning":15,"hp":40,"atk":25,"def":31,"agi":10},
 			{"name":"노타스","beginning":14,"hp":34,"atk":26,"def":37,"agi":20},
-			
-			
+
+            {"name":"고반케스","beginning":20,"hp":27,"atk":33,"def":15,"agi":16},
+            {"name":"쟈그라","beginning":20,"hp":26,"atk":34,"def":14,"agi":17},
+            {"name":"쟈그","beginning":20,"hp":30,"atk":33,"def":13,"agi":17},
+            {"name":"판지","beginning":20,"hp":29,"atk":33,"def":14,"agi":17},
+            
+            {"name":"기가로스","beginning":28,"hp":30,"atk":34,"def":32,"agi":20},
+            {"name":"메가로스","beginning":24,"hp":33,"atk":36,"def":33,"agi":13},
+            {"name":"비트로스","beginning":25,"hp":30,"atk":37,"def":27,"agi":21},
+            {"name":"가가로스","beginning":26,"hp":32,"atk":40,"def":27,"agi":15},
+            
+            {"name":"루이","beginning":22,"hp":40,"atk":32,"def":33,"agi":10},
 			{"name":"무이","beginning":20,"hp":44,"atk":30,"def":33,"agi":10},
+            {"name":"씨보스","beginning":21,"hp":41,"atk":30,"def":35,"agi":10},
 			{"name":"투이","beginning":24,"hp":39,"atk":34,"def":33,"agi":9},
 			
+            {"name":"다이노","beginning":25,"hp":37,"atk":31,"def":34,"agi":6},
+            {"name":"다이노스","beginning":26,"hp":46,"atk":30,"def":35,"agi":7},
+            {"name":"프라키토스","beginning":24,"hp":35,"atk":35,"def":28,"agi":6},
+            {"name":"스텐토스","beginning":28,"hp":45,"atk":32,"def":34,"agi":5},
+            {"name":"프리토스","beginning":28,"hp":41,"atk":34,"def":33,"agi":11},
+
 			{"name":"만모","beginning":25,"hp":47,"atk":26,"def":39,"agi":6},
 			{"name":"만모르","beginning":24,"hp":45,"atk":32,"def":35,"agi":6},
+            {"name":"만모나스","beginning":25,"hp":49,"atk":26,"def":37,"agi":6},
+            {"name":"만모로스","beginning":25,"hp":50,"atk":28,"def":34,"agi":6},
 			{"name":"만모드","beginning":25,"hp":45,"atk":28,"def":41,"agi":4},
-			
-			
-			
-			
-			{"name":"프리토스","beginning":28,"hp":41,"atk":34,"def":33,"agi":11},
-			
-			
-			
+            			
 			{"name":"테라곤","beginning":26,"hp":24,"atk":31,"def":15,"agi":32},
 			{"name":"카르곤","beginning":26,"hp":23,"atk":31,"def":13,"agi":30},
 			{"name":"포이비스","beginning":24,"hp":27,"atk":34,"def":21,"agi":32},
@@ -112,9 +201,24 @@
 			{"name":"골로스","beginning":26,"hp":28,"atk":40,"def":21,"agi":25},
             {"name":"노르곤","beginning":26,"hp":27,"atk":38,"def":17,"agi":27},
             
-			
+            {"name":"프이토","beginning":26,"hp":19,"atk":22,"def":25,"agi":29},
 			{"name":"모나시프","beginning":25,"hp":23,"atk":23,"def":24,"agi":28},
-			
+            {"name":"라나프","beginning":28,"hp":18,"atk":26,"def":24,"agi":29},
+            {"name":"라이혼","beginning":26,"hp":26,"atk":34,"def":25,"agi":32},
+            {"name":"타이혼","beginning":26,"hp":24,"atk":36,"def":22,"agi":33},
+
+            {"name":"스토라지","beginning":21,"hp":35,"atk":26,"def":23,"agi":20},
+            {"name":"아토라지","beginning":20,"hp":39,"atk":29,"def":24,"agi":23},
+            {"name":"아리노스","beginning":26,"hp":34,"atk":26,"def":25,"agi":19},
+            {"name":"다이노로스","beginning":24,"hp":36,"atk":32,"def":23,"agi":25},
+            {"name":"타르노로스","beginning":23,"hp":40,"atk":31,"def":24,"agi":24},
+            
+            {"name":"바로로크스","beginning":22,"hp":24,"atk":19,"def":24,"agi":18},
+            {"name":"란베르스","beginning":21,"hp":26,"atk":21,"def":21,"agi":22},
+            {"name":"코리토르스","beginning":19,"hp":24,"atk":20,"def":22,"agi":20},
+            {"name":"노스토로스","beginning":23,"hp":22,"atk":25,"def":20,"agi":24},
+            
+            
 			
 			{"name":"사루나","beginning":23,"hp":21,"atk":26,"def":10,"agi":35},
 			{"name":"푸투","beginning":15,"hp":22,"atk":24,"def":9,"agi":33},
@@ -128,6 +232,9 @@
 			{"name":"흑호","beginning":25,"hp":28,"atk":35,"def":16,"agi":35},
 			{"name":"이블티거","beginning":25,"hp":24,"atk":35,"def":14,"agi":25},
 			
+            {"name":"뉴로아","beginning":29,"hp":35,"atk":37,"def":27,"agi":20},
+            {"name":"푸루바","beginning":27,"hp":31,"atk":38,"def":11,"agi":33},
+            {"name":"베노미","beginning":27,"hp":31,"atk":38,"def":11,"agi":33},
 			
 			
 			{"name":"데블로스","beginning":21,"hp":24,"atk":32,"def":13,"agi":29},
@@ -143,6 +250,8 @@
 			{"name":"테로노돈","beginning":25,"hp":27,"atk":30,"def":12,"agi":33},
 			{"name":"베르마루","beginning":27,"hp":27,"atk":36,"def":15,"agi":25},
 			
+            {"name":"어린흑룡","beginning":26,"hp":25,"atk":33,"def":13,"agi":29},
+            
 			{"name":"구루마루","beginning":25,"hp":30,"atk":40,"def":17,"agi":29},
 			{"name":"흑주작","beginning":24,"hp":25,"atk":36,"def":13,"agi":25},
 			{"name":"흑풍","beginning":25,"hp":29,"atk":38,"def":14,"agi":34}
