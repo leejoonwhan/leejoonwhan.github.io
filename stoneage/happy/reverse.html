@@ -71,9 +71,10 @@
                 // agi
                 for (var ii = 0; ii <= 60; ii++) {
                     const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
-                    
+                    //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                     // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
+                        //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                         // hp
                         for (var iii = 0; iii <= 60; iii++) {
                             const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
@@ -84,6 +85,13 @@
                                 for (var iiiii = 0; iiiii <= 60; iiiii++) {
                                     const def = base.beginning * (base.def + 2 + 2.5) / 100;
                                     
+                                    if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
+                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
+                                        //$("#memo").append(hp + ' ' + atk + ' ' + def + ' ' + agi + '<br>');
+                                        //$("#memo").append(parseInt((hp * 4) + atk + def + agi, 10) + ' ' + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ' ' + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) + ' ' + parseInt(agi, 10) + '<br>');
+                                        //$("#memo").append(((hp * 4) + atk + def + agi) + '<br>');
+                                    }
+
                                     // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
                                     if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
                                         parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
@@ -114,12 +122,16 @@
                                         else if (sumStat >= 0) {
                                             base.rank = 575;
                                         }
-
                                         
                                         const baseUpHp  = (base.hp  + 2 + 2.5) * base.rank / 10000;
                                         const baseUpAtk = (base.atk + 2 + 2.5) * base.rank / 10000;
                                         const baseUpDef = (base.def + 2 + 2.5) * base.rank / 10000;
                                         const baseUpAgi = (base.agi + 2 + 2.5) * base.rank / 10000;
+
+                                        if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
+                                            //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
+                                            //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
+                                        }
                                         //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
                                         //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
                                         // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
@@ -168,7 +180,6 @@
                                 base.hp = 0;
                             }
                         }
-
                        
                         if (stop) {
                             break;
@@ -351,6 +362,7 @@
 		</p>
         <p class="lead">
 			내가 키운 펫이 S급인지 확인하는 계산기입니다.
+            고르돈, 푸이, 볼프를 제외한 모든 페트 사용 가능합니다.
 		</p>
 		<blockquote>
 			<p>STEP1. 게임 채팅으로 /검색 얀기로 엔터</p>
