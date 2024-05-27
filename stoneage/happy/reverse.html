@@ -42,8 +42,6 @@
         
         let stop = false;
         
-        const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
-
         // 스크롤
 		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
 		window.onscroll = function() {scrollFunction()};
@@ -56,6 +54,7 @@
 		}
 
         function getBase() {
+            const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
             const base = {"beginning":10,"hp":0,"atk":0,"def":0,"agi":0,"rank":0};
             const statHp  = Number($("#statHp").val());
             const statAtk = Number($("#statAtk").val());
@@ -148,7 +147,7 @@
                                             result.upAtk   = (baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05);
                                             result.upDef   = (baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05);
                                             result.upAgi   = baseUpAgi;
-                                            print1(base);
+                                            print1(base, result);
                                             stop = true;
                                             break;
                                         }
@@ -199,7 +198,7 @@
         }
 
 
-        function print1(base) {
+        function print1(base, result) {
             // 첫 번째 테이블에 데이터 출력
             $('#base tbody').append(''
                 + '<tr class="result1">'
