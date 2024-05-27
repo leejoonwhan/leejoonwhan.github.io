@@ -289,7 +289,8 @@
                             const agi = myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii);
                             
                             if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
-
+                            //if (baseRank + 10 > ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) && baseRank - 10 < ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2)) {
+                            //if (i == 0 && ii == 0 && iii == 0 && iiii == 0) {
                                 // 두 번째 테이블에 데이터 출력
                                 $('#rank tbody').append(''
                                     + '<tr class="result2">'
@@ -370,6 +371,7 @@
             <p>STEP3. 게임 채팅으로 /페트 1~5 엔터</p>
             <p>STEP4. 내 펫의 초기치 및 현재 성장률 입력 후 계산 클릭</p>
             <p>[ 8 ] 이 나오면 S급!!</p>
+            <p>저 레벨은 정확도가 낮습니다. 적어도 렙 100이상만 시도해주세요.</p>
 		</blockquote>
 
 		<br>
@@ -530,7 +532,10 @@
             </table>
         </div>
     </div>
-    
+    <br>
+    <br>
+    <br>
+    <br>
     <button id="btnTop" title="Go to top">Top</button>
 </div>
 </body>
