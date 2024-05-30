@@ -92,9 +92,9 @@
                                     }
 
                                     // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
-                                    if (parseInt((hp * 4) + atk + def + agi, 10) == statHp &&
-                                        parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) == statAtk &&
-                                        parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) == statDef) {
+                                    if (parseInt(+((hp * 4) + atk + def + agi).toFixed(12), 10) == statHp &&
+                                        parseInt(+((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)).toFixed(12), 10) == statAtk &&
+                                        parseInt(+((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)).toFixed(12), 10) == statDef) {
                                         
                                         const sumStat = base.hp + base.atk + base.def + base.agi;
                                         if (sumStat >= 110) {
