@@ -576,12 +576,12 @@
             stat.def = limitDecimalPlaces((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 2);
             stat.agi = limitDecimalPlaces(agi, 2);
             
-            stat.poison = (foundPet.beginning * (foundPet.hp  + base.hp  + bonus.hp))
-                        + (foundPet.beginning * (foundPet.atk + base.atk  + bonus.atk))
-                        + (foundPet.beginning * (foundPet.def + base.def  + bonus.def))
-                        + (foundPet.beginning * (foundPet.agi + base.agi  + bonus.agi));
+            stat.poison = parseInt((foundPet.beginning * (foundPet.hp  + base.hp  + bonus.hp)),  10)
+                        + parseInt((foundPet.beginning * (foundPet.atk + base.atk + bonus.atk)), 10)
+                        + parseInt((foundPet.beginning * (foundPet.def + base.def + bonus.def)), 10)
+                        + parseInt((foundPet.beginning * (foundPet.agi + base.agi + bonus.agi)), 10);
             stat.poison = ( stat.poison / 100 - 20 ) / 4;
-            if( stat.poison < 1 ) stat.poison = 1;
+            if ( stat.poison < 1 ) stat.poison = 1;
 
             if (btnName == "calculate") {
                 if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
@@ -597,7 +597,6 @@
                     stat.bonusAtk = bonus.atk;
                     stat.bonusDef = bonus.def;
                     stat.bonusAgi = bonus.agi;
-                    
                     result.push(stat);
                 }
             }
