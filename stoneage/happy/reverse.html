@@ -122,10 +122,10 @@
                                             base.rank = 575;
                                         }
                                         
-                                        const baseUpHp  = (base.hp  + 2 + 2.5) * base.rank / 10000;
-                                        const baseUpAtk = (base.atk + 2 + 2.5) * base.rank / 10000;
-                                        const baseUpDef = (base.def + 2 + 2.5) * base.rank / 10000;
-                                        const baseUpAgi = (base.agi + 2 + 2.5) * base.rank / 10000;
+                                        const baseUpHp  = +((base.hp  + 2 + 2.5) * base.rank / 10000).toFixed(12);
+                                        const baseUpAtk = +((base.atk + 2 + 2.5) * base.rank / 10000).toFixed(12);
+                                        const baseUpDef = +((base.def + 2 + 2.5) * base.rank / 10000).toFixed(12);
+                                        const baseUpAgi = +((base.agi + 2 + 2.5) * base.rank / 10000).toFixed(12);
 
                                         if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
                                             //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
@@ -134,19 +134,22 @@
                                         //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
                                         //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
                                         // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
-                                        if (((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) == upHp &&
-                                            ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) == upAtk &&
-                                            ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) == upDef &&
-                                            baseUpAgi.toFixed(2) == upAgi) {
+                                        const tempHp  = +((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(12);
+                                        const tempAtk = +((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(12);
+                                        const tempDef = +((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(12);
 
-                                            result.statHp  = (hp * 4) + atk + def + agi;
-                                            result.statAtk = (hp * 0.1) + atk + (def * 0.1) + (agi * 0.05);
-                                            result.statDef = (hp * 0.1) + (atk * 0.1) + def + (agi * 0.05);
+                                        if ((tempHp).toFixed(2) == upHp &&
+                                            (tempAtk).toFixed(2) == upAtk &&
+                                            (tempDef).toFixed(2) == upDef &&
+                                            baseUpAgi.toFixed(2) == upAgi) {
+                                            result.statHp  = +((hp * 4) + atk + def + agi).toFixed(12);
+                                            result.statAtk = +((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)).toFixed(12);
+                                            result.statDef = +((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)).toFixed(12);
                                             result.statAgi = agi;
-                                            result.upHp    = (baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi;
-                                            result.upAtk   = (baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05);
-                                            result.upDef   = (baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05);
-                                            result.upAgi   = baseUpAgi;
+                                            result.upHp    = +((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(12);
+                                            result.upAtk   = +((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(12);
+                                            result.upDef   = +((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(12);
+                                            result.upAgi   = +(baseUpAgi).toFixed(12);
                                             print1(base, result);
                                             stop = true;
                                             break;
@@ -254,10 +257,10 @@
             const myAgi = Number($("#myAgi").val());
 
             // 내 펫 성장률 계산
-            const myUpHp  = (myHp  - myBaseHp)  / (myLv - 1);
-            const myUpAtk = (myAtk - myBaseAtk) / (myLv - 1);
-            const myUpDef = (myDef - myBaseDef) / (myLv - 1);
-            const myUpAgi = (myAgi - myBaseAgi) / (myLv - 1);
+            const myUpHp  = +((myHp  - myBaseHp)  / (myLv - 1)).toFixed(12);
+            const myUpAtk = +((myAtk - myBaseAtk) / (myLv - 1)).toFixed(12);
+            const myUpDef = +((myDef - myBaseDef) / (myLv - 1)).toFixed(12);
+            const myUpAgi = +((myAgi - myBaseAgi) / (myLv - 1)).toFixed(12);
 
             const resultRank = [];
 
@@ -267,25 +270,25 @@
                     for (var iii = 0; iii < 5; iii++) {
                         for (var iiii = 0; iiii < 5; iiii++) {
                             
-                            const upHp  = (baseHp  + 2 - i    + 2.5) * baseRank / 10000;
-                            const upAtk = (baseAtk + 2 - ii   + 2.5) * baseRank / 10000;
-                            const upDef = (baseDef + 2 - iii  + 2.5) * baseRank / 10000;
-                            const upAgi = (baseAgi + 2 - iiii + 2.5) * baseRank / 10000;
+                            const upHp  = +((baseHp  + 2 - i    + 2.5) * baseRank / 10000).toFixed(12);
+                            const upAtk = +((baseAtk + 2 - ii   + 2.5) * baseRank / 10000).toFixed(12);
+                            const upDef = +((baseDef + 2 - iii  + 2.5) * baseRank / 10000).toFixed(12);
+                            const upAgi = +((baseAgi + 2 - iiii + 2.5) * baseRank / 10000).toFixed(12);
 
-                            const rankHp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / (baseHp + 2 - i + 2.5);
-                            const rankAtk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / (baseAtk + 2 - ii + 2.5);
-                            const rankDef = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / (baseDef + 2 - iii + 2.5);
-                            const rankAgi = myUpAgi * 10000 / (baseAgi + 2 - iiii + 2.5);
-                            const rankAvg = (rankHp + rankAtk + rankDef + rankAgi) / 4;
+                            const rankHp  = +((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / (baseHp + 2 - i + 2.5)).toFixed(12);
+                            const rankAtk = +((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / (baseAtk + 2 - ii + 2.5)).toFixed(12);
+                            const rankDef = +((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / (baseDef + 2 - iii + 2.5)).toFixed(12);
+                            const rankAgi = +(myUpAgi * 10000 / (baseAgi + 2 - iiii + 2.5)).toFixed(12);
+                            const rankAvg = +((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(12);
 
                             //$("#memo").append((2 - i) + ' ' + (2 - ii) + ' ' + (2 - iii) + ' ' + (2 - iiii) + '<br>');
                             //$("#memo").append((upHp) + ' ' + (upAtk) + ' ' + (upDef) + ' ' + (upAgi) + '<br>');
                             //$("#memo").append(rankAvg + ' ' + rankHp + ' ' + rankAtk + ' ' + rankDef + ' ' + rankAgi + '<br>');
                             //$("#memo").append(upHp + ' ' + upAtk + ' ' + upDef + ' ' + upAgi + '<br>');
-                            const hp  = (myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / rankAvg - (baseHp + 2 - i);
-                            const atk = (myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseAtk + 2 - ii);
-                            const def = (myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseDef + 2 - iii);
-                            const agi = myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii);
+                            const hp  = +((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / rankAvg - (baseHp + 2 - i)).toFixed(12);
+                            const atk = +((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseAtk + 2 - ii)).toFixed(12);
+                            const def = +((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseDef + 2 - iii)).toFixed(12);
+                            const agi = +(myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii)).toFixed(12);
                             
                             if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
                             //if (baseRank + 10 > ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) && baseRank - 10 < ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2)) {
@@ -372,14 +375,9 @@
             <p>[ 8 ] 이 나오면 S급!!</p>
             <p>저 레벨은 정확도가 낮습니다. 적어도 렙 100이상만 시도해주세요.</p>
 		</blockquote>
-
 		<br>
 		<br>
-		<br>
-		<br>
-
         <div id="memo"></div>
-
 		<div class="table-responsive" id="base">
 			<table class="table table-striped">
 				<colgroup>
@@ -531,11 +529,11 @@
             </table>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
     <button id="btnTop" title="Go to top">Top</button>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 </body>
 </html>
