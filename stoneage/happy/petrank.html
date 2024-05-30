@@ -377,7 +377,7 @@
             
             {"name":"메피노","beginning":25,"hp":30,"atk":41,"def":19,"agi":26},
             
-			{"name":"흑주작","beginning":24,"hp":25,"atk":36,"def":13,"agi":25},
+			{"name":"흑주작","beginning":24,"hp":25,"atk":36,"def":13,"agi":25}, // 맹독:2
 
 			{"name":"흑풍","beginning":25,"hp":29,"atk":38,"def":14,"agi":34},
 
@@ -580,7 +580,7 @@
                         + parseInt((foundPet.beginning * (foundPet.atk + base.atk + bonus.atk)), 10)
                         + parseInt((foundPet.beginning * (foundPet.def + base.def + bonus.def)), 10)
                         + parseInt((foundPet.beginning * (foundPet.agi + base.agi + bonus.agi)), 10);
-            stat.poison = ( stat.poison / 100 - 20 ) / 4;
+            stat.poison = +(( stat.poison / 100 - 20 ) / 4).toFixed(12);
             if ( stat.poison < 1 ) stat.poison = 1;
 
             if (btnName == "calculate") {
