@@ -69,20 +69,20 @@
             for (var i = 0; i <= 20; i++) {
                 // agi
                 for (var ii = 0; ii <= 60; ii++) {
-                    const agi = base.beginning * (base.agi + 2 + 2.5) / 100;
+                    const agi = +(base.beginning * (base.agi + 2 + 2.5) / 100).toFixed(12);
                     //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                     // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
                         //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                         // hp
                         for (var iii = 0; iii <= 60; iii++) {
-                            const hp = base.beginning * (base.hp + 2 + 2.5) / 100;
+                            const hp = +(base.beginning * (base.hp + 2 + 2.5) / 100).toFixed(12);
                             // atk 
                             for (var iiii = 0; iiii <= 60; iiii++) {
-                                const atk = base.beginning * (base.atk + 2 + 2.5) / 100;
+                                const atk = +(base.beginning * (base.atk + 2 + 2.5) / 100).toFixed(12);
                                 // def
                                 for (var iiiii = 0; iiiii <= 60; iiiii++) {
-                                    const def = base.beginning * (base.def + 2 + 2.5) / 100;
+                                    const def = +(base.beginning * (base.def + 2 + 2.5) / 100).toFixed(12);
                                     
                                     if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
                                         //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
