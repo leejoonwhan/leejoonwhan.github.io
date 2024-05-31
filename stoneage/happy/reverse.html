@@ -69,20 +69,20 @@
             for (var i = 0; i <= 20; i++) {
                 // agi
                 for (var ii = 0; ii <= 60; ii++) {
-                    const agi = +(base.beginning * (base.agi + 2 + 2.5) / 100).toFixed(12);
+                    const agi = preciseRound(base.beginning * (base.agi + 2 + 2.5) / 100);
                     //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                     // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
                         //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                         // hp
                         for (var iii = 0; iii <= 60; iii++) {
-                            const hp = +(base.beginning * (base.hp + 2 + 2.5) / 100).toFixed(12);
+                            const hp = preciseRound(base.beginning * (base.hp + 2 + 2.5) / 100);
                             // atk 
                             for (var iiii = 0; iiii <= 60; iiii++) {
-                                const atk = +(base.beginning * (base.atk + 2 + 2.5) / 100).toFixed(12);
+                                const atk = preciseRound(base.beginning * (base.atk + 2 + 2.5) / 100);
                                 // def
                                 for (var iiiii = 0; iiiii <= 60; iiiii++) {
-                                    const def = +(base.beginning * (base.def + 2 + 2.5) / 100).toFixed(12);
+                                    const def = preciseRound(base.beginning * (base.def + 2 + 2.5) / 100);
                                     
                                     //if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
                                         //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
@@ -92,9 +92,9 @@
                                     //}
 
                                     // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
-                                    if (parseInt(+((hp * 4) + atk + def + agi).toFixed(12), 10) == statHp &&
-                                        parseInt(+((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)).toFixed(12), 10) == statAtk &&
-                                        parseInt(+((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)).toFixed(12), 10) == statDef) {
+                                    if (parseInt(preciseRound((hp * 4) + atk + def + agi), 10) == statHp &&
+                                        parseInt(preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)), 10) == statAtk &&
+                                        parseInt(preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)), 10) == statDef) {
                                         
                                         const sumStat = base.hp + base.atk + base.def + base.agi;
                                         if (sumStat >= 110) {
@@ -122,10 +122,10 @@
                                             base.rank = 575;
                                         }
                                         
-                                        const baseUpHp  = +((base.hp  + 2 + 2.5) * base.rank / 10000).toFixed(12);
-                                        const baseUpAtk = +((base.atk + 2 + 2.5) * base.rank / 10000).toFixed(12);
-                                        const baseUpDef = +((base.def + 2 + 2.5) * base.rank / 10000).toFixed(12);
-                                        const baseUpAgi = +((base.agi + 2 + 2.5) * base.rank / 10000).toFixed(12);
+                                        const baseUpHp  = preciseRound((base.hp  + 2 + 2.5) * base.rank / 10000);
+                                        const baseUpAtk = preciseRound((base.atk + 2 + 2.5) * base.rank / 10000);
+                                        const baseUpDef = preciseRound((base.def + 2 + 2.5) * base.rank / 10000);
+                                        const baseUpAgi = preciseRound((base.agi + 2 + 2.5) * base.rank / 10000);
 
                                         if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
                                             //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
@@ -134,22 +134,22 @@
                                         //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
                                         //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
                                         // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
-                                        const tempHp  = +((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(12);
-                                        const tempAtk = +((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(12);
-                                        const tempDef = +((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(12);
+                                        const tempHp  = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
+                                        const tempAtk = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
+                                        const tempDef = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
 
                                         if ((tempHp).toFixed(2) == upHp &&
                                             (tempAtk).toFixed(2) == upAtk &&
                                             (tempDef).toFixed(2) == upDef &&
                                             baseUpAgi.toFixed(2) == upAgi) {
-                                            result.statHp  = +((hp * 4) + atk + def + agi).toFixed(12);
-                                            result.statAtk = +((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)).toFixed(12);
-                                            result.statDef = +((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)).toFixed(12);
+                                            result.statHp  = preciseRound((hp * 4) + atk + def + agi);
+                                            result.statAtk = preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
+                                            result.statDef = preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
                                             result.statAgi = agi;
-                                            result.upHp    = +((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(12);
-                                            result.upAtk   = +((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(12);
-                                            result.upDef   = +((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(12);
-                                            result.upAgi   = +(baseUpAgi).toFixed(12);
+                                            result.upHp    = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
+                                            result.upAtk   = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
+                                            result.upDef   = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
+                                            result.upAgi   = preciseRound(baseUpAgi);
                                             print1(base, result);
                                             stop = true;
                                             break;
@@ -258,10 +258,10 @@
             const myAgi = Number($("#myAgi").val());
 
             // 내 펫 성장률 계산
-            const myUpHp  = +((myHp  - myBaseHp)  / (myLv - 1)).toFixed(12);
-            const myUpAtk = +((myAtk - myBaseAtk) / (myLv - 1)).toFixed(12);
-            const myUpDef = +((myDef - myBaseDef) / (myLv - 1)).toFixed(12);
-            const myUpAgi = +((myAgi - myBaseAgi) / (myLv - 1)).toFixed(12);
+            const myUpHp  = preciseRound((myHp  - myBaseHp)  / (myLv - 1));
+            const myUpAtk = preciseRound((myAtk - myBaseAtk) / (myLv - 1));
+            const myUpDef = preciseRound((myDef - myBaseDef) / (myLv - 1));
+            const myUpAgi = preciseRound((myAgi - myBaseAgi) / (myLv - 1));
 
             const resultRank = [];
 
@@ -271,25 +271,25 @@
                     for (var iii = 0; iii < 5; iii++) {
                         for (var iiii = 0; iiii < 5; iiii++) {
                             
-                            const upHp  = +((baseHp  + 2 - i    + 2.5) * baseRank / 10000).toFixed(12);
-                            const upAtk = +((baseAtk + 2 - ii   + 2.5) * baseRank / 10000).toFixed(12);
-                            const upDef = +((baseDef + 2 - iii  + 2.5) * baseRank / 10000).toFixed(12);
-                            const upAgi = +((baseAgi + 2 - iiii + 2.5) * baseRank / 10000).toFixed(12);
+                            const upHp  = preciseRound((baseHp  + 2 - i    + 2.5) * baseRank / 10000);
+                            const upAtk = preciseRound((baseAtk + 2 - ii   + 2.5) * baseRank / 10000);
+                            const upDef = preciseRound((baseDef + 2 - iii  + 2.5) * baseRank / 10000);
+                            const upAgi = preciseRound((baseAgi + 2 - iiii + 2.5) * baseRank / 10000);
 
-                            const rankHp  = +((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / (baseHp + 2 - i + 2.5)).toFixed(12);
-                            const rankAtk = +((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / (baseAtk + 2 - ii + 2.5)).toFixed(12);
-                            const rankDef = +((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / (baseDef + 2 - iii + 2.5)).toFixed(12);
-                            const rankAgi = +(myUpAgi * 10000 / (baseAgi + 2 - iiii + 2.5)).toFixed(12);
-                            const rankAvg = +((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(12);
+                            const rankHp  = preciseRound((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / (baseHp + 2 - i + 2.5));
+                            const rankAtk = preciseRound((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / (baseAtk + 2 - ii + 2.5));
+                            const rankDef = preciseRound((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / (baseDef + 2 - iii + 2.5));
+                            const rankAgi = preciseRound(myUpAgi * 10000 / (baseAgi + 2 - iiii + 2.5));
+                            const rankAvg = preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4);
 
                             //$("#memo").append((2 - i) + ' ' + (2 - ii) + ' ' + (2 - iii) + ' ' + (2 - iiii) + '<br>');
                             //$("#memo").append((upHp) + ' ' + (upAtk) + ' ' + (upDef) + ' ' + (upAgi) + '<br>');
                             //$("#memo").append(rankAvg + ' ' + rankHp + ' ' + rankAtk + ' ' + rankDef + ' ' + rankAgi + '<br>');
                             //$("#memo").append(upHp + ' ' + upAtk + ' ' + upDef + ' ' + upAgi + '<br>');
-                            const hp  = +((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / rankAvg - (baseHp + 2 - i)).toFixed(12);
-                            const atk = +((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseAtk + 2 - ii)).toFixed(12);
-                            const def = +((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseDef + 2 - iii)).toFixed(12);
-                            const agi = +(myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii)).toFixed(12);
+                            const hp  = preciseRound((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / rankAvg - (baseHp + 2 - i));
+                            const atk = preciseRound((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseAtk + 2 - ii));
+                            const def = preciseRound((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseDef + 2 - iii));
+                            const agi = preciseRound(myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii));
                             
                             if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
                             //if (baseRank + 10 > ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) && baseRank - 10 < ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2)) {
@@ -327,6 +327,10 @@
                 }
                 if (stop) break;
             }
+        }
+
+        function preciseRound(num) {
+            return Math.round(num * 1e12) / 1e12;
         }
 
         // jQuery
