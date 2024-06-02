@@ -292,7 +292,7 @@
                             const agi = preciseRound(myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii));
                             
                             if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
-                            //if (baseRank + 10 > ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) && baseRank - 10 < ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2)) {
+                            //if (baseRank + 10 > preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4) && baseRank - 6 < preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4)) {
                             //if (i == 0 && ii == 0 && iii == 0 && iiii == 0) {
                                 // 두 번째 테이블에 데이터 출력
                                 $('#rank tbody').append(''
