@@ -649,6 +649,7 @@
 
 
             for (let i = 0; i < result.length; i++) {
+                /*
                 $('#result tbody').append(''
 					+ '<tr>'
                     + '<td>' + (i + 1) + '</td>'
@@ -657,6 +658,18 @@
 					+ '<td>' + result[i].atk.toFixed(2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
 					+ '<td>' + result[i].def.toFixed(2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
 					+ '<td>' + result[i].agi.toFixed(2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
+                    + '<td>' + result[i].poison + '</td>'
+					+ '</tr>'
+				);
+                */
+                $('#result tbody').append(''
+					+ '<tr>'
+                    + '<td>' + (i + 1) + '</td>'
+					+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].hp,  2) + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].atk, 2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].def, 2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].agi, 2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
                     + '<td>' + result[i].poison + '</td>'
 					+ '</tr>'
 				);
