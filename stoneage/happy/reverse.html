@@ -262,6 +262,17 @@
             const myUpAtk = preciseRound((myAtk - myBaseAtk) / (myLv - 1));
             const myUpDef = preciseRound((myDef - myBaseDef) / (myLv - 1));
             const myUpAgi = preciseRound((myAgi - myBaseAgi) / (myLv - 1));
+            $('#rank tbody').append(''
+                + '<tr class="result2">'
+                + '<td>' + "내 펫 성장률" + '</td>'
+                + '<td>' + '</td>'
+                + '<td>' + myUpHp  + '</td>'
+                + '<td>' + myUpAtk + '</td>'
+                + '<td>' + myUpDef + '</td>'
+                + '<td>' + myUpAgi + '</td>'
+                + '<td>' + preciseRound(myUpAtk + myUpDef + myUpAgi) + '</td>'
+                + '</tr>'
+            );
 
             const resultRank = [];
 
