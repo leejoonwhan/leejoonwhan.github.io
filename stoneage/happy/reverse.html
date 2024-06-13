@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Happy Server Reverse Info</title>
+	<title>Happy Server Pet Info</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -38,10 +38,368 @@
 		.red { color: #fff; background-color: #d9534f;}
 		.yellow { color: #fff; background-color: #f0ad4e;}
 	</style>
-	<script>
-        
-        let stop = false;
-        
+    <script>
+        var pet = [
+            {"name":"우리","beginning":10,"hp":20,"atk":12,"def":15,"agi":25},
+            {"name":"두리","beginning":20,"hp":22,"atk":23,"def":11,"agi":23},
+            {"name":"얼룩우리","beginning":15,"hp":22,"atk":17,"def":19,"agi":17},
+            {"name":"불그리","beginning":10,"hp":25,"atk":23,"def":19,"agi":33},
+            {"name":"실버우리","beginning":20,"hp":22,"atk":22,"def":24,"agi":27},
+            {"name":"환생얼룩우리","beginning":25,"hp":30,"atk":24,"def":27,"agi":24},
+            {"name":"복우리","beginning":21,"hp":21,"atk":19,"def":19,"agi":28},
+            {"name":"푸우리","beginning":21,"hp":25,"atk":27,"def":11,"agi":25},
+            {"name":"녹우리","beginning":20,"hp":26,"atk":32,"def":21,"agi":24},
+            
+            {"name":"부비","beginning":15,"hp":42,"atk":20,"def":16,"agi":12},
+            {"name":"골드부비","beginning":25,"hp":31,"atk":20,"def":32,"agi":12},
+			{"name":"부이","beginning":22,"hp":44,"atk":21,"def":16,"agi":13},
+            {"name":"부이비","beginning":16,"hp":32,"atk":26,"def":15,"agi":18},
+            {"name":"얼룩부이비","beginning":23,"hp":30,"atk":28,"def":14,"agi":20},
+            {"name":"푸비","beginning":24,"hp":31,"atk":34,"def":24,"agi":18},
+            {"name":"푸이","beginning":24,"hp":34,"atk":36,"def":21,"agi":18},
+            {"name":"깡우비","beginning":18,"hp":29,"atk":30,"def":15,"agi":20},
+            
+            {"name":"꼬미","beginning":22,"hp":22,"atk":28,"def":15,"agi":27},
+            {"name":"꼬비","beginning":22,"hp":22,"atk":27,"def":17,"agi":27},
+            {"name":"꼬비오","beginning":22,"hp":21,"atk":27,"def":15,"agi":29},
+            {"name":"꼬꼬비","beginning":22,"hp":21,"atk":28,"def":15,"agi":28},
+            {"name":"꼬꼬미","beginning":22,"hp":25,"atk":29,"def":17,"agi":28},
+            {"name":"꼬이미","beginning":22,"hp":21,"atk":26,"def":18,"agi":22},
+            {"name":"돌꼬비","beginning":22,"hp":25,"atk":31,"def":17,"agi":25},
+            {"name":"푸미","beginning":22,"hp":27,"atk":31,"def":16,"agi":25},
+            
+            {"name":"푸푸","beginning":13,"hp":18,"atk":20,"def":8,"agi":33},
+            {"name":"우푸","beginning":15,"hp":18,"atk":22,"def":7,"agi":32},
+            {"name":"투투","beginning":17,"hp":23,"atk":22,"def":8,"agi":26},
+            {"name":"오투투","beginning":20,"hp":20,"atk":19,"def":15,"agi":30},
+            {"name":"포포","beginning":16,"hp":20,"atk":24,"def":8,"agi":36},
+            {"name":"푸투투","beginning":14,"hp":29,"atk":23,"def":14,"agi":31},
+            {"name":"노투투","beginning":15,"hp":22,"atk":24,"def":13,"agi":39},
+            {"name":"푸투","beginning":15,"hp":22,"atk":24,"def":9,"agi":33},
+            
+            {"name":"베론","beginning":23,"hp":42,"atk":18,"def":37,"agi":18},
+            {"name":"베로로크","beginning":19,"hp":39,"atk":19,"def":37,"agi":17},
+            {"name":"베로보크","beginning":23,"hp":38,"atk":18,"def":36,"agi":14},
+            {"name":"베로포리","beginning":22,"hp":34,"atk":25,"def":35,"agi":15},
+            {"name":"베노노크","beginning":22,"hp":36,"atk":27,"def":32,"agi":22},
+            {"name":"베톤","beginning":22,"hp":40,"atk":24,"def":42,"agi":14},
+            {"name":"베노투리","beginning":22,"hp":37,"atk":25,"def":41,"agi":17},
+            {"name":"베로바드","beginning":22,"hp":36,"atk":33,"def":31,"agi":19},
+            {"name":"베노미","beginning":27,"hp":31,"atk":38,"def":11,"agi":33},
+            
+            {"name":"노북이","beginning":14,"hp":22,"atk":18,"def":34,"agi":6},
+            {"name":"북이","beginning":14,"hp":22,"atk":19,"def":35,"agi":5},
+            {"name":"깡북이","beginning":12,"hp":21,"atk":24,"def":33,"agi":5},
+            {"name":"돌북이","beginning":20,"hp":23,"atk":19,"def":41,"agi":4},
+            {"name":"물북이","beginning":14,"hp":24,"atk":20,"def":35,"agi":9},
+            {"name":"킹북이","beginning":21,"hp":23,"atk":19,"def":42,"agi":4},
+            {"name":"철북이","beginning":19,"hp":22,"atk":30,"def":34,"agi":6},
+            {"name":"자라북","beginning":20,"hp":28,"atk":26,"def":42,"agi":3},
+            
+            {"name":"아고아","beginning":20,"hp":25,"atk":39,"def":24,"agi":19},
+            {"name":"네고스","beginning":20,"hp":26,"atk":37,"def":26,"agi":18},
+            {"name":"타로곤","beginning":20,"hp":25,"atk":37,"def":26,"agi":18},
+            {"name":"다고스","beginning":20,"hp":27,"atk":38,"def":23,"agi":18},
+            {"name":"보크곤","beginning":20,"hp":23,"atk":38,"def":22,"agi":24},
+            {"name":"골드곤","beginning":20,"hp":25,"atk":33,"def":21,"agi":19},
+            {"name":"기고아","beginning":20,"hp":23,"atk":34,"def":24,"agi":16},
+            {"name":"타로아","beginning":20,"hp":25,"atk":36,"def":21,"agi":17},
+            {"name":"뉴로아","beginning":29,"hp":35,"atk":37,"def":27,"agi":20},
+            
+            {"name":"라고고","beginning":23,"hp":22,"atk":28,"def":17,"agi":26},
+            {"name":"후바바","beginning":24,"hp":22,"atk":25,"def":18,"agi":28},
+            {"name":"토루루","beginning":21,"hp":23,"atk":25,"def":23,"agi":27},
+            {"name":"루니","beginning":22,"hp":24,"atk":23,"def":25,"agi":22},
+            {"name":"푸고고","beginning":24,"hp":26,"atk":28,"def":14,"agi":26},
+            {"name":"라루루","beginning":21,"hp":24,"atk":29,"def":15,"agi":29},
+            {"name":"기바바","beginning":23,"hp":26,"atk":29,"def":24,"agi":20},
+            {"name":"주니","beginning":19,"hp":27,"atk":33,"def":19,"agi":35},
+            {"name":"쿠로로","beginning":23,"hp":30,"atk":27,"def":17,"agi":29},
+            {"name":"푸루바","beginning":27,"hp":31,"atk":38,"def":11,"agi":33},
+                                    
+            {"name":"카타르카스","beginning":22,"hp":25,"atk":24,"def":40,"agi":5},
+            {"name":"쿠타스","beginning":22,"hp":27,"atk":21,"def":39,"agi":6},
+            {"name":"코로카스","beginning":17,"hp":29,"atk":26,"def":37,"agi":5},
+            {"name":"로기안","beginning":23,"hp":25,"atk":22,"def":39,"agi":7},
+            {"name":"램가스","beginning":20,"hp":32,"atk":25,"def":52,"agi":5},
+            {"name":"아이카스","beginning":22,"hp":31,"atk":23,"def":40,"agi":5},
+            {"name":"쿠타스","beginning":22,"hp":31,"atk":25,"def":33,"agi":5},
+            {"name":"카르기안","beginning":20,"hp":25,"atk":22,"def":36,"agi":10},
+            
+            {"name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17},
+			{"name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20},
+			{"name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21},
+			{"name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20},
+			{"name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24},
+            {"name":"기라노","beginning":26,"hp":32,"atk":42,"def":19,"agi":23},
+            {"name":"기비노","beginning":24,"hp":25,"atk":39,"def":13,"agi":21},
+            {"name":"프로돈","beginning":25,"hp":36,"atk":39,"def":17,"agi":25},
+            
+            {"name":"쿠링","beginning":19,"hp":23,"atk":20,"def":22,"agi":24},
+            {"name":"쿠쿠르","beginning":20,"hp":24,"atk":20,"def":19,"agi":26},
+            {"name":"포링","beginning":18,"hp":22,"atk":20,"def":18,"agi":24},
+            {"name":"리스키","beginning":17,"hp":26,"atk":18,"def":21,"agi":24},
+            {"name":"노스키","beginning":18,"hp":22,"atk":22,"def":21,"agi":29},
+            {"name":"라스키","beginning":17,"hp":26,"atk":30,"def":18,"agi":29},
+            {"name":"토끼","beginning":17,"hp":32,"atk":30,"def":23,"agi":33},
+            {"name":"범링","beginning":22,"hp":26,"atk":28,"def":20,"agi":30},
+                        
+            {"name":"카비트","beginning":18,"hp":14,"atk":19,"def":19,"agi":27},
+			{"name":"케이비","beginning":20,"hp":14,"atk":19,"def":19,"agi":27},
+			{"name":"큐이","beginning":15,"hp":13,"atk":20,"def":17,"agi":25},
+			{"name":"골드카비트","beginning":19,"hp":16,"atk":20,"def":16,"agi":28},
+            {"name":"블루카비트","beginning":21,"hp":25,"atk":24,"def":12,"agi":26},
+            {"name":"연두큐이","beginning":21,"hp":23,"atk":25,"def":14,"agi":24},
+            {"name":"키라비","beginning":22,"hp":21,"atk":25,"def":11,"agi":26},
+            {"name":"카이비","beginning":21,"hp":22,"atk":25,"def":15,"agi":25},
+                        
+            {"name":"고르돈","beginning":24,"hp":27,"atk":31,"def":24,"agi":18},
+            {"name":"기라돈","beginning":24,"hp":28,"atk":31,"def":22,"agi":19},
+            {"name":"투르돈","beginning":24,"hp":26,"atk":28,"def":16,"agi":16},
+            {"name":"고르고","beginning":24,"hp":22,"atk":29,"def":16,"agi":16},
+            {"name":"철기돈","beginning":24,"hp":26,"atk":33,"def":23,"agi":21},
+            {"name":"실버고르돈","beginning":27,"hp":28,"atk":30,"def":19,"agi":17},
+            {"name":"고라돈","beginning":27,"hp":25,"atk":29,"def":25,"agi":15},
+            {"name":"노라돈","beginning":24,"hp":28,"atk":33,"def":19,"agi":22},
+            {"name":"그린고르","beginning":25,"hp":28,"atk":28,"def":30,"agi":4},
+            {"name":"킹고르","beginning":25,"hp":35,"atk":38,"def":25,"agi":19},
+            {"name":"그램고르","beginning":22,"hp":31,"atk":34,"def":32,"agi":19},
+            {"name":"지고르","beginning":22,"hp":31,"atk":39,"def":24,"agi":21},
+
+			{"name":"휴보","beginning":18,"hp":26,"atk":28,"def":25,"agi":16},
+            {"name":"포보","beginning":19,"hp":28,"atk":23,"def":26,"agi":14},
+			{"name":"쿠보","beginning":25,"hp":26,"atk":26,"def":26,"agi":17},
+            {"name":"토로쟈","beginning":21,"hp":25,"atk":26,"def":25,"agi":16},
+            {"name":"부르보","beginning":20,"hp":23,"atk":25,"def":24,"agi":20},
+            {"name":"푸보","beginning":18,"hp":30,"atk":30,"def":22,"agi":16},
+            {"name":"타루쟈","beginning":18,"hp":26,"atk":35,"def":21,"agi":16},
+            {"name":"노보","beginning":22,"hp":26,"atk":26,"def":29,"agi":24},
+            
+            {"name":"카쿠","beginning":18,"hp":28,"atk":29,"def":25,"agi":32},
+            {"name":"바카","beginning":20,"hp":19,"atk":27,"def":20,"agi":28},
+            {"name":"바우","beginning":17,"hp":18,"atk":23,"def":20,"agi":28},
+            {"name":"카우","beginning":17,"hp":16,"atk":23,"def":23,"agi":26},
+            {"name":"바카우","beginning":18,"hp":21,"atk":30,"def":17,"agi":29},
+            {"name":"바쿠우","beginning":18,"hp":30,"atk":34,"def":20,"agi":30},
+            {"name":"푸쿠","beginning":18,"hp":21,"atk":31,"def":17,"agi":28},
+            {"name":"바쿠","beginning":18,"hp":24,"atk":33,"def":21,"agi":29},
+                                    
+			{"name":"베르가","beginning":24,"hp":24,"atk":29,"def":14,"agi":26},
+			{"name":"베루루","beginning":23,"hp":21,"atk":30,"def":13,"agi":28},
+			{"name":"고르고르","beginning":21,"hp":20,"atk":30,"def":13,"agi":27},
+			{"name":"노르노르","beginning":25,"hp":22,"atk":30,"def":17,"agi":29},
+            {"name":"도르도르","beginning":23,"hp":25,"atk":31,"def":14,"agi":28},
+			{"name":"성호","beginning":24,"hp":29,"atk":32,"def":13,"agi":29},
+            {"name":"고루루","beginning":25,"hp":25,"atk":32,"def":13,"agi":28},
+            {"name":"페루루","beginning":26,"hp":23,"atk":32,"def":13,"agi":29},
+            {"name":"샤베르","beginning":24,"hp":25,"atk":31,"def":14,"agi":28},
+            {"name":"타키온","beginning":24,"hp":27,"atk":29,"def":12,"agi":26},
+                                                			
+            {"name":"토리노프스","beginning":12,"hp":26,"atk":21,"def":26,"agi":12},
+            {"name":"펜타스","beginning":16,"hp":28,"atk":17,"def":28,"agi":11},
+            {"name":"토리케라","beginning":18,"hp":27,"atk":18,"def":28,"agi":10},
+            {"name":"토르프스","beginning":14,"hp":26,"atk":19,"def":29,"agi":9},
+            {"name":"타노프스","beginning":16,"hp":38,"atk":24,"def":33,"agi":11},
+			{"name":"노타스","beginning":14,"hp":34,"atk":26,"def":37,"agi":20},            
+            {"name":"코발스","beginning":15,"hp":40,"atk":25,"def":31,"agi":10},
+            {"name":"타르프스","beginning":14,"hp":35,"atk":26,"def":42,"agi":11},
+            
+            {"name":"고반케스","beginning":20,"hp":27,"atk":33,"def":15,"agi":16},
+            {"name":"쟈그라","beginning":20,"hp":26,"atk":34,"def":14,"agi":17},
+            {"name":"쟈그","beginning":20,"hp":30,"atk":33,"def":13,"agi":17},
+            {"name":"판지","beginning":20,"hp":29,"atk":33,"def":14,"agi":17},
+            {"name":"석화케스","beginning":24,"hp":27,"atk":33,"def":15,"agi":17},
+            {"name":"판그라","beginning":24,"hp":27,"atk":35,"def":15,"agi":19},
+            {"name":"판그","beginning":23,"hp":28,"atk":34,"def":17,"agi":18},
+            {"name":"쟈하드","beginning":24,"hp":24,"atk":34,"def":14,"agi":22},
+                                    
+            {"name":"기가로스","beginning":28,"hp":30,"atk":34,"def":32,"agi":20},
+            {"name":"메가로스","beginning":24,"hp":33,"atk":36,"def":33,"agi":13},
+            {"name":"비트로스","beginning":25,"hp":30,"atk":37,"def":27,"agi":21},
+            {"name":"가가로스","beginning":26,"hp":32,"atk":40,"def":27,"agi":15},
+            {"name":"라가로스","beginning":24,"hp":38,"atk":30,"def":35,"agi":5},
+            {"name":"기트로스","beginning":24,"hp":35,"atk":34,"def":31,"agi":5},
+            {"name":"노트로스","beginning":26,"hp":36,"atk":33,"def":32,"agi":5},
+            {"name":"돌가로스","beginning":26,"hp":32,"atk":30,"def":33,"agi":8},
+            
+            {"name":"루이","beginning":22,"hp":40,"atk":32,"def":33,"agi":10},
+			{"name":"무이","beginning":20,"hp":44,"atk":30,"def":33,"agi":10},
+            {"name":"씨보스","beginning":21,"hp":41,"atk":30,"def":35,"agi":10},
+			{"name":"투이","beginning":24,"hp":39,"atk":34,"def":33,"agi":9},
+            {"name":"누이","beginning":20,"hp":36,"atk":32,"def":38,"agi":10},
+            {"name":"가이","beginning":20,"hp":46,"atk":33,"def":32,"agi":8},
+            {"name":"루보스","beginning":20,"hp":39,"atk":32,"def":37,"agi":8},
+            {"name":"노보스","beginning":20,"hp":36,"atk":34,"def":33,"agi":13},
+                                    
+            {"name":"다이노","beginning":25,"hp":37,"atk":31,"def":34,"agi":6},
+            {"name":"다이노스","beginning":26,"hp":46,"atk":30,"def":35,"agi":7},
+            {"name":"프라키토스","beginning":24,"hp":35,"atk":35,"def":28,"agi":6},
+            {"name":"스텐토스","beginning":28,"hp":45,"atk":32,"def":34,"agi":5},
+            {"name":"프리토스","beginning":28,"hp":41,"atk":34,"def":33,"agi":11},
+            {"name":"푸비토스","beginning":28,"hp":41,"atk":33,"def":38,"agi":8},
+            {"name":"브라키오스","beginning":28,"hp":40,"atk":32,"def":39,"agi":8},
+            {"name":"노라키토스","beginning":28,"hp":41,"atk":34,"def":36,"agi":10},
+                                    
+			{"name":"만모","beginning":25,"hp":47,"atk":26,"def":39,"agi":6},
+			{"name":"만모르","beginning":24,"hp":45,"atk":32,"def":35,"agi":6},
+            {"name":"만모나스","beginning":25,"hp":49,"atk":26,"def":37,"agi":6},
+            {"name":"만모로스","beginning":25,"hp":50,"atk":28,"def":34,"agi":6},
+            {"name":"메모스","beginning":25,"hp":48,"atk":27,"def":39,"agi":5},
+            {"name":"푸모나스","beginning":25,"hp":53,"atk":26,"def":36,"agi":5},
+			{"name":"만모드","beginning":25,"hp":45,"atk":28,"def":41,"agi":4},
+            {"name":"실버로스","beginning":25,"hp":51,"atk":26,"def":37,"agi":6},
+                        			
+			{"name":"테라곤","beginning":26,"hp":24,"atk":31,"def":15,"agi":32},
+			{"name":"카르곤","beginning":26,"hp":23,"atk":31,"def":13,"agi":30},
+			{"name":"포이비스","beginning":24,"hp":27,"atk":34,"def":21,"agi":32},
+			{"name":"도라비스","beginning":26,"hp":24,"atk":31,"def":14,"agi":33},
+            {"name":"푸테라","beginning":26,"hp":27,"atk":32,"def":15,"agi":30},
+            {"name":"실버라곤","beginning":26,"hp":30,"atk":34,"def":21,"agi":31},
+            {"name":"테라돈","beginning":25,"hp":35,"atk":33,"def":16,"agi":32},
+            {"name":"보르비스","beginning":25,"hp":31,"atk":38,"def":17,"agi":29},
+                        			
+			{"name":"타키","beginning":20,"hp":19,"atk":22,"def":10,"agi":35},
+			{"name":"쿠쿠","beginning":20,"hp":18,"atk":22,"def":10,"agi":36},
+			{"name":"호르쿠","beginning":20,"hp":20,"atk":21,"def":12,"agi":34},
+			{"name":"카키","beginning":20,"hp":17,"atk":23,"def":11,"agi":33},
+            {"name":"타르쿠","beginning":20,"hp":20,"atk":22,"def":13,"agi":33},
+            {"name":"푸타카","beginning":20,"hp":22,"atk":21,"def":12,"agi":34},
+            {"name":"흑카키","beginning":18,"hp":23,"atk":24,"def":15,"agi":40},
+            {"name":"쥬키","beginning":19,"hp":19,"atk":25,"def":10,"agi":32},
+                                    			
+			{"name":"오가로스","beginning":24,"hp":30,"atk":37,"def":28,"agi":20},
+			{"name":"오르곤","beginning":26,"hp":33,"atk":38,"def":22,"agi":24},
+			{"name":"모가로스","beginning":25,"hp":27,"atk":40,"def":19,"agi":28},
+			{"name":"골로스","beginning":26,"hp":28,"atk":40,"def":21,"agi":25},
+            {"name":"칼로스","beginning":25,"hp":26,"atk":35,"def":17,"agi":26},
+            {"name":"지가로스","beginning":25,"hp":27,"atk":34,"def":22,"agi":21},
+            {"name":"푸룡","beginning":25,"hp":31,"atk":39,"def":18,"agi":28},
+            {"name":"흑귀","beginning":26,"hp":30,"atk":42,"def":18,"agi":25},
+            {"name":"카르노스","beginning":25,"hp":28,"atk":39,"def":20,"agi":28},
+            {"name":"노르곤","beginning":26,"hp":27,"atk":38,"def":17,"agi":27},
+            {"name":"로제로스","beginning":24,"hp":27,"atk":40,"def":16,"agi":30},
+                        
+            {"name":"프이토","beginning":26,"hp":19,"atk":22,"def":25,"agi":29},
+			{"name":"모나시프","beginning":25,"hp":23,"atk":23,"def":24,"agi":28},
+            {"name":"라나프","beginning":28,"hp":18,"atk":26,"def":24,"agi":29},
+            {"name":"라이혼","beginning":26,"hp":26,"atk":34,"def":25,"agi":32},
+            {"name":"타이혼","beginning":26,"hp":24,"atk":36,"def":22,"agi":33},
+            {"name":"차이혼","beginning":28,"hp":28,"atk":38,"def":25,"agi":34},
+            {"name":"파라프","beginning":28,"hp":27,"atk":27,"def":24,"agi":36},
+            {"name":"모이토","beginning":27,"hp":22,"atk":26,"def":29,"agi":32},
+            
+            {"name":"스토라지","beginning":21,"hp":35,"atk":26,"def":23,"agi":20},
+            {"name":"아토라지","beginning":20,"hp":39,"atk":29,"def":24,"agi":23},
+            {"name":"아리노스","beginning":26,"hp":34,"atk":26,"def":25,"agi":19},
+            {"name":"다이노로스","beginning":24,"hp":36,"atk":32,"def":23,"agi":25},
+            {"name":"타르노로스","beginning":23,"hp":40,"atk":31,"def":24,"agi":24},
+            {"name":"노리노스","beginning":23,"hp":34,"atk":26,"def":32,"agi":27},
+            {"name":"푸토라지","beginning":23,"hp":38,"atk":26,"def":31,"agi":20},
+            {"name":"코리노로스","beginning":26,"hp":30,"atk":32,"def":28,"agi":28},
+            
+            {"name":"바로로크스","beginning":22,"hp":24,"atk":19,"def":24,"agi":18},
+            {"name":"란베르스","beginning":21,"hp":26,"atk":21,"def":21,"agi":22},
+            {"name":"코리토르스","beginning":19,"hp":24,"atk":20,"def":22,"agi":20},
+            {"name":"노스토로스","beginning":23,"hp":22,"atk":25,"def":20,"agi":24},
+            {"name":"노로로크스","beginning":23,"hp":26,"atk":29,"def":22,"agi":27},
+            {"name":"실버로크스","beginning":25,"hp":29,"atk":30,"def":23,"agi":25},
+            {"name":"디로로크스","beginning":24,"hp":25,"atk":28,"def":21,"agi":28},
+            {"name":"진주토로스","beginning":24,"hp":30,"atk":27,"def":22,"agi":20},
+			
+            {"name":"황호","beginning":25,"hp":27,"atk":37,"def":18,"agi":31},
+			{"name":"청호","beginning":25,"hp":29,"atk":39,"def":20,"agi":27},
+			{"name":"흑호","beginning":25,"hp":28,"atk":35,"def":16,"agi":35},
+			{"name":"이블티거","beginning":25,"hp":24,"atk":35,"def":14,"agi":25},
+
+            {"name":"포루나","beginning":23,"hp":27,"atk":31,"def":13,"agi":30},
+            {"name":"피피아","beginning":23,"hp":24,"atk":29,"def":14,"agi":29},
+            {"name":"사루나","beginning":23,"hp":21,"atk":26,"def":10,"agi":35},
+			
+            {"name":"포레스트크랩","beginning":24,"hp":43,"atk":32,"def":36,"agi":5},
+            {"name":"크랩","beginning":21,"hp":33,"atk":36,"def":26,"agi":21}, // 맹독:2
+            {"name":"핑크랩","beginning":25,"hp":34,"atk":36,"def":32,"agi":5},
+            {"name":"킹크랩","beginning":21,"hp":40,"atk":38,"def":34,"agi":6},
+            			
+            {"name":"지라크","beginning":23,"hp":30,"atk":27,"def":17,"agi":29},
+            {"name":"타이판","beginning":23,"hp":25,"atk":33,"def":17,"agi":19},
+                        
+            {"name":"아코로비","beginning":25,"hp":32,"atk":38,"def":19,"agi":27},
+            {"name":"골드로비","beginning":26,"hp":22,"atk":29,"def":14,"agi":28},
+            
+            //{"name":"토라","beginning":26,"hp":21,"atk":26,"def":12,"agi":26},
+			{"name":"페르페","beginning":26,"hp":23,"atk":25,"def":11,"agi":24},
+            {"name":"슈우","beginning":26,"hp":21,"atk":29,"def":17,"agi":14},
+            
+            {"name":"발로스","beginning":22,"hp":27,"atk":39,"def":16,"agi":29},
+            {"name":"데블로스","beginning":21,"hp":24,"atk":32,"def":13,"agi":29},
+
+            {"name":"스노밍코","beginning":20,"hp":30,"atk":22,"def":20,"agi":33},
+            {"name":"밍코","beginning":19,"hp":30,"atk":34,"def":11,"agi":31},
+            
+            {"name":"쿠아","beginning":24,"hp":23,"atk":29,"def":16,"agi":25},
+            {"name":"쿠팡","beginning":23,"hp":19,"atk":30,"def":10,"agi":27},
+            
+            {"name":"크루거","beginning":24,"hp":30,"atk":35,"def":17,"agi":33},
+
+            {"name":"기로아치","beginning":24,"hp":30,"atk":40,"def":16,"agi":28},
+            {"name":"크로아치","beginning":23,"hp":30,"atk":39,"def":21,"agi":25},
+            {"name":"마루아치","beginning":26,"hp":28,"atk":40,"def":18,"agi":23},
+                        
+            {"name":"도에디크","beginning":27,"hp":30,"atk":34,"def":32,"agi":13},
+            
+            {"name":"레이론","beginning":24,"hp":26,"atk":34,"def":19,"agi":20},
+            {"name":"샤크론","beginning":24,"hp":32,"atk":37,"def":15,"agi":33},
+            			
+            {"name":"디메트로돈","beginning":23,"hp":42,"atk":33,"def":38,"agi":3},
+            
+            {"name":"갈푸스","beginning":24,"hp":27,"atk":40,"def":14,"agi":33},
+            {"name":"베르푸스","beginning":26,"hp":21,"atk":30,"def":12,"agi":26}, // 89, 535
+			//{"name":"울푸스","beginning":26,"hp":23,"atk":28,"def":11,"agi":25}, // 87, 555
+            //{"name":"볼프","beginning":26,"hp":22,"atk":32,"def":17,"agi":15},   // 86, 555
+            {"name":"델푸스","beginning":24,"hp":24,"atk":33,"def":12,"agi":25},
+                        			
+            {"name":"아르마루","beginning":25,"hp":28,"atk":37,"def":17,"agi":27},
+            {"name":"베르마루","beginning":27,"hp":27,"atk":36,"def":15,"agi":25},
+            {"name":"구루마루","beginning":25,"hp":30,"atk":40,"def":17,"agi":29},
+            
+            {"name":"호르카","beginning":25,"hp":25,"atk":28,"def":18,"agi":25},
+
+            {"name":"펠트로돈","beginning":26,"hp":27,"atk":35,"def":17,"agi":22},
+
+            {"name":"푸타푸타","beginning":25,"hp":23,"atk":29,"def":12,"agi":33},
+            
+            {"name":"후바티","beginning":23,"hp":33,"atk":39,"def":24,"agi":22},
+            
+			{"name":"키파","beginning":25,"hp":24,"atk":33,"def":15,"agi":26},
+			
+			{"name":"테로노돈","beginning":25,"hp":27,"atk":30,"def":12,"agi":33},
+			{"name":"익시노돈","beginning":26,"hp":24,"atk":29,"def":11,"agi":33},
+            
+            {"name":"라이쿠스","beginning":24,"hp":43,"atk":33,"def":38,"agi":6},
+            {"name":"바라쿠스","beginning":24,"hp":42,"atk":31,"def":39,"agi":7},
+            			
+            {"name":"어린흑룡","beginning":26,"hp":25,"atk":33,"def":13,"agi":29},
+            {"name":"어린백룡","beginning":24,"hp":25,"atk":30,"def":15,"agi":25},
+
+            {"name":"메피노","beginning":25,"hp":30,"atk":41,"def":19,"agi":26},
+            
+			{"name":"흑주작","beginning":24,"hp":25,"atk":36,"def":13,"agi":25}, // 맹독:2
+
+			{"name":"흑풍","beginning":25,"hp":29,"atk":38,"def":14,"agi":34},
+
+            {"name":"흑룡","beginning":26,"hp":26,"atk":35,"def":13,"agi":30},
+            {"name":"백룡","beginning":24,"hp":25,"atk":34,"def":15,"agi":25},
+            
+            
+            {"name":"흑기린","beginning":24,"hp":26,"atk":40,"def":18,"agi":19},
+
+            {"name":"우라노스","beginning":27,"hp":23,"atk":29,"def":11,"agi":26}
+
+        ]
+
+        let btnName = "";
+        const result = [];
+
         // 스크롤
 		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
 		window.onscroll = function() {scrollFunction()};
@@ -53,313 +411,375 @@
 			}
 		}
 
-        function getBase() {
-            const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
-            const base = {"beginning":10,"hp":0,"atk":0,"def":0,"agi":0,"rank":0};
-            const statHp  = Number($("#statHp").val());
-            const statAtk = Number($("#statAtk").val());
-            const statDef = Number($("#statDef").val());
-            const statAgi = Number($("#statAgi").val());
-            const upHp    = Number($("#upHp").val());
-            const upAtk   = Number($("#upAtk").val());
-            const upDef   = Number($("#upDef").val());
-            const upAgi   = Number($("#upAgi").val());
+        function setSRank(copiedPet) {
 
-            // beginning
-            for (var i = 0; i <= 20; i++) {
-                // agi
-                for (var ii = 0; ii <= 60; ii++) {
-                    const agi = preciseRound(base.beginning * (base.agi + 2 + 2.5) / 100);
-                    //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
-                    // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
-                    if (parseInt(agi, 10) == statAgi) {
-                        //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
-                        // hp
-                        for (var iii = 0; iii <= 60; iii++) {
-                            const hp = preciseRound(base.beginning * (base.hp + 2 + 2.5) / 100);
-                            // atk 
-                            for (var iiii = 0; iiii <= 60; iiii++) {
-                                const atk = preciseRound(base.beginning * (base.atk + 2 + 2.5) / 100);
-                                // def
-                                for (var iiiii = 0; iiiii <= 60; iiiii++) {
-                                    const def = preciseRound(base.beginning * (base.def + 2 + 2.5) / 100);
-                                    
-                                    //if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
-                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
-                                        //$("#memo").append(hp + ' ' + atk + ' ' + def + ' ' + agi + '<br>');
-                                        //$("#memo").append(parseInt((hp * 4) + atk + def + agi, 10) + ' ' + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ' ' + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) + ' ' + parseInt(agi, 10) + '<br>');
-                                        //$("#memo").append(((hp * 4) + atk + def + agi) + '<br>');
-                                    //}
+            $(".srank").remove();
 
-                                    // 체력, 공격력, 방어력 정수 값이 입력값과 일치하면 소수점 데이터 계산
-                                    if (parseInt(preciseRound((hp * 4) + atk + def + agi), 10) == statHp &&
-                                        parseInt(preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)), 10) == statAtk &&
-                                        parseInt(preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)), 10) == statDef) {
-                                        
-                                        const sumStat = base.hp + base.atk + base.def + base.agi;
-                                        if (sumStat >= 110) {
-                                            base.rank = 435;
-                                        }
-                                        else if (sumStat >= 105) {
-                                            base.rank = 455;
-                                        }
-                                        else if (sumStat >= 100) {
-                                            base.rank = 475;
-                                        }
-                                        else if (sumStat >= 95) {
-                                            base.rank = 495;
-                                        }
-                                        else if (sumStat >= 90) {
-                                            base.rank = 515;
-                                        }
-                                        else if (sumStat >= 85) {
-                                            base.rank = 535;
-                                        }
-                                        else if (sumStat >= 80) {
-                                            base.rank = 555;
-                                        }
-                                        else if (sumStat >= 0) {
-                                            base.rank = 575;
-                                        }
-                                        
-                                        const baseUpHp  = preciseRound((base.hp  + 2 + 2.5) * base.rank / 10000);
-                                        const baseUpAtk = preciseRound((base.atk + 2 + 2.5) * base.rank / 10000);
-                                        const baseUpDef = preciseRound((base.def + 2 + 2.5) * base.rank / 10000);
-                                        const baseUpAgi = preciseRound((base.agi + 2 + 2.5) * base.rank / 10000);
+            let rank = 0;
+            if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 110) {
+                rank = 435;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 105) {
+                rank = 455;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 100) {
+                rank = 475;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 95) {
+                rank = 495;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 90) {
+                rank = 515;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 85) {
+                rank = 535;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 80) {
+                rank = 555;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 0) {
+                rank = 575;
+            }
 
-                                        if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
-                                            //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
-                                            //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
-                                        }
-                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
-                                        //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
-                                        // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
-                                        const tempHp  = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
-                                        const tempAtk = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
-                                        const tempDef = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
+            // base
+            copiedPet.hp  = copiedPet.hp  + 2;
+            copiedPet.atk = copiedPet.atk + 2;
+            copiedPet.def = copiedPet.def + 2;
+            copiedPet.agi = copiedPet.agi + 2;
+            
+            // bonus
+            copiedPet.hp  = copiedPet.hp  + 2.5;
+            copiedPet.atk = copiedPet.atk + 2.5;
+            copiedPet.def = copiedPet.def + 2.5;
+            copiedPet.agi = copiedPet.agi + 2.5;
 
-                                        if ((tempHp).toFixed(2) == upHp &&
-                                            (tempAtk).toFixed(2) == upAtk &&
-                                            (tempDef).toFixed(2) == upDef &&
-                                            baseUpAgi.toFixed(2) == upAgi) {
-                                            result.statHp  = preciseRound((hp * 4) + atk + def + agi);
-                                            result.statAtk = preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
-                                            result.statDef = preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
-                                            result.statAgi = agi;
-                                            result.upHp    = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
-                                            result.upAtk   = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
-                                            result.upDef   = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
-                                            result.upAgi   = preciseRound(baseUpAgi);
-                                            print1(base, result);
-                                            stop = true;
-                                            break;
-                                        }
-                                        
-                                    }
+            // 계산
+            const hp  = preciseRound(copiedPet.beginning * copiedPet.hp  / 100);
+            const atk = preciseRound(copiedPet.beginning * copiedPet.atk / 100);
+            const def = preciseRound(copiedPet.beginning * copiedPet.def / 100);
+            const agi = preciseRound(copiedPet.beginning * copiedPet.agi / 100);
 
-                                    base.def++;
-                                    if (base.def > 60) {
-                                        base.def = 0;
-                                    }
-                                }
+            const resultHp  = preciseRound((hp * 4) + atk + def + agi);
+            const resultAtk = preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
+            const resultDef = preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
+            const resultAgi = agi;
 
-                                if (stop) {
-                                    break;
-                                }
+            const upHp  = preciseRound(copiedPet.hp  * rank / 10000);
+            const upAtk = preciseRound(copiedPet.atk * rank / 10000);
+            const upDef = preciseRound(copiedPet.def * rank / 10000);
+            const upAgi = preciseRound(copiedPet.agi * rank / 10000);
 
-                                base.atk++;
-                                if (base.atk > 60) {
-                                    base.atk = 0;
-                                }
-                            }
-                            
-                            if (stop) {
-                                break;
-                            }
+            const resultUpHp  = preciseRound((upHp * 4) + upAtk + upDef + upAgi);
+            const resultUpAtk = preciseRound((upHp * 0.1) + upAtk + (upDef * 0.1) + (upAgi * 0.05));
+            const resultUpDef = preciseRound((upHp * 0.1) + (upAtk * 0.1) + upDef + (upAgi * 0.05));
+            const resultUpAgi = upAgi;
 
+            $('#myPet tbody').append(''
+                + '<tr class="srank">'
+                + '<td>S 초기치</td>'
+                + '<td>' + resultHp.toFixed(2) + '</td>'
+                + '<td>' + resultAtk.toFixed(2) + '</td>'
+                + '<td>' + resultDef.toFixed(2) + '</td>'
+                + '<td>' + resultAgi.toFixed(2) + '</td>'
+                + '<td>' + '' + '</td>'
+                + '</tr>'
+                + '<tr class="srank">'
+                + '<td>S 성장률</td>'
+                + '<td>' + resultUpHp.toFixed(2) + '</td>'
+                + '<td>' + resultUpAtk.toFixed(2) + '</td>'
+                + '<td>' + resultUpDef.toFixed(2) + '</td>'
+                + '<td>' + resultUpAgi.toFixed(2) + '</td>'
+                + '<td>' + '' + '</td>'
+                + '</tr>'
+            );
+
+            if (btnName == "search") {
+                $("#hp").val(parseInt(resultHp, 10));
+                $("#atk").val(parseInt(resultAtk, 10));
+                $("#def").val(parseInt(resultDef, 10));
+                $("#agi").val(parseInt(resultAgi, 10));
+            }
+
+            //$("#memo").append(resultHp);
+        }
+
+        function setBase(foundPet) {
+
+            $('#result tbody').empty();
+            result.length = 0;
+            const base = {"hp":-2,"atk":-2,"def":-2,"agi":-2};
+            
+            for (let i = 0; i < 5; i++) {
+                for (let ii = 0; ii < 5; ii++) {
+                    for (let iii = 0; iii < 5; iii++) {
+                        for (let iiii = 0; iiii < 5; iiii++) {
+                            setBonus(foundPet, base);
                             base.hp++;
-                            if (base.hp > 60) {
-                                base.hp = 0;
+                            if (base.hp == 3) {
+                                base.hp = -2;
                             }
                         }
-                       
-                        if (stop) {
-                            break;
+                        base.atk++;
+                        if (base.atk == 3) {
+                            base.atk = -2;
                         }
                     }
-                    base.agi++;
-                    if (base.agi > 60) {
-                        base.agi = 0;
+                    base.def++;
+                    if (base.def == 3) {
+                        base.def = -2;
                     }
                 }
-                if (stop == true) {
-                    stop = false;
-                    break;
+                base.agi++;
+                if (base.agi == 3) {
+                    base.agi = -2;
                 }
-                base.beginning++;
+            }
+            
+            print();
+        }
+
+        function setBonus(foundPet, base) {
+
+            const bonus = {"hp":0,"atk":0,"def":0,"agi":0};
+
+            for (let i = 0; i < 11; i++) {
+                for (let ii = 0; ii < 11; ii++) {
+                    for (let iii = 0; iii < 11; iii++) {
+                        for (let iiii = 0; iiii < 11; iiii++) {
+                            const sum = bonus.hp + bonus.atk + bonus.def + bonus.agi;
+                            if (sum == 10) {
+                                // 계산
+                                addData(foundPet, base, bonus);
+                            }
+                            bonus.hp++;
+                            if (bonus.hp == 11) {
+                                bonus.hp = 0;
+                            }
+                        }
+                        bonus.atk++;
+                        if (bonus.atk == 11) {
+                            bonus.atk = 0;
+                        }
+                    }
+                    bonus.def++;
+                    if (bonus.def == 11) {
+                        bonus.def = 0;
+                    }
+                }
+                bonus.agi++;
+                if (bonus.agi == 11) {
+                    bonus.agi = 0;
+                }
             }
         }
 
-
-        function print1(base, result) {
-            // 첫 번째 테이블에 데이터 출력
-            $('#base tbody').append(''
-                + '<tr class="result1">'
-                + '<td>' + "계산 베이스" + '</td>'
-                + '<td colspan="5">' + base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '</td>'
-                + '</tr>'
-                + '<tr class="result1">'
-                + '<td>' + "계산 초기치"   + '</td>'
-                + '<td>' + result.statHp  + '</td>'
-                + '<td>' + result.statAtk + '</td>'
-                + '<td>' + result.statDef + '</td>'
-                + '<td>' + result.statAgi + '</td>'
-                + '<td>' + '</td>'
-                + '</tr>'
-                + '<tr class="result1">'
-                + '<td>' + "계산 성장률" + '</td>'
-                + '<td>' + result.upHp  + '</td>'
-                + '<td>' + result.upAtk + '</td>'
-                + '<td>' + result.upDef + '</td>'
-                + '<td>' + result.upAgi + '</td>'
-                + '<td>' + '</td>'
-                + '</tr>'
-            );
+        function addData(foundPet, base, bonus) {
             
-            // 두 번째 테이블 베이스에 데이터 입력
-            $("#baseBeginning").val(base.beginning);
-            $("#baseHp").val(base.hp);
-            $("#baseAtk").val(base.atk);
-            $("#baseDef").val(base.def);
-            $("#baseAgi").val(base.agi);
-            $("#baseRank").val(base.rank);
+            const hp  = preciseRound(foundPet.beginning * (foundPet.hp  + base.hp  + bonus.hp)  / 100);
+            const atk = preciseRound(foundPet.beginning * (foundPet.atk + base.atk + bonus.atk) / 100);
+            const def = preciseRound(foundPet.beginning * (foundPet.def + base.def + bonus.def) / 100);
+            const agi = preciseRound(foundPet.beginning * (foundPet.agi + base.agi + bonus.agi) / 100);
+            
+            const stat = {"rank":0,"hp":0,"atk":0,"def":0,"agi":0,"baseHp":0,"baseAtk":0,"baseDef":0,"baseAgi":0,"bonusHp":0,"bonusAtk":0,"bonusDef":0,"bonusAgi":0,"poison":0};
+            //stat.hp  = limitDecimalPlaces((hp * 4) + atk + def + agi, 2);
+            //stat.atk = limitDecimalPlaces((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 2);
+            //stat.def = limitDecimalPlaces((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 2);
+            //stat.agi = limitDecimalPlaces(agi, 2);
+            
+            stat.hp  = preciseRound((hp * 4) + atk + def + agi);
+            stat.atk = preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
+            stat.def = preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
+            stat.agi = agi;
 
-            alert("계산 완료!");
+            stat.poison = parseInt((foundPet.beginning * (foundPet.hp  + base.hp  + bonus.hp)),  10)
+                        + parseInt((foundPet.beginning * (foundPet.atk + base.atk + bonus.atk)), 10)
+                        + parseInt((foundPet.beginning * (foundPet.def + base.def + bonus.def)), 10)
+                        + parseInt((foundPet.beginning * (foundPet.agi + base.agi + bonus.agi)), 10);
+            stat.poison = preciseRound(( stat.poison / 100 - 20 ) / 4);
+            if ( stat.poison < 1 ) stat.poison = 1;
+
+            if (btnName == "calculate") {
+                if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
+                    Math.floor(stat.atk) === parseInt($("#atk").val(), 10) &&
+                    Math.floor(stat.def) === parseInt($("#def").val(), 10) &&
+                    Math.floor(stat.agi) === parseInt($("#agi").val(), 10)) {
+                    stat.rank     = base.hp + base.atk + base.def + base.agi;
+                    stat.baseHp   = base.hp;
+                    stat.baseAtk  = base.atk;
+                    stat.baseDef  = base.def;
+                    stat.baseAgi  = base.agi;
+                    stat.bonusHp  = bonus.hp;
+                    stat.bonusAtk = bonus.atk;
+                    stat.bonusDef = bonus.def;
+                    stat.bonusAgi = bonus.agi;
+                    result.push(stat);
+                }
+            }
+            else if (btnName == "search") {
+                if (base.hp + base.atk + base.def + base.agi == 8) {
+                    stat.rank     = base.hp + base.atk + base.def + base.agi;
+                    stat.baseHp   = base.hp;
+                    stat.baseAtk  = base.atk;
+                    stat.baseDef  = base.def;
+                    stat.baseAgi  = base.agi;
+                    stat.bonusHp  = bonus.hp;
+                    stat.bonusAtk = bonus.atk;
+                    stat.bonusDef = bonus.def;
+                    stat.bonusAgi = bonus.agi;
+                    result.push(stat);
+                }
+            }
         }
 
-        function getRank() {
-            
-            const baseBeginning = Number($("#baseBeginning").val());
-            const baseHp = Number($("#baseHp").val());
-            const baseAtk = Number($("#baseAtk").val());
-            const baseDef = Number($("#baseDef").val());
-            const baseAgi = Number($("#baseAgi").val());
-            const baseRank = Number($("#baseRank").val());
-            
-            const myBaseHp = Number($("#myBaseHp").val());
-            const myBaseAtk = Number($("#myBaseAtk").val());
-            const myBaseDef = Number($("#myBaseDef").val());
-            const myBaseAgi = Number($("#myBaseAgi").val());
-
-            const myLv = Number($("#myLv").val());
-            const myHp = Number($("#myHp").val());
-            const myAtk = Number($("#myAtk").val());
-            const myDef = Number($("#myDef").val());
-            const myAgi = Number($("#myAgi").val());
-
-            // 내 펫 성장률 계산
-            const myUpHp  = preciseRound((myHp  - myBaseHp)  / (myLv - 1));
-            const myUpAtk = preciseRound((myAtk - myBaseAtk) / (myLv - 1));
-            const myUpDef = preciseRound((myDef - myBaseDef) / (myLv - 1));
-            const myUpAgi = preciseRound((myAgi - myBaseAgi) / (myLv - 1));
-            $('#rank tbody').append(''
-                + '<tr class="result2">'
-                + '<td>' + "내 펫 성장률" + '</td>'
-                + '<td>' + '</td>'
-                + '<td>' + myUpHp.toFixed(2)  + '</td>'
-                + '<td>' + myUpAtk.toFixed(2) + '</td>'
-                + '<td>' + myUpDef.toFixed(2) + '</td>'
-                + '<td>' + myUpAgi.toFixed(2) + '</td>'
-                + '<td>' + preciseRound(myUpAtk + myUpDef + myUpAgi).toFixed(2) + '</td>'
-                + '</tr>'
-            );
-
-            const resultRank = [];
-
-            // 바로 계산 및 출력
-            for (var i = 0; i < 5; i++) {
-                for (var ii = 0; ii < 5; ii++) {
-                    for (var iii = 0; iii < 5; iii++) {
-                        for (var iiii = 0; iiii < 5; iiii++) {
-                            
-                            const upHp  = preciseRound((baseHp  + 2 - i    + 2.5) * baseRank / 10000);
-                            const upAtk = preciseRound((baseAtk + 2 - ii   + 2.5) * baseRank / 10000);
-                            const upDef = preciseRound((baseDef + 2 - iii  + 2.5) * baseRank / 10000);
-                            const upAgi = preciseRound((baseAgi + 2 - iiii + 2.5) * baseRank / 10000);
-
-                            const rankHp  = preciseRound((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / (baseHp + 2 - i + 2.5));
-                            const rankAtk = preciseRound((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / (baseAtk + 2 - ii + 2.5));
-                            const rankDef = preciseRound((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / (baseDef + 2 - iii + 2.5));
-                            const rankAgi = preciseRound(myUpAgi * 10000 / (baseAgi + 2 - iiii + 2.5));
-                            const rankAvg = preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4);
-
-                            //$("#memo").append((2 - i) + ' ' + (2 - ii) + ' ' + (2 - iii) + ' ' + (2 - iiii) + '<br>');
-                            //$("#memo").append((upHp) + ' ' + (upAtk) + ' ' + (upDef) + ' ' + (upAgi) + '<br>');
-                            //$("#memo").append(rankAvg + ' ' + rankHp + ' ' + rankAtk + ' ' + rankDef + ' ' + rankAgi + '<br>');
-                            //$("#memo").append(upHp + ' ' + upAtk + ' ' + upDef + ' ' + upAgi + '<br>');
-                            const hp  = preciseRound((myUpHp  - upAtk - upDef - upAgi) / 4 * 10000 / rankAvg - (baseHp + 2 - i));
-                            const atk = preciseRound((myUpAtk - (upHp * 0.1) - (upDef * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseAtk + 2 - ii));
-                            const def = preciseRound((myUpDef - (upHp * 0.1) - (upAtk * 0.1) - (upAgi * 0.05)) * 10000 / rankAvg - (baseDef + 2 - iii));
-                            const agi = preciseRound(myUpAgi * 10000 / rankAvg - (baseAgi + 2 - iiii));
-                            
-                            //if (parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
-                            if (baseRank - 10 < preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4) && 
-                                baseRank + 10 > preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4) && 
-                                parseInt(hp, 10) == 2 && parseInt(atk, 10) == 2 && parseInt(def, 10) == 2 && parseInt(agi, 10) == 2) {
-                            //if (baseRank + 10 > preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4) && baseRank - 6 < preciseRound((rankHp + rankAtk + rankDef + rankAgi) / 4)) {
-                            //if (i == 0 && ii == 0 && iii == 0 && iiii == 0) {
-                                // 두 번째 테이블에 데이터 출력
-                                $('#rank tbody').append(''
-                                    + '<tr class="result2">'
-                                    + '<td>' + "계산 베이스" + '</td>'
-                                    + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - i)    + ']' + rankHp.toFixed(2)  + '</td>'
-                                    + '<td>[' + (2 - ii)   + ']' + rankAtk.toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - iii)  + ']' + rankDef.toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - iiii) + ']' + rankAgi.toFixed(2) + '</td>'
-                                    + '<td>' + '</td>'
-                                    + '</tr>'
-                                    + '<tr class="result2">'
-                                    + '<td>' + "계산 베이스" + '</td>'
-                                    + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + (hp + atk + def + agi).toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - i)    + ']' + hp.toFixed(2)  + '</td>'
-                                    + '<td>[' + (2 - ii)   + ']' + atk.toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - iii)  + ']' + def.toFixed(2) + '</td>'
-                                    + '<td>[' + (2 - iiii) + ']' + agi.toFixed(2) + '</td>'
-                                    + '<td>' + '</td>'
-                                    + '</tr>'
-                                );
-
-                                //stop = true;
-                                //break;
-                            }
-                            //if (stop) break;
-                        }
-                        //if (stop) break;
-                    }
-                    //if (stop) break;
+        function print() {
+            result.sort(function(a, b) {
+                
+                if (b['rank'] !== a['rank']) {
+                    return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
+                } else if (b['hp'] !== a['hp']) {
+                    return b['hp'] - a['hp']; // hp를 기준으로 내림차순 정렬
+                } else if (b['atk'] !== a['atk']) {
+                    return b['atk'] - a['atk']; // atk를 기준으로 내림차순 정렬
+                } else if (b['def'] !== a['def']) {
+                    return b['def'] - a['def']; // def를 기준으로 내림차순 정렬
+                } else {
+                    return b['agi'] - a['agi']; // agi를 기준으로 내림차순 정렬
                 }
-                //if (stop) break;
+            });
+
+
+            for (let i = 0; i < result.length; i++) {
+                /*
+                $('#result tbody').append(''
+					+ '<tr>'
+                    + '<td>' + (i + 1) + '</td>'
+					+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+					+ '<td>' + result[i].hp.toFixed(2)  + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
+					+ '<td>' + result[i].atk.toFixed(2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
+					+ '<td>' + result[i].def.toFixed(2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
+					+ '<td>' + result[i].agi.toFixed(2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
+                    + '<td>' + result[i].poison + '</td>'
+					+ '</tr>'
+				);
+                */
+                $('#result tbody').append(''
+					+ '<tr>'
+                    + '<td>' + (i + 1) + '</td>'
+					+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].hp,  2) + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].atk, 2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].def, 2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
+					+ '<td>' + limitDecimalPlaces(result[i].agi, 2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
+                    + '<td>' + result[i].poison + '</td>'
+					+ '</tr>'
+				);
             }
+
+            // 각 rank 값의 등장 횟수를 저장할 객체
+            const rankCounts = {};
+
+            // 배열 순회하면서 각 rank 값의 개수 체크
+            for (let i = 0; i < result.length; i++) {
+                const rank = result[i].rank;
+                if (rankCounts[rank] === undefined) {
+                    rankCounts[rank] = 1;
+                } else {
+                    rankCounts[rank]++;
+                }
+            }
+
+            // 객체를 배열로 변환하고 rank에 대해 내림차순으로 정렬
+            const ranks = Object.keys(rankCounts).sort((a, b) => b - a); // rank를 내림차순으로 정렬한 배열
+
+            // 결과 출력
+            let message = '계산이 끝났습니다!\n';
+            if (btnName == "calculate") {
+                const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
+                for (const rank of ranks) {
+                    const count = rankCounts[rank];
+                    const percentage = (count / totalCount * 100).toFixed(2); // 소수점 둘째 자리까지 표시
+                    message += `${rank} 등급: ${count} 건 (${percentage}%) \n`;
+                }
+            }
+            else if (btnName == "search") {
+                // 값을 카운트할 객체 생성
+                var countMap = {};
+                var totalCount = result.length;
+
+                // 배열을 반복하면서 각 요소의 값을 카운트
+                result.forEach(function(obj) {
+                    var key = parseInt(obj.hp, 10) + ', ' + parseInt(obj.atk, 10) + ', ' + parseInt(obj.def, 10) + ', ' + parseInt(obj.agi, 10);
+                    countMap[key] = (countMap[key] || 0) + 1;
+                });
+
+                // 결과를 문자열로 변환하여 출력
+                for (var key in countMap) {
+                    if (countMap.hasOwnProperty(key)) {
+                        var count = countMap[key];
+                        var percentage = (count / totalCount * 100).toFixed(2); // 백분율 계산 및 소수점 이하 두 자리까지만 표시
+                        message += key + ' ' + countMap[key] + '건 (' + percentage + '%)\n';
+                    }
+                }
+            }
+            alert(message);
+        }
+
+        function limitDecimalPlaces(number, places) {
+            var power = Math.pow(10, places);
+            return (Math.floor(number * power) / power).toFixed(places);
         }
 
         function preciseRound(num) {
             return Math.round(num * 1e12) / 1e12;
         }
 
+        /*
+        function getListName() {
+            var text = "";
+            pet.forEach(function(obj) {
+                text += obj.name + ", ";
+            });
+            $("#listName").text(text);
+        }
+        */
+
         // jQuery
 		$(document).ready(function() {
 
-            // 계산 버튼
-			$("#calculate1").on("click", function() {
-                $(".result1").remove();
-                getBase();
+            //getListName();
+
+            $("#name").on("keydown", function(event) {
+                if (event.key === 'Enter') {
+                    $("#search").click();
+                }
+            })
+
+            // 검색 버튼
+			$("#search").on("click", function() {
+                const foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                    return;
+                }
+                btnName = "search";
+                // foundPet을 깊은 복사하여 새로운 객체를 생성
+                const copiedPet = JSON.parse(JSON.stringify(foundPet));
+                setSRank(copiedPet);
+				setBase(foundPet);
 			});
 
-             // 계산 버튼
-			$("#calculate2").on("click", function() {
-                $(".result2").remove();
-                getRank();
+            // 계산 버튼
+			$("#calculate").on("click", function() {
+                const foundPet = pet.find(p => p.name === $("#name").val());
+                if (foundPet == undefined) {
+                    alert("페트 정보를 찾을 수 없습니다.");
+                    return;
+                }
+                btnName = "calculate";
+                // foundPet을 깊은 복사하여 새로운 객체를 생성
+                const copiedPet = JSON.parse(JSON.stringify(foundPet));
+                setSRank(copiedPet);
+				setBase(foundPet);
 			});
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
@@ -373,193 +793,32 @@
 </head>
 <body>
 	<div class="container">
-		<h2>Happy Server Pet Reverse Info</h2>
+		<h2>그 동안 이용해 주셔서 감사합니다.</h2>
 		<hr>
-        <a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>
-        <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
-        <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
-		<p class="lead" id="listName">
-			
-		</p>
-        <p class="lead">
-			펫의 초기치 소수점을 확인하는 계산기입니다.<br>
-            울푸스, 볼프를 제외한 모든 페트 사용 가능합니다.<br>
-            현재 S급 계산기는 테스트 중 입니다.
-		</p>
-		<blockquote>
-			<p>STEP1. 게임 채팅으로 '/검색 얀기로' 엔터</p>
-            <p>STEP2. S급 초기치, S급 성장률 입력 후 계산 클릭</p>
-            <p>STEP3. 게임 채팅으로 '/페트 1~5' 엔터</p>
-            <p>STEP4. 내 펫의 초기치 및 현재 성장률 입력 후 계산 클릭 (테스트 중)</p>
-            <p>[ 8 ] 이 나오면 S급!!</p>
-            <p>S급 계산기는 100% 신뢰하지는 마세요.</p>
-		</blockquote>
-		<br>
-		<br>
-        <div id="memo"></div>
-        <h4>소수점 계산기</h4>
-        <hr>
-		<div class="table-responsive" id="base">
-			<table class="table table-striped">
-				<colgroup>
-					<col width="10%">	
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-				</colgroup>
-				<thead>
-					<tr>
-						<th>구분</th>
-                        <th>내구력</th>
-                        <th>공격력</th>
-                        <th>방어력</th>
-                        <th>순발력</th>
-                        <th></th>
-					</tr>
-				</thead>
-				<tbody>
-                    <tr>
-                        <td>
-                            S급 초기치
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="statHp" placeholder="57">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="statAtk" placeholder="12">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="statDef" placeholder="7">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="statAgi" placeholder="6">
-                        </td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            S급 성장률
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upHp" placeholder="10.47">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upAtk" placeholder="2.32">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upDef" placeholder="1.43">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="upAgi" placeholder="1.21">
-                        </td>
-                        <td>
-                            <button type="button" class="form-control" id="calculate1">계산</button>
-                        </td>
-                    </tr>
-                    <tr class="result1"><td>계산 베이스</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr class="result1"><td>계산 초기치</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr class="result1"><td>게산 성장률</td><td></td><td></td><td></td><td></td><td></td></tr>
-				</tbody>
-			</table>
-		</div>
 
-        <h4>S급 계산기(테스트 중)</h4>
-        <hr>
-        <div class="table-responsive" id="rank">
-            <table class="table table-striped">
-                <colgroup>
-                    <col width="10%">	
-					<col width="10%">
-					<col width="10%">
-					<col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>구분</th>
-                        <th>레벨</th>
-                        <th>내구력</th>
-                        <th>공격력</th>
-                        <th>방어력</th>
-                        <th>순발력</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>베이스</td>
-                        <td>
-                            <input type="number" class="form-control" id="baseBeginning" placeholder="27" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseHp" placeholder="27" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseAtk" placeholder="36" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseDef" placeholder="16" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseAgi" placeholder="20" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="baseRank" placeholder="495" readonly>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>초기치</td>
-                        <td>1</td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseHp" placeholder="57">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseAtk" placeholder="12">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseDef" placeholder="7">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myBaseAgi" placeholder="7">
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>현재</td>
-                        <td>
-                            <input type="number" class="form-control" id="myLv" placeholder="127">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myHp" placeholder="1370">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myAtk" placeholder="304">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myDef" placeholder="185">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="myAgi" placeholder="159">
-                        </td>
-                        <td>
-                            <button type="button" class="form-control" id="calculate2">계산</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <img src="https://github.com/leejoonwhan/leejoonwhan.github.io/blob/master/stoneage/happy/222.png?raw=true">
+        <img src="https://github.com/leejoonwhan/leejoonwhan.github.io/blob/master/stoneage/happy/1222.png?raw=true">
+        <br>
+
+        <h4>그 동안 많이 알려진 계산기를 토대로 happy 서버에 맞게 수정하여 사이트를 공유했었습니다</h4>
+        <h4>위 두 스샷을 비교해보시면 아시겠지만 동일한 로직으로 구현된 계산기 였습니다. </h4>
+        <br>
+        <br>
+        <h4>그런데, 2024-06-13 이상한 데이터가 발견되었습니다.</h4>
+        <img src="https://github.com/leejoonwhan/leejoonwhan.github.io/blob/master/stoneage/happy/333.png?raw=true">
+        <img src="https://github.com/leejoonwhan/leejoonwhan.github.io/blob/master/stoneage/happy/123.png?raw=true">
+        
+        <h4>현재 사용하는 계산 공식으로는 위 토라의 능력치가 나올 수 없음을 확인하였습니다.</h4>
+        <h4>따라서, 틀릴 수 있는 계산기는 없느니만 못하다고 판단하여 금일로 서비스 종료함을 알려드립니다.</h4>
+        <h4>개인적으로 의심 되는 내용은 있지만.. 증명할 수 없기 때문에 언급하지는 않겠습니다.</h4>
+        
+        <h4>그 동안 믿고 사용해주신 여러분들께 감사의 말씀을 드립니다.</h4>
+        <h4>사용해주셔서 감사합니다.</h4>
+        <br>
+        <br>
+        <br>
+        <br>
+        
     </div>
-    <button id="btnTop" title="Go to top">Top</button>
-    <br>
-    <br>
-    <br>
-    <br>
-</div>
 </body>
 </html>
