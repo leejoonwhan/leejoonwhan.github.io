@@ -722,6 +722,8 @@
                 }
             }
             alert(message);
+            $("#search").attr("disabled", false);
+            $("#calculate").attr("disabled", false);
         }
 
         function limitDecimalPlaces(number, places) {
@@ -756,6 +758,8 @@
 
             // 검색 버튼
 			$("#search").on("click", function() {
+                $(this).attr("disabled", true);
+
                 const foundPet = pet.find(p => p.name === $("#name").val());
                 if (foundPet == undefined) {
                     alert("페트 정보를 찾을 수 없습니다.");
@@ -770,6 +774,8 @@
 
             // 계산 버튼
 			$("#calculate").on("click", function() {
+                $(this).attr("disabled", true);
+
                 const foundPet = pet.find(p => p.name === $("#name").val());
                 if (foundPet == undefined) {
                     alert("페트 정보를 찾을 수 없습니다.");
