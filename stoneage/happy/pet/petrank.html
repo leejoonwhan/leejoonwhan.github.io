@@ -507,7 +507,7 @@
 
             $('#result tbody').empty();
             result.length = 0;
-            const base = {"hp":-3,"atk":-3,"def":-3,"agi":-3}; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
+            const base = {"hp":-2,"atk":-2,"def":-2,"agi":-2}; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
             
             for (let i = 0; i < 6; i++) {
                 for (let ii = 0; ii < 6; ii++) {
@@ -516,22 +516,22 @@
                             setBonus(foundPet, base);
                             base.hp++;
                             if (base.hp == 3) {
-                                base.hp = -3;
+                                base.hp = -2; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                             }
                         }
                         base.atk++;
                         if (base.atk == 3) {
-                            base.atk = -3;
+                            base.atk = -2; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                         }
                     }
                     base.def++;
                     if (base.def == 3) {
-                        base.def = -3;
+                        base.def = -2; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                     }
                 }
                 base.agi++;
                 if (base.agi == 3) {
-                    base.agi = -3;
+                    base.agi = -2; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                 }
             }
             
