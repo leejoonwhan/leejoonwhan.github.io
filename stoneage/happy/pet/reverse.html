@@ -96,6 +96,7 @@
                                         parseInt(preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05)), 10) == statAtk &&
                                         parseInt(preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05)), 10) == statDef) {
                                         
+                                        /*
                                         const sumStat = base.hp + base.atk + base.def + base.agi;
                                         if (sumStat >= 110) {
                                             base.rank = 435;
@@ -121,40 +122,48 @@
                                         else if (sumStat >= 0) {
                                             base.rank = 575;
                                         }
-                                        
-                                        const baseUpHp  = preciseRound((base.hp  + 2 + 2.5) * base.rank / 10000);
-                                        const baseUpAtk = preciseRound((base.atk + 2 + 2.5) * base.rank / 10000);
-                                        const baseUpDef = preciseRound((base.def + 2 + 2.5) * base.rank / 10000);
-                                        const baseUpAgi = preciseRound((base.agi + 2 + 2.5) * base.rank / 10000);
+                                        */
 
-                                        if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
+                                        const rank = [435, 455, 475, 495, 515, 535, 555, 575];
+                                        for (var j = 0; j < rank.length; j++) {
+                                            base.rank = rank[j];
+                                            const baseUpHp  = preciseRound((base.hp  + 2 + 2.5) * base.rank / 10000);
+                                            const baseUpAtk = preciseRound((base.atk + 2 + 2.5) * base.rank / 10000);
+                                            const baseUpDef = preciseRound((base.def + 2 + 2.5) * base.rank / 10000);
+                                            const baseUpAgi = preciseRound((base.agi + 2 + 2.5) * base.rank / 10000);
+
+                                            if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
+                                                //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
+                                                //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
+                                            }
                                             //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
                                             //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
-                                        }
-                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
-                                        //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
-                                        // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
-                                        const tempHp  = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
-                                        const tempAtk = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
-                                        const tempDef = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
+                                            // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
+                                            const tempHp  = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
+                                            const tempAtk = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
+                                            const tempDef = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
 
-                                        if ((tempHp).toFixed(2) == upHp &&
-                                            (tempAtk).toFixed(2) == upAtk &&
-                                            (tempDef).toFixed(2) == upDef &&
-                                            baseUpAgi.toFixed(2) == upAgi) {
-                                            result.statHp  = preciseRound((hp * 4) + atk + def + agi);
-                                            result.statAtk = preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
-                                            result.statDef = preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
-                                            result.statAgi = agi;
-                                            result.upHp    = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
-                                            result.upAtk   = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
-                                            result.upDef   = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
-                                            result.upAgi   = preciseRound(baseUpAgi);
-                                            print1(base, result);
-                                            stop = true;
-                                            break;
+                                            if ((tempHp).toFixed(2) == upHp &&
+                                                (tempAtk).toFixed(2) == upAtk &&
+                                                (tempDef).toFixed(2) == upDef &&
+                                                baseUpAgi.toFixed(2) == upAgi) {
+                                                result.statHp  = preciseRound((hp * 4) + atk + def + agi);
+                                                result.statAtk = preciseRound((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05));
+                                                result.statDef = preciseRound((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05));
+                                                result.statAgi = agi;
+                                                result.upHp    = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
+                                                result.upAtk   = preciseRound((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05));
+                                                result.upDef   = preciseRound((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05));
+                                                result.upAgi   = preciseRound(baseUpAgi);
+                                                print1(base, result);
+                                                stop = true;
+                                                break;
+                                            }
                                         }
-                                        
+
+                                        if (stop) {
+                                           break;
+                                        }
                                     }
 
                                     base.def++;
