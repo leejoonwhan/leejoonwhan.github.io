@@ -125,6 +125,7 @@
             {"name":"아이카스","beginning":22,"hp":31,"atk":23,"def":40,"agi":5},
             {"name":"쿠타스","beginning":22,"hp":31,"atk":25,"def":33,"agi":5},
             {"name":"카르기안","beginning":20,"hp":25,"atk":22,"def":36,"agi":10},
+            {"name":"엘로카스","beginning":24,"hp":35,"atk":28,"def":46,"agi":6,"rank":435},
             
             {"name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17},
 			{"name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20},
@@ -353,9 +354,9 @@
             {"name":"디메트로돈","beginning":23,"hp":42,"atk":33,"def":38,"agi":3},
             
             {"name":"갈푸스","beginning":24,"hp":27,"atk":40,"def":14,"agi":33},
-            {"name":"베르푸스","beginning":26,"hp":21,"atk":30,"def":12,"agi":26}, // 89, 535
-			//{"name":"울푸스","beginning":26,"hp":23,"atk":28,"def":11,"agi":25}, // 87, 555
-            //{"name":"볼프","beginning":26,"hp":22,"atk":32,"def":17,"agi":15},   // 86, 555
+            {"name":"베르푸스","beginning":26,"hp":21,"atk":30,"def":12,"agi":26,"rank":535}, // 89, 535
+			{"name":"울푸스","beginning":26,"hp":23,"atk":28,"def":11,"agi":25,"rank":555},   // 87, 555
+            {"name":"볼프","beginning":26,"hp":22,"atk":32,"def":17,"agi":15,"rank":555},     // 86, 555
             {"name":"델푸스","beginning":24,"hp":24,"atk":33,"def":12,"agi":25},
                         			
             {"name":"아르마루","beginning":25,"hp":28,"atk":37,"def":17,"agi":27},
@@ -382,7 +383,8 @@
             {"name":"어린백룡","beginning":24,"hp":25,"atk":30,"def":15,"agi":25},
 
             {"name":"메피노","beginning":25,"hp":30,"atk":41,"def":19,"agi":26},
-            
+            {"name":"스피노","beginning":26,"hp":29,"atk":43,"def":17,"agi":26,"rank":435},
+                        
 			{"name":"흑주작","beginning":24,"hp":25,"atk":36,"def":13,"agi":25}, // 맹독:2
 
 			{"name":"흑풍","beginning":25,"hp":29,"atk":38,"def":14,"agi":34},
@@ -390,10 +392,12 @@
             {"name":"흑룡","beginning":26,"hp":26,"atk":35,"def":13,"agi":30},
             {"name":"백룡","beginning":24,"hp":25,"atk":34,"def":15,"agi":25},
             
-            
             {"name":"흑기린","beginning":24,"hp":26,"atk":40,"def":18,"agi":19},
 
-            {"name":"우라노스","beginning":27,"hp":23,"atk":29,"def":11,"agi":26}
+            {"name":"우라노스","beginning":27,"hp":23,"atk":29,"def":11,"agi":26},
+
+            {"name":"아비시니안","beginning":26,"hp":23,"atk":31,"def":14,"agi":25,"rank":515}
+            
 
         ]
 
@@ -416,7 +420,10 @@
             $(".srank").remove();
 
             let rank = 0;
-            if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 110) {
+            if (copiedPet.rank > 0) {
+                rank = copiedPet.rank;
+            }
+            else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 110) {
                 rank = 435;
             }
             else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 105) {
@@ -810,12 +817,13 @@
         <a href="https://leejoonwhan.github.io/stoneage/happy/pet/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/pet/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
 		<p class="lead" id="listName">
-			울푸스, 볼프를 제외한 모든 페트 업데이트 되었습니다.
+			환생, 진화를 제외한 모든 페트 업데이트 되었습니다.
 		</p>
         <p class="lead">
             [F:LM]이정재님의 도움으로 일부 데이터가 좀 더 정교해졌습니다.<br>
             [F:LM]이정재님께 감사의 말씀을 전합니다.
 		</p>
+        <!--
         <blockquote>
 			<strong>
                 <p>가끔 오해하시거나 잘못 이해하신 분들을 위해 설명을 보충합니다.</p>
@@ -852,6 +860,7 @@
             <p>( 숫자 ) 는 초기치만 영향을 줍니다. 따라서, 내구력, 공격력, 방어력, 순발력에 (0)이 붙더라도 S급과는 연관이 없습니다.</p>
             <p>( 숫자 ) 의 내구력 + 공격력 + 방어력 + 순발력 합은 S급도 10, F급도 10, 무조건 10입니다.</p>
 		</blockquote>
+        -->
 		<br>
 		<br>
         <div id="memo"></div>
