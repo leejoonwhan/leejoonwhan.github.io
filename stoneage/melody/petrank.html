@@ -128,7 +128,7 @@
             //{"name":"엘로카스","beginning":24,"hp":35,"atk":28,"def":46,"agi":6,"rank":435},
             //
             //{"name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17},
-			//{"name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20},
+			{"name":"얀기로","beginning":27,"hp":27,"atk":36,"def":16,"agi":20},
 			//{"name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21},
 			//{"name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20},
 			//{"name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24},
@@ -311,7 +311,7 @@
 			//{"name":"청호","beginning":25,"hp":29,"atk":39,"def":20,"agi":27},
 			//{"name":"흑호","beginning":25,"hp":28,"atk":35,"def":16,"agi":35},
 			//{"name":"이블티거","beginning":25,"hp":24,"atk":35,"def":14,"agi":25},
-//
+
             //{"name":"포루나","beginning":23,"hp":27,"atk":31,"def":13,"agi":30},
             //{"name":"피피아","beginning":23,"hp":24,"atk":29,"def":14,"agi":29},
             //{"name":"사루나","beginning":23,"hp":21,"atk":26,"def":10,"agi":35},
@@ -333,7 +333,7 @@
             //
             //{"name":"발로스","beginning":22,"hp":27,"atk":39,"def":16,"agi":29},
             //{"name":"데블로스","beginning":21,"hp":24,"atk":32,"def":13,"agi":29},
-//
+
             //{"name":"스노밍코","beginning":20,"hp":30,"atk":22,"def":20,"agi":33},
             //{"name":"밍코","beginning":19,"hp":30,"atk":34,"def":11,"agi":31},
             //
@@ -365,9 +365,9 @@
             //{"name":"구루마루","beginning":25,"hp":30,"atk":40,"def":17,"agi":29},
             //
             //{"name":"호르카","beginning":25,"hp":25,"atk":28,"def":18,"agi":25},
-//
+
             //{"name":"펠트로돈","beginning":26,"hp":27,"atk":35,"def":17,"agi":22},
-//
+
             //{"name":"푸타푸타","beginning":25,"hp":23,"atk":29,"def":12,"agi":33},
             //
             //{"name":"후바티","beginning":23,"hp":33,"atk":39,"def":24,"agi":22},
@@ -382,21 +382,21 @@
             //			
             //{"name":"어린흑룡","beginning":26,"hp":25,"atk":33,"def":13,"agi":29},
             //{"name":"어린백룡","beginning":24,"hp":25,"atk":30,"def":15,"agi":25},
-//
+
             //{"name":"메피노","beginning":25,"hp":30,"atk":41,"def":19,"agi":26},
             //{"name":"스피노","beginning":26,"hp":29,"atk":43,"def":17,"agi":26,"rank":435},
             //            
 			//{"name":"흑주작","beginning":24,"hp":25,"atk":36,"def":13,"agi":25}, // 맹독:2
-//
+
 			//{"name":"흑풍","beginning":25,"hp":29,"atk":38,"def":14,"agi":34},
-//
+
             //{"name":"흑룡","beginning":26,"hp":26,"atk":35,"def":13,"agi":30},
             //{"name":"백룡","beginning":24,"hp":25,"atk":34,"def":15,"agi":25},
             //
             //{"name":"흑기린","beginning":24,"hp":26,"atk":40,"def":18,"agi":19},
-//
+
             //{"name":"우라노스","beginning":27,"hp":23,"atk":29,"def":11,"agi":26},
-//
+
             //{"name":"아비시니안","beginning":26,"hp":23,"atk":31,"def":14,"agi":25,"rank":515},
             //
             //{"name":"바우트","beginning":26,"hp":38,"atk":39,"def":36,"agi":4,"rank":435},
@@ -488,18 +488,18 @@
             $('#myPet tbody').append(''
                 + '<tr class="srank">'
                 + '<td>S 초기치</td>'
-                + '<td>' + resultHp.toFixed(2) + '</td>'
-                + '<td>' + resultAtk.toFixed(2) + '</td>'
-                + '<td>' + resultDef.toFixed(2) + '</td>'
-                + '<td>' + resultAgi.toFixed(2) + '</td>'
+                + '<td>' + resultHp.toFixed(3) + '</td>'
+                + '<td>' + resultAtk.toFixed(3) + '</td>'
+                + '<td>' + resultDef.toFixed(3) + '</td>'
+                + '<td>' + resultAgi.toFixed(3) + '</td>'
                 + '<td>' + '' + '</td>'
                 + '</tr>'
                 + '<tr class="srank">'
                 + '<td>S 성장률</td>'
-                + '<td>' + resultUpHp.toFixed(2) + '</td>'
-                + '<td>' + resultUpAtk.toFixed(2) + '</td>'
-                + '<td>' + resultUpDef.toFixed(2) + '</td>'
-                + '<td>' + resultUpAgi.toFixed(2) + '</td>'
+                + '<td>' + resultUpHp.toFixed(3) + '</td>'
+                + '<td>' + resultUpAtk.toFixed(3) + '</td>'
+                + '<td>' + resultUpDef.toFixed(3) + '</td>'
+                + '<td>' + resultUpAgi.toFixed(3) + '</td>'
                 + '<td>' + '' + '</td>'
                 + '</tr>'
             );
@@ -713,7 +713,7 @@
                 const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
                 for (const rank of ranks) {
                     const count = rankCounts[rank];
-                    const percentage = (count / totalCount * 100).toFixed(2); // 소수점 둘째 자리까지 표시
+                    const percentage = (count / totalCount * 100).toFixed(3); // 소수점 둘째 자리까지 표시
                     message += `${rank} 등급: ${count} 건 (${percentage}%) \n`;
                 }
             }
@@ -732,7 +732,7 @@
                 for (var key in countMap) {
                     if (countMap.hasOwnProperty(key)) {
                         var count = countMap[key];
-                        var percentage = (count / totalCount * 100).toFixed(2); // 백분율 계산 및 소수점 이하 두 자리까지만 표시
+                        var percentage = (count / totalCount * 100).toFixed(3); // 백분율 계산 및 소수점 이하 두 자리까지만 표시
                         message += key + ' ' + countMap[key] + '건 (' + percentage + '%)\n';
                     }
                 }
@@ -750,8 +750,7 @@
         function preciseRound(num) {
             return Math.round(num * 1e12) / 1e12;
         }
-
-        /*
+        
         function getListName() {
             var text = "";
             pet.forEach(function(obj) {
@@ -759,7 +758,6 @@
             });
             $("#listName").text(text);
         }
-        */
 
         // jQuery
 		$(document).ready(function() {
@@ -822,13 +820,12 @@
         <a href="https://leejoonwhan.github.io/stoneage/melody/petrank.html" target="_blank"><h4>Melody Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/melody/reverse.html" target="_blank"><h4>Melody Server Pet Reverse Info</h4></a>
         -->
+        <p class="lead">
+            임시 테스트 중..
+		</p>
 		<p class="lead" id="listName">
 			
 		</p>
-        <p class="lead">
-            
-		</p>
-        
         <!--
         <blockquote>
 			<strong>
