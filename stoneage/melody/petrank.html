@@ -127,11 +127,11 @@
             //{"name":"카르기안","beginning":20,"hp":25,"atk":22,"def":36,"agi":10},
             //{"name":"엘로카스","beginning":24,"hp":35,"atk":28,"def":46,"agi":6,"rank":435},
             //
-            //{"name":"리비노","beginning":25,"hp":27,"atk":37,"def":19,"agi":17},
+            {"name":"리비노","beginning":22,"hp":27,"atk":37,"def":19,"agi":17},
 			{"name":"얀기로","beginning":29,"hp":27,"atk":36,"def":16,"agi":20},
-			//{"name":"반보로","beginning":27,"hp":25,"atk":37,"def":16,"agi":21},
+			{"name":"반보로","beginning":27,"hp":25,"atk":37,"def":15,"agi":21},
 			{"name":"반기노","beginning":26,"hp":24,"atk":38,"def":16,"agi":20},
-			//{"name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24},
+			{"name":"부르돈","beginning":25,"hp":25,"atk":35,"def":14,"agi":24},
             //{"name":"기라노","beginning":26,"hp":32,"atk":42,"def":19,"agi":23},
             //{"name":"기비노","beginning":24,"hp":25,"atk":39,"def":13,"agi":21},
             //{"name":"프로돈","beginning":25,"hp":36,"atk":39,"def":17,"agi":25},
@@ -270,7 +270,7 @@
             //                        			
 			//{"name":"오가로스","beginning":24,"hp":30,"atk":37,"def":28,"agi":20},
 			//{"name":"오르곤","beginning":26,"hp":33,"atk":38,"def":22,"agi":24},
-			//{"name":"모가로스","beginning":25,"hp":27,"atk":40,"def":19,"agi":28},
+			{"name":"모가로스","beginning":27,"hp":23,"atk":37,"def":20,"agi":25},
 			//{"name":"골로스","beginning":26,"hp":28,"atk":40,"def":21,"agi":25},
             //{"name":"칼로스","beginning":25,"hp":26,"atk":35,"def":17,"agi":26},
             //{"name":"지가로스","beginning":25,"hp":27,"atk":34,"def":22,"agi":21},
@@ -427,12 +427,14 @@
             if (copiedPet.rank > 0) {
                 rank = copiedPet.rank;
             }
+            /*
             else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 110) {
                 rank = 435;
             }
             else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 105) {
                 rank = 455;
             }
+            */
             else if (copiedPet.hp + copiedPet.atk + copiedPet.def + copiedPet.agi >= 100) {
                 rank = 475;
             }
