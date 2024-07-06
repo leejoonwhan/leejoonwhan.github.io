@@ -613,6 +613,10 @@
                         + parseInt((foundPet.initnum * (foundPet.agi + base.agi + bonus.agi)), 10);
             stat.poison = preciseRound(( stat.poison / 100 - 20 ) / 4);
             if ( stat.poison < 1 ) stat.poison = 1;
+            console.log(foundPet.initnum + " " + foundPet.hp  + " " + base.hp  + " " + bonus.hp);
+            console.log(foundPet.initnum + " " + foundPet.atk + " " + base.atk + " " + bonus.atk);
+            console.log(foundPet.initnum + " " + foundPet.def + " " + base.def + " " + bonus.def);
+            console.log(foundPet.initnum + " " + foundPet.agi + " " + base.agi + " " + bonus.agi);
 
             if (btnName == "calculate") {
                 if (Math.floor(stat.hp)  === parseInt($("#hp").val(),  10) &&
