@@ -479,11 +479,12 @@
             const upAtk = preciseRound(copiedPet.atk * rank / 10000);
             const upDef = preciseRound(copiedPet.def * rank / 10000);
             const upAgi = preciseRound(copiedPet.agi * rank / 10000);
-
+            
             const resultUpHp  = preciseRound((upHp * 4) + upAtk + upDef + upAgi);
             const resultUpAtk = preciseRound((upHp * 0.1) + upAtk + (upDef * 0.1) + (upAgi * 0.05));
             const resultUpDef = preciseRound((upHp * 0.1) + (upAtk * 0.1) + upDef + (upAgi * 0.05));
             const resultUpAgi = upAgi;
+            const resultSum   = preciseRound(resultUpAtk + resultUpDef + resultUpAgi);
 
             $('#myPet tbody').append(''
                 + '<tr class="srank">'
@@ -500,7 +501,7 @@
                 + '<td>' + resultUpAtk.toFixed(2) + '</td>'
                 + '<td>' + resultUpDef.toFixed(2) + '</td>'
                 + '<td>' + resultUpAgi.toFixed(2) + '</td>'
-                + '<td>' + '' + '</td>'
+                + '<td>' + resultSum.toFixed(2) + '</td>'
                 + '</tr>'
             );
 
