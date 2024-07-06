@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Happy Server Reverse Info</title>
+	<title>Melody Server Reverse Info</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -55,7 +55,7 @@
 
         function getBase() {
             const result = {"statHp":0,"statAtk":0,"statDef":0,"statAgi":0,"upHp":0,"upAtk":0,"upDef":0,"upAgi":0};
-            const base = {"beginning":10,"hp":0,"atk":0,"def":0,"agi":0,"rank":0};
+            const base = {"initnum":10,"hp":0,"atk":0,"def":0,"agi":0,"rank":0};
             const statHp  = Number($("#statHp").val());
             const statAtk = Number($("#statAtk").val());
             const statDef = Number($("#statDef").val());
@@ -65,27 +65,27 @@
             const upDef   = Number($("#upDef").val());
             const upAgi   = Number($("#upAgi").val());
 
-            // beginning
+            // initnum
             for (var i = 0; i <= 20; i++) {
                 // agi
                 for (var ii = 0; ii <= 60; ii++) {
-                    const agi = preciseRound(base.beginning * (base.agi + 2 + 2.5) / 100);
-                    //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
+                    const agi = preciseRound(base.initnum * (base.agi + 2 + 2.5) / 100);
+                    //$("#memo").append(base.initnum + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                     // 순발력 정수 값이 입력값과 일치하면 체력, 공격력, 방어력 데이터를 검색
                     if (parseInt(agi, 10) == statAgi) {
-                        //$("#memo").append(base.beginning + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
+                        //$("#memo").append(base.initnum + ' ' + base.agi + ' ' + agi + ' ' + parseInt(agi, 10) + '<br>');
                         // hp
                         for (var iii = 0; iii <= 60; iii++) {
-                            const hp = preciseRound(base.beginning * (base.hp + 2 + 2.5) / 100);
+                            const hp = preciseRound(base.initnum * (base.hp + 2 + 2.5) / 100);
                             // atk 
                             for (var iiii = 0; iiii <= 60; iiii++) {
-                                const atk = preciseRound(base.beginning * (base.atk + 2 + 2.5) / 100);
+                                const atk = preciseRound(base.initnum * (base.atk + 2 + 2.5) / 100);
                                 // def
                                 for (var iiiii = 0; iiiii <= 60; iiiii++) {
-                                    const def = preciseRound(base.beginning * (base.def + 2 + 2.5) / 100);
+                                    const def = preciseRound(base.initnum * (base.def + 2 + 2.5) / 100);
                                     
-                                    //if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
-                                        //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
+                                    //if (base.initnum == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
+                                        //$("#memo").append(base.initnum + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + '<br>');
                                         //$("#memo").append(hp + ' ' + atk + ' ' + def + ' ' + agi + '<br>');
                                         //$("#memo").append(parseInt((hp * 4) + atk + def + agi, 10) + ' ' + parseInt((hp * 0.1) + atk + (def * 0.1) + (agi * 0.05), 10) + ' ' + parseInt((hp * 0.1) + (atk * 0.1) + def + (agi * 0.05), 10) + ' ' + parseInt(agi, 10) + '<br>');
                                         //$("#memo").append(((hp * 4) + atk + def + agi) + '<br>');
@@ -133,11 +133,11 @@
                                             const baseUpDef = preciseRound((base.def + 2 + 2.5) * base.rank / 10000);
                                             const baseUpAgi = preciseRound((base.agi + 2 + 2.5) * base.rank / 10000);
 
-                                            if (base.beginning == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
-                                                //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
+                                            if (base.initnum == 24 && base.hp == 27 && base.atk == 31 && base.def == 24 && base.agi == 18) {
+                                                //$("#memo").append(base.initnum + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
                                                 //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
                                             }
-                                            //$("#memo").append(base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
+                                            //$("#memo").append(base.initnum + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '<br>');
                                             //$("#memo").append(((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi).toFixed(2) + ' ' + ((baseUpHp * 0.1) + baseUpAtk + (baseUpDef * 0.1) + (baseUpAgi * 0.05)).toFixed(2) + ' ' + ((baseUpHp * 0.1) + (baseUpAtk * 0.1) + baseUpDef + (baseUpAgi * 0.05)).toFixed(2) + ' ' + baseUpAgi.toFixed(2) + '<br>');
                                             // 소수점 데이터도 일치하면 출력값 계산 및 계산 종료
                                             const tempHp  = preciseRound((baseUpHp * 4) + baseUpAtk + baseUpDef + baseUpAgi);
@@ -206,7 +206,7 @@
                     stop = false;
                     break;
                 }
-                base.beginning++;
+                base.initnum++;
             }
         }
 
@@ -216,7 +216,7 @@
             $('#base tbody').append(''
                 + '<tr class="result1">'
                 + '<td>' + "계산 베이스" + '</td>'
-                + '<td colspan="5">' + base.beginning + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '</td>'
+                + '<td colspan="5">' + base.initnum + ' ' + base.hp + ' ' + base.atk + ' ' + base.def + ' ' + base.agi + ' ' + base.rank + '</td>'
                 + '</tr>'
                 + '<tr class="result1">'
                 + '<td>' + "계산 초기치"   + '</td>'
@@ -237,7 +237,7 @@
             );
             
             // 두 번째 테이블 베이스에 데이터 입력
-            $("#baseBeginning").val(base.beginning);
+            $("#baseinitnum").val(base.initnum);
             $("#baseHp").val(base.hp);
             $("#baseAtk").val(base.atk);
             $("#baseDef").val(base.def);
@@ -249,7 +249,7 @@
 
         function getRank() {
             
-            const baseBeginning = Number($("#baseBeginning").val());
+            const baseinitnum = Number($("#baseinitnum").val());
             const baseHp = Number($("#baseHp").val());
             const baseAtk = Number($("#baseAtk").val());
             const baseDef = Number($("#baseDef").val());
@@ -402,9 +402,9 @@
 		<hr>
         <!--
         <a href="https://leejoonwhan.github.io/stoneage/melody/happy.html" target="_blank"><h4>Melody Server Pet Info</h4></a>
+        -->
         <a href="https://leejoonwhan.github.io/stoneage/melody/petrank.html" target="_blank"><h4>Melody Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/melody/reverse.html" target="_blank"><h4>Melody Server Pet Reverse Info</h4></a>
-        -->
         <!--
         <p class="lead">
 			펫의 초기치 소수점을 확인하는 계산기입니다.<br>
@@ -521,7 +521,7 @@
                     <tr>
                         <td>베이스</td>
                         <td>
-                            <input type="number" class="form-control" id="baseBeginning" placeholder="27" readonly>
+                            <input type="number" class="form-control" id="baseinitnum" placeholder="27" readonly>
                         </td>
                         <td>
                             <input type="number" class="form-control" id="baseHp" placeholder="27" readonly>
