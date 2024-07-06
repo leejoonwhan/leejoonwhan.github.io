@@ -629,10 +629,13 @@
                     stat.bonusDef = bonus.def;
                     stat.bonusAgi = bonus.agi;
                     result.push(stat);
-                    console.log(foundPet.initnum + " " + foundPet.hp  + " " + base.hp  + " " + bonus.hp);
-                    console.log(foundPet.initnum + " " + foundPet.atk + " " + base.atk + " " + bonus.atk);
-                    console.log(foundPet.initnum + " " + foundPet.def + " " + base.def + " " + bonus.def);
-                    console.log(foundPet.initnum + " " + foundPet.agi + " " + base.agi + " " + bonus.agi);
+                    if (stat.rank == 8) {
+                        console.log(foundPet.initnum + " " + foundPet.hp  + " " + base.hp  + " " + bonus.hp);
+                        console.log(foundPet.initnum + " " + foundPet.atk + " " + base.atk + " " + bonus.atk);
+                        console.log(foundPet.initnum + " " + foundPet.def + " " + base.def + " " + bonus.def);
+                        console.log(foundPet.initnum + " " + foundPet.agi + " " + base.agi + " " + bonus.agi);
+                    }
+                    
                 }
             }
             else if (btnName == "search") {
