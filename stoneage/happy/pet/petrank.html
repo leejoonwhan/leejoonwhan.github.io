@@ -759,6 +759,22 @@
             return Math.round(num * 1e12) / 1e12;
         }
 
+        function poisonDamageRank() {
+            for (var i = 0; i < pet.length; i++) {
+                var poison = parseInt((pet[i].initnum * (pet[i].hp + 2 + 3)),  10)
+                        + parseInt((pet[i].initnum * (pet[i].atk + 2 + 3)), 10)
+                        + parseInt((pet[i].initnum * (pet[i].def + 2 + 2)), 10)
+                        + parseInt((pet[i].initnum * (pet[i].agi + 2 + 2)), 10);
+                poison = preciseRound(( poison / 100 - 20 ) / 4);
+                if ( poison < 1 ) poison = 1;
+
+                if ( poison > 2 && poison % 1.0 > 0.00 && poison % 1.0 < 0.0625) {
+                    console.log(pet[i].name + " " + poison);
+                    $("#poisonRank").append("<footer>" + pet[i].name + ": " + poison + "</footer>");
+                }
+            }
+        }
+
         /*
         function getListName() {
             var text = "";
@@ -772,6 +788,7 @@
         // jQuery
 		$(document).ready(function() {
 
+            poisonDamageRank();
             //getListName();
 
             $("#name").on("keydown", function(event) {
@@ -832,20 +849,8 @@
 			2024-06-20 신규 환생을 제외한 모든 페트 업데이트 되었습니다.<br>
             환생/진화는 성장베이스를 그대로 이전 받기 때문에 업데이트 제외 예정입니다.<br>
 		</p>
-        <blockquote>
+        <blockquote id="poisonRank">
             독뎀으로 8등급을 알 수 있는 목록 (※주의: 아직 증명되지 않음)
-            <footer>노트로스: 3.06</footer>
-            <footer>씨보스 2.035</footer>
-            <footer>라나프 3.05</footer>
-            <footer>차이혼 5.01</footer>
-            <footer>다이노로스 3.04</footer>
-            <footer>노로로크스 2.015</footer>
-            <footer>진주토로스 2.02</footer>
-            <footer>포레스트크랩 3.04</footer>
-            <footer>크랩 2.035</footer>
-            <footer>레이론 2.02</footer>
-            <footer>흑주작 2.02</footer>
-            <footer>백룡 2.02</footer>
         </blockquote>
         <!--
         <blockquote>
