@@ -800,7 +800,7 @@
 
             // 검색 버튼
 			$("#search").on("click", function() {
-                $(this).attr("disabled", true);
+                //$(this).attr("disabled", true);
 
                 const foundPet = pet.find(p => p.name === $("#name").val());
                 if (foundPet == undefined) {
@@ -816,7 +816,7 @@
 
             // 계산 버튼
 			$("#calculate").on("click", function() {
-                $(this).attr("disabled", true);
+                //$(this).attr("disabled", true);
 
                 const foundPet = pet.find(p => p.name === $("#name").val());
                 if (foundPet == undefined) {
