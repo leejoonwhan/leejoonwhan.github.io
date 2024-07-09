@@ -769,9 +769,15 @@
                 poison = preciseRound(( poison / 100 - 20 ) / 4);
                 if ( poison < 1 ) poison = 1;
 
-                if ( poison > 2 && poison % 1.0 > 0.00 && poison % 1.0 < 0.0625) {
+                if ( poison >= 2 && poison % 1.0 > 0.00 && poison % 1.0 < 0.0625) {
                     console.log(pet[i].name + " " + poison);
-                    $("#poisonRank").append("<footer>" + pet[i].name + ": " + poison + "</footer>");
+                    $("#poisonRank8").append("<footer>" + pet[i].name + ": " + poison + "</footer>");
+                    continue;
+                }
+
+                if ( poison >= 2 && poison % 1.0 >= 0.0625 && poison % 1.0 < 0.125) {
+                    console.log(pet[i].name + " " + poison);
+                    $("#poisonRank7").append("<footer>" + pet[i].name + ": " + poison + "</footer>");
                 }
             }
         }
@@ -850,8 +856,11 @@
 			2024-06-20 신규 환생을 제외한 모든 페트 업데이트 되었습니다.<br>
             환생/진화는 성장베이스를 그대로 이전 받기 때문에 업데이트 제외 예정입니다.<br>
 		</p>
-        <blockquote id="poisonRank">
+        <blockquote id="poisonRank8">
             독뎀으로 8등급을 알 수 있는 목록 (※주의: 아직 증명되지 않음)
+        </blockquote>
+        <blockquote id="poisonRank7">
+            독뎀으로 7등급 이상을 알 수 있는 목록 (※주의: 아직 증명되지 않음)
         </blockquote>
         <!--
         <blockquote>
