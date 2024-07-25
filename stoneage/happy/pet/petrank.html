@@ -279,7 +279,6 @@
             {"name":"카르노스","initnum":25,"hp":28,"atk":39,"def":20,"agi":28},
             {"name":"노르곤","initnum":26,"hp":27,"atk":38,"def":17,"agi":27},
             {"name":"로제로스","initnum":24,"hp":27,"atk":40,"def":16,"agi":30},
-            {"name":"로제로스","initnum":24,"hp":27,"atk":40,"def":16,"agi":30},
             {"name":"파베로스","initnum":24,"hp":28,"atk":38,"def":15,"agi":33,"rank":435},
             
             {"name":"프이토","initnum":26,"hp":19,"atk":22,"def":25,"agi":29},
@@ -532,36 +531,36 @@
 
             $('#result tbody').empty();
             result.length = 0;
-            const base = {"hp":-2,"atk":-2,"def":-2,"agi":-2};
-            //const base = {"hp":-3,"atk":-3,"def":-3,"agi":-3}; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
+            //const base = {"hp":-2,"atk":-2,"def":-2,"agi":-2};
+            const base = {"hp":-3,"atk":-3,"def":-3,"agi":-3}; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
             
-            for (let i = 0; i < 5; i++) {
-                for (let ii = 0; ii < 5; ii++) {
-                    for (let iii = 0; iii < 5; iii++) {
-                        for (let iiii = 0; iiii < 5; iiii++) {
+            for (let i = 0; i < 6; i++) {
+                for (let ii = 0; ii < 6; ii++) {
+                    for (let iii = 0; iii < 6; iii++) {
+                        for (let iiii = 0; iiii < 6; iiii++) {
                             setBonus(foundPet, base);
                             base.hp++;
                             if (base.hp == 3) {
-                                base.hp = -2;
-                                //base.hp = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
+                                //base.hp = -2;
+                                base.hp = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                             }
                         }
                         base.atk++;
                         if (base.atk == 3) {
-                            base.atk = -2;
-                            //base.atk = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
+                            //base.atk = -2;
+                            base.atk = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                         }
                     }
                     base.def++;
                     if (base.def == 3) {
-                        base.def = -2;
-                        //base.def = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
+                        //base.def = -2;
+                        base.def = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                     }
                 }
                 base.agi++;
                 if (base.agi == 3) {
-                    base.agi = -2;
-                    //base.agi = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
+                    //base.agi = -2;
+                    base.agi = -3; // 2024-06-13 토라 데이터 발견으로 의심되는 부분 수정함
                 }
             }
             
@@ -878,6 +877,7 @@
         <a href="https://leejoonwhan.github.io/stoneage/happy/pet/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/pet/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
 		<p class="lead" id="listName">
+            2024-07-25 -3 등급 업데이트 되었습니다.<br>
 			2024-07-17 신규 환생을 제외한 모든 페트 업데이트 되었습니다.<br>
             환생/진화는 성장베이스를 그대로 이전 받기 때문에 업데이트 제외 예정입니다.<br>
 		</p>
