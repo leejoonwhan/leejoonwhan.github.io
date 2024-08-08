@@ -33,6 +33,15 @@
             width: 100px;
 		}
 
+        /* 최소 너비 지정 */
+        .min-width-td-120 {
+            min-width: 120px; /* 원하는 최소 너비로 조정 */
+        }
+        /* 최소 너비 지정 */
+        .min-width-td-80 {
+            min-width: 80px; /* 원하는 최소 너비로 조정 */
+        }
+    
 		.green { color: #fff; background-color: #5cb85c;}
 		.blue { color: #fff; background-color: #337ab7;}
 		.red { color: #fff; background-color: #d9534f;}
@@ -698,7 +707,6 @@
 
         function print() {
             result.sort(function(a, b) {
-                
                 if (b['rank'] !== a['rank']) {
                     return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
                 } else if (b['hp'] !== a['hp']) {
@@ -714,19 +722,6 @@
 
 
             for (let i = 0; i < result.length; i++) {
-                /*
-                $('#result tbody').append(''
-            		+ '<tr>'
-                    + '<td>' + (i + 1) + '</td>'
-            		+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
-            		+ '<td>' + result[i].hp.toFixed(2)  + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
-            		+ '<td>' + result[i].atk.toFixed(2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
-            		+ '<td>' + result[i].def.toFixed(2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
-            		+ '<td>' + result[i].agi.toFixed(2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
-                    + '<td>' + result[i].poison + '</td>'
-            		+ '</tr>'
-            	);
-                */
                 $('#result tbody').append(''
             		+ '<tr>'
                     + '<td>' + (i + 1) + '</td>'
@@ -996,7 +991,7 @@
             	</thead>
             	<tbody>
                     <tr>
-                        <td>
+                        <td class="min-width-td-120">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="name" placeholder="얀기로">
                                 <div class="input-group-btn">
@@ -1004,19 +999,19 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
+                        <td class="min-width-td-80">
                             <input type="number" class="form-control" id="hp" placeholder="57">
                         </td>
-                        <td>
+                        <td class="min-width-td-80">
                             <input type="number" class="form-control" id="atk" placeholder="12">
                         </td>
-                        <td>
+                        <td class="min-width-td-80">
                             <input type="number" class="form-control" id="def" placeholder="7">
                         </td>
-                        <td>
+                        <td class="min-width-td-80">
                             <input type="number" class="form-control" id="agi" placeholder="6">
                         </td>
-                        <td>
+                        <td class="min-width-td-80">
                             <button type="button" class="form-control" id="calculate">계산</button>
                         </td>
                     </tr>
