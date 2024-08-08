@@ -325,15 +325,6 @@
 
                                 // 두 번째 테이블에 데이터 출력
                                 $('#rank tbody').append(''
-                                    //+ '<tr class="result2">'
-                                    //+ '<td>' + "계산 스텟" + '</td>'
-                                    //+ '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + '</td>'
-                                    //+ '<td>[' + (2 - i)    + ']' + guessHp  + '</td>'
-                                    //+ '<td>[' + (2 - ii)   + ']' + guessAtk + '</td>'
-                                    //+ '<td>[' + (2 - iii)  + ']' + guessDef + '</td>'
-                                    //+ '<td>[' + (2 - iiii) + ']' + guessAgi + '</td>'
-                                    //+ '<td>' + '</td>'
-                                    //+ '</tr>'
                                     + '<tr class="result2">'
                                     + '<td>' + "계산 베이스" + '</td>'
                                     + '<td>[' + ((2 - i) + (2 - ii) + (2 - iii) + (2 - iiii)) +  ']' + ((rankHp + rankAtk + rankDef + rankAgi) / 4).toFixed(2) + '</td>'
@@ -507,7 +498,7 @@
 			</table>
 		</div>
 
-        <h4>환각 계산기(테스트 중)</h4>
+        <h4>환각 계산기(미완성)</h4>
         <hr>
         <div class="table-responsive" id="rank">
             <table class="table table-striped">
