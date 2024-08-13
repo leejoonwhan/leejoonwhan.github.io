@@ -534,10 +534,6 @@
             $('#myPet tbody').append(''
                 + '<tr class="srank">'
                 + '<td>S 초기치</td>'
-                //+ '<td>' + resultHp.toFixed(2) + '</td>'
-                //+ '<td>' + resultAtk.toFixed(2) + '</td>'
-                //+ '<td>' + resultDef.toFixed(2) + '</td>'
-                //+ '<td>' + resultAgi.toFixed(2) + '</td>'
                 + '<td>' + limitDecimalPlaces(resultHp, 2) + '</td>'
                 + '<td>' + limitDecimalPlaces(resultAtk, 2) + '</td>'
                 + '<td>' + limitDecimalPlaces(resultDef, 2) + '</td>'
@@ -897,10 +893,11 @@
 	<div class="container">
 		<h2>Happy Server Pet Rank Info</h2>
 		<hr>
-        <a href="https://happy01.net/bbs/board.php?bo_table=board23" target="_blank"><h4>Happy Server</h4>
+        <a href="https://happy01.net/bbs/board.php?bo_table=board23" target="_blank" class="input-group"><h4>Happy Server</h4></a>
         <!--<a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>-->
-        <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
-        <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
+        <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank" class="input-group"><h4>Happy Server Pet Rank Info</h4></a>
+        <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank" class="input-group"><h4>Happy Server Pet Reverse Info</h4></a>
+        <br>
         <div class="panel panel-danger">
             <div class="panel-heading"><strong>주의사항</strong></div>
             <div class="panel-body">
@@ -969,7 +966,6 @@
             <p>( 숫자 ) 의 내구력 + 공격력 + 방어력 + 순발력 합은 S급도 10, F급도 10, 무조건 10입니다.</p>
 		</blockquote>
         -->
-		<br>
 		<br>
         <div id="memo"></div>
 		<div class="table-responsive" id="myPet">
