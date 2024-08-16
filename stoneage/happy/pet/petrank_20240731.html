@@ -904,20 +904,19 @@
             	setBase(foundPet);
             });
 
+            // 24시간을 밀리초로 변환 (24시간 * 60분 * 60초 * 1000밀리초)
+            //var refreshTime = 24 * 60 * 60 * 1000;
+            // 24시간마다 페이지를 새로고침
+            //setInterval(function () {
+            //    location.reload();
+            //}, refreshTime);
+            
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
             $("#btnTop").on("click", function() {
             	document.body.scrollTop = 0;
             	document.documentElement.scrollTop = 0;
             });
-
-            // 24시간을 밀리초로 변환 (24시간 * 60분 * 60초 * 1000밀리초)
-            //var refreshTime = 24 * 60 * 60 * 1000;
-            var refreshTime = 60 * 1000;
-            // 24시간마다 페이지를 새로고침
-            setInterval(function () {
-                location.reload();
-            }, refreshTime);
         });
     </script>
 </head>
