@@ -859,6 +859,19 @@
             $("#listName").text(text);
         }
         */
+        
+        // 현재 시간과 자정(00:00:00)까지 남은 시간을 계산
+        function timeUntilMidnight() {
+            var now = new Date();
+            var midnight = new Date();
+            midnight.setHours(24, 0, 0, 0); // 자정 시간 설정 (24:00:00:000)
+            return midnight - now; // 현재 시간과 자정까지의 차이 계산
+        }
+
+        // 자정에 페이지를 새로고침하는 함수
+        function refreshAtMidnight() {
+            location.reload(); // 페이지 새로고침
+        }
 
         // jQuery
 		$(document).ready(function() {
@@ -910,7 +923,18 @@
             //setInterval(function () {
             //    location.reload();
             //}, refreshTime);
-            
+
+            // 첫 번째 새로고침까지의 시간 설정
+            var firstRefreshTime = timeUntilMidnight();
+
+            // 첫 번째 새로고침 타이머 설정
+            setTimeout(function () {
+                refreshAtMidnight(); // 첫 번째 새로고침 실행
+
+                // 이후에는 24시간마다 새로고침
+                setInterval(refreshAtMidnight, 24 * 60 * 60 * 1000); // 24시간 주기로 반복
+            }, firstRefreshTime);
+
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
             $("#btnTop").on("click", function() {
