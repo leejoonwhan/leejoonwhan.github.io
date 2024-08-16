@@ -864,9 +864,11 @@
         
         // Audio 객체 생성
         const audio = new Audio(audioUrl);
+        audio.muted = true;
 
         // 일정 시간 (5초) 후에 오디오 재생
         setTimeout(() => {
+            audio.muted = false;
             audio.play().catch(error => {
                 console.error("오디오 재생 중 오류 발생:", error);
             });
