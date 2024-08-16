@@ -859,20 +859,6 @@
             $("#listName").text(text);
         }
         */
-        // 오디오 파일 URL 설정
-        const audioUrl = "https://github.com/leejoonwhan/leejoonwhan.github.io/raw/master/wow/sound/SylvanasWindrunnerGreeting04.ogg";
-        
-        // Audio 객체 생성
-        const audio = new Audio(audioUrl);
-        audio.muted = true;
-
-        // 일정 시간 (5초) 후에 오디오 재생
-        setTimeout(() => {
-            audio.muted = false;
-            audio.play().catch(error => {
-                console.error("오디오 재생 중 오류 발생:", error);
-            });
-        }, 5000); // 5000ms = 5초
 
         // jQuery
 		$(document).ready(function() {
