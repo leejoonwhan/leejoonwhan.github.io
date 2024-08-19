@@ -351,7 +351,8 @@
 
             {"name":"스노밍코","initnum":20,"hp":30,"atk":22,"def":20,"agi":33},
             {"name":"밍코","initnum":19,"hp":30,"atk":34,"def":11,"agi":31},
-            
+            {"name":"링코","initnum":22,"hp":43,"atk":30,"def":14,"agi":33},
+                        
             {"name":"쿠아","initnum":24,"hp":23,"atk":29,"def":16,"agi":25},
             {"name":"쿠팡","initnum":23,"hp":19,"atk":30,"def":10,"agi":27},
             
@@ -393,7 +394,8 @@
             {"name":"푸타푸타","initnum":25,"hp":23,"atk":29,"def":12,"agi":33},
             
             {"name":"후바티","initnum":23,"hp":33,"atk":39,"def":24,"agi":22},
-            
+            {"name":"노바티","initnum":21,"hp":28,"atk":39,"def":21,"agi":27},
+                        
             {"name":"키파","initnum":25,"hp":24,"atk":33,"def":15,"agi":26},
             {"name":"히파","initnum":24,"hp":26,"atk":33,"def":10,"agi":39,"rank":455},
                         
@@ -408,7 +410,7 @@
             {"name":"어린청룡","initnum":26,"hp":34,"atk":42,"def":14,"agi":22},
             
             {"name":"메피노","initnum":25,"hp":30,"atk":41,"def":19,"agi":26},
-            {"name":"스피노","initnum":26,"hp":29,"atk":43,"def":17,"agi":26,"rank":435},
+            {"name":"스피노","initnum":26,"hp":29,"atk":43,"def":17,"agi":26},
                         
             {"name":"흑주작","initnum":24,"hp":25,"atk":36,"def":13,"agi":25},
 
@@ -421,20 +423,21 @@
 
             {"name":"우라노스","initnum":27,"hp":23,"atk":29,"def":11,"agi":26},
 
-            {"name":"아비시니안","initnum":26,"hp":23,"atk":31,"def":14,"agi":25,"rank":515},
+            {"name":"아비시니안","initnum":26,"hp":23,"atk":31,"def":14,"agi":25},
             
-            {"name":"바우트","initnum":26,"hp":38,"atk":39,"def":36,"agi":4,"rank":435},
-            {"name":"토우트","initnum":26,"hp":45,"atk":34,"def":36,"agi":7,"rank":435},
+            {"name":"바우트","initnum":26,"hp":38,"atk":39,"def":36,"agi":4},
+            {"name":"토우트","initnum":26,"hp":45,"atk":34,"def":36,"agi":7},
             
-            {"name":"모사크","initnum":23,"hp":32,"atk":40,"def":17,"agi":28,"rank":435},
+            {"name":"모사크","initnum":23,"hp":32,"atk":40,"def":17,"agi":28},
             
-            {"name":"블랙펄","initnum":25,"hp":25,"atk":35,"def":14,"agi":29,"rank":475},
+            {"name":"블랙펄","initnum":25,"hp":25,"atk":35,"def":14,"agi":29},
+            {"name":"블루문","initnum":25,"hp":30,"atk":39,"def":17,"agi":28},
+                        
+            {"name":"쿠오코마","initnum":26,"hp":39,"atk":36,"def":31,"agi":9},
+            {"name":"웅이","initnum":26,"hp":42,"atk":35,"def":33,"agi":8},
             
-            {"name":"쿠오코마","initnum":26,"hp":39,"atk":36,"def":31,"agi":9,"rank":435},
-            {"name":"웅이","initnum":26,"hp":42,"atk":35,"def":33,"agi":8,"rank":435},
-            
-            {"name":"흑토끼","initnum":24,"hp":28,"atk":36,"def":22,"agi":18,"rank":475},
-            {"name":"백설토끼","initnum":24,"hp":43,"atk":33,"def":37,"agi":4,"rank":435},
+            {"name":"흑토끼","initnum":24,"hp":28,"atk":36,"def":22,"agi":18},
+            {"name":"백설토끼","initnum":24,"hp":43,"atk":33,"def":37,"agi":4},
 
             {"name":"어린현무","initnum":24,"hp":46,"atk":28,"def":37,"agi":6},
             
@@ -448,7 +451,21 @@
             {"name":"막쿠마","initnum":24,"hp":26,"atk":34,"def":9,"agi":39},
 
             {"name":"자쿠이노","initnum":26,"hp":35,"atk":39,"def":26,"agi":19},
-        ]
+
+            {"name":"페리스","initnum":24,"hp":38,"atk":37,"def":30,"agi":4},
+            {"name":"델피누스","initnum":24,"hp":25,"atk":30,"def":12,"agi":32},
+            {"name":"엘피누스","initnum":25,"hp":23,"atk":31,"def":11,"agi":33},
+            
+            {"name":"깜아리","initnum":22,"hp":32,"atk":38,"def":13,"agi":33},
+            {"name":"홍아리","initnum":24,"hp":21,"atk":29,"def":11,"agi":35},
+
+            {"name":"펭펭","initnum":26,"hp":29,"atk":37,"def":20,"agi":23},
+            {"name":"흑돌","initnum":25,"hp":33,"atk":38,"def":22,"agi":23},
+            {"name":"팽돌","initnum":24,"hp":42,"atk":37,"def":33,"agi":4},
+
+            {"name":"셀르프","initnum":24,"hp":37,"atk":32,"def":34,"agi":5},
+            
+        ];
 
         let btnName = "";
         const result = [];
@@ -836,17 +853,18 @@
         }
         */
 
-        // 현재 시간과 자정(00:00:00)까지 남은 시간을 계산
-        function timeUntilMidnight() {
-            var now = new Date();
-            var midnight = new Date();
-            midnight.setHours(24, 0, 0, 0); // 자정 시간 설정 (24:00:00:000)
-            return midnight - now; // 현재 시간과 자정까지의 차이 계산
-        }
-
-        // 자정에 페이지를 새로고침하는 함수
-        function refreshAtMidnight() {
-            location.reload(); // 페이지 새로고침
+        function checkUpdateExists() {
+            fetch('https://leejoonwhan.github.io/stoneage/happy/20240819_001.html', { method: 'HEAD' })
+                .then(response => {
+                    if (!response.ok) {
+                        // HTML 파일이 없을 때 페이지를 새로고침 (업데이트)
+                        alert("새로운 업데이트가 확인되었습니다.\n페이지를 새로고침합니다.");
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching the HTML file:', error);
+                });
         }
 
         // jQuery
@@ -893,23 +911,8 @@
             	setBase(foundPet);
             });
 
-            // 24시간을 밀리초로 변환 (24시간 * 60분 * 60초 * 1000밀리초)
-            //var refreshTime = 24 * 60 * 60 * 1000;
-            // 24시간마다 페이지를 새로고침
-            //setInterval(function () {
-            //    location.reload();
-            //}, refreshTime);
-
-            // 첫 번째 새로고침까지의 시간 설정
-            var firstRefreshTime = timeUntilMidnight();
-
-            // 첫 번째 새로고침 타이머 설정
-            setTimeout(function () {
-                refreshAtMidnight(); // 첫 번째 새로고침 실행
-
-                // 이후에는 24시간마다 새로고침
-                setInterval(refreshAtMidnight, 24 * 60 * 60 * 1000); // 24시간 주기로 반복
-            }, firstRefreshTime);
+            // 600초마다 업데이트 여부를 확인
+            setInterval(checkUpdateExists, 600000);
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
