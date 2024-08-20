@@ -852,17 +852,24 @@
                     poison5 = preciseRound(( poison5 / 100 - 20 ) / 4);
                 if ( poison5 < 1 ) poison5 = 1;
 
-                if ( poison8 >= 2 && poison8 % 1.0 < poison7 % 1.0) {
-                    $("#poisonRank8").append("<footer>" + pet[i].name + ": " + poison8 + "</footer>");
-                    continue;
-                }
+                var poison4 = parseInt((pet[i].initnum * (pet[i].hp - 2 + 3)),  10)
+                        + parseInt((pet[i].initnum * (pet[i].atk + 2 + 3)), 10)
+                        + parseInt((pet[i].initnum * (pet[i].def + 2 + 2)), 10)
+                        + parseInt((pet[i].initnum * (pet[i].agi + 2 + 2)), 10);
+                    poison4 = preciseRound(( poison4 / 100 - 20 ) / 4);
+                if ( poison4 < 1 ) poison4 = 1;
 
-                if ( poison7 >= 2 && poison8 % 1.0 > poison7 % 1.0 && poison7 % 1.0 < poison6 % 1.0) {
+                if (poison8 >= 2 && poison8 % 1.0 < poison7 % 1.0) {
+                    $("#poisonRank8").append("<footer>" + pet[i].name + ": " + poison8 + "</footer>");
+                } 
+                else if (poison7 >= 2 && poison8 % 1.0 > poison7 % 1.0 && poison7 % 1.0 < poison6 % 1.0) {
                     $("#poisonRank7").append("<footer>" + pet[i].name + ": " + poison8 + "</footer>");
                 }
-
-                if ( poison6 >= 2 && poison7 % 1.0 > poison6 % 1.0 && poison6 % 1.0 < poison5 % 1.0) {
+                else if (poison6 >= 2 && poison7 % 1.0 > poison6 % 1.0 && poison6 % 1.0 < poison5 % 1.0) {
                     $("#poisonRank6").append("<footer>" + pet[i].name + ": " + poison8 + "</footer>");
+                }
+                else if (poison5 >= 2 && poison6 % 1.0 > poison5 % 1.0 && poison5 % 1.0 < poison4 % 1.0) {
+                    $("#poisonRank5").append("<footer>" + pet[i].name + ": " + poison8 + "</footer>");
                 }
             }
         }
@@ -878,7 +885,7 @@
         */
         
         function checkUpdateExists() {
-            fetch('https://leejoonwhan.github.io/stoneage/happy/20240819_001.html', { method: 'HEAD' })
+            fetch('https://leejoonwhan.github.io/stoneage/happy/pet/20240820_001.html', { method: 'HEAD' })
                 .then(response => {
                     if (!response.ok) {
                         // HTML 파일이 없을 때 페이지를 새로고침 (업데이트)
@@ -959,15 +966,26 @@
             
 		</p>
         <div class="row">
-            <blockquote id="poisonRank8" class="col-xs-6 col-md-4">
-                8등급
-            </blockquote>
-            <blockquote id="poisonRank7" class="col-xs-6 col-md-4">
-                7등급
-            </blockquote>
-            <blockquote id="poisonRank6" class="col-xs-6 col-md-4">
-                6등급
-            </blockquote>
+            <div class="col-md-3">
+                <blockquote id="poisonRank8">
+                    8등급
+                </blockquote>
+            </div>
+            <div class="col-md-3">
+                <blockquote id="poisonRank7">
+                    7등급
+                </blockquote>
+            </div>
+            <div class="col-md-3">
+                <blockquote id="poisonRank6">
+                    6등급
+                </blockquote>
+            </div>
+            <div class="col-md-3">
+                <blockquote id="poisonRank5">
+                    5등급
+                </blockquote>
+            </div>
         </div>
         
         <!--
