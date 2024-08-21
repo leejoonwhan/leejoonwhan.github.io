@@ -854,16 +854,27 @@
         */
 
         function checkUpdateExists() {
-            fetch('https://leejoonwhan.github.io/stoneage/happy/20240819_001.html', { method: 'HEAD' })
+            const version = 20240821000;
+            fetch('https://leejoonwhan.github.io/stoneage/happy/version.json')
                 .then(response => {
                     if (!response.ok) {
-                        // HTML 파일이 없을 때 페이지를 새로고침 (업데이트)
-                        alert("새로운 업데이트가 확인되었습니다.\n페이지를 새로고침합니다.");
-                        location.reload();
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();  // 응답을 텍스트로 읽음
+                })
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
+                        if (version < data.version) {
+                            alert("새로운 업데이트가 확인되었습니다.\n페이지를 새로고침합니다.");
+                            location.reload();
+                        }
+                    } catch (error) {
+                        console.error('Parsing error:', error);
                     }
                 })
                 .catch(error => {
-                    console.error('Error fetching the HTML file:', error);
+                    console.error('Error fetching the JSON file:', error);
                 });
         }
 
@@ -911,8 +922,8 @@
             	setBase(foundPet);
             });
 
-            // 600초마다 업데이트 여부를 확인
-            setInterval(checkUpdateExists, 600000);
+            // 30분마다 업데이트 여부를 확인
+            setInterval(checkUpdateExists, 1000 * 60 * 30);
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
