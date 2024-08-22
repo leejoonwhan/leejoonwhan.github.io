@@ -888,7 +888,7 @@
         
         function checkUpdateExists() {
             const version = 20240822000;
-            fetch('https://leejoonwhan.github.io/stoneage/happy/pet/version.json')
+            fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
