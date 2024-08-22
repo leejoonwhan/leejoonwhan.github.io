@@ -887,7 +887,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240821000;
+            const version = 20240822000;
             fetch('https://leejoonwhan.github.io/stoneage/happy/pet/version.json')
                 .then(response => {
                     if (!response.ok) {
@@ -899,8 +899,11 @@
                     try {
                         const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
                         if (version < data.version) {
-                            alert("새로운 업데이트가 확인되었습니다.\n페이지를 새로고침합니다.");
-                            location.reload();
+                            let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
+                            if (data.version != "") {
+                                message += `\n\n업데이트 내용: \n${data.message}`;
+                            }
+                            alert(message);
                         }
                     } catch (error) {
                         console.error('Parsing error:', error);
@@ -908,7 +911,7 @@
                 })
                 .catch(error => {
                     console.error('Error fetching the JSON file:', error);
-                });
+            });
         }
 
         // jQuery
