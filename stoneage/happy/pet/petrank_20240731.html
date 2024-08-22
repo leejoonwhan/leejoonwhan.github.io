@@ -898,6 +898,7 @@
                 .then(text => {
                     try {
                         const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
+                        console.log(data);
                         if (version < data.version) {
                             let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
                             if (data.version != "") {
