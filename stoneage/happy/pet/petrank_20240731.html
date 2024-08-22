@@ -905,6 +905,7 @@
                                 message += `\n\n업데이트 내용: \n${data.message}`;
                             }
                             alert(message);
+                            location.reload();
                         }
                     } catch (error) {
                         console.error('Parsing error:', error);
