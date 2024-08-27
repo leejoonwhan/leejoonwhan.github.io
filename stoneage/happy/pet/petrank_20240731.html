@@ -736,8 +736,12 @@
                 }
             });
 
+            let len = 500;
+            if (len > result.length) {
+                len = result.length
+            }
 
-            for (let i = 0; i < result.length; i++) {
+            for (let i = 0; i < len; i++) {
                 /*
                 $('#result tbody').append(''
             		+ '<tr>'
@@ -887,7 +891,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240822004;
+            const version = 20240822005;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
