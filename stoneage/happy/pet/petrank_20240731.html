@@ -891,7 +891,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240822005;
+            const version = 20240822006;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -905,7 +905,7 @@
                         console.log(version);
                         if (version < data.version) {
                             let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
-                            if (data.version != "") {
+                            if (data.message != "") {
                                 message += `\n\n업데이트 내용: \n${data.message}`;
                             }
                             alert(message);
@@ -964,7 +964,7 @@
             	setBase(foundPet);
             });
 
-            // 30분마다 업데이트 여부를 확인
+            // 10분마다 업데이트 여부를 확인
             setInterval(checkUpdateExists, 1000 * 60 * 10);
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
