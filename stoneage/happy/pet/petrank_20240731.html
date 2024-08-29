@@ -736,7 +736,7 @@
                 }
             });
 
-            let len = 500;
+            let len = 300;
             if (len > result.length) {
                 len = result.length
             }
@@ -891,7 +891,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240822008;
+            const version = 20240822009;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -908,8 +908,10 @@
                             if (data.message != "") {
                                 message += `\n\n업데이트 내용: \n${data.message}`;
                             }
-                            alert(message);
-                            location.reload();
+                            
+                            if (!alert(message)) {
+                                location.reload();
+                            }
                         }
                     } catch (error) {
                         console.error('Parsing error:', error);
