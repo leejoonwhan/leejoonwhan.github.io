@@ -722,7 +722,6 @@
 
         function print() {
             result.sort(function(a, b) {
-                
                 if (b['rank'] !== a['rank']) {
                     return b['rank'] - a['rank']; // rank를 기준으로 내림차순 정렬
                 } else if (b['hp'] !== a['hp']) {
@@ -742,19 +741,6 @@
             }
 
             for (let i = 0; i < len; i++) {
-                /*
-                $('#result tbody').append(''
-            		+ '<tr>'
-                    + '<td>' + (i + 1) + '</td>'
-            		+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
-            		+ '<td>' + result[i].hp.toFixed(2)  + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
-            		+ '<td>' + result[i].atk.toFixed(2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
-            		+ '<td>' + result[i].def.toFixed(2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
-            		+ '<td>' + result[i].agi.toFixed(2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
-                    + '<td>' + result[i].poison + '</td>'
-            		+ '</tr>'
-            	);
-                */
                 $('#result tbody').append(''
             		+ '<tr>'
                     + '<td>' + (i + 1) + '</td>'
@@ -768,36 +754,15 @@
             	);
             }
 
-            // 각 rank 값의 등장 횟수를 저장할 객체
-            const rankCounts = {};
-
-            // 배열 순회하면서 각 rank 값의 개수 체크
-            for (let i = 0; i < result.length; i++) {
-                const rank = result[i].rank;
-                if (rankCounts[rank] === undefined) {
-                    rankCounts[rank] = 1;
-                } else {
-                    rankCounts[rank]++;
-                }
-            }
-
-            // 객체를 배열로 변환하고 rank에 대해 내림차순으로 정렬
-            const ranks = Object.keys(rankCounts).sort((a, b) => b - a); // rank를 내림차순으로 정렬한 배열
-
             // 결과 출력
-            let message = '계산이 끝났습니다!\n';
-            if (btnName == "calculate") {
-                const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
-                for (const rank of ranks) {
-                    const count = rankCounts[rank];
-                    const percentage = (count / totalCount * 100).toFixed(2); // 소수점 둘째 자리까지 표시
-                    message += `${rank} 등급: ${count} 건 (${percentage}%) \n`;
-                }
-            }
-            else if (btnName == "search") {
+            let message = '';
+            if (btnName == "search") {
+                message += '8등급의 분포는 다음과 같습니다!';
+
                 // 값을 카운트할 객체 생성
                 var countMap = {};
                 var totalCount = result.length;
+                var statCounts = [];
 
                 // 배열을 반복하면서 각 요소의 값을 카운트
                 result.forEach(function(obj) {
@@ -810,10 +775,59 @@
                     if (countMap.hasOwnProperty(key)) {
                         var count = countMap[key];
                         var percentage = (count / totalCount * 100).toFixed(2); // 백분율 계산 및 소수점 이하 두 자리까지만 표시
-                        message += key + ' ' + countMap[key] + '건 (' + percentage + '%)\n';
+                        //message += key + ' ' + countMap[key] + '건 (' + percentage + '%)\n';
+                        var arrStat = {};
+                        arrStat['key'] = key;
+                        arrStat['cnt'] = countMap[key];
+                        arrStat['per'] = percentage;
+                        statCounts.push(arrStat);
                     }
                 }
+                
+                statCounts.sort(function (a, b) {
+                    if (b['cnt'] !== a['cnt']) {
+                        return b['cnt'] - a['cnt']; // 건수를 기준으로 내림차순 정렬
+                    } else if (b['key'] !== a['key']) {
+                        return b['key'] - a['key']; // 초기치를 기준으로 내림차순 정렬
+                    } 
+                });
+
+                statCounts.forEach(function(obj) {
+                    message += '\n' + obj['key'] + ' ' + obj['cnt'] + '건 (' + obj['per'] + '%)';
+                });
             }
+            else if (btnName == "calculate") {
+                // 각 rank 값의 등장 횟수를 저장할 객체
+                const rankCounts = {};
+
+                // 배열 순회하면서 각 rank 값의 개수 체크
+                for (let i = 0; i < result.length; i++) {
+                    const rank = result[i].rank;
+                    if (rankCounts[rank] === undefined) {
+                        rankCounts[rank] = 1;
+                    } else {
+                        rankCounts[rank]++;
+                    }
+                }
+
+                // 객체를 배열로 변환하고 rank에 대해 내림차순으로 정렬
+                const ranks = Object.keys(rankCounts).sort((a, b) => b - a); // rank를 내림차순으로 정렬한 배열
+
+                const name = $("#name").val();
+                const hp = $("#hp").val();
+                const atk = $("#atk").val();
+                const def = $("#def").val();
+                const agi = $("#agi").val();
+
+                message += `[${name}][${hp}, ${atk}, ${def}, ${agi}]의 계산이 끝났습니다!\n`
+                const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
+                for (const rank of ranks) {
+                    const count = rankCounts[rank];
+                    const percentage = (count / totalCount * 100).toFixed(2); // 소수점 둘째 자리까지 표시
+                    message += `${rank} 등급: ${count} 건 (${percentage}%) \n`;
+                }
+            }
+            
             alert(message);
             //$("#search").attr("disabled", false);
             //$("#calculate").attr("disabled", false);
@@ -891,7 +905,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240829000;
+            const version = 20240831000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
