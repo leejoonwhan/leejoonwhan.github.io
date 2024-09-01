@@ -817,7 +817,7 @@
                 const atk = $("#atk").val();
                 const def = $("#def").val();
                 const agi = $("#agi").val();
-                const encounter = preciseRound((result.length + 1) / 178750 * 100).toFixed(2); // 모든 경우의 수 178750
+                const encounter = preciseRound((result.length + 1) / 178750 * 100).toFixed(3); // 모든 경우의 수 178750
 
                 message += `[${name}][${hp}, ${atk}, ${def}, ${agi}] 출현율: ${encounter}%\n`
                 const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
