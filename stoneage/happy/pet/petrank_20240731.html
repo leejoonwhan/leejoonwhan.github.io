@@ -819,7 +819,7 @@
                 const agi = $("#agi").val();
                 let   encounter = 0;
                 if (result.length > 0) {
-                    encounter = preciseRound((result.length + 1) / 178750 * 100).toFixed(3); // 모든 경우의 수 178750
+                    encounter = preciseRound(result.length / 178750 * 100).toFixed(4); // 모든 경우의 수 178750
                 }
 
                 message += `[${name}][${hp}, ${atk}, ${def}, ${agi}] 출현율: ${encounter}%\n`
