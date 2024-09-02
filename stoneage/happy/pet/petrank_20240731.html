@@ -756,7 +756,9 @@
             // 결과 출력
             let message = '';
             if (btnName == "search") {
-                message += '8등급의 분포는 다음과 같습니다!';
+
+                const name = $("#name").val();
+                message += `[${name}]의 8등급 분포는 다음과 같습니다!`;
 
                 // 값을 카운트할 객체 생성
                 var countMap = {};
@@ -908,7 +910,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240901000;
+            const version = 20240902000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
