@@ -342,6 +342,7 @@
                                     
             {"name":"지라크","initnum":23,"hp":30,"atk":27,"def":17,"agi":29},
             {"name":"타이판","initnum":23,"hp":25,"atk":33,"def":17,"agi":19},
+            {"name":"파이톤","initnum":23,"hp":26,"atk":36,"def":17,"agi":24},
             {"name":"바이퍼","initnum":24,"hp":25,"atk":34,"def":16,"agi":28},
             {"name":"포보스","initnum":24,"hp":26,"atk":33,"def":24,"agi":21},
             
@@ -929,7 +930,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240903001;
+            const version = 20240904000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
