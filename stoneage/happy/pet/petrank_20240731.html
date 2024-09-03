@@ -342,9 +342,10 @@
                                     
             {"name":"지라크","initnum":23,"hp":30,"atk":27,"def":17,"agi":29},
             {"name":"타이판","initnum":23,"hp":25,"atk":33,"def":17,"agi":19},
+            {"name":"바이퍼","initnum":24,"hp":25,"atk":34,"def":16,"agi":28},
             {"name":"포보스","initnum":24,"hp":26,"atk":33,"def":24,"agi":21},
             
-            {"name":"아코로비","initnum":25,"hp":32,"atk":38,"def":19,"agi":27},
+            {"name":"아코로비","initnum":25,"hp":31,"atk":38,"def":19,"agi":27},
             {"name":"골드로비","initnum":26,"hp":22,"atk":29,"def":14,"agi":28},
             
             {"name":"토라","initnum":26,"hp":21,"atk":26,"def":12,"agi":26},
@@ -479,6 +480,8 @@
             {"name":"셀르프","initnum":24,"hp":37,"atk":32,"def":34,"agi":5},
 
             {"name":"봉봉","initnum":26,"hp":30,"atk":41,"def":19,"agi":26},
+
+            {"name":"라이칸","initnum":25,"hp":24,"atk":34,"def":17,"agi":19},
 
             {"name":"나비드래곤","initnum":25,"hp":29,"atk":39,"def":15,"agi":32},
             {"name":"블랙드래곤","initnum":25,"hp":28,"atk":42,"def":16,"agi":29},
@@ -926,7 +929,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240903000;
+            const version = 20240903001;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
