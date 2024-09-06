@@ -845,7 +845,8 @@
                     encounter = preciseRound(result.length / 178750 * 100).toFixed(4); // 모든 경우의 수 178750
                 }
 
-                message += `[${name}][${hp}, ${atk}, ${def}, ${agi}] 출현율: ${encounter}%\n`
+                //message += `[${name}][${hp}, ${atk}, ${def}, ${agi}] 출현율: ${encounter}%\n`
+                message += `[${name}][${hp}, ${atk}, ${def}, ${agi}] 계산 완료!\n`
                 const totalCount = Object.keys(rankCounts).reduce((acc, rank) => acc + rankCounts[rank], 0);
                 for (const rank of ranks) {
                     const count = rankCounts[rank];
@@ -913,7 +914,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20240904000;
+            const version = 20240904001;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
