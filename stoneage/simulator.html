@@ -102,11 +102,11 @@
             stat[3] = preciseRound(stat[3] + dex);
 
             // 통계를 위한 변수 저장
-            FRAND += preciseRound(fRand * 100);
+            FRAND  += preciseRound(fRand * 100);
             FVITAL += preciseRound(param[0]);
-            FSTR += preciseRound(param[1]);
-            FTGH += preciseRound(param[2]);
-            FDEX += preciseRound(param[3]);
+            FSTR   += preciseRound(param[1]);
+            FTGH   += preciseRound(param[2]);
+            FDEX   += preciseRound(param[3]);
         }
 
         // jQuery
@@ -115,6 +115,13 @@
             $("#run").on("click", function() {
 
                 $('#result tbody').empty();
+
+                // 평균 값 계산을 위한 변수 선언 
+                FRAND  = 0.0;
+                FVITAL = 0.0;
+                FSTR   = 0.0;
+                FTGH   = 0.0;
+                FDEX   = 0.0;
 
                 let stat = [
                     preciseRound(initnum * (base[0] + 2.0)),
@@ -169,11 +176,11 @@
 
                 $('#result tbody').append(''
                     + '<tr class="srank">'
-                    + '<td>' + preciseRound(FRAND  / (maxLevel - 1)) + '</td>'
-                    + '<td>' + preciseRound(FVITAL / (maxLevel - 1)) + '</td>'
-                    + '<td>' + preciseRound(FSTR   / (maxLevel - 1)) + '</td>'
-                    + '<td>' + preciseRound(FTGH   / (maxLevel - 1)) + '</td>'
-                    + '<td>' + preciseRound(FDEX   / (maxLevel - 1)) + '</td>'
+                    + '<td>' + preciseRound(FRAND  / (maxLevel - 1)).toFixed(2) + '</td>'
+                    + '<td>' + preciseRound(FVITAL / (maxLevel - 1)).toFixed(2) + '</td>'
+                    + '<td>' + preciseRound(FSTR   / (maxLevel - 1)).toFixed(2) + '</td>'
+                    + '<td>' + preciseRound(FTGH   / (maxLevel - 1)).toFixed(2) + '</td>'
+                    + '<td>' + preciseRound(FDEX   / (maxLevel - 1)).toFixed(2) + '</td>'
                     + '</tr>'
                 );
                 
