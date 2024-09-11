@@ -76,7 +76,7 @@
         }
 
         function preciseRound(num) {
-            return Math.round(num * 1e12) / 1e12;
+            return preciseRound(num * 1e12) / 1e12;
         }
         
         function petLevelUp(base, stat) {
@@ -96,17 +96,17 @@
             tgh   = preciseRound(tgh   * fRand + param[2] * fRand);
             dex   = preciseRound(dex   * fRand + param[3] * fRand);
 
-            stat[0] = preciseRound(stat[0] + vital);
-            stat[1] = preciseRound(stat[1] + str);
-            stat[2] = preciseRound(stat[2] + tgh);
-            stat[3] = preciseRound(stat[3] + dex);
+            stat[0] = INT(preciseRound(stat[0] + vital));
+            stat[1] = INT(preciseRound(stat[1] + str));
+            stat[2] = INT(preciseRound(stat[2] + tgh));
+            stat[3] = INT(preciseRound(stat[3] + dex));
 
             // 통계를 위한 변수 저장
-            FRAND  += preciseRound(fRand * 100);
-            FVITAL += preciseRound(param[0]);
-            FSTR   += preciseRound(param[1]);
-            FTGH   += preciseRound(param[2]);
-            FDEX   += preciseRound(param[3]);
+            FRAND  = preciseRound(FRAND  + (fRand * 100));
+            FVITAL = preciseRound(FVITAL + param[0]);
+            FSTR   = preciseRound(FSTR   + param[1]);
+            FTGH   = preciseRound(FTGH   + param[2]);
+            FDEX   = preciseRound(FDEX   + param[3]);
         }
 
         // jQuery
@@ -135,19 +135,19 @@
                 const maxLevel = 140;
                 let stat1 = [...stat];
                 for (let i = 1; i <= maxLevel; i++) {
-                    let vital = Math.round((i - 1) * best2[0] + best1[0]);
-                    let str = Math.round((i - 1) * best2[1] + best1[1]);
-                    let tgh = Math.round((i - 1) * best2[2] + best1[2]);
-                    let dex = Math.round((i - 1) * best2[3] + best1[3]);
+                    let vital = INT(preciseRound((i - 1) * best2[0] + best1[0]));
+                    let str   = INT(preciseRound((i - 1) * best2[1] + best1[1]));
+                    let tgh   = INT(preciseRound((i - 1) * best2[2] + best1[2]));
+                    let dex   = INT(preciseRound((i - 1) * best2[3] + best1[3]));
 
                     if (i > 1) {
                         petLevelUp(base, stat1);
                     }
 
-                    let vital1 = Math.round((stat1[0] * 4.0 + stat1[1] + stat1[2] + stat1[3]) / 100);
-                    let str1   = Math.round(((stat1[0] * 0.1) + stat1[1] + (stat1[2] * 0.1) + (stat1[3] * 0.05)) / 100);
-                    let tgh1   = Math.round(((stat1[0] * 0.1) + (stat1[1] * 0.1) + stat1[2] + (stat1[3] * 0.05)) / 100);
-                    let dex1   = Math.round(stat1[3] / 100);
+                    let vital1 = INT(preciseRound((stat1[0] * 4.0 + stat1[1] + stat1[2] + stat1[3]) / 100));
+                    let str1   = INT(preciseRound(((stat1[0] * 0.1) + stat1[1] + (stat1[2] * 0.1) + (stat1[3] * 0.05)) / 100));
+                    let tgh1   = INT(preciseRound(((stat1[0] * 0.1) + (stat1[1] * 0.1) + stat1[2] + (stat1[3] * 0.05)) / 100));
+                    let dex1   = INT(preciseRound(stat1[3] / 100));
 
                     $('#result tbody').append(''
                         + '<tr class="srank">'
