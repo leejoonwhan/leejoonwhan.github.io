@@ -76,7 +76,7 @@
         }
 
         function preciseRound(num) {
-            return preciseRound(num * 1e12) / 1e12;
+            return Math.round(num * 1e12) / 1e12;
         }
         
         function petLevelUp(base, stat) {
