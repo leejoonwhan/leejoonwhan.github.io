@@ -20,7 +20,7 @@
 		  outline: none;
 		  background-color: red;
 		  color: white;
-		  cursor: pointer;
+		  cursor: poparseInter;
 		  padding: 15px;
 		  border-radius: 4px;
 		}
@@ -96,10 +96,10 @@
             tgh   = preciseRound(tgh   * fRand + param[2] * fRand);
             dex   = preciseRound(dex   * fRand + param[3] * fRand);
 
-            stat[0] = INT(preciseRound(stat[0] + vital));
-            stat[1] = INT(preciseRound(stat[1] + str));
-            stat[2] = INT(preciseRound(stat[2] + tgh));
-            stat[3] = INT(preciseRound(stat[3] + dex));
+            stat[0] = parseInt(preciseRound(stat[0] + vital), 10);
+            stat[1] = parseInt(preciseRound(stat[1] + str), 10);
+            stat[2] = parseInt(preciseRound(stat[2] + tgh), 10);
+            stat[3] = parseInt(preciseRound(stat[3] + dex), 10);
 
             // 통계를 위한 변수 저장
             FRAND  = preciseRound(FRAND  + (fRand * 100));
@@ -135,19 +135,19 @@
                 const maxLevel = 140;
                 let stat1 = [...stat];
                 for (let i = 1; i <= maxLevel; i++) {
-                    let vital = INT(preciseRound((i - 1) * best2[0] + best1[0]));
-                    let str   = INT(preciseRound((i - 1) * best2[1] + best1[1]));
-                    let tgh   = INT(preciseRound((i - 1) * best2[2] + best1[2]));
-                    let dex   = INT(preciseRound((i - 1) * best2[3] + best1[3]));
+                    let vital = parseInt(preciseRound((i - 1) * best2[0] + best1[0]));
+                    let str   = parseInt(preciseRound((i - 1) * best2[1] + best1[1]));
+                    let tgh   = parseInt(preciseRound((i - 1) * best2[2] + best1[2]));
+                    let dex   = parseInt(preciseRound((i - 1) * best2[3] + best1[3]));
 
                     if (i > 1) {
                         petLevelUp(base, stat1);
                     }
 
-                    let vital1 = INT(preciseRound((stat1[0] * 4.0 + stat1[1] + stat1[2] + stat1[3]) / 100));
-                    let str1   = INT(preciseRound(((stat1[0] * 0.1) + stat1[1] + (stat1[2] * 0.1) + (stat1[3] * 0.05)) / 100));
-                    let tgh1   = INT(preciseRound(((stat1[0] * 0.1) + (stat1[1] * 0.1) + stat1[2] + (stat1[3] * 0.05)) / 100));
-                    let dex1   = INT(preciseRound(stat1[3] / 100));
+                    let vital1 = parseInt(preciseRound((stat1[0] * 4.0 + stat1[1] + stat1[2] + stat1[3]) / 100), 10);
+                    let str1   = parseInt(preciseRound(((stat1[0] * 0.1) + stat1[1] + (stat1[2] * 0.1) + (stat1[3] * 0.05)) / 100), 10);
+                    let tgh1   = parseInt(preciseRound(((stat1[0] * 0.1) + (stat1[1] * 0.1) + stat1[2] + (stat1[3] * 0.05)) / 100), 10);
+                    let dex1   = parseInt(preciseRound(stat1[3] / 100), 10);
 
                     $('#result tbody').append(''
                         + '<tr class="srank">'
