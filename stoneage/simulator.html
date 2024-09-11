@@ -107,7 +107,7 @@
             const initnum = 26;
             let base = [24.0, 38.0, 16.0, 20.0];
 
-            $("#btnTop").on("click", function() {
+            $("#run").on("click", function() {
             	// 성장 베이스 설정
                 base = base.map(b => b + 2.0);
 
@@ -211,7 +211,7 @@
         </div>
         
         <div class="form-group">
-            <button type="button" class="btn btn-success form-control">Success</button>
+            <button type="button" class="btn btn-success form-control" id="run">시뮬레이션 시작</button>
         </div>
 
         <div class="table-responsive" id="results">
