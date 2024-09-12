@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Happy Server Pet Info</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<style>
-		body { cursor: default; }
-		#btnTop {
-		  display: none;
-		  position: fixed;
-		  bottom: 20px;
-		  right: 30px;
-		  z-index: 99;
-		  font-size: 18px;
-		  border: none;
-		  outline: none;
-		  background-color: red;
-		  color: white;
-		  cursor: pointer;
-		  padding: 15px;
-		  border-radius: 4px;
-		}
+    <title>Happy Server Pet Info</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body { cursor: default; }
+        #btnTop {
+          display: none;
+          position: fixed;
+          bottom: 20px;
+          right: 30px;
+          z-index: 99;
+          font-size: 18px;
+          border: none;
+          outline: none;
+          background-color: red;
+          color: white;
+          cursor: pointer;
+          padding: 15px;
+          border-radius: 4px;
+        }
 
-		#btnTop:hover {
-		  background-color: #555;
-		}
-		.searchValue {
+        #btnTop:hover {
+          background-color: #555;
+        }
+        .searchValue {
             display: inline;
             width: 100px;
-		}
+        }
 
         /* 최소 너비 지정 */
         .min-width-td-120 {
@@ -42,11 +42,11 @@
             min-width: 80px; /* 원하는 최소 너비로 조정 */
         }
 
-		.green { color: #fff; background-color: #5cb85c;}
-		.blue { color: #fff; background-color: #337ab7;}
-		.red { color: #fff; background-color: #d9534f;}
-		.yellow { color: #fff; background-color: #f0ad4e;}
-	</style>
+        .green { color: #fff; background-color: #5cb85c;}
+        .blue { color: #fff; background-color: #337ab7;}
+        .red { color: #fff; background-color: #d9534f;}
+        .yellow { color: #fff; background-color: #f0ad4e;}
+    </style>
     <script>
         var pet = [
             {"name":"우리","initnum":10,"hp":20,"atk":12,"def":15,"agi":25},
@@ -495,15 +495,15 @@
         const result = [];
 
         // 스크롤
-		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
-		window.onscroll = function() {scrollFunction()};
-		function scrollFunction() {
+        // 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            	btnTop.style.display = "block";
+                btnTop.style.display = "block";
             } else {
-            	btnTop.style.display = "none";
+                btnTop.style.display = "none";
             }
-		}
+        }
 
         function setSRank(copiedPet) {
 
@@ -759,16 +759,16 @@
 
             for (let i = 0; i < result.length; i++) {
                 $('#result tbody').append(''
-            		+ '<tr>'
+                    + '<tr>'
                     + '<td>' + (i + 1) + '</td>'
-            		+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].hp,  2) + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].atk, 2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].def, 2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].agi, 2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
+                    + '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].hp,  2) + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].atk, 2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].def, 2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].agi, 2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
                     + '<td>' + result[i].poison + '</td>'
-            		+ '</tr>'
-            	);
+                    + '</tr>'
+                );
 
                 if (i + 1 >= 300) {
                     break;
@@ -980,7 +980,7 @@
         }
 
         // jQuery
-		$(document).ready(function() {
+        $(document).ready(function() {
 
             poisonDamageRank();
             //getListName();
@@ -1004,7 +1004,7 @@
                 // foundPet을 깊은 복사하여 새로운 객체를 생성
                 const copiedPet = JSON.parse(JSON.stringify(foundPet));
                 setSRank(copiedPet);
-            	setBase(foundPet);
+                setBase(foundPet);
             });
 
             // 계산 버튼
@@ -1020,7 +1020,7 @@
                 // foundPet을 깊은 복사하여 새로운 객체를 생성
                 const copiedPet = JSON.parse(JSON.stringify(foundPet));
                 setSRank(copiedPet);
-            	setBase(foundPet);
+                setBase(foundPet);
             });
 
             // 5분마다 업데이트 여부를 확인
@@ -1029,26 +1029,26 @@
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
             $("#btnTop").on("click", function() {
-            	document.body.scrollTop = 0;
-            	document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
             });
         });
     </script>
 </head>
 <body>
-	<div class="container">
-		<h2>Happy Server Pet Rank Info</h2>
-		<hr>
+    <div class="container">
+        <h2>Happy Server Pet Rank Info</h2>
+        <hr>
         <a href="https://happy01.net/bbs/board.php?bo_table=board23" target="_blank"><h4>Happy Server</h4></a>
         <!--<a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>-->
         <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
-        <a href="https://leejoonwhan.github.io/stoneage/simulator.html" target="_blank"><h4>Pet Level Up Simulator</h4></a>
-		<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fleejoonwhan.github.io%2Fstoneage%2Fhappy%2Fpet%2Fpetrank_20240731.html&count_bg=%230000FF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
+        <a href="https://leejoonwhan.github.io/stoneage/simulator/petlevelup.html" target="_blank"><h4>Simulator Pet Level Up</h4></a>
+        <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fleejoonwhan.github.io%2Fstoneage%2Fhappy%2Fpet%2Fpetrank_20240731.html&count_bg=%230000FF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
         <p class="text-right" id="ver"></p>
         <p class="lead" id="listName">
             
-		</p>
+        </p>
         <div class="row">
             <div class="col-xs-6 col-md-4">
                 <blockquote id="poisonRank8">
@@ -1098,11 +1098,11 @@
                 <p>다시 한 번 말씀드리지만, 해당 계산기에서 8등급이 나오더라도 모든 스텟이 S급 이상 성장률을 보장하는 것은 절대 아닙니다.</p>
                 <p>해당 계산기는 참고용이며, 판단은 사용자의 몫입니다.</p>
             </strong>
-		</blockquote>
-		<blockquote>
+        </blockquote>
+        <blockquote>
             <p>펫 이름과 초기치를 입력해주세요. 만약, 입력값과 출력되는 S급 초기치가 다르다면 제보해주세요.</p>
             <p>8 등급부터 -8 등급까지 존재하며 8등급이 S급 확률입니다.</p>
-		</blockquote>
+        </blockquote>
         <blockquote>
             <p>[ 숫자 ] 와 ( 숫자 ) 에 대해서 설명을 드립니다.</p>
             <p>[ 숫자 ] 는 [-2, -1, 0, 1, 2] 이렇게 총 5가지가 존재합니다.</p>
@@ -1110,31 +1110,31 @@
             <p>( 숫자 ) 는 (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10) 이렇게 총 11가지가 존재합니다.</p>
             <p>( 숫자 ) 는 초기치만 영향을 줍니다. 따라서, 내구력, 공격력, 방어력, 순발력에 (0)이 붙더라도 S급과는 연관이 없습니다.</p>
             <p>( 숫자 ) 의 내구력 + 공격력 + 방어력 + 순발력 합은 S급도 10, F급도 10, 무조건 10입니다.</p>
-		</blockquote>
+        </blockquote>
         -->
-		<br>
+        <br>
         <div id="memo"></div>
-		<div class="table-responsive" id="myPet">
+        <div class="table-responsive" id="myPet">
             <table class="table table-striped">
-            	<colgroup>
-                    <col width="100px">	
-            		<col width="50px">
-            		<col width="50px">
-            		<col width="50px">
+                <colgroup>
+                    <col width="100px">    
                     <col width="50px">
                     <col width="50px">
-            	</colgroup>
-            	<thead>
-            		<tr>
+                    <col width="50px">
+                    <col width="50px">
+                    <col width="50px">
+                </colgroup>
+                <thead>
+                    <tr>
                         <th>이름</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
                         <th>순발력</th>
                         <th></th>
-            		</tr>
-            	</thead>
-            	<tbody>
+                    </tr>
+                </thead>
+                <tbody>
                     <tr>
                         <td class="min-width-td-120">
                             <div class="input-group">
@@ -1160,9 +1160,9 @@
                             <button type="button" class="form-control" id="calculate">계산</button>
                         </td>
                     </tr>
-            	</tbody>
+                </tbody>
             </table>
-		</div>
+        </div>
 
         <div class="table-responsive" id="result">
             <table class="table table-striped">
