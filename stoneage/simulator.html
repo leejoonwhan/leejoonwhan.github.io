@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Happy Server Pet Info</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<style>
-		body { cursor: default; }
-		#btnTop {
-		  display: none;
-		  position: fixed;
-		  bottom: 20px;
-		  right: 30px;
-		  z-index: 99;
-		  font-size: 18px;
-		  border: none;
-		  outline: none;
-		  background-color: red;
-		  color: white;
-		  cursor: poparseInter;
-		  padding: 15px;
-		  border-radius: 4px;
-		}
+    <title>Simulator Pet Level Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body { cursor: default; }
+        #btnTop {
+          display: none;
+          position: fixed;
+          bottom: 20px;
+          right: 30px;
+          z-index: 99;
+          font-size: 18px;
+          border: none;
+          outline: none;
+          background-color: red;
+          color: white;
+          cursor: poparseInter;
+          padding: 15px;
+          border-radius: 4px;
+        }
 
-		#btnTop:hover {
-		  background-color: #555;
-		}
-		
+        #btnTop:hover {
+          background-color: #555;
+        }
+        
         /* 최소 너비 지정 */
         .min-width-td-120 {
             min-width: 120px; /* 원하는 최소 너비로 조정 */
@@ -38,11 +38,11 @@
             min-width: 80px; /* 원하는 최소 너비로 조정 */
         }
     
-		.green { color: #fff; background-color: #5cb85c;}
-		.blue { color: #fff; background-color: #337ab7;}
-		.red { color: #fff; background-color: #d9534f;}
-		.yellow { color: #fff; background-color: #f0ad4e;}
-	</style>
+        .green { color: #fff; background-color: #5cb85c;}
+        .blue { color: #fff; background-color: #337ab7;}
+        .red { color: #fff; background-color: #d9534f;}
+        .yellow { color: #fff; background-color: #f0ad4e;}
+    </style>
     <script>
 
         // 샘플 페트 반기노 
@@ -60,15 +60,15 @@
         let FDEX   = 0.0;
         
         // 스크롤
-		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
-		window.onscroll = function() {scrollFunction()};
-		function scrollFunction() {
+        // 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            	btnTop.style.display = "block";
+                btnTop.style.display = "block";
             } else {
-            	btnTop.style.display = "none";
+                btnTop.style.display = "none";
             }
-		}
+        }
 
         function limitDecimalPlaces(number, places) {
             var power = Math.pow(10, places);
@@ -110,7 +110,7 @@
         }
 
         // jQuery
-		$(document).ready(function() {
+        $(document).ready(function() {
 
             $("#run").on("click", function() {
 
@@ -190,21 +190,21 @@
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
             $("#btnTop").on("click", function() {
-            	document.body.scrollTop = 0;
-            	document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
             });
         });
     </script>
 </head>
 <body>
-	<div class="container">
-		<h2>Pet Level Up Simulator</h2>
-		<hr>
+    <div class="container">
+        <h2>Pet Level Up Simulator</h2>
+        <hr>
         <a href="https://happy01.net/bbs/board.php?bo_table=board23" target="_blank"><h4>Happy Server</h4></a>
         <!--<a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>-->
         <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
-        <a href="https://leejoonwhan.github.io/stoneage/simulator.html" target="_blank"><h4>Pet Level Up Simulator</h4></a>
+        <a href="https://leejoonwhan.github.io/stoneage/simulator/petlevelup.html" target="_blank"><h4>Simulator Pet Level Up</h4></a>
         
         <p class="text-right" id="ver"></p>
         <div class="panel panel-danger">
