@@ -360,7 +360,8 @@
             {"name":"스노밍코","initnum":20,"hp":30,"atk":22,"def":20,"agi":33},
             {"name":"밍코","initnum":19,"hp":30,"atk":34,"def":11,"agi":31},
             {"name":"링코","initnum":22,"hp":43,"atk":30,"def":14,"agi":33},
-                        
+            {"name":"한복밍코","initnum":26,"hp":26,"atk":34,"def":14,"agi":34},
+                                    
             {"name":"쿠아","initnum":24,"hp":23,"atk":29,"def":16,"agi":25},
             {"name":"쿠팡","initnum":23,"hp":19,"atk":30,"def":10,"agi":27},
             
@@ -486,7 +487,8 @@
 
             {"name":"나비드래곤","initnum":25,"hp":29,"atk":39,"def":15,"agi":32},
             {"name":"블랙드래곤","initnum":25,"hp":28,"atk":42,"def":16,"agi":29},
-            
+
+            {"name":"한복메이","initnum":26,"hp":27,"atk":39,"def":19,"agi":23},
         ];
 
         let btnName = "";
@@ -930,7 +932,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240904000;
+            const version = 20240912000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1025,6 +1027,7 @@
         <!--<a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>-->
         <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
+        <a href="https://leejoonwhan.github.io/stoneage/simulator.html" target="_blank"><h4>Pet Level Up Simulator</h4></a>
 		<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fleejoonwhan.github.io%2Fstoneage%2Fhappy%2Fpet%2Fpetrank_20240731.html&count_bg=%230000FF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
         <p class="text-right" id="ver"></p>
         <p class="lead" id="listName">
