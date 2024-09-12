@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Happy Server Pet Info</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<style>
-		body { cursor: default; }
-		#btnTop {
-		  display: none;
-		  position: fixed;
-		  bottom: 20px;
-		  right: 30px;
-		  z-index: 99;
-		  font-size: 18px;
-		  border: none;
-		  outline: none;
-		  background-color: red;
-		  color: white;
-		  cursor: pointer;
-		  padding: 15px;
-		  border-radius: 4px;
-		}
+    <title>Happy Server Pet Info</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body { cursor: default; }
+        #btnTop {
+          display: none;
+          position: fixed;
+          bottom: 20px;
+          right: 30px;
+          z-index: 99;
+          font-size: 18px;
+          border: none;
+          outline: none;
+          background-color: red;
+          color: white;
+          cursor: pointer;
+          padding: 15px;
+          border-radius: 4px;
+        }
 
-		#btnTop:hover {
-		  background-color: #555;
-		}
-		.searchValue {
+        #btnTop:hover {
+          background-color: #555;
+        }
+        .searchValue {
             display: inline;
             width: 100px;
-		}
+        }
 
         /* 최소 너비 지정 */
         .min-width-td-120 {
@@ -42,11 +42,11 @@
             min-width: 80px; /* 원하는 최소 너비로 조정 */
         }
     
-		.green { color: #fff; background-color: #5cb85c;}
-		.blue { color: #fff; background-color: #337ab7;}
-		.red { color: #fff; background-color: #d9534f;}
-		.yellow { color: #fff; background-color: #f0ad4e;}
-	</style>
+        .green { color: #fff; background-color: #5cb85c;}
+        .blue { color: #fff; background-color: #337ab7;}
+        .red { color: #fff; background-color: #d9534f;}
+        .yellow { color: #fff; background-color: #f0ad4e;}
+    </style>
     <script>
         var pet = [
             {"name":"우리","initnum":10,"hp":20,"atk":12,"def":15,"agi":25},
@@ -360,6 +360,7 @@
             {"name":"스노밍코","initnum":20,"hp":30,"atk":22,"def":20,"agi":33},
             {"name":"밍코","initnum":19,"hp":30,"atk":34,"def":11,"agi":31},
             {"name":"링코","initnum":22,"hp":43,"atk":30,"def":14,"agi":33},
+            {"name":"한복밍코","initnum":26,"hp":26,"atk":34,"def":14,"agi":34},
                         
             {"name":"쿠아","initnum":24,"hp":23,"atk":29,"def":16,"agi":25},
             {"name":"쿠팡","initnum":23,"hp":19,"atk":30,"def":10,"agi":27},
@@ -487,21 +488,22 @@
             {"name":"나비드래곤","initnum":25,"hp":29,"atk":39,"def":15,"agi":32},
             {"name":"블랙드래곤","initnum":25,"hp":28,"atk":42,"def":16,"agi":29},
             
+            {"name":"한복메이","initnum":26,"hp":27,"atk":39,"def":19,"agi":23},
         ];
 
         let btnName = "";
         const result = [];
 
         // 스크롤
-		// 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
-		window.onscroll = function() {scrollFunction()};
-		function scrollFunction() {
+        // 사용자가 문서 상단에서 50px 아래로 스크롤 할 때 버튼을 표시합니다.
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            	btnTop.style.display = "block";
+                btnTop.style.display = "block";
             } else {
-            	btnTop.style.display = "none";
+                btnTop.style.display = "none";
             }
-		}
+        }
 
         function setSRank(copiedPet) {
 
@@ -758,16 +760,16 @@
 
             for (let i = 0; i < result.length; i++) {
                 $('#result tbody').append(''
-            		+ '<tr>'
+                    + '<tr>'
                     + '<td>' + (i + 1) + '</td>'
-            		+ '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].hp,  2) + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].atk, 2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].def, 2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
-            		+ '<td>' + limitDecimalPlaces(result[i].agi, 2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
+                    + '<td class="' + (result[i].rank === 8 ? 'text-danger' : '') + '">' + result[i].rank + '</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].hp,  2) + '[' + result[i].baseHp  + '](' + result[i].bonusHp  + ')</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].atk, 2) + '[' + result[i].baseAtk + '](' + result[i].bonusAtk + ')</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].def, 2) + '[' + result[i].baseDef + '](' + result[i].bonusDef + ')</td>'
+                    + '<td>' + limitDecimalPlaces(result[i].agi, 2) + '[' + result[i].baseAgi + '](' + result[i].bonusAgi + ')</td>'
                     //+ '<td>' + result[i].poison + '</td>'
-            		+ '</tr>'
-            	);
+                    + '</tr>'
+                );
 
                 if (i + 1 >= 300) {
                     break;
@@ -914,7 +916,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20240906001;
+            const version = 20240912000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -925,7 +927,8 @@
                 .then(text => {
                     try {
                         const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
-                        console.log(version);
+                        console.log("[" + formatDate() + "] ClientVer: " + version);
+                        console.log("[" + formatDate() + "] ServerVer: " + data.version);
                         if (version < data.version) {
                             let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
                             if (data.message != "") {
@@ -945,8 +948,23 @@
                 });
         }
 
+        function formatDate() {
+            const date = new Date();
+            
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // 0-based index
+            const day = String(date.getDate()).padStart(2, '0');
+            
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
+            
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+        }
+
         // jQuery
-		$(document).ready(function() {
+        $(document).ready(function() {
 
             poisonDamageRank();
             //getListName();
@@ -970,7 +988,7 @@
                 // foundPet을 깊은 복사하여 새로운 객체를 생성
                 const copiedPet = JSON.parse(JSON.stringify(foundPet));
                 setSRank(copiedPet);
-            	setBase(foundPet);
+                setBase(foundPet);
             });
 
             // 계산 버튼
@@ -986,7 +1004,7 @@
                 // foundPet을 깊은 복사하여 새로운 객체를 생성
                 const copiedPet = JSON.parse(JSON.stringify(foundPet));
                 setSRank(copiedPet);
-            	setBase(foundPet);
+                setBase(foundPet);
             });
 
             // 5분마다 업데이트 여부를 확인
@@ -995,20 +1013,21 @@
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
             $("#btnTop").on("click", function() {
-            	document.body.scrollTop = 0;
-            	document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
             });
         });
     </script>
 </head>
 <body>
-	<div class="container">
-		<h2>Happy Server Pet Rank Info</h2>
-		<hr>
+    <div class="container">
+        <h2>Happy Server Pet Rank Info</h2>
+        <hr>
         <a href="https://happy01.net/bbs/board.php?bo_table=board23" target="_blank"><h4>Happy Server</h4></a>
         <!--<a href="https://leejoonwhan.github.io/stoneage/happy/happy.html" target="_blank"><h4>Happy Server Pet Info</h4></a>-->
         <a href="https://leejoonwhan.github.io/stoneage/happy/petrank.html" target="_blank"><h4>Happy Server Pet Rank Info</h4></a>
         <a href="https://leejoonwhan.github.io/stoneage/happy/reverse.html" target="_blank"><h4>Happy Server Pet Reverse Info</h4></a>
+        <a href="https://leejoonwhan.github.io/stoneage/simulator/petlevelup.html" target="_blank"><h4>Simulator Pet Level Up</h4></a>
         <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fleejoonwhan.github.io%2Fstoneage%2Fhappy%2Fpetrank.html&count_bg=%23FF0000&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
         <p class="text-right" id="ver"></p>
         <div class="panel panel-danger">
@@ -1029,30 +1048,30 @@
                 - 괄호()안의 숫자는 깡스탯을 의미하며, 성장률에는 영향을 주지 않습니다.<br>
                 - 환생/진화 페트는 성장베이스를 이전 받기 때문에 목록에서 제외되었습니다.<br>
                 - 입력한 값과 일치하는 경우의 수가 많을 경우 속도 향상을 위해 최대 300건까지만 출력됩니다.<br>
-                - 8등급 100% 등 페트가 정상적으로 성장하지 않는 경우, 최소한 81레벨까지 키워본 후 문의해 주세요. 지금까지 접수된 문의 중 60레벨까지 계산기와 다르게 성장하다가 이후 점차 일치하는 사례가 확인되었습니다.<br>
+                - 레벨업을 진행한 페트가 일반적인 성장 범위를 벗어날 경우, 8등급(환각)을 확인할 방법이 없다는 결론에 도달했습니다. 이에 따라, 8등급의 성장 범위는 페트 레벨업 시뮬레이션 링크로 대체하오니 이 점 양해 부탁드립니다.<br>
             </div>
         </div>
-		<div class="table-responsive" id="myPet">
+        <div class="table-responsive" id="myPet">
             <table class="table table-striped">
-            	<colgroup>
-                    <col width="100px">	
-            		<col width="50px">
-            		<col width="50px">
-            		<col width="50px">
+                <colgroup>
+                    <col width="100px">    
                     <col width="50px">
                     <col width="50px">
-            	</colgroup>
-            	<thead>
-            		<tr>
+                    <col width="50px">
+                    <col width="50px">
+                    <col width="50px">
+                </colgroup>
+                <thead>
+                    <tr>
                         <th>이름</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
                         <th>순발력</th>
                         <th></th>
-            		</tr>
-            	</thead>
-            	<tbody>
+                    </tr>
+                </thead>
+                <tbody>
                     <tr>
                         <td class="min-width-td-120">
                             <div class="input-group">
@@ -1078,9 +1097,9 @@
                             <button type="button" class="form-control" id="calculate">계산</button>
                         </td>
                     </tr>
-            	</tbody>
+                </tbody>
             </table>
-		</div>
+        </div>
 
         <div class="table-responsive" id="result">
             <table class="table table-striped">
