@@ -932,7 +932,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240912000;
+            const version = 20240912001;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -943,7 +943,7 @@
                 .then(text => {
                     try {
                         const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
-                        console.log(version);
+                        console.log(formatDate() + " ClientVer: " + version + ", ServerVer: " + data.version);
                         if (version < data.version) {
                             let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
                             if (data.message != "") {
@@ -961,6 +961,21 @@
                 .catch(error => {
                     console.error('Error fetching the JSON file:', error);
             });
+        }
+
+        function formatDate() {
+            const date = new Date();
+            
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // 0-based index
+            const day = String(date.getDate()).padStart(2, '0');
+            
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
+            
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
         }
 
         // jQuery
@@ -1007,8 +1022,8 @@
             	setBase(foundPet);
             });
 
-            // 10분마다 업데이트 여부를 확인
-            setInterval(checkUpdateExists, 1000 * 60 * 10);
+            // 5분마다 업데이트 여부를 확인
+            setInterval(checkUpdateExists, 1000 * 60 * 5);
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
