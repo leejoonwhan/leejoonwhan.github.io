@@ -1029,17 +1029,25 @@
             const now = new Date();
             const timeUntilNextPlay = nextPlayTime - now;
 
-            console.log(`다음 재생 시간은 ${nextPlayTime}입니다. ${timeUntilNextPlay / 1000}초 남았습니다.`);
+            // 날짜 형식 변환
+            const year = nextPlayTime.getFullYear();
+            const month = (nextPlayTime.getMonth() + 1).toString().padStart(2, '0');
+            const date = nextPlayTime.getDate().toString().padStart(2, '0');
+            const day = getDayName(nextPlayTime.getDay());
+            const hours = nextPlayTime.getHours().toString().padStart(2, '0');
+            const minutes = nextPlayTime.getMinutes().toString().padStart(2, '0');
+            const seconds = nextPlayTime.getSeconds().toString().padStart(2, '0');
+
+            // 로그 출력
+            console.log(`다음 재생 시간은 ${year}-${month}-${date}(${day}) ${hours}:${minutes}:${seconds} 입니다. ${formatRemainingTime(timeUntilNextPlay)}`);
 
             setTimeout(() => {
-                const audio = new Audio('/wow/sound/SylvanasWindrunnerGreeting04.ogg');
+                const audio = new Audio('../test.mp3');
                 audio.play();
-                console.log(`ogg 파일이 ${nextPlayTime}에 실행되었습니다.`);
+                console.log(`MP3 파일이 ${nextPlayTime}에 실행되었습니다.`);
                 scheduleNextPlay(); // 다음 재생을 다시 예약
             }, timeUntilNextPlay);
         }
-
-        
 
         // jQuery
         $(document).ready(function() {
