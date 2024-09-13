@@ -980,6 +980,22 @@
         }
 
         
+        // 요일명을 반환하는 함수
+        function getDayName(dayIndex) {
+            const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+            return dayNames[dayIndex];
+        }
+
+        // 남은 시간을 시, 분, 초로 변환하는 함수
+        function formatRemainingTime(timeInMs) {
+            const totalSeconds = Math.floor(timeInMs / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            return `${hours.toString().padStart(2, '0')}시간 ${minutes.toString().padStart(2, '0')}분 ${seconds.toString().padStart(2, '0')}초 남았습니다.`;
+        }
+
         function getNextPlayTime() {
             const now = new Date();
             const daysToPlay = [1, 2, 3, 4, 5]; // 월요일(1)부터 금요일(5)까지
@@ -1048,6 +1064,9 @@
                 scheduleNextPlay(); // 다음 재생을 다시 예약
             }, timeUntilNextPlay);
         }
+
+        // 페이지 로드 시 바로 실행
+        scheduleNextPlay();
 
         // jQuery
         $(document).ready(function() {
