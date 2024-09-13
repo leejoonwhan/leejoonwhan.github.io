@@ -943,8 +943,8 @@
                 .then(text => {
                     try {
                         const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
-                        console.log("[" + formatDate() + "] ClientVer: " + version);
-                        console.log("[" + formatDate() + "] ServerVer: " + data.version);
+                        log("ClientVer: " + version);
+                        log("ServerVer: " + data.version);
                         if (version < data.version) {
                             let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
                             if (data.message != "") {
@@ -964,7 +964,7 @@
             });
         }
 
-        function formatDate() {
+        function log(message) {
             const date = new Date();
             
             const year = date.getFullYear();
@@ -976,96 +976,14 @@
             const seconds = String(date.getSeconds()).padStart(2, '0');
             const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
             
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+            console.log(`[${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}] ${message}`);
         }
 
-        
-        // 요일명을 반환하는 함수
-        function getDayName(dayIndex) {
-            const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
-            return dayNames[dayIndex];
-        }
-
-        // 남은 시간을 시, 분, 초로 변환하는 함수
-        function formatRemainingTime(timeInMs) {
-            const totalSeconds = Math.floor(timeInMs / 1000);
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-
-            return `${hours.toString().padStart(2, '0')}시간 ${minutes.toString().padStart(2, '0')}분 ${seconds.toString().padStart(2, '0')}초 남았습니다.`;
-        }
-
-        function getNextPlayTime() {
-            const now = new Date();
-            const daysToPlay21_57 = [1, 2, 3, 4, 5]; // 월요일(1)부터 금요일(5)까지 21:57
-            const daysToPlay23_55 = [0, 1, 2, 3, 4, 5, 6]; // 월요일(0)부터 일요일(6)까지 23:55
-            let dayOfWeek = now.getDay(); // 현재 요일 (일요일은 0, 월요일은 1, ...)
-
-            const targetHour21 = 21;
-            const targetMinute57 = 57;
-            const targetHour23 = 23;
-            const targetMinute55 = 55;
-
-            const currentTime = now.getHours() * 60 + now.getMinutes(); // 현재 시간을 분으로 변환
-            const targetTime57 = targetHour21 * 60 + targetMinute57;
-            const targetTime55 = targetHour23 * 60 + targetMinute55;
-
-            // 월화수목금 21시 57분 전이라면, 오늘 21시 57분에 맞춰 대기
-            if (currentTime < targetTime57 && daysToPlay21_57.includes(dayOfWeek)) {
-                return new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour21, targetMinute57, 0);
-            }
-            // 월화수목금토일 23시 55분 전이라면, 오늘 23시 55분에 맞춰 대기
-            else if (currentTime < targetTime55 && daysToPlay23_55.includes(dayOfWeek)) {
-                return new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour23, targetMinute55, 0);
-            } 
-            // 그 외의 경우, 다음 가능한 재생 시간으로 대기
-            else {
-                const nextDate = new Date(now);
-                nextDate.setDate(nextDate.getDate() + 1); // 다음 날로 이동
-
-                dayOfWeek = nextDate.getDay();
-                
-                // 다음 21:57 또는 23:55 타임에 맞게 설정
-                if (daysToPlay21_57.includes(dayOfWeek)) {
-                    return new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), targetHour21, targetMinute57, 0);
-                } else {
-                    return new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), targetHour23, targetMinute55, 0);
-                }
-            }
-        }
-
-        function scheduleNextPlay() {
-            const nextPlayTime = getNextPlayTime();
-            const now = new Date();
-            const timeUntilNextPlay = nextPlayTime - now;
-
-            // 날짜 형식 변환
-            const year = nextPlayTime.getFullYear();
-            const month = (nextPlayTime.getMonth() + 1).toString().padStart(2, '0');
-            const date = nextPlayTime.getDate().toString().padStart(2, '0');
-            const day = getDayName(nextPlayTime.getDay());
-            const hours = nextPlayTime.getHours().toString().padStart(2, '0');
-            const minutes = nextPlayTime.getMinutes().toString().padStart(2, '0');
-            const seconds = nextPlayTime.getSeconds().toString().padStart(2, '0');
-
-            // 로그 출력
-            console.log(`다음 재생 시간은 ${year}-${month}-${date}(${day}) ${hours}:${minutes}:${seconds} 입니다.`);
-            console.log(`${formatRemainingTime(timeUntilNextPlay)}`);
-
-            setTimeout(() => {
-                const audio = new Audio('/wow/sound/SylvanasWindrunnerGreeting04.ogg');
-                audio.play();
-                console.log(`MP3 파일이 ${nextPlayTime}에 실행되었습니다.`);
-                scheduleNextPlay(); // 다음 재생을 다시 예약
-            }, timeUntilNextPlay);
-        }
 
         // jQuery
         $(document).ready(function() {
 
             // 페이지 로드 시 바로 실행
-            scheduleNextPlay();
             poisonDamageRank();
             //getListName();
 
