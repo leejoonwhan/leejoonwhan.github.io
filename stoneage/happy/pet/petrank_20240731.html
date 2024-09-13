@@ -1050,7 +1050,8 @@
             const seconds = nextPlayTime.getSeconds().toString().padStart(2, '0');
 
             // 로그 출력
-            console.log(`다음 재생 시간은 ${year}-${month}-${date}(${day}) ${hours}:${minutes}:${seconds} 입니다. ${formatRemainingTime(timeUntilNextPlay)}`);
+            console.log(`다음 재생 시간은 ${year}-${month}-${date}(${day}) ${hours}:${minutes}:${seconds} 입니다.`);
+            console.log(`${formatRemainingTime(timeUntilNextPlay)}`);
 
             setTimeout(() => {
                 const audio = new Audio('/wow/sound/SylvanasWindrunnerGreeting04.ogg');
