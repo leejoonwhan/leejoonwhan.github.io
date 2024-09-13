@@ -932,7 +932,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20240912001;
+            const version = 20240913000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -979,9 +979,73 @@
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
         }
 
+        
+        function getNextPlayTime() {
+            const now = new Date();
+            const daysToPlay = [1, 2, 3, 4, 5]; // 월요일(1)부터 금요일(5)까지
+            let dayOfWeek = now.getDay(); // 현재 요일 (일요일은 0, 월요일은 1, ...)
+
+            const targetHour = 21;
+            const targetMinute55 = 55;
+            const targetMinute57 = 57;
+
+            const currentTime = now.getHours() * 60 + now.getMinutes(); // 현재 시간을 분으로 변환
+            const targetTime55 = targetHour * 60 + targetMinute55;
+            const targetTime57 = targetHour * 60 + targetMinute57;
+
+            // 21시 55분 전이라면, 21시 55분에 맞춰 대기
+            if (currentTime < targetTime55 && daysToPlay.includes(dayOfWeek)) {
+                return new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, targetMinute55, 0);
+            }
+            // 21시 55분 이후 21시 57분 이전이라면, 21시 57분에 맞춰 대기
+            else if (currentTime < targetTime57 && daysToPlay.includes(dayOfWeek)) {
+                return new Date(now.getFullYear(), now.getMonth(), now.getDate(), targetHour, targetMinute57, 0);
+            } 
+            // 그 외의 경우, 다음 요일의 21시 55분에 맞춰 대기
+            else {
+                const nextDate = new Date(now);
+                nextDate.setDate(nextDate.getDate() + 1); // 다음 날로 이동
+
+                dayOfWeek = nextDate.getDay();
+                
+                // 다음 요일이 금요일 이후라면, 월요일로 설정
+                while (!daysToPlay.includes(dayOfWeek)) {
+                    nextDate.setDate(nextDate.getDate() + 1);
+                    dayOfWeek = nextDate.getDay();
+                    
+                    // 금요일 이후는 월요일로 설정
+                    if (dayOfWeek === 6 || dayOfWeek === 0) { 
+                        nextDate.setDate(nextDate.getDate() + (8 - dayOfWeek)); // 일요일에서 월요일로 이동
+                        dayOfWeek = 1;
+                    }
+                }
+
+                return new Date(nextDate.getFullYear(), nextDate.getMonth(), nextDate.getDate(), targetHour, targetMinute55, 0);
+            }
+        }
+
+        function scheduleNextPlay() {
+            const nextPlayTime = getNextPlayTime();
+            const now = new Date();
+            const timeUntilNextPlay = nextPlayTime - now;
+
+            console.log(`다음 재생 시간은 ${nextPlayTime}입니다. ${timeUntilNextPlay / 1000}초 남았습니다.`);
+
+            setTimeout(() => {
+                const audio = new Audio('/wow/sound/SylvanasWindrunnerGreeting04.ogg');
+                audio.play();
+                console.log(`ogg 파일이 ${nextPlayTime}에 실행되었습니다.`);
+                scheduleNextPlay(); // 다음 재생을 다시 예약
+            }, timeUntilNextPlay);
+        }
+
+        
+
         // jQuery
         $(document).ready(function() {
 
+            // 페이지 로드 시 바로 실행
+            scheduleNextPlay();
             poisonDamageRank();
             //getListName();
 
