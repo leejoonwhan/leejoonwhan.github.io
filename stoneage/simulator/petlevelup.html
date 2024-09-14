@@ -45,12 +45,16 @@
     </style>
     <script>
 
+        // 과거 내역
+        let results = [];
+        let detail  = [];
+        let content = {"rank": "", "level": "", "vital": "", "str": "", "tgh": "", "dex": "", "fRand": ""};
+
+        let maxLevel = 140;
+
         // 샘플 페트 반기노 
         const initnum = 26;
         let base = [24.0, 38.0, 16.0, 20.0];
-
-        // 성장 베이스 설정
-        base = base.map(b => b + 2.0);
 
         // 평균 값 계산을 위한 변수 선언 
         let FRAND  = 0.0;
@@ -79,6 +83,39 @@
             return Math.round(num * 1e12) / 1e12;
         }
         
+        function checkUpdateExists() {
+            const version = 20240915000;
+            fetch(`https://leejoonwhan.github.io/stoneage/simulator/petlevelup_version.json?v=${new Date().getTime()}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();  // 응답을 텍스트로 읽음
+                })
+                .then(text => {
+                    try {
+                        const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
+                        log("ClientVer: " + version);
+                        log("ServerVer: " + data.version);
+                        if (version < data.version) {
+                            let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
+                            if (data.message != "") {
+                                message += `\n\n업데이트 내용: \n${data.message}`;
+                            }
+                            
+                            if (!alert(message)) {
+                                location.reload();
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Parsing error:', error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching the JSON file:', error);
+            });
+        }
+
         function petLevelUp(base, stat) {
             let param = [0.0, 0.0, 0.0, 0.0];
             for (let i = 0; i < 10; i++) {
@@ -97,9 +134,9 @@
             dex   = preciseRound(dex   * fRand + param[3] * fRand);
 
             stat[0] = parseInt(preciseRound(stat[0] + vital), 10);
-            stat[1] = parseInt(preciseRound(stat[1] + str), 10);
-            stat[2] = parseInt(preciseRound(stat[2] + tgh), 10);
-            stat[3] = parseInt(preciseRound(stat[3] + dex), 10);
+            stat[1] = parseInt(preciseRound(stat[1] + str),   10);
+            stat[2] = parseInt(preciseRound(stat[2] + tgh),   10);
+            stat[3] = parseInt(preciseRound(stat[3] + dex),   10);
 
             // 통계를 위한 변수 저장
             FRAND  = preciseRound(FRAND  + (fRand * 100));
@@ -107,14 +144,30 @@
             FSTR   = preciseRound(FSTR   + param[1]);
             FTGH   = preciseRound(FTGH   + param[2]);
             FDEX   = preciseRound(FDEX   + param[3]);
+
+            return preciseRound(fRand * 100);
         }
 
         // jQuery
         $(document).ready(function() {
+            
+            $("#rank8").on("click", function() {
+                
+                $('#detail tbody').empty();
 
-            $("#run").on("click", function() {
-
-                $('#result tbody').empty();
+                maxLevel = 140;
+                if ($("#input-level").val() > 0) {
+                    maxLevel = $("#input-level").val();
+                }
+                
+                // 기본 베이스 설정
+                base = [24.0, 38.0, 16.0, 20.0];
+                // 성장 베이스 설정
+                base[0] = preciseRound(base[0] + 2.0);
+                base[1] = preciseRound(base[1] + 2.0);
+                base[2] = preciseRound(base[2] + 2.0);
+                base[3] = preciseRound(base[3] + 2.0);
+                //base = base.map(b => b + 2.0);
 
                 // 평균 값 계산을 위한 변수 선언 
                 FRAND  = 0.0;
@@ -132,16 +185,16 @@
 
                 const best1 = [52.0, 12.0, 7.0, 6.0];
                 const best2 = [9.97425, 2.4069375, 1.4268375, 1.21275];
-                const maxLevel = 140;
                 let stat1 = [...stat];
                 for (let i = 1; i <= maxLevel; i++) {
-                    let vital = parseInt(preciseRound((i - 1) * best2[0] + best1[0]));
-                    let str   = parseInt(preciseRound((i - 1) * best2[1] + best1[1]));
-                    let tgh   = parseInt(preciseRound((i - 1) * best2[2] + best1[2]));
-                    let dex   = parseInt(preciseRound((i - 1) * best2[3] + best1[3]));
+                    let vital = parseInt(preciseRound((i - 1) * best2[0] + best1[0]), 10);
+                    let str   = parseInt(preciseRound((i - 1) * best2[1] + best1[1]), 10);
+                    let tgh   = parseInt(preciseRound((i - 1) * best2[2] + best1[2]), 10);
+                    let dex   = parseInt(preciseRound((i - 1) * best2[3] + best1[3]), 10);
 
+                    let fRand = 0;
                     if (i > 1) {
-                        petLevelUp(base, stat1);
+                        fRand = petLevelUp(base, stat1);
                     }
 
                     let vital1 = parseInt(preciseRound((stat1[0] * 4.0 + stat1[1] + stat1[2] + stat1[3]) / 100), 10);
@@ -149,43 +202,106 @@
                     let tgh1   = parseInt(preciseRound(((stat1[0] * 0.1) + (stat1[1] * 0.1) + stat1[2] + (stat1[3] * 0.05)) / 100), 10);
                     let dex1   = parseInt(preciseRound(stat1[3] / 100), 10);
 
-                    $('#result tbody').append(''
-                        + '<tr class="srank">'
+                    let cName = "";
+                    if (i > 1 && fRand >= 515) {
+                        cName = "info";
+                    }
+                    else if (i > 1 && fRand <= 475) {
+                        cName = "danger";
+                    }
+
+                    $('#detail tbody').append(''
+                        + '<tr class="' + cName + '">'
+                        + '<td>' + 8 + ' </td>'
                         + '<td>' + i + ' </td>'
                         + '<td>' + vital1 + '(' + (vital1 - vital) + ')</td>'
                         + '<td>' + str1   + '(' + (str1   - str)   + ')</td>'
                         + '<td>' + tgh1   + '(' + (tgh1   - tgh)   + ')</td>'
                         + '<td>' + dex1   + '(' + (dex1   - dex)   + ')</td>'
+                        + '<td>' + fRand  + '</td>'
                         + '</tr>'
                     );
+                    content       = {"rank": "", "level": "", "vital": "", "str": "", "tgh": "", "dex": "", "fRand": ""};
+                    content.rank  = 8;
+                    content.level = i;
+                    content.vital = vital1 + '(' + (vital1 - vital) + ')';
+                    content.str   = str1   + '(' + (str1   - str)   + ')';
+                    content.tgh   = tgh1   + '(' + (tgh1   - tgh)   + ')';
+                    content.dex   = dex1   + '(' + (dex1   - dex)   + ')';
+                    content.fRand = fRand;
+                    detail.push(content);
                     
                     if (i == maxLevel) {
                         $('#results tbody').append(''
                             + '<tr class="srank">'
+                            + '<td>' + 8 + ' </td>'    
                             + '<td>' + i + ' </td>'
                             + '<td>' + vital1 + '(' + (vital1 - vital) + ')</td>'
                             + '<td>' + str1   + '(' + (str1   - str)   + ')</td>'
                             + '<td>' + tgh1   + '(' + (tgh1   - tgh)   + ')</td>'
                             + '<td>' + dex1   + '(' + (dex1   - dex)   + ')</td>'
+                            + '<td>' + preciseRound(FRAND  / (maxLevel - 1)).toFixed(2) + '</td>'
                             + '</tr>'
                         );
+                        console.log(`${i}: ${vital1}(${vital1 - vital}), ${str1}(${str1 - str}), ${tgh1}(${tgh1 - tgh}), ${dex1}(${dex1 - dex})`);
+                        
+                        if (maxLevel > 1) {
+                            $('#detail tbody').append(''
+                                + '<tr class="srank">'
+                                + '<td>' + '</td>'
+                                + '<td>' + '</td>'
+                                + '<td>' + preciseRound(FVITAL / (maxLevel - 1)).toFixed(2) + '</td>'
+                                + '<td>' + preciseRound(FSTR   / (maxLevel - 1)).toFixed(2) + '</td>'
+                                + '<td>' + preciseRound(FTGH   / (maxLevel - 1)).toFixed(2) + '</td>'
+                                + '<td>' + preciseRound(FDEX   / (maxLevel - 1)).toFixed(2) + '</td>'
+                                + '<td>' + preciseRound(FRAND  / (maxLevel - 1)).toFixed(2) + '</td>'
+                                + '</tr>'
+                            );
+                            content       = {"rank": "", "level": "", "vital": "", "str": "", "tgh": "", "dex": "", "fRand": ""};
+                            content.vital = preciseRound(FVITAL / (maxLevel - 1)).toFixed(2);
+                            content.str   = preciseRound(FSTR   / (maxLevel - 1)).toFixed(2);
+                            content.tgh   = preciseRound(FTGH   / (maxLevel - 1)).toFixed(2);
+                            content.dex   = preciseRound(FDEX   / (maxLevel - 1)).toFixed(2);
+                            content.fRand = preciseRound(FRAND  / (maxLevel - 1)).toFixed(2);
+                            detail.push(content);
+                            console.log(`RAND: ${preciseRound(FRAND / (maxLevel - 1))}, VITAL: ${preciseRound(FVITAL / (maxLevel - 1))}, STR: ${preciseRound(FSTR / (maxLevel - 1))}, TGH: ${preciseRound(FTGH / (maxLevel - 1))}, DEX: ${preciseRound(FDEX / (maxLevel - 1))}`);
+                        }
+                        results.push(detail);
+                        detail = [];
                     }
-
-                    console.log(`${i}: ${vital1}(${vital1 - vital}), ${str1}(${str1 - str}), ${tgh1}(${tgh1 - tgh}), ${dex1}(${dex1 - dex})`);
                 }
-
-                $('#result tbody').append(''
-                    + '<tr class="srank">'
-                    + '<td>' + preciseRound(FRAND  / (maxLevel - 1)).toFixed(2) + '</td>'
-                    + '<td>' + preciseRound(FVITAL / (maxLevel - 1)).toFixed(2) + '</td>'
-                    + '<td>' + preciseRound(FSTR   / (maxLevel - 1)).toFixed(2) + '</td>'
-                    + '<td>' + preciseRound(FTGH   / (maxLevel - 1)).toFixed(2) + '</td>'
-                    + '<td>' + preciseRound(FDEX   / (maxLevel - 1)).toFixed(2) + '</td>'
-                    + '</tr>'
-                );
-                
-                console.log(`RAND: ${preciseRound(FRAND / (maxLevel - 1))}, VITAL: ${preciseRound(FVITAL / (maxLevel - 1))}, STR: ${preciseRound(FSTR / (maxLevel - 1))}, TGH: ${preciseRound(FTGH / (maxLevel - 1))}, DEX: ${preciseRound(FDEX / (maxLevel - 1))}`);
             });
+
+            $(document).on("click", "#results tbody tr", function() {
+                var index = $(this).index(); // 몇 번째 tr인지 index를 가져옴
+                $("#detail tbody").empty();
+                detail = results[index];
+                //$("#ver").text(detail.length);
+                for (let i = 0; i < detail.length; i++) {
+                    let cName = "";
+                    if (i > 0 && detail[i].fRand >= 515) {
+                        cName = "info";
+                    }
+                    else if (i > 0 && detail[i].fRand <= 475) {
+                        cName = "danger";
+                    }
+                    $('#detail tbody').append(''
+                        + '<tr class="' + cName + '">'
+                        + '<td>' + detail[i].rank  + '</td>'
+                        + '<td>' + detail[i].level + '</td>'
+                        + '<td>' + detail[i].vital + '</td>'
+                        + '<td>' + detail[i].str   + '</td>'
+                        + '<td>' + detail[i].tgh   + '</td>'
+                        + '<td>' + detail[i].dex   + '</td>'
+                        + '<td>' + detail[i].fRand + '</td>'
+                        + '</tr>'
+                    );
+                }
+                detail = [];
+            });
+
+            // 5분마다 업데이트 여부를 확인
+            setInterval(checkUpdateExists, 1000 * 60 * 5);
 
             // 사용자가 버튼을 클릭하면 문서 상단으로 스크롤
             var btnTop = document.getElementById("btnTop");
@@ -218,28 +334,38 @@
         <div class="panel panel-primary">
             <div class="panel-heading"><strong>안내사항</strong></div>
             <div class="panel-body">
-                - 시뮬레이션의 목적은 8등급(환각)의 성장 범위를 통해, 초보자도 육성 중인 페트의 등급을 대략적으로 예측할 수 있도록 돕는 것입니다.<br>
+                - 시뮬레이션의 목적은 7등급과 8등급(환각)의 비교를 통해, 초보자도 육성 중인 페트의 등급을 대략적으로 예측할 수 있도록 돕는 것입니다.<br>
                 - 본 시뮬레이션에 사용되는 샘플 페트는 반기노 정석 52.00[2](2), 12.75[2](3), 7.37[2](2), 6.50[2](3) 입니다.<br>
                 - 시뮬레이션 된 결과와 육성 중인 페트의 ± 수치가 동일하다고 환각을 보장하는 것은 절대 아니니 참고만 하시기 바랍니다.<br>
             </div>
         </div>
-        
-        <div class="form-group">
-            <button type="button" class="btn btn-success form-control" id="run">시뮬레이션 시작</button>
+        <div class="form-inline form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Lv</div>
+                <input type="number" class="form-control" id="input-level" placeholder="140" value="140">
+                <!-- <div class="input-group-addon">.00</div> -->
+            </div>
+            <button type="button" class="btn btn-primary" id="rank8">8등급(환각)</button>
+            <button type="button" class="btn btn-danger" id="rank7vital" disabled>7등급(내구력[1])</button>
+            <button type="button" class="btn btn-danger" id="rank7str"   disabled>7등급(공격력[1])</button>
+            <button type="button" class="btn btn-danger" id="rank7tgh"   disabled>7등급(방어력[1])</button>
+            <button type="button" class="btn btn-danger" id="rank7dex"   disabled>7등급(순발력[1])</button>
         </div>
-
-        <div class="table-responsive" id="results">
+        <div class="table-responsive panel panel-default" id="results">
+            <div class="panel-heading"><strong>시뮬레이션 내역</strong></div>
             <table class="table table-striped">
                 <colgroup>
                     
                 </colgroup>
                 <thead>
                     <tr>
+                        <th>등급</th>
                         <th>레벨</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
                         <th>순발력</th>
+                        <th>주사위</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -247,18 +373,21 @@
             </table>
         </div>
 
-        <div class="table-responsive" id="result">
+        <div class="table-responsive panel panel-success" id="detail">
+            <div class="panel-heading"><strong>시뮬레이션</strong></div>
             <table class="table table-striped">
                 <colgroup>
                     
                 </colgroup>
                 <thead>
                     <tr>
+                        <th>등급</th>
                         <th>레벨</th>
                         <th>내구력</th>
                         <th>공격력</th>
                         <th>방어력</th>
                         <th>순발력</th>
+                        <th>주사위</th>
                     </tr>
                 </thead>
                 <tbody>
