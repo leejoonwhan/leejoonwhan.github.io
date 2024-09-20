@@ -938,6 +938,7 @@
             $("#memo").empty();
             var rank   = 8;
             var poison = 0;
+            var data   = 0;
             for (let i = 0; i < 5; i++) {
                 poison = parseInt((copiedPet.initnum * (copiedPet.hp  + 2 + 3 - i)), 10)
                        + parseInt((copiedPet.initnum * (copiedPet.atk + 2 + 3)),     10)
@@ -946,6 +947,13 @@
                 poison = preciseRound(( poison / 100 - 20 ) / 4);
                 if ( poison < 1 ) poison = 1;
                 rank = 8 - i;
+                if (i == 0) {
+                    data = parseInt(poison, 10);
+                }
+                if (data != parseInt(poison, 10)) {
+                    data = parseInt(poison, 10);
+                    $("#memo").append('<br>');
+                }
                 $("#memo").append(`[${rank}]: ${parseInt(poison, 10)}, `);
             }
 
@@ -957,6 +965,10 @@
                 poison = preciseRound(( poison / 100 - 20 ) / 4);
                 if ( poison < 1 ) poison = 1;
                 rank = 4 - i;
+                if ( data != parseInt(poison, 10)) {
+                    data = parseInt(poison, 10);
+                    $("#memo").append('<br>');
+                }
                 $("#memo").append(`[${rank}]: ${parseInt(poison, 10)}, `);
             }
 
@@ -968,6 +980,10 @@
                 poison = preciseRound(( poison / 100 - 20 ) / 4);
                 if ( poison < 1 ) poison = 1;
                 rank = 0 - i;
+                if ( data != parseInt(poison, 10)) {
+                    data = parseInt(poison, 10);
+                    $("#memo").append('<br>');
+                }
                 $("#memo").append(`[${rank}]: ${parseInt(poison, 10)}, `);
             }
 
@@ -979,6 +995,10 @@
                 poison = preciseRound(( poison / 100 - 20 ) / 4);
                 if ( poison < 1 ) poison = 1;
                 rank = -4 - i;
+                if ( data != parseInt(poison, 10)) {
+                    data = parseInt(poison, 10);
+                    $("#memo").append('<br>');
+                }
                 $("#memo").append(`[${rank}]: ${parseInt(poison, 10)}, `);
             }
             
@@ -1255,7 +1275,6 @@
             <p>( 숫자 ) 의 내구력 + 공격력 + 방어력 + 순발력 합은 S급도 10, F급도 10, 무조건 10입니다.</p>
         </blockquote>
         -->
-        <br>
         <div id="memo"></div>
         <div class="table-responsive" id="myPet">
             <table class="table table-striped">
