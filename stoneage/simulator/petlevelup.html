@@ -29,6 +29,24 @@
           background-color: #555;
         }
         
+        /* 시뮬레이션 내역 5줄 이상 스크롤 */
+        .table-wrapper {
+            max-height: 260px; /* 10개의 tr 높이에 맞춰 설정합니다. */
+            overflow-y: auto;  /* 스크롤을 표시합니다. */
+        }
+
+        #results table {
+            width: 100%; /* 테이블 너비가 wrapper에 맞게 조정되도록 설정합니다. */
+            border-collapse: collapse; /* 테이블 경계선이 겹치도록 설정 */
+        }
+
+        #results thead th {
+            position: sticky;
+            top: 0;
+            background-color: white; /* 상단에 고정된 thead 배경을 설정 */
+            z-index: 1; /* 다른 요소들 위에 놓이도록 z-index 설정 */
+        }
+
         /* 최소 너비 지정 */
         .min-width-td-120 {
             min-width: 120px; /* 원하는 최소 너비로 조정 */
@@ -84,7 +102,7 @@
         }
         
         function checkUpdateExists() {
-            const version = 20240915000;
+            const version = 20240921000;
             fetch(`https://leejoonwhan.github.io/stoneage/simulator/petlevelup_version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -154,7 +172,6 @@
             $("#rank8").on("click", function() {
                 
                 $('#detail tbody').empty();
-
                 maxLevel = 140;
                 if ($("#input-level").val() > 0) {
                     maxLevel = $("#input-level").val();
@@ -232,7 +249,7 @@
                     detail.push(content);
                     
                     if (i == maxLevel) {
-                        $('#results tbody').append(''
+                        $('#results tbody').prepend(''
                             + '<tr class="srank">'
                             + '<td>' + 8 + ' </td>'    
                             + '<td>' + i + ' </td>'
@@ -273,10 +290,10 @@
             });
 
             $(document).on("click", "#results tbody tr", function() {
-                var index = $(this).index(); // 몇 번째 tr인지 index를 가져옴
+                var index = $(this).index(); // 클릭한 tr의 순서를 가져옴
+                var actualIndex = results.length - 1 - index; // 배열의 역순 인덱스를 계산
                 $("#detail tbody").empty();
-                detail = results[index];
-                //$("#ver").text(detail.length);
+                detail = results[actualIndex]; // 계산된 역순 인덱스로 결과 가져옴
                 for (let i = 0; i < detail.length; i++) {
                     let cName = "";
                     if (i > 0 && detail[i].fRand >= 515) {
@@ -351,7 +368,7 @@
             <button type="button" class="btn btn-danger" id="rank7tgh"   disabled>7등급(방어력[1])</button>
             <button type="button" class="btn btn-danger" id="rank7dex"   disabled>7등급(순발력[1])</button>
         </div>
-        <div class="table-responsive panel panel-default" id="results">
+        <div class="table-responsive panel panel-default table-wrapper" id="results">
             <div class="panel-heading"><strong>시뮬레이션 내역</strong></div>
             <table class="table table-striped">
                 <colgroup>
