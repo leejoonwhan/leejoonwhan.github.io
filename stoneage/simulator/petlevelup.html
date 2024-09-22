@@ -102,7 +102,7 @@
         }
         
         function checkUpdateExists() {
-            const version = 20240921000;
+            const version = 20240922000;
             fetch(`https://leejoonwhan.github.io/stoneage/simulator/petlevelup_version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -184,7 +184,7 @@
         // jQuery
         $(document).ready(function() {
             
-            $("#rank8").on("click", function() {
+            $(".form-inline button").on("click", function() {
                 
                 $('#detail tbody').empty();
                 maxLevel = 140;
@@ -194,13 +194,40 @@
                 
                 // 기본 베이스 설정
                 base = [24.0, 38.0, 16.0, 20.0];
+                
                 // 성장 베이스 설정
-                base[0] = preciseRound(base[0] + 2.0);
-                base[1] = preciseRound(base[1] + 2.0);
-                base[2] = preciseRound(base[2] + 2.0);
-                base[3] = preciseRound(base[3] + 2.0);
-                //base = base.map(b => b + 2.0);
-
+                var buttonId = $(this).data("id");
+                if (buttonId == "rank8") {
+                    base[0] = preciseRound(base[0] + 2.0);
+                    base[1] = preciseRound(base[1] + 2.0);
+                    base[2] = preciseRound(base[2] + 2.0);
+                    base[3] = preciseRound(base[3] + 2.0);
+                }
+                else if (buttonId == "rank7vital") {
+                    base[0] = preciseRound(base[0] + 1.0);
+                    base[1] = preciseRound(base[1] + 2.0);
+                    base[2] = preciseRound(base[2] + 2.0);
+                    base[3] = preciseRound(base[3] + 2.0);
+                }
+                else if (buttonId == "rank7str") {
+                    base[0] = preciseRound(base[0] + 2.0);
+                    base[1] = preciseRound(base[1] + 1.0);
+                    base[2] = preciseRound(base[2] + 2.0);
+                    base[3] = preciseRound(base[3] + 2.0);
+                }
+                else if (buttonId == "rank7tgh") {
+                    base[0] = preciseRound(base[0] + 2.0);
+                    base[1] = preciseRound(base[1] + 2.0);
+                    base[2] = preciseRound(base[2] + 1.0);
+                    base[3] = preciseRound(base[3] + 2.0);
+                }
+                else if (buttonId == "rank7dex") {
+                    base[0] = preciseRound(base[0] + 2.0);
+                    base[1] = preciseRound(base[1] + 2.0);
+                    base[2] = preciseRound(base[2] + 2.0);
+                    base[3] = preciseRound(base[3] + 1.0);
+                }
+                
                 // 평균 값 계산을 위한 변수 선언 
                 FRAND  = 0.0;
                 FVITAL = 0.0;
@@ -244,8 +271,8 @@
 
                     $('#detail tbody').append(''
                         + '<tr class="' + cName + '">'
-                        + '<td>' + 8 + ' </td>'
-                        + '<td>' + i + ' </td>'
+                        + '<td>' + buttonId + '</td>'
+                        + '<td>' + i + '</td>'
                         + '<td>' + vital1 + '(' + (vital1 - vital) + ')</td>'
                         + '<td>' + str1   + '(' + (str1   - str)   + ')</td>'
                         + '<td>' + tgh1   + '(' + (tgh1   - tgh)   + ')</td>'
@@ -254,7 +281,7 @@
                         + '</tr>'
                     );
                     content       = {"rank": "", "level": "", "vital": "", "str": "", "tgh": "", "dex": "", "fRand": ""};
-                    content.rank  = 8;
+                    content.rank  = buttonId;
                     content.level = i;
                     content.vital = vital1 + '(' + (vital1 - vital) + ')';
                     content.str   = str1   + '(' + (str1   - str)   + ')';
@@ -266,8 +293,8 @@
                     if (i == maxLevel) {
                         $('#results tbody').prepend(''
                             + '<tr class="srank">'
-                            + '<td>' + 8 + ' </td>'    
-                            + '<td>' + i + ' </td>'
+                            + '<td>' + buttonId + '</td>'    
+                            + '<td>' + i + '</td>'
                             + '<td>' + vital1 + '(' + (vital1 - vital) + ')</td>'
                             + '<td>' + str1   + '(' + (str1   - str)   + ')</td>'
                             + '<td>' + tgh1   + '(' + (tgh1   - tgh)   + ')</td>'
@@ -367,7 +394,7 @@
             <div class="panel-heading"><strong>안내사항</strong></div>
             <div class="panel-body">
                 - 시뮬레이션의 목적은 7등급과 8등급(환각)의 비교를 통해, 초보자도 육성 중인 페트의 등급을 대략적으로 예측할 수 있도록 돕는 것입니다.<br>
-                - 본 시뮬레이션에 사용되는 샘플 페트는 반기노 정석 52.00[2](2), 12.75[2](3), 7.37[2](2), 6.50[2](3) 입니다.<br>
+                - 본 시뮬레이션에 사용되는 샘플 페트는 반기노(2)(3)(2)(3) 입니다.<br>
                 - 시뮬레이션 된 결과와 육성 중인 페트의 ± 수치가 동일하다고 환각을 보장하는 것은 절대 아니니 참고만 하시기 바랍니다.<br>
             </div>
         </div>
@@ -377,11 +404,11 @@
                 <input type="number" class="form-control" id="input-level" placeholder="140" value="140">
                 <!-- <div class="input-group-addon">.00</div> -->
             </div>
-            <button type="button" class="btn btn-primary" id="rank8">8등급(환각)</button>
-            <button type="button" class="btn btn-danger" id="rank7vital" disabled>7등급(내구력[1])</button>
-            <button type="button" class="btn btn-danger" id="rank7str"   disabled>7등급(공격력[1])</button>
-            <button type="button" class="btn btn-danger" id="rank7tgh"   disabled>7등급(방어력[1])</button>
-            <button type="button" class="btn btn-danger" id="rank7dex"   disabled>7등급(순발력[1])</button>
+            <button type="button" class="btn btn-primary" data-id="rank8">8등급(환각)</button>
+            <button type="button" class="btn btn-danger"  data-id="rank7vital">7등급(내구력[1])</button>
+            <button type="button" class="btn btn-danger"  data-id="rank7str">7등급(공격력[1])</button>
+            <button type="button" class="btn btn-danger"  data-id="rank7tgh">7등급(방어력[1])</button>
+            <button type="button" class="btn btn-danger"  data-id="rank7dex">7등급(순발력[1])</button>
         </div>
         <div class="table-responsive panel panel-default table-wrapper" id="results">
             <div class="panel-heading"><strong>시뮬레이션 내역</strong></div>
