@@ -58,6 +58,7 @@
             {"name":"복우리","initnum":21,"hp":21,"atk":19,"def":19,"agi":28},
             {"name":"푸우리","initnum":21,"hp":25,"atk":27,"def":11,"agi":25},
             {"name":"녹우리","initnum":20,"hp":26,"atk":32,"def":21,"agi":24},
+            {"name":"우리스타","initnum":18,"hp":22,"atk":14,"def":18,"agi":28},
             
             {"name":"부비","initnum":15,"hp":42,"atk":20,"def":16,"agi":12},
             {"name":"골드부비","initnum":25,"hp":31,"atk":20,"def":32,"agi":12},
@@ -206,6 +207,7 @@
             {"name":"페루루","initnum":26,"hp":23,"atk":32,"def":13,"agi":29},
             {"name":"베라라","initnum":25,"hp":26,"atk":35,"def":15,"agi":32},
             {"name":"하르가","initnum":22,"hp":30,"atk":37,"def":16,"agi":31},
+            {"name":"검호","initnum":26,"hp":26,"atk":34,"def":14,"agi":30},
                                                                                     
             {"name":"토리노프스","initnum":12,"hp":26,"atk":21,"def":26,"agi":12},
             {"name":"펜타스","initnum":16,"hp":28,"atk":17,"def":28,"agi":11},
@@ -303,6 +305,7 @@
             {"name":"차이혼","initnum":28,"hp":28,"atk":28,"def":25,"agi":34},
             {"name":"파라프","initnum":28,"hp":27,"atk":27,"def":24,"agi":36},
             {"name":"모이토","initnum":27,"hp":22,"atk":26,"def":29,"agi":32},
+            {"name":"타이혼","initnum":26,"hp":24,"atk":36,"def":22,"agi":33},
             
             {"name":"스토라지","initnum":21,"hp":35,"atk":26,"def":23,"agi":20},
             {"name":"아토라지","initnum":20,"hp":39,"atk":29,"def":24,"agi":23},
@@ -378,6 +381,7 @@
             
             {"name":"레이론","initnum":24,"hp":26,"atk":34,"def":19,"agi":20},
             {"name":"샤크론","initnum":24,"hp":32,"atk":37,"def":15,"agi":33},
+            {"name":"다크론","initnum":24,"hp":33,"atk":41,"def":20,"agi":24},
             
             {"name":"디메트로돈","initnum":23,"hp":42,"atk":33,"def":38,"agi":3},
             {"name":"비트로돈","initnum":22,"hp":29,"atk":35,"def":27,"agi":23},
@@ -427,13 +431,17 @@
             
             {"name":"흑주작","initnum":24,"hp":25,"atk":36,"def":13,"agi":25},
             {"name":"아스타로","initnum":23,"hp":27,"atk":35,"def":11,"agi":41},
+            {"name":"어린주작","initnum":28,"hp":22,"atk":28,"def":10,"agi":25},
 
             {"name":"흑풍","initnum":25,"hp":29,"atk":38,"def":14,"agi":34},
+            {"name":"어린풍백","initnum":33,"hp":20,"atk":24,"def":10,"agi":24},
 
             //{"name":"흑룡","initnum":26,"hp":26,"atk":35,"def":13,"agi":30},
             //{"name":"백룡","initnum":24,"hp":25,"atk":34,"def":15,"agi":25},
             
             {"name":"흑기린","initnum":24,"hp":26,"atk":40,"def":18,"agi":19},
+            {"name":"기린","initnum":24,"hp":30,"atk":41,"def":21,"agi":22},
+            {"name":"기란","initnum":24,"hp":28,"atk":38,"def":20,"agi":22},
 
             {"name":"우라노스","initnum":27,"hp":23,"atk":29,"def":11,"agi":26},
 
@@ -441,6 +449,7 @@
             
             {"name":"바우트","initnum":26,"hp":38,"atk":39,"def":36,"agi":4},
             {"name":"토우트","initnum":26,"hp":45,"atk":34,"def":36,"agi":7},
+            {"name":"타우트","initnum":27,"hp":40,"atk":38,"def":36,"agi":4},
             
             {"name":"모사크","initnum":23,"hp":32,"atk":40,"def":17,"agi":28},
             
@@ -487,8 +496,16 @@
 
             {"name":"나비드래곤","initnum":25,"hp":29,"atk":39,"def":15,"agi":32},
             {"name":"블랙드래곤","initnum":25,"hp":28,"atk":42,"def":16,"agi":29},
+            {"name":"어린골드드래곤","initnum":24,"hp":26,"atk":34,"def":10,"agi":40},
             
             {"name":"한복메이","initnum":26,"hp":27,"atk":39,"def":19,"agi":23},
+
+            {"name":"베이클","initnum":24,"hp":29,"atk":39,"def":18,"agi":23},
+
+            {"name":"각수","initnum":25,"hp":28,"atk":38,"def":16,"agi":27},
+            {"name":"격수","initnum":23,"hp":30,"atk":40,"def":17,"agi":28},
+
+            {"name":"싸이클론","initnum":24,"hp":30,"atk":39,"def":28,"agi":19},
         ];
 
         let btnName = "";
@@ -916,7 +933,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20240912000;
+            const version = 20241009000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -927,14 +944,14 @@
                 .then(text => {
                     try {
                         const data = JSON.parse(text);  // 텍스트를 JSON으로 파싱
-                        console.log("[" + formatDate() + "] ClientVer: " + version);
-                        console.log("[" + formatDate() + "] ServerVer: " + data.version);
+                        log("ClientVer: " + version);
+                        log("ServerVer: " + data.version);
                         if (version < data.version) {
                             let message = "업데이트가 확인되었습니다.\n페이지를 새로고침합니다.";
                             if (data.message != "") {
                                 message += `\n\n업데이트 내용: \n${data.message}`;
                             }
-
+                            
                             if (!alert(message)) {
                                 location.reload();
                             }
@@ -945,10 +962,10 @@
                 })
                 .catch(error => {
                     console.error('Error fetching the JSON file:', error);
-                });
+            });
         }
 
-        function formatDate() {
+        function log(message) {
             const date = new Date();
             
             const year = date.getFullYear();
@@ -960,12 +977,15 @@
             const seconds = String(date.getSeconds()).padStart(2, '0');
             const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
             
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+            console.log(`[${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}] ${message}`);
         }
 
         // jQuery
         $(document).ready(function() {
 
+            log("reload");
+
+            // 페이지 로드 시 바로 실행
             poisonDamageRank();
             //getListName();
 
@@ -973,7 +993,7 @@
                 if (event.key === 'Enter') {
                     $("#search").click();
                 }
-            })
+            });
 
             // 검색 버튼
             $("#search").on("click", function() {
