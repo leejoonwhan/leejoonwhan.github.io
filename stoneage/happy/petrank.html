@@ -253,6 +253,7 @@
             {"name":"푸비토스","initnum":28,"hp":41,"atk":33,"def":38,"agi":8},
             {"name":"브라키오스","initnum":28,"hp":40,"atk":32,"def":39,"agi":8},
             {"name":"노라키토스","initnum":28,"hp":41,"atk":34,"def":36,"agi":10},
+            {"name":"브라키우스","initnum":26,"hp":36,"atk":39,"def":33,"agi":6},
                                     
             {"name":"만모","initnum":25,"hp":47,"atk":26,"def":39,"agi":6},
             {"name":"만모르","initnum":24,"hp":45,"atk":32,"def":35,"agi":6},
@@ -294,8 +295,9 @@
             {"name":"카르노스","initnum":25,"hp":28,"atk":39,"def":20,"agi":28},
             {"name":"노르곤","initnum":26,"hp":27,"atk":38,"def":17,"agi":27},
             {"name":"로제로스","initnum":24,"hp":27,"atk":40,"def":16,"agi":30},
-            {"name":"파베로스","initnum":24,"hp":28,"atk":38,"def":15,"agi":33,"rank":435},
+            {"name":"파베로스","initnum":24,"hp":28,"atk":38,"def":15,"agi":33},
             {"name":"카가로스","initnum":25,"hp":26,"atk":40,"def":14,"agi":23},
+            {"name":"암흑골로스","initnum":26,"hp":24,"atk":37,"def":16,"agi":26},
             
             {"name":"프이토","initnum":26,"hp":19,"atk":22,"def":25,"agi":29},
             {"name":"모나시프","initnum":25,"hp":23,"atk":23,"def":24,"agi":28},
@@ -506,6 +508,13 @@
             {"name":"격수","initnum":23,"hp":30,"atk":40,"def":17,"agi":28},
 
             {"name":"싸이클론","initnum":24,"hp":30,"atk":39,"def":28,"agi":19},
+
+            {"name":"타르톤","initnum":26,"hp":38,"atk":37,"def":37,"agi":4},
+            
+            {"name":"밤미","initnum":25,"hp":27,"atk":34,"def":15,"agi":37},
+
+            {"name":"아누","initnum":24,"hp":25,"atk":33,"def":14,"agi":29},
+            
         ];
 
         let btnName = "";
@@ -933,7 +942,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20241019000;
+            const version = 20241021000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
