@@ -105,6 +105,7 @@
             {"name":"킹북이","initnum":21,"hp":23,"atk":19,"def":42,"agi":4},
             {"name":"철북이","initnum":19,"hp":22,"atk":30,"def":34,"agi":6},
             {"name":"자라북","initnum":20,"hp":28,"atk":26,"def":42,"agi":3},
+            {"name":"메카북이","initnum":24,"hp":42,"atk":34,"def":38,"agi":6},
             
             {"name":"아고아","initnum":20,"hp":25,"atk":39,"def":24,"agi":19},
             {"name":"네고스","initnum":20,"hp":26,"atk":37,"def":26,"agi":18},
@@ -440,6 +441,7 @@
 
             //{"name":"흑룡","initnum":26,"hp":26,"atk":35,"def":13,"agi":30},
             //{"name":"백룡","initnum":24,"hp":25,"atk":34,"def":15,"agi":25},
+            {"name":"메카청룡","initnum":25,"hp":34,"atk":42,"def":15,"agi":28},
             
             {"name":"흑기린","initnum":24,"hp":26,"atk":40,"def":18,"agi":19},
             {"name":"기린","initnum":24,"hp":30,"atk":41,"def":21,"agi":22},
@@ -523,6 +525,16 @@
             {"name":"다크울프","initnum":23,"hp":28,"atk":38,"def":15,"agi":32},
             
             {"name":"다크야무","initnum":25,"hp":37,"atk":40,"def":31,"agi":5},
+
+            {"name":"라그노스","initnum":25,"hp":41,"atk":39,"def":34,"agi":4},
+            {"name":"크로톤","initnum":25,"hp":33,"atk":40,"def":20,"agi":25},
+
+            {"name":"크라우","initnum":25,"hp":28,"atk":38,"def":16,"agi":27},
+            {"name":"싸가트","initnum":25,"hp":30,"atk":43,"def":17,"agi":26},
+            {"name":"파사트","initnum":25,"hp":28,"atk":38,"def":17,"agi":21},
+
+            {"name":"플라티우스","initnum":25,"hp":28,"atk":29,"def":13,"agi":20},
+            {"name":"프라미우스","initnum":25,"hp":24,"atk":28,"def":15,"agi":23},
         ];
 
         let btnName = "";
@@ -950,7 +962,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20241025000;
+            const version = 20241104000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
