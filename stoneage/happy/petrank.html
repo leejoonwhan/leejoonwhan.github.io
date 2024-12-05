@@ -146,6 +146,7 @@
             {"name":"기라노","initnum":26,"hp":32,"atk":42,"def":19,"agi":23},
             {"name":"기비노","initnum":24,"hp":25,"atk":39,"def":13,"agi":21},
             {"name":"프로돈","initnum":25,"hp":36,"atk":39,"def":17,"agi":25},
+            {"name":"환얀기로","initnum":27,"hp":28,"atk":36,"def":17,"agi":21,"rank":495},
             
             {"name":"쿠링","initnum":19,"hp":23,"atk":20,"def":22,"agi":24},
             {"name":"쿠쿠르","initnum":20,"hp":24,"atk":20,"def":19,"agi":26},
@@ -284,6 +285,7 @@
             {"name":"푸타카","initnum":20,"hp":22,"atk":21,"def":12,"agi":34},
             {"name":"흑카키","initnum":18,"hp":23,"atk":24,"def":15,"agi":40},
             {"name":"쥬키","initnum":19,"hp":19,"atk":25,"def":10,"agi":32},
+            {"name":"환카키","initnum":20,"hp":18,"atk":23,"def":11,"agi":34,"rank":555},
                                                 
             {"name":"오가로스","initnum":24,"hp":30,"atk":37,"def":28,"agi":20},
             {"name":"오르곤","initnum":26,"hp":33,"atk":38,"def":22,"agi":24},
@@ -423,7 +425,8 @@
 
             {"name":"라이쿠스","initnum":24,"hp":43,"atk":33,"def":38,"agi":6},
             {"name":"바라쿠스","initnum":24,"hp":42,"atk":31,"def":39,"agi":7},
-                        
+            {"name":"헤라쿠스","initnum":22,"hp":42,"atk":33,"def":37,"agi":5},
+            
             {"name":"어린흑룡","initnum":26,"hp":25,"atk":33,"def":13,"agi":29},
             {"name":"어린백룡","initnum":24,"hp":25,"atk":30,"def":15,"agi":25},
             {"name":"어린청룡","initnum":26,"hp":34,"atk":42,"def":14,"agi":22},
@@ -501,6 +504,8 @@
             {"name":"나비드래곤","initnum":25,"hp":29,"atk":39,"def":15,"agi":32},
             {"name":"블랙드래곤","initnum":25,"hp":28,"atk":42,"def":16,"agi":29},
             {"name":"어린골드드래곤","initnum":24,"hp":26,"atk":34,"def":10,"agi":40},
+            {"name":"어린아이스드래곤","initnum":28,"hp":25,"atk":33,"def":11,"agi":21},
+            {"name":"어린어스드래곤","initnum":24,"hp":32,"atk":41,"def":17,"agi":22},
             
             {"name":"한복메이","initnum":26,"hp":27,"atk":39,"def":19,"agi":23},
 
@@ -516,8 +521,11 @@
             {"name":"밤미","initnum":25,"hp":27,"atk":34,"def":15,"agi":37},
 
             {"name":"아누","initnum":24,"hp":25,"atk":33,"def":14,"agi":29},
-            
+            {"name":"카누","initnum":24,"hp":26,"atk":34,"def":14,"agi":28},
+
             {"name":"토로카","initnum":23,"hp":30,"atk":42,"def":20,"agi":24},
+            {"name":"아르카","initnum":24,"hp":25,"atk":34,"def":13,"agi":30},
+            
             {"name":"메이","initnum":24,"hp":25,"atk":33,"def":14,"agi":31},
             {"name":"토르","initnum":23,"hp":32,"atk":39,"def":22,"agi":25},
 
@@ -535,6 +543,19 @@
 
             {"name":"플라티우스","initnum":25,"hp":28,"atk":29,"def":13,"agi":20},
             {"name":"프라미우스","initnum":25,"hp":24,"atk":28,"def":15,"agi":23},
+
+            {"name":"아마란","initnum":25,"hp":26,"atk":31,"def":11,"agi":25},
+            {"name":"고오다","initnum":25,"hp":23,"atk":28,"def":8,"agi":32},
+
+            {"name":"스켈렉스","initnum":25,"hp":30,"atk":43,"def":20,"agi":23},
+            {"name":"스켈록스","initnum":26,"hp":24,"atk":39,"def":16,"agi":20},
+            {"name":"본드래곤","initnum":25,"hp":31,"atk":42,"def":16,"agi":28},
+
+            {"name":"우마왕","initnum":23,"hp":30,"atk":39,"def":28,"agi":19},
+
+            {"name":"마그노","initnum":23,"hp":32,"atk":34,"def":16,"agi":21},
+            {"name":"머그노","initnum":22,"hp":29,"atk":36,"def":17,"agi":21},
+            
         ];
 
         let btnName = "";
@@ -962,7 +983,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20241104000;
+            const version = 20241205000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1090,9 +1111,10 @@
         <div class="panel panel-primary">
             <div class="panel-heading"><strong>안내사항</strong></div>
             <div class="panel-body">
-                - 버그 제보 및 문의사항은 디스코드 <code>[펫]칸쵸</code>에게 연락주시기 바랍니다. 여러분의 제보가 프로그램의 신뢰성을 높여줍니다.<br>
+                - 버그 제보 및 문의사항은 디스코드 <code>[펫]칸쵸</code> 또는 <code>하얀물</code>님에게 연락주시기 바랍니다. 여러분의 제보가 프로그램의 신뢰성을 높여줍니다.<br>
                 - 제작자가 입력한 데이터에 오타가 있을 수 있으니 페트 이름 조회 후 게임 내 데이터와 초기치 및 성장률이 일치하는지 확인하시기 바랍니다.<br>
-                - 프로그램은 표본을 수집하는 것이 아니며, 모든 경우의 수(178,750)에서 입력한 값과 일치하는 경우의 수만 출력하는 원리 입니다.<br>
+                <!-- - 프로그램은 표본을 수집하는 것이 아니며, 모든 경우의 수(178,750)에서 입력한 값과 일치하는 경우의 수만 출력하는 원리 입니다.<br> -->
+                - 프로그램은 <code>유저들에게 제보를 받아 표본을 수집하는것이 아니며, 시뮬레이션으로 모든 입력값을 계산하여 나온 결과</code>입니다.<br>
                 - 대괄호[]안의 숫자는 성장베이스를 의미하며, 총합 8등급([2][2][2][2])은 환각(MaxBase)을 의미합니다.<br>
                 - 괄호()안의 숫자는 깡스탯을 의미하며, 성장률에는 영향을 주지 않습니다.<br>
                 - 환생/진화 페트는 성장베이스를 이전 받기 때문에 목록에서 제외되었습니다.<br>
