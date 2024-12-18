@@ -557,6 +557,20 @@
             {"name":"마그노","initnum":23,"hp":32,"atk":34,"def":16,"agi":21},
             {"name":"머그노","initnum":22,"hp":29,"atk":36,"def":17,"agi":21},
             
+            {"name":"푸로비","initnum":26,"hp":26,"atk":35,"def":12,"agi":31},
+            {"name":"화이트쟈그","initnum":24,"hp":42,"atk":35,"def":35,"agi":8},
+            {"name":"리어룬","initnum":24,"hp":29,"atk":41,"def":18,"agi":29},
+            {"name":"산타베르가","initnum":25,"hp":29,"atk":40,"def":15,"agi":33},
+            {"name":"리바이어던","initnum":24,"hp":53,"atk":30,"def":34,"agi":5},
+            {"name":"만모베베","initnum":25,"hp":43,"atk":38,"def":31,"agi":7},
+            {"name":"크람푸스","initnum":23,"hp":29,"atk":39,"def":15,"agi":33},
+            {"name":"만모링","initnum":23,"hp":32,"atk":41,"def":23,"agi":20},
+            {"name":"산타로스","initnum":23,"hp":38,"atk":37,"def":35,"agi":7},
+            {"name":"링코링","initnum":17,"hp":27,"atk":30,"def":20,"agi":27},
+            {"name":"프로스비","initnum":22,"hp":30,"atk":40,"def":17,"agi":27},
+            {"name":"산타링코","initnum":23,"hp":28,"atk":31,"def":26,"agi":32},
+
+
         ];
 
         let btnName = "";
@@ -1145,7 +1159,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20241208000;
+            const version = 20241218000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
