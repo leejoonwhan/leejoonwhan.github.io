@@ -46,10 +46,16 @@
         .blue { color: #fff; background-color: #337ab7;}
         .red { color: #fff; background-color: #d9534f;}
         .yellow { color: #fff; background-color: #f0ad4e;}
+
+        .highlight {
+            background-color: yellow; /* 노란 배경 */
+            color: red;              /* 빨간 글씨 */
+            font-weight: bold;       /* 굵은 글씨 (선택 사항) */
+        }
     </style>
     <script>
         var pet = [
-            {"name":"우리","initnum":10,"hp":20,"atk":12,"def":15,"agi":25},
+        {"name":"우리","initnum":10,"hp":20,"atk":12,"def":15,"agi":25},
             {"name":"두리","initnum":20,"hp":22,"atk":23,"def":11,"agi":23},
             {"name":"얼룩우리","initnum":15,"hp":22,"atk":17,"def":19,"agi":17},
             {"name":"불그리","initnum":10,"hp":25,"atk":23,"def":19,"agi":33},
@@ -557,6 +563,19 @@
             {"name":"마그노","initnum":23,"hp":32,"atk":34,"def":16,"agi":21},
             {"name":"머그노","initnum":22,"hp":29,"atk":36,"def":17,"agi":21},
             
+            {"name":"푸로비","initnum":26,"hp":26,"atk":35,"def":12,"agi":31},
+            {"name":"화이트쟈그","initnum":24,"hp":42,"atk":35,"def":35,"agi":8},
+            {"name":"리어룬","initnum":24,"hp":29,"atk":41,"def":18,"agi":29},
+            {"name":"산타베르가","initnum":25,"hp":29,"atk":39,"def":15,"agi":33},
+            {"name":"리바이어던","initnum":24,"hp":53,"atk":30,"def":34,"agi":5},
+            {"name":"만모베베","initnum":25,"hp":43,"atk":38,"def":31,"agi":7},
+            {"name":"크람푸스","initnum":23,"hp":29,"atk":39,"def":15,"agi":33},
+            {"name":"만모링","initnum":23,"hp":32,"atk":41,"def":23,"agi":20},
+            {"name":"산타로스","initnum":23,"hp":38,"atk":37,"def":35,"agi":7},
+            {"name":"링코링","initnum":17,"hp":27,"atk":30,"def":20,"agi":27},
+            {"name":"프로스비","initnum":22,"hp":30,"atk":40,"def":17,"agi":27},
+            {"name":"산타링코","initnum":23,"hp":28,"atk":31,"def":26,"agi":32},
+            
         ];
 
         let btnName = "";
@@ -707,7 +726,16 @@
                 }
             }
             
-            print();
+            if (foundPet.name == "만모링"   || 
+                foundPet.name == "산타로스" || 
+                foundPet.name == "링코링"   ||
+                foundPet.name == "프로스비" ||
+                foundPet.name == "산타링코") {
+                alert("크리스마스 랭킹 이벤트에 포함되는 페트는 이벤트에 협조하는 차원에서 소수점만 공개합니다.");
+            } else {
+                print();
+            }
+            
         }
 
         function setBonus(foundPet, base) {
@@ -984,7 +1012,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20241208000;
+            const version = 20241219000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1031,11 +1059,40 @@
             console.log(`[${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}] ${message}`);
         }
 
+        function modalEvent() {
+            // Close 버튼과 Footer 버튼을 숨김 (visibility: hidden)
+            $('.modal-header .close, .modal-footer .btn').css('visibility', 'hidden');
+
+            // 초기 카운트다운 시간 설정
+            var timeLeft = 5;
+            
+            // 5초 카운트다운 표시 시작
+            var countdownInterval = setInterval(function () {
+                $('#countdown').text(timeLeft); // 시간 표시
+                timeLeft--;
+
+                // 시간이 0초가 되면 버튼을 표시하고 카운트다운 종료
+                if (timeLeft < 0) {
+                    $('#countdown').text("");
+                    clearInterval(countdownInterval); // 카운트다운 종료
+                    $('.modal-header .close, .modal-footer .btn').css('visibility', 'visible'); // 버튼 표시
+                }
+            }, 1000); // 1초마다 실행
+            
+        }
+
         // jQuery
         $(document).ready(function() {
 
             log("reload");
 
+            // 페이지 로드 시 모달 자동 출력
+            modalEvent();
+            $('#myModal').modal({
+                backdrop: 'static', // 외부 클릭 방지
+                keyboard: false     // ESC 키 방지
+            }).modal('show');       // 모달 표시
+                        
             // 페이지 로드 시 바로 실행
             poisonDamageRank();
             //getListName();
@@ -1114,6 +1171,7 @@
             <div class="panel-body">
                 - 버그 제보 및 문의사항은 디스코드 <code>[펫]칸쵸</code> 또는 <code>하얀물</code>님에게 연락주시기 바랍니다. 여러분의 제보가 프로그램의 신뢰성을 높여줍니다.<br>
                 - 제작자가 입력한 데이터에 오타가 있을 수 있으니 페트 이름 조회 후 게임 내 데이터와 초기치 및 성장률이 일치하는지 확인하시기 바랍니다.<br>
+                - 특히, 업데이트로 추가되는 페트는 성장률 변경 등으로 인해 계산기에 입력한 시점의 능력치와 실제 능력치가 달라질 수 있습니다. <br>
                 <!-- - 프로그램은 표본을 수집하는 것이 아니며, 모든 경우의 수(178,750)에서 입력한 값과 일치하는 경우의 수만 출력하는 원리 입니다.<br> -->
                 - 프로그램은 <code>유저들에게 제보를 받아 표본을 수집하는것이 아니며, 시뮬레이션으로 모든 입력값을 계산하여 나온 결과</code>입니다.<br>
                 - 대괄호[]안의 숫자는 성장베이스를 의미하며, 총합 8등급([2][2][2][2])은 환각(MaxBase)을 의미합니다.<br>
@@ -1199,6 +1257,29 @@
     <br>
     <br>
     <br>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog" data-backdrop="static"> 
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><strong>부탁드립니다.</strong></h4>
+                </div>
+                <div class="modal-body">
+                    <p>이 웹 페이지는 스톤에이지를 사랑하는 분들이 페트를 이해하고 활용하는 데 도움을 드리기 위해 제작된 단순한 계산기입니다.</p>
+                    <p><span class="highlight">제작자는 이 페이지가 타인을 비방하거나 비난하는 목적으로 사용되지 않기를 진심으로 바랍니다.</span></p>
+                    <p>올바르게 사용해 주신다면 모두에게 유용한 도구가 될 것입니다. 여러분의 협조를 부탁드립니다.</p>
+                    <p>감사합니다.</p>
+                </div>
+                <div class="modal-footer">
+                    <span id="countdown" style="position: absolute; left: 10px;"></span> <!-- 시간 표시 영역 -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
 </div>
 </body>
 </html>
