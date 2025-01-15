@@ -560,7 +560,7 @@
             {"name":"푸로비","initnum":26,"hp":26,"atk":35,"def":12,"agi":31},
             {"name":"화이트쟈그","initnum":24,"hp":42,"atk":35,"def":35,"agi":8},
             {"name":"리어룬","initnum":24,"hp":29,"atk":41,"def":18,"agi":29},
-            {"name":"산타베르가","initnum":25,"hp":29,"atk":40,"def":15,"agi":33},
+            {"name":"산타베르가","initnum":25,"hp":29,"atk":39,"def":15,"agi":33},
             {"name":"리바이어던","initnum":24,"hp":53,"atk":30,"def":34,"agi":5},
             {"name":"만모베베","initnum":25,"hp":43,"atk":38,"def":31,"agi":7},
             {"name":"크람푸스","initnum":23,"hp":29,"atk":39,"def":15,"agi":33},
@@ -570,7 +570,29 @@
             {"name":"프로스비","initnum":22,"hp":30,"atk":40,"def":17,"agi":27},
             {"name":"산타링코","initnum":23,"hp":28,"atk":31,"def":26,"agi":32},
 
+            {"name":"킹라쿠","initnum":24,"hp":23,"atk":29,"def":12,"agi":34},
+            {"name":"차란라쿠","initnum":24,"hp":22,"atk":28,"def":12,"agi":34},
+            {"name":"칼란라쿠","initnum":24,"hp":23,"atk":26,"def":12,"agi":32},
+            {"name":"메이밍","initnum":26,"hp":26,"atk":35,"def":15,"agi":32},
+            {"name":"킹꼬미","initnum":24,"hp":28,"atk":39,"def":15,"agi":27},
+            {"name":"체루루","initnum":26,"hp":26,"atk":36,"def":13,"agi":32},
 
+            {"name":"해태","initnum":24,"hp":30,"atk":39,"def":22,"agi":25},
+            {"name":"해치","initnum":25,"hp":25,"atk":33,"def":14,"agi":31},
+            {"name":"도철","initnum":24,"hp":31,"atk":41,"def":20,"agi":24},
+            
+            {"name":"아리","initnum":24,"hp":22,"atk":28,"def":11,"agi":36},
+            {"name":"테이노스","initnum":23,"hp":35,"atk":42,"def":19,"agi":24},
+            {"name":"백여우","initnum":25,"hp":27,"atk":36,"def":16,"agi":25},
+
+            {"name":"메카카키","initnum":17,"hp":26,"atk":32,"def":12,"agi":45},
+            {"name":"지룡","initnum":25,"hp":29,"atk":41,"def":19,"agi":27},
+            {"name":"하트링","initnum":22,"hp":25,"atk":28,"def":17,"agi":31},
+            {"name":"노론","initnum":25,"hp":28,"atk":39,"def":19,"agi":22},
+            {"name":"피노","initnum":22,"hp":29,"atk":41,"def":16,"agi":28},
+            {"name":"라피노","initnum":25,"hp":32,"atk":41,"def":18,"agi":25},
+            {"name":"글루밍","initnum":22,"hp":26,"atk":36,"def":15,"agi":30},
+            {"name":"바쿰","initnum":26,"hp":43,"atk":34,"def":35,"agi":6},
         ];
 
         let btnName = "";
@@ -689,10 +711,10 @@
                 $('#myPet tbody').append(''
                     + '<tr class="srank">'
                     + '<td>S 초기치</td>'
-                    + '<td>' + resultHp.toFixed(2) + '</td>'
-                    + '<td>' + resultAtk.toFixed(2) + '</td>'
-                    + '<td>' + resultDef.toFixed(2) + '</td>'
-                    + '<td>' + resultAgi.toFixed(2) + '</td>'
+                    + '<td>' + limitDecimalPlaces(resultHp, 2) + '</td>'
+                    + '<td>' + limitDecimalPlaces(resultAtk, 2) + '</td>'
+                    + '<td>' + limitDecimalPlaces(resultDef, 2) + '</td>'
+                    + '<td>' + limitDecimalPlaces(resultAgi, 2) + '</td>'
                     + '<td>' + '' + '</td>'
                     + '</tr>'
                     + '<tr class="srank">'
@@ -704,6 +726,7 @@
                     + '<td>' + resultSum.toFixed(2) + '</td>'
                     + '</tr>'
                 );
+                
 
                 if (btnName == "search") {
                     $("#hp").val(parseInt(resultHp, 10));
@@ -1159,7 +1182,7 @@
         */
         
         function checkUpdateExists() {
-            const version = 20241218000;
+            const version = 20250115000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/pet/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
