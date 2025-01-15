@@ -55,7 +55,7 @@
     </style>
     <script>
         var pet = [
-        {"name":"우리","initnum":10,"hp":20,"atk":12,"def":15,"agi":25},
+            {"name":"우리","initnum":10,"hp":20,"atk":12,"def":15,"agi":25},
             {"name":"두리","initnum":20,"hp":22,"atk":23,"def":11,"agi":23},
             {"name":"얼룩우리","initnum":15,"hp":22,"atk":17,"def":19,"agi":17},
             {"name":"불그리","initnum":10,"hp":25,"atk":23,"def":19,"agi":33},
@@ -575,7 +575,30 @@
             {"name":"링코링","initnum":17,"hp":27,"atk":30,"def":20,"agi":27},
             {"name":"프로스비","initnum":22,"hp":30,"atk":40,"def":17,"agi":27},
             {"name":"산타링코","initnum":23,"hp":28,"atk":31,"def":26,"agi":32},
+
+            {"name":"킹라쿠","initnum":24,"hp":23,"atk":29,"def":12,"agi":34},
+            {"name":"차란라쿠","initnum":24,"hp":22,"atk":28,"def":12,"agi":34},
+            {"name":"칼란라쿠","initnum":24,"hp":23,"atk":26,"def":12,"agi":32},
+            {"name":"메이밍","initnum":26,"hp":26,"atk":35,"def":15,"agi":32},
+            {"name":"킹꼬미","initnum":24,"hp":28,"atk":39,"def":15,"agi":27},
+            {"name":"체루루","initnum":26,"hp":26,"atk":36,"def":13,"agi":32},
+
+            {"name":"해태","initnum":24,"hp":30,"atk":39,"def":22,"agi":25},
+            {"name":"해치","initnum":25,"hp":25,"atk":33,"def":14,"agi":31},
+            {"name":"도철","initnum":24,"hp":31,"atk":41,"def":20,"agi":24},
             
+            {"name":"아리","initnum":24,"hp":22,"atk":28,"def":11,"agi":36},
+            {"name":"테이노스","initnum":23,"hp":35,"atk":42,"def":19,"agi":24},
+            {"name":"백여우","initnum":25,"hp":27,"atk":36,"def":16,"agi":25},
+
+            {"name":"메카카키","initnum":17,"hp":26,"atk":32,"def":12,"agi":45},
+            {"name":"지룡","initnum":25,"hp":29,"atk":41,"def":19,"agi":27},
+            {"name":"하트링","initnum":22,"hp":25,"atk":28,"def":17,"agi":31},
+            {"name":"노론","initnum":25,"hp":28,"atk":39,"def":19,"agi":22},
+            {"name":"피노","initnum":22,"hp":29,"atk":41,"def":16,"agi":28},
+            {"name":"라피노","initnum":25,"hp":32,"atk":41,"def":18,"agi":25},
+            {"name":"글루밍","initnum":22,"hp":26,"atk":36,"def":15,"agi":30},
+            {"name":"바쿰","initnum":26,"hp":43,"atk":34,"def":35,"agi":6},
         ];
 
         let btnName = "";
@@ -726,6 +749,7 @@
                 }
             }
             
+            /*
             if (foundPet.name == "만모링"   || 
                 foundPet.name == "산타로스" || 
                 foundPet.name == "링코링"   ||
@@ -735,7 +759,8 @@
             } else {
                 print();
             }
-            
+            */
+            print();
         }
 
         function setBonus(foundPet, base) {
@@ -1012,7 +1037,7 @@
         */
 
         function checkUpdateExists() {
-            const version = 20241219000;
+            const version = 20250115000;
             fetch(`https://leejoonwhan.github.io/stoneage/happy/version.json?v=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
@@ -1087,12 +1112,13 @@
             log("reload");
 
             // 페이지 로드 시 모달 자동 출력
+            /*
             modalEvent();
             $('#myModal').modal({
                 backdrop: 'static', // 외부 클릭 방지
                 keyboard: false     // ESC 키 방지
             }).modal('show');       // 모달 표시
-                        
+            */          
             // 페이지 로드 시 바로 실행
             poisonDamageRank();
             //getListName();
